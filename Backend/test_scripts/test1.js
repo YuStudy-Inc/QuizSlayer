@@ -1,14 +1,14 @@
 // Add a character to the database.
 import dotenv from 'dotenv';
-import { Character } from '../schemas/Schemas.js'
+import { Character } from '../schemas/Schemas.js';
 import mongoose from 'mongoose';
 
 dotenv.config({path: '../.env'});
 
-const URI = process.env.MONGODB_URI
-console.log(URI)
+const URI = process.env.MONGODB_URI;
+console.log(URI);
 
-mongoose.Promise = global.Promise
+mongoose.Promise = global.Promise;
 
 try {
     await mongoose.connect(URI);
