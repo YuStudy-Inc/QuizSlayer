@@ -7,6 +7,7 @@ const port = 3000
 
 await DatabaseConnection()
 
+//route to grab all characters from DB
 app.get("/getCharacters", async(req, res) => {
     try {
         const characters = await character.find()
