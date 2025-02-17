@@ -18,16 +18,19 @@ catch (error) {
     console.log(error)
 }
 
-let newCharacter = new Character({
-    _id: 6,
-    name: "Test",
-    health: 111,
-    hat: 0,
-    weapon: 0,
-    isAlive: false,
-    picture: "test",
-});
-newCharacter.save().catch(err => {
-    console.log("An error occured while adding character to the database.");
-    console.log(err);
-})
+
+//returns an array of all characters
+const characters = await Character.find({});
+//Grabs the first doc that matches query
+const character = await Character.findOne({hat: '0', health: '111'})
+
+
+console.log('All Characters: ', characters)
+console.log('First Character: ', characters[0])
+
+
+console.log('Searched Character: ', character)
+console.log('Searched Character\'s Health', character.health)
+
+
+
