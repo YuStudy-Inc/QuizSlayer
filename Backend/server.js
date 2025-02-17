@@ -1,21 +1,27 @@
 import DatabaseConnection from './DatabaseConnection.js';
 import { Character } from './schemas/Schemas.js';
 import express from 'express';
-import { Schema } from 'mongoose';
 
 const app = express();
 const port = 3001;
 
-await DatabaseConnection()
+let dbReady = await DatabaseConnection();
 
 app.get("/Characters", async(req, res) => {
-    try {
-        let characters = await Character.find();
-        res.json(characters);
+    // console.log("asdf")
+    console.log("DB Connection: ");
+    if(!dbReady) {
+        res.json(-1);
     }
-    catch (error) {
-        console.log("An error occured while connecting to the database: ");
-        console.log(error)
+    else {
+        try {
+            let characters = await Character.find();
+            res.json(characters);
+        }
+        catch (error) {
+            console.log("An error occured while connecting to the database: ");
+            console.log(error)
+        }
     }
 });
 
