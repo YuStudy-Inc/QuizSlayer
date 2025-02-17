@@ -7,10 +7,10 @@ const port = 3001;
 
 let dbReady = await DatabaseConnection();
 
-app.get("/Characters", async(req, res) => {
+app.get("/Characters", async (req, res) => {
     // console.log("asdf")
     console.log("DB Connection: ");
-    if(!dbReady) {
+    if (!dbReady) {
         res.json(-1);
     }
     else {
