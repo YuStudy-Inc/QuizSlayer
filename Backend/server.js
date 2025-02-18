@@ -34,7 +34,10 @@ const passwordMatch = (async(passwordFromUser, savedPasswordFromDB) => {
 app.get("/getCharacters", async(req, res) => {
     try {
         const characters = await character.find()
-        res.status(200).json(characters)
+        res.status(200).json({
+            "message": "characters retrieved",
+            "characters": characters
+        })
     }
     catch (e) {
         console.error("error retrieving Characters: ", e)
@@ -75,7 +78,10 @@ app.post("/createUser", async(req, res) => {
             0 //coins
         )
         await newUser.save()
-        return res.status(200).json({"message": "new user created"})
+        return res.status(200).json({
+            "message": "new user created",
+            "user": newUser
+        })
     }
     catch (e) {
         console.error("error creating user: ", e)
@@ -89,17 +95,44 @@ app.post("/loginUser", async(req, res) => {
         
         const user = await User.findOne( {username} )
         if (!user)
-            return res.status(400).json({ message: "User not found" })
+            return res.status(404).json({ message: "User not found" })
 
         const passwordValidated = await passwordMatch(password, user.password) 
         if (!passwordValidated)
             return res.status(400).json({ message: "Invalid Password" })
 
-        res.status(200).json({"message": "Login Successful"})
+        res.status(200).json({
+            "message": "Login Successful",
+            "user": user
+        })
     } 
     catch (e) {
         console.error("error logging in: ", e)
         res.status(500).json({"message": "Error logging in", e})
+    }
+})
+
+app.post("createQuiz", async(req, res) => {
+    try {
+        const { title, description } = req.body
+    
+        if (title === null || description === null || title === "" || description === "")
+            return res.status(404).json({ message: "Not all fields filled out" })
+    
+        const newQuiz = new quiz(
+            title,
+            description,
+            [] // list of question objects
+        )
+        await newQuiz.save()
+        res.status(200).json({
+            "message": "Quiz Created Successfully",
+            "quiz": newQuiz
+        })
+    } 
+    catch (e) {
+        console.error("error creating quiz: ", e)
+        res.status(500).json({"message": "Error creating quiz", e})
     }
 })
 
