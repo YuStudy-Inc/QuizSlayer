@@ -26,6 +26,10 @@ const hashPassword = ((password) => {
     return bcrypt.hash(password, saltRounds)
 })
 
+const passwordMatch = (async(passwordFromUser, savedPasswordFromDB) => {
+    return await bcrypt.compare(passwordFromUser, savedPasswordFromDB)
+})
+
 //route to grab all characters from DB
 app.get("/getCharacters", async(req, res) => {
     try {
@@ -34,7 +38,7 @@ app.get("/getCharacters", async(req, res) => {
     }
     catch (e) {
         console.error("error retrieving Characters: ", e)
-        res.status(500).json({"message": "Error retrieving Characters"})
+        res.status(500).json({"message": "Error retrieving Characters", e})
     }
 })
 
@@ -75,7 +79,27 @@ app.post("/createUser", async(req, res) => {
     }
     catch (e) {
         console.error("error creating user: ", e)
-        res.status(500).json({"message": "Error creating user"})
+        res.status(500).json({"message": "Error creating user", e})
+    }
+})
+
+app.post("/loginUser", async(req, res) => {
+    try {
+        const {username, password} = req.body
+        
+        const user = await User.findOne( {username} )
+        if (!user)
+            return res.status(400).json({ message: "User not found" })
+
+        const passwordValidated = await passwordMatch(password, user.password) 
+        if (!passwordValidated)
+            return res.status(400).json({ message: "Invalid Password" })
+
+        res.status(200).json({"message": "Login Successful"})
+    } 
+    catch (e) {
+        console.error("error logging in: ", e)
+        res.status(500).json({"message": "Error logging in", e})
     }
 })
 
