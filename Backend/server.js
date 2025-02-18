@@ -54,20 +54,20 @@ app.post("/createUser", async(req, res) => {
         const { username, email, password, passwordAgain } = req.body
         
         if (username === null || email === null || password === null || passwordAgain === null)
-            return res.status(404).json({"message": "Not all information filled out"})
+            res.status(404).json({"message": "Not all information filled out"})
         
         const listOfUsernames = new Set(await user.find("username"))
         if (!listOfUsernames.includes(username))
-            return res.status(400).json({"message": "Username already exists"})
+            res.status(400).json({"message": "Username already exists"})
 
         if (!validEmail(email))
-            return res.status(400).json({"message": "This is not a valid email"})
+            res.status(400).json({"message": "This is not a valid email"})
 
         if (!validPassword(password))
-            return res.status(400).json({"message": "The password is weak"})
+            res.status(400).json({"message": "The password is weak"})
 
         if (password !== passwordAgain)
-            return res.status(400).json({"message": "The passwords do not match"})
+            res.status(400).json({"message": "The passwords do not match"})
 
         const newUser = new user(
             username,
@@ -82,7 +82,7 @@ app.post("/createUser", async(req, res) => {
             0 //coins
         )
         await newUser.save()
-        return res.status(200).json({
+        res.status(200).json({
             "message": "new user created",
             "user": newUser
         })
@@ -99,11 +99,11 @@ app.post("/loginUser", async(req, res) => {
         
         const user = await User.findOne( {username} )
         if (!user)
-            return res.status(404).json({ message: "User not found" })
+            res.status(404).json({ message: "User not found" })
 
         const passwordValidated = await passwordMatch(password, user.password) 
         if (!passwordValidated)
-            return res.status(400).json({ message: "Invalid Password" })
+            res.status(400).json({ message: "Invalid Password" })
 
         res.status(200).json({
             "message": "Login Successful",
@@ -121,7 +121,7 @@ app.post("/createQuiz", async(req, res) => {
         const { title, description } = req.body
     
         if (title === null || description === null || title === "" || description === "")
-            return res.status(404).json({ message: "Not all fields filled out" })
+            res.status(404).json({ message: "Not all fields filled out" })
     
         const newQuiz = new Quiz(
             title,
@@ -162,13 +162,13 @@ app.post("/createQuestion", async(req, res) => {
             right,
             wrong
         ) 
-        await newQuestion.save()
-
+        
         const quizAssociatedWithTheQuestion = await Quiz.find(quizID)
         if (!quizAssociatedWithTheQuestion)
             res.status(404).json({ message: "Quiz not found" })
-
+        
         quiz.questions.push(newQuestion)
+        await newQuestion.save()
 
         res.status(200).json({
             "message": "Question Created Successfully",
