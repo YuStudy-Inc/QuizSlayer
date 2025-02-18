@@ -30,6 +30,10 @@ const passwordMatch = (async(passwordFromUser, savedPasswordFromDB) => {
     return await bcrypt.compare(passwordFromUser, savedPasswordFromDB)
 })
 
+function isInt(value) {
+    return !isNaN(value) && parseInt(Number(value)) == value && !isNaN(parseInt(value, 10));
+}
+
 //route to grab all characters from DB
 app.get("/getCharacters", async(req, res) => {
     try {
@@ -112,14 +116,14 @@ app.post("/loginUser", async(req, res) => {
     }
 })
 
-app.post("createQuiz", async(req, res) => {
+app.post("/createQuiz", async(req, res) => {
     try {
         const { title, description } = req.body
     
         if (title === null || description === null || title === "" || description === "")
             return res.status(404).json({ message: "Not all fields filled out" })
     
-        const newQuiz = new quiz(
+        const newQuiz = new Quiz(
             title,
             description,
             [] // list of question objects
@@ -133,6 +137,48 @@ app.post("createQuiz", async(req, res) => {
     catch (e) {
         console.error("error creating quiz: ", e)
         res.status(500).json({"message": "Error creating quiz", e})
+    }
+})
+
+app.post("/createQuestion", async(req, res) => {
+    try {
+        const { quizID, question, answer, difficulty, right, wrong } = req.body
+
+        //difficulty will be drop down menu for easy, medium, hard
+        if (question === null || answer === null || difficulty === null || right === null || wrong === null)
+            res.status(404).json({ message: "Not all fields filled out" })
+
+        if (question === "" || answer === "")
+            res.status(404).json({ message: "Question and/or answer not filled out" })
+
+        if (!isInt(right) || !isInt(wrong))
+            res.status(400).json({ message: "points right or points wrong is not a valid number" })
+
+        const newQuestion = new Question(
+            quizID,
+            question,
+            answer, 
+            difficulty,
+            right,
+            wrong
+        ) 
+        await newQuestion.save()
+
+        const quizAssociatedWithTheQuestion = await Quiz.find(quizID)
+        if (!quizAssociatedWithTheQuestion)
+            res.status(404).json({ message: "Quiz not found" })
+
+        quiz.questions.push(newQuestion)
+
+        res.status(200).json({
+            "message": "Question Created Successfully",
+            "question": newQuestion
+        })
+
+    }
+    catch (e) {
+        console.error("error creating question: ", e)
+        res.status(500).json({"message": "Error creating question", e})
     }
 })
 
