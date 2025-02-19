@@ -1,5 +1,5 @@
 import DatabaseConnection from './DatabaseConnection.js';
-import { Character } from './schemas/Schemas.js';
+import { Character, Quiz } from './schemas/Schemas.js';
 import express from 'express';
 
 const app = express();
@@ -25,6 +25,21 @@ app.get("/Characters", async (req, res) => {
     }
 });
 
+app.delete("/quizzes/:id", async(req, res)=>{
+    const{id} = req.params;
+    try{
+        const deletedQuiz = await Quiz.findByIdAndDelete(id);
+        if(!deletedQuiz){
+            console.log("Quiz was not found")
+            return;
+        }
+        console.log("Quiz deleted successfully!")
+    }
+    catch(err){
+        console.log("An error occured while connecting to the database: ");
+        console.log(err)
+    }
+})
 app.listen(port, () => {
     console.log(`server is running on port ${port}`);
 })
