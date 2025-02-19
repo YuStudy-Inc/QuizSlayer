@@ -1,5 +1,5 @@
 import DatabaseConnection from './DatabaseConnection.js'
-import character from './schemas/character.js'
+import { Character } from './schemas/Schemas.js';
 import express from 'express'
 import bodyParser from 'body-parser'
 import bcrypt from 'bcrypt'
@@ -9,7 +9,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 const port = 3000
 
-await DatabaseConnection()
+let dbReady = await DatabaseConnection();
 
 const validEmail = ((email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -37,7 +37,7 @@ function isInt(value) {
 //route to grab all characters from DB
 app.get("/getCharacters", async(req, res) => {
     try {
-        const characters = await character.find()
+        const characters = await Character.find()
         res.status(200).json({
             "message": "characters retrieved",
             "characters": characters
@@ -183,5 +183,5 @@ app.post("/createQuestion", async(req, res) => {
 })
 
 app.listen(port, () => {
-    console.log(`server is running on port ${port}`)
+    console.log(`server is running on port ${port}`);
 })
