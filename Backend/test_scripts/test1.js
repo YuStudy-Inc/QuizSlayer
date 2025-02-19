@@ -1,9 +1,9 @@
 // Add a character to the database.
 import dotenv from 'dotenv';
-import { Character } from '../schemas/Schemas.js';
+import { Character, Question } from '../schemas/Schemas.js';
 import mongoose from 'mongoose';
 
-dotenv.config({path: './.env'})
+dotenv.config({path: '../.env'})
 
 const URI = process.env.MONGODB_URI;
 console.log(URI);
@@ -29,5 +29,19 @@ let newCharacter = new Character({
 });
 newCharacter.save().catch(err => {
     console.log("An error occured while adding character to the database.");
+    console.log(err);
+})
+
+let newQuestion = new Question({
+    quizId: null, 
+    questionPrompt: "Test, this gonna be gone in 3 seconds",
+    choices: ["Nonexistant lol", "Bye bye"],
+    answer: -1,
+    difficulty: 10,
+    pointsIfRight: 6,
+    pointsIfWrong: 5
+})
+newQuestion.save().catch(err=>{
+    console.log("Error occured while adding new question to db.");
     console.log(err);
 })
