@@ -1,5 +1,5 @@
 import DatabaseConnection from './DatabaseConnection.js'
-import { Character } from './schemas/Schemas.js';
+import { Character, User } from './schemas/Schemas.js';
 import express from 'express'
 import bodyParser from 'body-parser'
 import bcrypt from 'bcrypt'
@@ -92,7 +92,21 @@ app.post("/createUser", async(req, res) => {
         res.status(500).json({"message": "Error creating user", e})
     }
 })
-
+app.delete("/user/:id", async(req, res)=>{
+    const {id} = req.params;
+    try{
+        const deleteUser = await User.findByIdAndDelete(id);
+        if(!deleteUser){
+            console.log("Could not find User");
+            return;
+        }
+        console.log("User Deleted Succesfully!");
+    }
+    catch(error){
+        console.log("Error trying to delete user")
+        console.log(error);
+    }
+})
 app.post("/loginUser", async(req, res) => {
     try {
         const {username, password} = req.body

@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import { Character } from '../schemas/Schemas.js';
 import mongoose from 'mongoose';
 
-dotenv.config({path: './.env'})
+dotenv.config({path: '../.env'})
 
 const URI = process.env.MONGODB_URI;
 console.log(URI);
@@ -31,3 +31,4 @@ newCharacter.save().catch(err => {
     console.log("An error occured while adding character to the database.");
     console.log(err);
 })
+
