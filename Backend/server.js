@@ -1,5 +1,5 @@
 import DatabaseConnection from './DatabaseConnection.js'
-import { Character, Quiz } from './schemas/Schemas.js';
+import { Character, Quiz, Question } from './schemas/Schemas.js';
 import express from 'express'
 import bodyParser from 'body-parser'
 import bcrypt from 'bcrypt'
@@ -197,6 +197,23 @@ app.delete("/quizzes/:id", async(req, res)=>{
         console.log(err)
     }
 })
+
+app.delete("/Questions/:id", async(req, res)=>{
+    const{id} = req.params;
+    try{
+        const deleteQuestion  = await Question.findByIdAndDelete(id);
+        if(!deleteQuestion){
+            console.log("Could not find question");
+            return;
+        }
+        console.log("Deleted Quiz question successfully!");
+    }
+    catch(err){
+        console.log("Error occured while connecting to database");
+        console.log(err);
+    }
+} )
+
 app.listen(port, () => {
     console.log(`server is running on port ${port}`);
 })
