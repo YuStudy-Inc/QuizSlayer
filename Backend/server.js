@@ -1,5 +1,5 @@
 import DatabaseConnection from './DatabaseConnection.js'
-import { Character } from './schemas/Schemas.js';
+import { Character, User } from './schemas/Schemas.js';
 import express from 'express'
 import bodyParser from 'body-parser'
 import bcrypt from 'bcrypt'
@@ -155,12 +155,12 @@ app.post("/createQuestion", async(req, res) => {
             res.status(400).json({ message: "points right or points wrong is not a valid number" })
 
         const newQuestion = new Question(
-            quizID,
+            quizID, 
             question,
             answer, 
             difficulty,
             right,
-            wrong
+            wrong 
         ) 
         
         const quizAssociatedWithTheQuestion = await Quiz.find(quizID)
@@ -179,6 +179,17 @@ app.post("/createQuestion", async(req, res) => {
     catch (e) {
         console.error("error creating question: ", e)
         res.status(500).json({"message": "Error creating question", e})
+    }
+})
+
+app.put('/user/:id', async (req,res) => {
+    try {
+        const userId = req.params.id
+        const result = await User.replaceOne({_id: userId}, req.body)
+        console.log(result);
+        res.json({updatedCount: result.modifiedCount}) 
+    } catch (e) {
+        res.status(500).json({error: 'User not modified'})
     }
 })
 
