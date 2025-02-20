@@ -22,7 +22,7 @@ const QuestionSchema = new Schema({
         type: Number,
     },
     difficulty: {
-        type: Number,
+        type: String,
     },
     pointsIfRight: {
         type: Number,

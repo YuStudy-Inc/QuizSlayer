@@ -5,7 +5,6 @@ import mongoose from 'mongoose';
 dotenv.config({ path: '.env' });
 
 const URI = process.env.MONGODB_URI;
-console.log(URI);
 
 const DatabaseConnection = async () => {
     let ready = false;

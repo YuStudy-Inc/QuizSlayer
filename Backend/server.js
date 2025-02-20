@@ -3,6 +3,7 @@ import { Character, Quiz, Question, User } from './schemas/Schemas.js';
 import express from 'express'
 import bodyParser from 'body-parser'
 import bcrypt from 'bcrypt'
+import mongoose from 'mongoose';
 
 const app = express()
 app.use(bodyParser.json())
@@ -53,45 +54,73 @@ app.post("/createUser", async(req, res) => {
     try {
         const { username, email, password, passwordAgain } = req.body
         
-        if (username === null || email === null || password === null || passwordAgain === null)
-            res.status(404).json({"message": "Not all information filled out"})
+        if (!username || !email || !password || !passwordAgain)
+            return res.status(404).json({"message": "Not all information filled out"})
         
-        const listOfUsernames = new Set(await user.find("username"))
-        if (!listOfUsernames.includes(username))
-            res.status(400).json({"message": "Username already exists"})
+        const users = await User.find({}, "username")
+        const listOfUsernames = new Set(users.map(user => user.username))
+        console.log(listOfUsernames)
+        if (listOfUsernames.has(username))
+            return res.status(400).json({"message": "Username already exists"})
 
         if (!validEmail(email))
-            res.status(400).json({"message": "This is not a valid email"})
+            return res.status(400).json({"message": "This is not a valid email"})
 
         if (!validPassword(password))
-            res.status(400).json({"message": "The password is weak"})
+            return res.status(400).json({"message": "The password is weak"})
 
         if (password !== passwordAgain)
-            res.status(400).json({"message": "The passwords do not match"})
+            return res.status(400).json({"message": "The passwords do not match"})
 
-        const newUser = new user(
+        const hashedPassword = await hashPassword(password)
+
+        const newUser = new User({
             username,
             email,
-            hashPassword(password),
-            "", //pfp string url, save a temp one for now after creation
-            "", //description, empty for now (could default to "" in the schema)
-            [], //we need to store at least one character in the inventory list
-            [], //or can we have another list for characters ?
-            1, //selected character will be the first one
-            0, //xp
-            0 //coins
-        )
+            password: hashedPassword,
+            pfp: "", //pfp string url, save a temp one for now after creation
+            description: "", //description, empty for now (could default to "" in the schema)
+            inventory: [], //we need to store at least one character in the inventory list
+            //[], //or can we have another list for characters ?
+            selectedCharacter: 1, //selected character will be the first one
+            xp: 0, //xp
+            coins: 0 //coins
+        })
         await newUser.save()
-        res.status(200).json({
+        res.status(201).json({
             "message": "new user created",
             "user": newUser
         })
     }
     catch (e) {
         console.error("error creating user: ", e)
-        res.status(500).json({"message": "Error creating user", e})
+        res.status(500).json({"message": "Error creating user", "e": e})
     }
 })
+
+app.post("/loginUser", async(req, res) => {
+    try {
+        const {username, password} = req.body
+        
+        const user = await User.findOne( {username} )
+        if (!user)
+            res.status(404).json({ message: "User not found" })
+        
+        const passwordValidated = await passwordMatch(password, user.password) 
+        if (!passwordValidated)
+            res.status(400).json({ message: "Invalid Password" })
+        
+        res.status(200).json({
+            "message": "Login Successful",
+            "user": user
+        })
+    } 
+    catch (e) {
+        console.error("error logging in: ", e)
+        res.status(500).json({"message": "Error logging in", "e": e})
+    }
+})
+
 app.delete("/user/:id", async(req, res)=>{
     const {id} = req.params;
     try{
@@ -107,41 +136,20 @@ app.delete("/user/:id", async(req, res)=>{
         console.log(error);
     }
 })
-app.post("/loginUser", async(req, res) => {
-    try {
-        const {username, password} = req.body
-        
-        const user = await User.findOne( {username} )
-        if (!user)
-            res.status(404).json({ message: "User not found" })
-
-        const passwordValidated = await passwordMatch(password, user.password) 
-        if (!passwordValidated)
-            res.status(400).json({ message: "Invalid Password" })
-
-        res.status(200).json({
-            "message": "Login Successful",
-            "user": user
-        })
-    } 
-    catch (e) {
-        console.error("error logging in: ", e)
-        res.status(500).json({"message": "Error logging in", e})
-    }
-})
 
 app.post("/createQuiz", async(req, res) => {
     try {
         const { title, description } = req.body
     
-        if (title === null || description === null || title === "" || description === "")
-            res.status(404).json({ message: "Not all fields filled out" })
+        if (!title || !description || title === "" || description === "")
+            return res.status(404).json({ message: "Not all fields filled out" })
     
-        const newQuiz = new Quiz(
+        const newQuiz = new Quiz({
             title,
             description,
-            [] // list of question objects
-        )
+            questions: [] // list of question objects
+
+        })
         await newQuiz.save()
         res.status(200).json({
             "message": "Quiz Created Successfully",
@@ -150,49 +158,7 @@ app.post("/createQuiz", async(req, res) => {
     } 
     catch (e) {
         console.error("error creating quiz: ", e)
-        res.status(500).json({"message": "Error creating quiz", e})
-    }
-})
-
-app.post("/createQuestion", async(req, res) => {
-    try {
-        const { quizID, question, answer, difficulty, right, wrong } = req.body
-
-        //difficulty will be drop down menu for easy, medium, hard
-        if (question === null || answer === null || difficulty === null || right === null || wrong === null)
-            res.status(404).json({ message: "Not all fields filled out" })
-
-        if (question === "" || answer === "")
-            res.status(404).json({ message: "Question and/or answer not filled out" })
-
-        if (!isInt(right) || !isInt(wrong))
-            res.status(400).json({ message: "points right or points wrong is not a valid number" })
-
-        const newQuestion = new Question(
-            quizID,
-            question,
-            answer, 
-            difficulty,
-            right,
-            wrong
-        ) 
-        
-        const quizAssociatedWithTheQuestion = await Quiz.find(quizID)
-        if (!quizAssociatedWithTheQuestion)
-            res.status(404).json({ message: "Quiz not found" })
-        
-        quiz.questions.push(newQuestion)
-        await newQuestion.save()
-
-        res.status(200).json({
-            "message": "Question Created Successfully",
-            "question": newQuestion
-        })
-
-    }
-    catch (e) {
-        console.error("error creating question: ", e)
-        res.status(500).json({"message": "Error creating question", e})
+        res.status(500).json({"message": "Error creating quiz", "e": e})
     }
 })
 
@@ -212,6 +178,49 @@ app.delete("/quizzes/:id", async(req, res)=>{
     }
 })
 
+app.post("/createQuestion", async(req, res) => {
+    try {
+        const { quizID, question, answer, difficulty, right, wrong } = req.body
+
+        //difficulty will be drop down menu for easy, medium, hard
+        if (!question || !answer || !difficulty || !right || !wrong)
+            return res.status(404).json({ message: "Not all fields filled out" })
+
+        if (question === "" || answer === "")
+            return res.status(404).json({ message: "Question and/or answer not filled out" })
+
+        if (!isInt(right) || !isInt(wrong))
+            return res.status(400).json({ message: "points right or points wrong is not a valid number" })
+
+        const newQuestion = new Question({
+            quizID,
+            question,
+            answer, 
+            difficulty,
+            right,
+            wrong
+        }) 
+
+        const turnQuizStringIntoAIDObjectBecauseGodKnowsWhyIHaveToConvertIt = new mongoose.Types.ObjectId(quizID);
+        const quizAssociatedWithTheQuestion = await Quiz.findById(turnQuizStringIntoAIDObjectBecauseGodKnowsWhyIHaveToConvertIt)
+        if (!quizAssociatedWithTheQuestion)
+            return res.status(404).json({ message: "Quiz not found" })
+        
+        quizAssociatedWithTheQuestion.questions.push(newQuestion)
+        await newQuestion.save()
+
+        res.status(200).json({
+            "message": "Question Created Successfully",
+            "question": newQuestion
+        })
+
+    }
+    catch (e) {
+        console.error("error creating question: ", e)
+        res.status(500).json({"message": "Error creating question", e})
+    }
+})
+
 app.delete("/Questions/:id", async(req, res)=>{
     const{id} = req.params;
     try{
@@ -226,7 +235,7 @@ app.delete("/Questions/:id", async(req, res)=>{
         console.log("Error occured while connecting to database");
         console.log(err);
     }
-} )
+})
 
 app.listen(port, () => {
     console.log(`server is running on port ${port}`);
