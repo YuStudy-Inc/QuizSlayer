@@ -15,14 +15,11 @@ const QuestionSchema = new Schema({
     questionPrompt: {
         type: String,
     },
-    choices: {
-        type: [String],
-    },
     answer: {
-        type: Number,
+        type: String,
     },
     difficulty: {
-        type: Number,
+        type: String,
     },
     pointsIfRight: {
         type: Number,
