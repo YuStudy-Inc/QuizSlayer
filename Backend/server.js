@@ -204,6 +204,7 @@ app.put('/editUser/:id', async (req,res) => {
 
 app.put('/editUser/password/:id', async (req,res) => {
     try {
+        const {oldPassword, newPassword, newPasswordAgain} = req.body
         const user = await User.findOne({_id: req.params.id})
         if(newPassword != newPasswordAgain) {
             res.status(400).json({error: "New Passwords do not match!"})
@@ -213,18 +214,19 @@ app.put('/editUser/password/:id', async (req,res) => {
             res.status(400).json({error: "The password is weak"})
             return;
         }
-        const passwordValidated = await passwordMatch(req.body.oldPassword, user.password)
+        const passwordValidated = await passwordMatch(oldPassword, user.password)
         if(!passwordValidated) {
             res.status(404).json({error: 'Old Password Incorrect'})
             return;
         }
-        user.password = hashPassword(newPassword);
+        user.password = await hashPassword(newPassword);
         user.save();
 
-        res.status(200).json({message: "Password updated!"})
+        res.status(200).json({message: 'Password updated!'})
     }
     catch (e) {
         res.status(500).json({error: 'Password not modified'})
+        console.log(e)
     } 
 })
 
