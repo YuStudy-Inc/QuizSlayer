@@ -180,7 +180,7 @@ app.delete("/quizzes/:id", async(req, res)=>{
 
 app.post("/createQuestion", async(req, res) => {
     try {
-        const { quizID, question, answer, difficulty, right, wrong } = req.body
+        const { quizID, question, choices, answer, difficulty, right, wrong } = req.body
 
         //difficulty will be drop down menu for easy, medium, hard
         if (!question || !answer || !difficulty || !right || !wrong)
@@ -192,19 +192,19 @@ app.post("/createQuestion", async(req, res) => {
         if (!isInt(right) || !isInt(wrong))
             return res.status(400).json({ message: "points right or points wrong is not a valid number" })
 
+        const turnQuizStringIntoAIDObjectBecauseGodKnowsWhyIHaveToConvertIt = new mongoose.Types.ObjectId(quizID);
+        const quizAssociatedWithTheQuestion = await Quiz.findById(turnQuizStringIntoAIDObjectBecauseGodKnowsWhyIHaveToConvertIt)
+        if (!quizAssociatedWithTheQuestion)
+            return res.status(404).json({ message: "Quiz not found" })
+
         const newQuestion = new Question({
-            quizID,
+            quizId: turnQuizStringIntoAIDObjectBecauseGodKnowsWhyIHaveToConvertIt,
             question,
             answer, 
             difficulty,
             right,
             wrong
         }) 
-
-        const turnQuizStringIntoAIDObjectBecauseGodKnowsWhyIHaveToConvertIt = new mongoose.Types.ObjectId(quizID);
-        const quizAssociatedWithTheQuestion = await Quiz.findById(turnQuizStringIntoAIDObjectBecauseGodKnowsWhyIHaveToConvertIt)
-        if (!quizAssociatedWithTheQuestion)
-            return res.status(404).json({ message: "Quiz not found" })
         
         quizAssociatedWithTheQuestion.questions.push(newQuestion)
         await newQuestion.save()
