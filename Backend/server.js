@@ -18,7 +18,7 @@ const validEmail = ((email) => {
 })
 
 const validPassword = ((password) => {
-    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{9,}$/
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&_])[A-Za-z\d@$!%*?&_]{9,}$/
     return passwordRegex.test(password)
 })
 
@@ -135,6 +135,54 @@ app.delete("/user/:id", async(req, res)=>{
         console.log("Error trying to delete user")
         console.log(error);
     }
+})
+
+app.put('/editUser/:id', async (req,res) => {
+    try {
+        const userId = req.params.id
+        
+        //need to check if username is taken. 
+        const tempUser = await User.findOne({username: req.body.username})
+        if(tempUser){
+            res.status(404).json({error: 'Username taken'})
+            return; 
+        }
+        //currently need all fields to update
+        const result = await User.findOneAndUpdate({_id: userId}, {$set: req.body})
+        console.log(result);
+
+        res.status(200).json({updatedCount: result.modifiedCount}) 
+    } catch (e) {
+        res.status(500).json({error: 'User not modified'})
+    }
+})
+
+app.put('/editUser/password/:id', async (req,res) => {
+    try {
+        const {oldPassword, newPassword, newPasswordAgain} = req.body
+        const user = await User.findOne({_id: req.params.id})
+        if(newPassword != newPasswordAgain) {
+            res.status(400).json({error: "New Passwords do not match!"})
+            return;
+        }
+        if (!validPassword(newPassword)) {
+            res.status(400).json({error: "The password is weak"})
+            return;
+        }
+        const passwordValidated = await passwordMatch(oldPassword, user.password)
+        if(!passwordValidated) {
+            res.status(404).json({error: 'Old Password Incorrect'})
+            return;
+        }
+        user.password = await hashPassword(newPassword);
+        user.save();
+
+        res.status(200).json({message: 'Password updated!'})
+    }
+    catch (e) {
+        res.status(500).json({error: 'Password not modified'})
+        console.log(e)
+    } 
 })
 
 app.post("/createQuiz", async(req, res) => {
