@@ -6,20 +6,20 @@ const QuestionSchema = new Schema({
     //     type: Schema.Types.ObjectId,
     //     required: true,
     // },
+
     quizId: {
         type: Schema.Types.ObjectId,
+            //Change this back later
+        default: null,
     },
     questionPrompt: {
         type: String,
     },
-    choices: {
-        type: [String],
-    },
     answer: {
-        type: Number,
+        type: String,
     },
     difficulty: {
-        type: Number,
+        type: String,
     },
     pointsIfRight: {
         type: Number,
