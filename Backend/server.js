@@ -201,12 +201,13 @@ app.post("/createQuestion", async(req, res) => {
             wrong
         }) 
 
-        const turnQuizStringIntoAIDObjectBecauseGodKnowsWhyIHaveToConvertIt = new mongoose.Types.ObjectId(quizID);
+        //we gonna remove the list of questions in the Quiz object because that just makes everything harder.
+        /* const turnQuizStringIntoAIDObjectBecauseGodKnowsWhyIHaveToConvertIt = new mongoose.Types.ObjectId(quizID);
         const quizAssociatedWithTheQuestion = await Quiz.findById(turnQuizStringIntoAIDObjectBecauseGodKnowsWhyIHaveToConvertIt)
         if (!quizAssociatedWithTheQuestion)
             return res.status(404).json({ message: "Quiz not found" })
         
-        quizAssociatedWithTheQuestion.questions.push(newQuestion)
+        quizAssociatedWithTheQuestion.questions.push(newQuestion) */
         await newQuestion.save()
 
         res.status(200).json({
