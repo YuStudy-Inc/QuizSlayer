@@ -18,7 +18,7 @@ const validEmail = ((email) => {
 })
 
 const validPassword = ((password) => {
-    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{9,}$/
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&_])[A-Za-z\d@$!%*?&_]{9,}$/
     return passwordRegex.test(password)
 })
 
@@ -137,6 +137,54 @@ app.delete("/user/:id", async(req, res)=>{
     }
 })
 
+app.put('/editUser/:id', async (req,res) => {
+    try {
+        const userId = req.params.id
+        
+        //need to check if username is taken. 
+        const tempUser = await User.findOne({username: req.body.username})
+        if(tempUser){
+            res.status(404).json({error: 'Username taken'})
+            return; 
+        }
+        //currently need all fields to update
+        const result = await User.findOneAndUpdate({_id: userId}, {$set: req.body})
+        console.log(result);
+
+        res.status(200).json({updatedCount: result.modifiedCount}) 
+    } catch (e) {
+        res.status(500).json({error: 'User not modified'})
+    }
+})
+
+app.put('/editUser/password/:id', async (req,res) => {
+    try {
+        const {oldPassword, newPassword, newPasswordAgain} = req.body
+        const user = await User.findOne({_id: req.params.id})
+        if(newPassword != newPasswordAgain) {
+            res.status(400).json({error: "New Passwords do not match!"})
+            return;
+        }
+        if (!validPassword(newPassword)) {
+            res.status(400).json({error: "The password is weak"})
+            return;
+        }
+        const passwordValidated = await passwordMatch(oldPassword, user.password)
+        if(!passwordValidated) {
+            res.status(404).json({error: 'Old Password Incorrect'})
+            return;
+        }
+        user.password = await hashPassword(newPassword);
+        user.save();
+
+        res.status(200).json({message: 'Password updated!'})
+    }
+    catch (e) {
+        res.status(500).json({error: 'Password not modified'})
+        console.log(e)
+    } 
+})
+
 app.post("/createQuiz", async(req, res) => {
     try {
         const { title, description } = req.body
@@ -180,7 +228,7 @@ app.delete("/quizzes/:id", async(req, res)=>{
 
 app.post("/createQuestion", async(req, res) => {
     try {
-        const { quizID, question, answer, difficulty, right, wrong } = req.body
+        const { quizID, question, choices, answer, difficulty, right, wrong } = req.body
 
         //difficulty will be drop down menu for easy, medium, hard
         if (!question || !answer || !difficulty || !right || !wrong)
@@ -192,8 +240,13 @@ app.post("/createQuestion", async(req, res) => {
         if (!isInt(right) || !isInt(wrong))
             return res.status(400).json({ message: "points right or points wrong is not a valid number" })
 
+        const turnQuizStringIntoAIDObjectBecauseGodKnowsWhyIHaveToConvertIt = new mongoose.Types.ObjectId(quizID);
+        const quizAssociatedWithTheQuestion = await Quiz.findById(turnQuizStringIntoAIDObjectBecauseGodKnowsWhyIHaveToConvertIt)
+        if (!quizAssociatedWithTheQuestion)
+            return res.status(404).json({ message: "Quiz not found" })
+
         const newQuestion = new Question({
-            quizID,
+            quizId: turnQuizStringIntoAIDObjectBecauseGodKnowsWhyIHaveToConvertIt,
             question,
             answer, 
             difficulty,

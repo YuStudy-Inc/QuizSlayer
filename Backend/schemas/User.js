@@ -36,6 +36,9 @@ const UserSchema = new Schema({
     },
     coins: {
         type: Number
+    },
+    __v: {
+        type: Number
     }
 });
 
