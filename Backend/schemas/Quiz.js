@@ -12,11 +12,12 @@ const QuizSchema = new Schema({
     description: {
         type: String,
     },
-    questions: {
+    //we will just have QuizId attached to the questions that are in this quiz and then call all of the questions with the quizID
+    /* questions: {
         type: [Schema.Types.ObjectId],
         ref: 'Question',
         default: null,
-    }
+    } */
 });
 
 const Quiz = model('Quiz', QuizSchema);
