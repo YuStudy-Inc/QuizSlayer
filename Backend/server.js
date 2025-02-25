@@ -190,14 +190,17 @@ app.put('/editQuestion/:id', async (req,res) => {
         const questionId = req.params.id
         
         //Only changes the parameter that was included in the json req
-        const result = await Question.findOneAndUpdate({_id: questionId}, {$set: req.body})
+        const result = await Question.findOneAndUpdate({_id: questionId}, {$set: req.body}, {new: true})
         if(result == null){
             res.status(404).json({error: 'No Question with that ID'})
             return;
         }
 
         console.log(result);
-        res.status(200).json({updatedCount: result.modifiedCount}) 
+        res.status(200).json({
+            message: "Question updated Successfully",
+            object: result
+        }) 
 
     } catch (e) {
         res.status(500).json({error: "Question not modified"})
@@ -210,14 +213,17 @@ app.put('/editQuiz/:id', async (req,res) => {
         const quizId = req.params.id
         
         //Only changes the parameter that was included in the json req
-        const result = await Quiz.findOneAndUpdate({_id: quizId}, {$set: req.body})
+        const result = await Quiz.findOneAndUpdate({_id: quizId}, {$set: req.body}, {new: true})
         if(result == null){
             res.status(404).json({error: 'No Quiz with that ID'})
             return;
         }
         
         console.log(result);
-        res.status(200).json({updatedCount: result.modifiedCount}) 
+        res.status(200).json({
+            message: 'Quiz edited successfullly',
+            object: result
+        }) 
 
     } catch (e) {
         res.status(500).json({error: "Quiz not modified"})
