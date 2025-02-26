@@ -9,18 +9,6 @@ const CharacterSchema = new Schema({
     name: {
         type: String,
     },
-    health: {
-        type: Number,
-    },
-    hat: {
-        type: Number,
-    },
-    weapon: {
-        type: Number,
-    },
-    isAlive: {
-        type: Boolean,
-    },
     picture: {
         type: String,
     },
