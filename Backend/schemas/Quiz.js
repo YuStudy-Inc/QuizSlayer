@@ -8,9 +8,11 @@ const QuizSchema = new Schema({
     // },
     title: {
         type: String,
+        required: true
     },
     description: {
         type: String,
+        default: ""
     },
     //we will just have QuizId attached to the questions that are in this quiz and then call all of the questions with the quizID
     /* questions: {
