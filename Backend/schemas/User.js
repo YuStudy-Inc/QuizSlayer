@@ -33,8 +33,12 @@ const UserSchema = new Schema({
         // type: Schema.Types.ObjectId, // Not ObjectID because Item uses Number for ID
         type: [Number],
         ref: 'Item',
-        default: [1]
         // required: true,
+    },
+    characterList: {
+        type: [Number],
+        ref: 'Character',
+        default: [1]
     },
     selectedCharacter: { // Stores Character ID
         type: Number,
