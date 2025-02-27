@@ -2,8 +2,6 @@ import DatabaseConnection from './DatabaseConnection.js'
 import { Character, Quiz, Question, User } from './schemas/Schemas.js';
 import express from 'express'
 import bodyParser from 'body-parser'
-/* added bcrypt as the library */
-import bcrypt from 'bcrypt'
 import mongoose from 'mongoose';
 
 const app = express()
@@ -21,16 +19,6 @@ const validEmail = ((email) => {
 const validPassword = ((password) => {
     const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&_])[A-Za-z\d@$!%*?&_]{9,}$/
     return passwordRegex.test(password)
-})
-
-/* created methods that uses library */
-const hashPassword = ((password) => {
-    const saltRounds = 10
-    return bcrypt.hash(password, saltRounds)
-})
-
-const passwordMatch = (async(passwordFromUser, savedPasswordFromDB) => {
-    return await bcrypt.compare(passwordFromUser, savedPasswordFromDB)
 })
 
 function isInt(value) {
