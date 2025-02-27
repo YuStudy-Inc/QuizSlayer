@@ -9,12 +9,6 @@ const EnemySchema = new Schema({
     name: {
         type: String,
     },
-    health: {
-        type: Number,
-    },
-    isAlive: {
-        type: Boolean,
-    },
     picture: { // Reference to picture stored on frontend
         type: String,
     }
