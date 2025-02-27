@@ -23,7 +23,15 @@ const validPassword = ((password) => {
     return passwordRegex.test(password)
 })
 
+/* created methods that uses library */
+const hashPassword = ((password) => {
+    const saltRounds = 10
+    return bcrypt.hash(password, saltRounds)
+})
 
+const passwordMatch = (async(passwordFromUser, savedPasswordFromDB) => {
+    return await bcrypt.compare(passwordFromUser, savedPasswordFromDB)
+})
 
 function isInt(value) {
     return !isNaN(value) && parseInt(Number(value)) == value && !isNaN(parseInt(value, 10));
