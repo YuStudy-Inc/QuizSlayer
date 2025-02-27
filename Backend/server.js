@@ -23,6 +23,7 @@ const validPassword = ((password) => {
     return passwordRegex.test(password)
 })
 
+/* created methods that uses library */
 const hashPassword = ((password) => {
     const saltRounds = 10
     return bcrypt.hash(password, saltRounds)
