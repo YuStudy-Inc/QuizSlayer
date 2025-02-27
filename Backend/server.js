@@ -2,6 +2,7 @@ import DatabaseConnection from './DatabaseConnection.js'
 import { Character, Quiz, Question, User } from './schemas/Schemas.js';
 import express from 'express'
 import bodyParser from 'body-parser'
+/* added bcrypt as the library */
 import bcrypt from 'bcrypt'
 import mongoose from 'mongoose';
 
