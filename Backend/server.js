@@ -2,6 +2,8 @@ import DatabaseConnection from './DatabaseConnection.js'
 import { Character, Quiz, Question, User } from './schemas/Schemas.js';
 import express from 'express'
 import bodyParser from 'body-parser'
+/* added bcrypt as the library */
+import bcrypt from 'bcrypt'
 import mongoose from 'mongoose';
 
 const app = express()
@@ -20,6 +22,8 @@ const validPassword = ((password) => {
     const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&_])[A-Za-z\d@$!%*?&_]{9,}$/
     return passwordRegex.test(password)
 })
+
+
 
 function isInt(value) {
     return !isNaN(value) && parseInt(Number(value)) == value && !isNaN(parseInt(value, 10));
