@@ -1,0 +1,51 @@
+:root {
+    --black: #1D1D1D;
+    --light-green: #5CDCA0;
+    --dark-green: #5FA785;
+    --red: #B95858;
+    --white: #E8EEEC; 
+}
+
+
+.navbar-container {
+    position: absolute;
+    display: flex;
+    width: 50%;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 3%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.navbar-container a {
+    text-decoration: none;
+}
+
+.navbar-container h1 {
+    color: var(--white);
+    margin-bottom: 5px;
+}
+ 
+.highlight:hover .selector {
+    animation: expand 0.5s ease-in-out forwards;
+    
+}
+
+.selector {
+    position: relative;
+    width: 0;
+    height: 3px;
+    background-color: var(--white);
+    transform: translateX(-50%);
+    left: 50%;
+}   
+
+@keyframes expand {
+    0% {
+        width: 0%;
+    }
+    100% {
+        width: 100%;
+    }
+}
