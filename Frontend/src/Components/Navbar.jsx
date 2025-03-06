@@ -38,8 +38,6 @@ const Navbar = () => {
                         <h1>LEADERBOARD</h1>
                     </Link>
                     <div className="selector">
-                        <div className="selector-left"></div>
-                        <div className="selector-right"></div>
                     </div>
                 </div>
             </div>

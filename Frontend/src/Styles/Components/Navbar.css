@@ -6,7 +6,6 @@
     --white: #E8EEEC; 
 }
 
-
 .navbar-container {
     position: absolute;
     display: flex;
@@ -29,7 +28,6 @@
  
 .highlight:hover .selector {
     animation: expand 0.5s ease-in-out forwards;
-    
 }
 
 .selector {
