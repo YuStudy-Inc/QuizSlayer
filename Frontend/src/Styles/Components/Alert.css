@@ -1,0 +1,51 @@
+:root {
+    --black: #1D1D1D;
+    --light-green: #5CDCA0;
+    --dark-green: #5FA785;
+    --red: #B95858;
+    --white: #E8EEEC; 
+}
+
+.dim-background {
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    overflow: hidden;
+}
+
+.alert-container {
+    width: 30vw;
+    height: 25vh;
+    border-radius: 15px;
+    background-color: var(--white);
+    display: flex;
+    flex-direction: column;
+} 
+
+.alert-container h1 {
+    background-color: transparent;
+    color: var(--black);
+    text-align: center;
+    font-size: 2rem;
+}
+
+.alert-container button {
+    background-color: var(--dark-green);
+    width: 9vw;
+    height: 5vh;
+    border-radius: 10px;
+    border: transparent;
+}
+
+.buttons {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: transparent;
+}
+

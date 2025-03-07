@@ -27,7 +27,7 @@
 }
  
 .highlight:hover .selector {
-    animation: expand 0.5s ease-in-out forwards;
+    animation: expand 0.2s ease-in-out forwards;
 }
 
 .selector {
