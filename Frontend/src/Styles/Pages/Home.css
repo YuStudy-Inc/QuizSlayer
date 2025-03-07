@@ -1,3 +1,38 @@
 * {
     margin: 0;
 }
+
+.home-todo-list {
+    order: 1;
+}
+.home-podium {
+    order: 2;
+}
+.home-friends-active {
+    order: 3;
+}
+
+.home-cards-container {
+    height: 100vh;
+    display: flex;
+    justify-content: space-around;
+    gap: 10%;
+    align-items: center;
+}
+
+@media only screen and (max-width: 1200px) {
+    .home-cards-container {
+        flex-direction: column; 
+        align-items: center;
+        gap: 2rem;
+    }
+    .home-todo-list {
+        order: 2 !important;
+    }
+    .home-podium {
+        order: -1 !important;
+    }
+    .home-friends-active {
+        order: 3 !important;
+    }
+}

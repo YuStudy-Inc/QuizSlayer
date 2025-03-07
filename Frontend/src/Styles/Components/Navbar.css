@@ -7,7 +7,7 @@
 }
 
 .navbar-container {
-    position: absolute;
+    position: fixed;
     display: flex;
     width: 50%;
     align-items: center;
