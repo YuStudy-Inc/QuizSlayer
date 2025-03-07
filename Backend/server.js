@@ -2,7 +2,6 @@ import DatabaseConnection from './DatabaseConnection.js'
 import { Character, Quiz, Question, User } from './schemas/Schemas.js';
 import express from 'express'
 import bodyParser from 'body-parser'
-/* added bcrypt as the library */
 import bcrypt from 'bcrypt'
 import mongoose from 'mongoose';
 
@@ -23,7 +22,6 @@ const validPassword = ((password) => {
     return passwordRegex.test(password)
 })
 
-/* created methods that uses library */
 const hashPassword = ((password) => {
     const saltRounds = 10
     return bcrypt.hash(password, saltRounds)
