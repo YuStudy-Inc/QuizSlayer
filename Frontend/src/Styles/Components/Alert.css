@@ -1,0 +1,86 @@
+:root {
+    --black: #1D1D1D;
+    --light-green: #5CDCA0;
+    --dark-green: #5FA785;
+    --red: #B95858;
+    --white: #E8EEEC; 
+}
+
+.dim-background {
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    overflow: hidden;
+}
+
+.alert-container {
+    width: 30vw;
+    height: 25vh;
+    border-radius: 15px;
+    background-color: var(--white);
+    display: flex;
+    flex-direction: column;
+} 
+
+.alert-container h1 {
+    background-color: transparent;
+    color: var(--black);
+    text-align: center;
+    font-size: 2rem;
+    margin-top: 10px;
+}
+
+.alert-container button {
+    background-color: var(--dark-green);
+    width: 9vw;
+    height: 5vh;
+    border-radius: 10px;
+    border: transparent;
+    -webkit-box-shadow: 0px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 10px 5px 0px rgba(0,0,0,0.75);
+    transition: all 0.2s ease-in-out;
+    color: var(--white);
+    font-size: 1.3rem;
+}
+
+.button-container {
+    margin: auto;
+    bottom: 10px;
+}
+
+.alert-container button:hover {
+    transform: scale(1.1);
+}
+
+.alert-container button:active {
+    transform: scale(0.9);
+    transform: translateY(2px);
+    -webkit-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
+}
+
+.two-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    background-color: transparent;
+}
+
+.buttons {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: transparent;
+}
+
+.bad-button {
+    background-color: var(--red) !important;
+}
+

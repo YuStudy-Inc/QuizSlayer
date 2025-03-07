@@ -1,0 +1,28 @@
+:root {
+    --black: #1D1D1D;
+    --light-green: #5CDCA0;
+    --dark-green: #5FA785;
+    --red: #B95858;
+    --white: #E8EEEC; 
+}
+
+.todolist-container {
+    width: 20vw;
+    height: 60vh;
+    background-color: var(--white);
+}
+
+@media only screen and (max-width: 1200px) {
+    .todolist-container {
+        width: 40vw;
+        height: 60vh;
+        background-color: var(--white);
+    }
+}
+
+.todolist-container h1 {
+    font-size: 2rem;
+    color: var(--black);
+    background-color: transparent;
+    margin: 10px 0 0 15px;
+}
