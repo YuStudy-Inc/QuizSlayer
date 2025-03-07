@@ -32,6 +32,7 @@
     color: var(--black);
     text-align: center;
     font-size: 2rem;
+    margin-top: 10px;
 }
 
 .alert-container button {
@@ -40,6 +41,36 @@
     height: 5vh;
     border-radius: 10px;
     border: transparent;
+    -webkit-box-shadow: 0px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 10px 5px 0px rgba(0,0,0,0.75);
+    transition: all 0.2s ease-in-out;
+    color: var(--white);
+    font-size: 1.3rem;
+}
+
+.button-container {
+    margin: auto;
+    bottom: 10px;
+}
+
+.alert-container button:hover {
+    transform: scale(1.1);
+}
+
+.alert-container button:active {
+    transform: scale(0.9);
+    transform: translateY(2px);
+    -webkit-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
+}
+
+.two-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    background-color: transparent;
 }
 
 .buttons {
@@ -47,5 +78,9 @@
     display: flex;
     justify-content: center;
     background-color: transparent;
+}
+
+.bad-button {
+    background-color: var(--red) !important;
 }
 

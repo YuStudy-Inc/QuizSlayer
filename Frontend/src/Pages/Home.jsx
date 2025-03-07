@@ -5,7 +5,7 @@ import "../Styles/Pages/Home.css"
 const Home = () => {
     return(
         <>
-            <Alert />
+            {/* <Alert /> */}
             <Navbar />
         </>
     )
