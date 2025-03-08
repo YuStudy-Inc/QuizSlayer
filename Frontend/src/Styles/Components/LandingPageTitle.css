@@ -1,0 +1,28 @@
+.background-for-title-page {
+    width: 100%;
+    height: 100vh;
+    background-image: url("../../assets/chiikawaBackground.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.black-triangle-thingy {
+    position: relative;
+    clip-path: polygon(0 0, 30% 0, 100% 100%, 0% 100%);
+    height: 100vh;
+    z-index: 1;
+}
+
+.button-container-title {
+    position: relative;
+    width: auto;
+    bottom: 20%;
+    left: 20%;
+    z-index: 4;
+}
+
+.button-container-title button {
+    width: 9rem;
+    height: 5rem;
+}
+

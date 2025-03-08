@@ -1,4 +1,5 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
+import LandingPage from "./Pages/LandingPage";
 import Home from "./Pages/Home";
 
 function App() {
@@ -6,7 +7,8 @@ function App() {
 		<>
 			<BrowserRouter>
 				<Routes>
-					{/* <Route index element=> {}/> */}
+					<Route index element={<LandingPage />}/>
+					<Route path='/' element={<LandingPage />}/>
 					<Route path='/home' element={<Home />}/>
 				</Routes>
 			</BrowserRouter>

@@ -8,7 +8,7 @@ import "../Styles/Pages/Home.css"
 const Home = () => {
     return(
         <>
-            {/* <Alert /> */}
+            {/* <Alert text="Ready to Begin" buttonOneText="no" functionButtonOne={() => {}} buttonTwoText="yes" functionButtonTwo={() => {}}/> */}
             <Navbar />
             <div className="home-container">
                 <div className="home-cards-container">
