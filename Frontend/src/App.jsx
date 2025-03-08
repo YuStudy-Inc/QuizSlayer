@@ -1,5 +1,5 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-import {Home, Landing} from "./Pages/Pages";
+import {Home, Landing, Login} from "./Pages/Pages";
 
 function App() {
 	return (
@@ -8,6 +8,7 @@ function App() {
 				<Routes>
 					{/* <Route index element=> {}/> */}
 					<Route index path='/' element={<Landing />}/>
+					<Route path='/login' element={<Login />}/>
 					<Route path='/home' element={<Home />}/>
 				</Routes>
 			</BrowserRouter>
