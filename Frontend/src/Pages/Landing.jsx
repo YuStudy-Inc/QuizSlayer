@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import './styles.css';
-function App() {
+import '../Styles/Pages/Landing.css';
+function Login() {
 	return (
 		<div className="diagonal">
 			<h1 className="header">Quiz Slayer</h1>
@@ -12,4 +12,4 @@ function App() {
 	)
 }
 
-export default App
+export default Login
