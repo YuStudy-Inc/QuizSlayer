@@ -1,7 +1,11 @@
 .developer-container {
-    display: flex;
     width: 70%;
     gap: 7%;
+    display: none;
+}
+
+.developer-container.is-active  {
+    display: flex;
 }
 
 .developer-container img {
@@ -11,6 +15,7 @@
 }
 
 .wise-words-from-this-dev {
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -20,5 +25,34 @@
     font-size: 3rem;
 }
 
+.dev-links {
+    width: 100%;
+    display: flex;
+    gap: 10%;
+}
 
+.dev-links a {
+    display: inline-block;
+    width: fit-content;
+    color: var(--black);
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+    animation: dev-hover 4s infinite ease-in-out;
+}
+
+.dev-links a:hover {
+    color: var(--light-green);
+}
+
+@keyframes dev-hover {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(5px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
 

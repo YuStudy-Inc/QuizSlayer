@@ -11,6 +11,7 @@
 
 .special-thanks-card-container h1 {
     font-size: 3rem;
+    color: var(--white);
 }
 
 .special-thanks-card-container p {
