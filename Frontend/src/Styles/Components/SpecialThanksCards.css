@@ -1,0 +1,14 @@
+.special-thanks-card-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.special-thanks-card-container img {
+    width: 300px;
+    aspect-ratio: 1/1;
+}
+
+.special-thanks-card-container h1 {
+    font-size: 3rem;
+}

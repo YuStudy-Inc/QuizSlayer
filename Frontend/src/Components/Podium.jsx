@@ -1,5 +1,5 @@
 import "../Styles/Components/Podium.css"
-import podium from "../assets/podium.jpg"
+import { podium } from "../assets/Pictures"
 
 const Podium = ({ className = "" }) => {
     return(

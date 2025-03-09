@@ -5,10 +5,10 @@ const Alert = ({text, buttonOneText, functionButtonOne, buttonTwoText, functionB
         <>
             <div className="dim-background">
                 <div className="alert-container">
-                    <h1>{text}Ready to Begin?</h1>
-                    <div className={`button-container ${buttonTwoText ? "two-buttons" : "two-buttons"}`}>
-                        <button className={`${buttonTwoText ? "bad-button" : "bad-button"}`} onClick={functionButtonOne}>{buttonOneText}No</button>
-                        {<button onClick={functionButtonTwo}>{buttonTwoText}Yes</button>}
+                    <h1>{text}</h1>
+                    <div className={`button-container ${buttonTwoText ? "two-buttons" : "buttons"}`}>
+                        <button className={`${buttonTwoText ? "bad-button" : ""}`} onClick={functionButtonOne}>{buttonOneText}</button>
+                        {buttonTwoText && <button onClick={functionButtonTwo}>{buttonTwoText}</button>}
                     </div>
                 </div>
             </div>

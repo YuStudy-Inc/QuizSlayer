@@ -1,0 +1,24 @@
+.developer-container {
+    display: flex;
+    width: 70%;
+    gap: 7%;
+}
+
+.developer-container img {
+    height: 350px;
+    aspect-ratio: 1/1;
+    background-color: var(--dark-green);
+}
+
+.wise-words-from-this-dev {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.wise-words-from-this-dev h1 {
+    font-size: 3rem;
+}
+
+
+

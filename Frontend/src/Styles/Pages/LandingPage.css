@@ -1,0 +1,17 @@
+.corner-logo {
+    height: 96px;
+    aspect-ratio: 1/1;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
+    background: transparent;
+    opacity: 0;
+    visibility: hidden;
+    transition: visibility 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.corner-logo.visible {
+    opacity: 1;
+    visibility: visible;
+}

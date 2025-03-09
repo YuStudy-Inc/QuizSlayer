@@ -1,8 +1,8 @@
 import Home from './Home.jsx';
-// import Landing from './Landing.jsx';
+import LandingPage from './LandingPage.jsx';
 import Login from './Login.jsx'
 export {
     Home,
-    // Landing,
+    LandingPage,
     Login
 }

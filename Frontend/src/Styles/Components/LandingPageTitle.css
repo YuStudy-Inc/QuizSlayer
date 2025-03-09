@@ -1,0 +1,98 @@
+:root {
+    --black: #1D1D1D;
+    --light-green: #5CDCA0;
+    --dark-green: #5FA785;
+    --red: #B95858;
+    --white: #E8EEEC; 
+}
+
+.background-for-title-page {
+    width: 100%;
+    height: 100vh;
+    background-image: url("../../assets/chiikawaBackground.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.black-triangle-thingy {
+    position: relative;
+    clip-path: polygon(0 0, 30% 0, 100% 100%, 0% 100%);
+    height: 100vh;
+    z-index: 1;
+}
+
+.logo-big {
+    position: absolute;
+    height: 512px;
+    aspect-ratio: 1/1;
+    top: 10%;
+    left: 12%;
+    animation: hover 4s infinite ease-in-out;
+}
+
+@keyframes hover {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(20px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .logo-big {
+        height: 408px;
+        aspect-ratio: 1/1;
+        top: 15%;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .logo-big {
+        height: 350px;
+        aspect-ratio: 1/1;
+        top: 20%;
+    }
+}
+
+.button-container-title {
+    position: absolute;
+    width: 30%;
+    z-index: 4;
+    left: 10%;
+    bottom: 20%;
+    display: flex;
+    justify-content: end;
+    gap: 20%;
+}
+
+.button-container-title button {
+    width: 14rem;
+    height: 5rem;
+    background-color: var(--white);
+    border: none;
+    border-radius: 20px;
+    -webkit-box-shadow: 0px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 10px 5px 0px rgba(0,0,0,0.75);
+    transition: all 0.2s ease-in-out;
+    font-size: 2rem;
+}
+
+.button-container-title button:hover {
+    transform: scale(1.1);
+    background-color: var(--light-green);
+    color: var(--white);
+}
+
+.button-container-title button:active {
+    transform: scale(0.9);
+    transform: translateY(2px);
+    -webkit-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
+}
+
