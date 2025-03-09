@@ -12,3 +12,32 @@
 .special-thanks-card-container h1 {
     font-size: 3rem;
 }
+
+.special-thanks-card-container p {
+    color: var(--white);
+}
+
+.special-thanks-card-container a {
+    display: inline-block;
+    width: fit-content;
+    color: var(--white);
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+    animation: social-hover 4s infinite ease-in-out;
+}
+
+.special-thanks-card-container a:hover {
+    color: var(--black);
+}
+
+@keyframes social-hover {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(5px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}

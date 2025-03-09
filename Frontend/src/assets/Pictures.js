@@ -1,5 +1,6 @@
 import logo from "../assets/logo.png";
 import armoredSolder from "../assets/armoredSoldier.png";
+import backgroundFight from "../assets/backgroundFight.png"
 import bananaPeel from "../assets/bananaPeel.png";
 import bucketHat from "../assets/bucketHat.png";
 import capyBaraCharacter from "../assets/capyBaraCharacter.png";
@@ -17,6 +18,7 @@ import wizardHat from "../assets/wizardHat.png";
 export {
     logo,
     armoredSolder,
+    backgroundFight,
     bananaPeel,
     bucketHat,
     capyBaraCharacter,
