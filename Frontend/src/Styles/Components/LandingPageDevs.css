@@ -1,0 +1,70 @@
+:root {
+    --black: #1D1D1D;
+    --light-green: #5CDCA0;
+    --dark-green: #5FA785;
+    --red: #B95858;
+    --white: #E8EEEC; 
+}
+
+.meet-the-devs-container {
+    position: relative;
+    background-color: var(--white);
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.meet-the-devs-container * {
+    background-color: var(--white);
+}
+
+.devs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 80%;
+}
+
+.title-devs {
+    font-size: 4rem;
+}
+
+.underline {
+    width: 110%;
+    height: 7px;
+    border-radius: 10px;
+    background-color: var(--black);
+}
+
+.carousel {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 70%;
+}
+
+.carousel button {
+    border: none;
+    height: 60px;
+    width: 60px;
+    color: var(--dark-green);
+    font-size: 2.5rem;
+    display: flex;
+    align-items: center;
+    transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.carousel button:hover {
+    color: var(--light-green);
+    transform: scale(1.1);
+}
+
+.carousel button:active {
+    transform: scale(0.9);
+}

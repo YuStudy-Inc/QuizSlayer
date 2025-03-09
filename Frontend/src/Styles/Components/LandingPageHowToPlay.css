@@ -1,0 +1,46 @@
+:root {
+    --black: #1D1D1D;
+    --light-green: #5CDCA0;
+    --dark-green: #5FA785;
+    --red: #B95858;
+    --white: #E8EEEC; 
+}
+
+.how-to-play-title-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--white);
+}
+
+.how-to-play-title-container * {
+    background-color: var(--white);
+}
+
+.how-to-actually {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.words-how-to {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.words-how-to h1 {
+    font-size: 4rem;
+    border-bottom: 20px solid var(--black);
+}
+
+/* .words-how-to p {
+
+} */
+
+.how-to-actually img {
+    width: 40%;
+}
