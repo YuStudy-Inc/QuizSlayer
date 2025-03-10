@@ -22,10 +22,10 @@
 /* 2880px x 1080px */
 @keyframes slow-pan {
     0% {
-        transform: translateX(0);
+        transform: translateX(-900px);
     }
     100% {
-        transform: translateX(calc(-1 * var(--max-translate)));
+        transform: translateX(550px);
     }
 }
 
