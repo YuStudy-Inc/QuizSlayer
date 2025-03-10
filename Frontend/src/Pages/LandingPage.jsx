@@ -30,6 +30,7 @@ const LandingPage = () => {
     
     return (
         <>
+            <div className="landing-page-container"></div>
             <img className={`corner-logo ${showingTheLogo ? "visible" : ""}`} src={logo} alt="small-logo" />
             <LandingPageTitle />
             <LandingPageHowToPlay />

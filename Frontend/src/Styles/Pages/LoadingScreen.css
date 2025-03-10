@@ -7,8 +7,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transform: translateX(0%);
-    transition: transform 1s ease-in-out;
+    animation: move-out 1.5s 2s forwards ease-in-out;
+}
+
+@keyframes move-out {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
 }
 
 .load {
@@ -92,8 +100,4 @@
 
 .message-for-load p {
     color: var(--white);
-}
-
-.loading-screen-container.loaded {
-    transform: translateX(-100%);
 }

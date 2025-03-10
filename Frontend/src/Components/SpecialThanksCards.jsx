@@ -7,7 +7,7 @@ const SpecialThanksCards = ({ image, name, role, linkForSocial }) => {
                 <img src={image} alt="" />
                 <h1>{name}</h1>
                 <p>{role}</p>
-                <a href={linkForSocial}>&gt;&gt;&gt; Socials &lt;&lt;&lt;</a>
+                <a href={linkForSocial} target="_blank" rel="noopener noreferrer">&gt;&gt;&gt; Socials &lt;&lt;&lt;</a>
             </div>
         </>
     )

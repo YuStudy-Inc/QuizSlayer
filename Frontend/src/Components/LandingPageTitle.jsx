@@ -6,7 +6,8 @@ import LoadingScreen from "../Pages/LoadingScreen.jsx"
 
 const LandingPageTitle = () => {
     const [isLoaded, setIsLoaded] = useState(false)
-    const [maxTranslate, setMaxTranslate] = useState(0)
+    const [isTransitioning, setIsTransitioning] = useState(false)
+    //const [maxTranslate, setMaxTranslate] = useState(0)
     /* const isInitialLoad = useRef(true)
 
     const handleImageLoad = () => {
@@ -27,23 +28,27 @@ const LandingPageTitle = () => {
 
     const wipeLoadingScreenOff = () => {
         const timer = setTimeout(() => {
-            setIsLoaded(true); 
-            document.documentElement.style.setProperty("--max-translate", `${maxTranslate}px`);
-        }, 2000);
+            setIsTransitioning(true)
+            //document.documentElement.style.setProperty("--max-translate", `${maxTranslate}px`);
+            const transitionTimer = setTimeout(() => {
+                setIsLoaded(true); 
+                setIsTransitioning(false);
+            }, 1000);
+
+            return () => clearTimeout(transitionTimer);
+        }, 2400);
 
         return () => clearTimeout(timer);
     }
 
     useEffect(() => {
-        return () => {
-            wipeLoadingScreenOff()
-        }
+        wipeLoadingScreenOff()
     }, [])
 
     
     return (
         <>
-            {!isLoaded && <LoadingScreen />}
+            {(!isLoaded || isTransitioning) && <LoadingScreen isLoaded={isLoaded} />}
             <div className="background-for-title-page">
                 <img id="bg-image" className="moving-background" src={backgroundFight} alt="" />
                 <div id="triangle" className="black-triangle-thingy">
