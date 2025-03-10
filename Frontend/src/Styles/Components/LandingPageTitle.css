@@ -7,11 +7,26 @@
 }
 
 .background-for-title-page {
+    position: relative;
     width: 100%;
     height: 100vh;
-    background-image: url("../../assets/chiikawaBackground.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
+    overflow: hidden;
+}
+
+.moving-background {
+    position: absolute;
+    object-fit: cover;
+    animation: slow-pan 60s linear infinite alternate;
+}
+
+/* 2880px x 1080px */
+@keyframes slow-pan {
+    0% {
+        transform: translateX(-900px);
+    }
+    100% {
+        transform: translateX(550px);
+    }
 }
 
 .black-triangle-thingy {

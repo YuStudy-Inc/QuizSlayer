@@ -12,9 +12,9 @@ const LandingPageSpecialThanks = () => {
                         <div className="underline-thanks"></div>
                     </div>
                     <div className="pictures-and-descriptions"> 
-                        <SpecialThanksCards image={crowCharacter} name={"Hannah"} role={"Background Design"}/>
-                        <SpecialThanksCards image={armoredSolder} name={"Daniel"} role={"Interviewee"}/>
-                        <SpecialThanksCards image={podium} name={"Justin"} role={"Interviewee"}/>
+                        <SpecialThanksCards image={crowCharacter} name={"Auralyie"} role={"Background Design"} linkForSocial={"https://www.instagram.com/auralyie/"}/>
+                        <SpecialThanksCards image={armoredSolder} name={"Daniel"} role={"Interviewee"} linkForSocial={"https://www.instagram.com/dnpaxion/"}/>
+                        <SpecialThanksCards image={podium} name={"Justin"} role={"Interviewee"} linkForSocial={"https://www.instagram.com/justin_nagooyen/"}/>
                     </div>
                 </div>
             </div>
