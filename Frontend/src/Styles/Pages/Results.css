@@ -11,18 +11,64 @@
     height: 100vh;
     background-color: var(--black);
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
 
 }
+.results-title {
+    border: 2px var(--dark-green) solid;
+    height: 15%;
+}
+
+.results-title h1 {
+    color: var(--white);
+    font-size: 3.5rem;
+    margin-top: 20px;
+}
 
 
+.show-results {
+    border: 2px var(--dark-green) solid;
+    width: 80%;
+    height: 85%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.container-for-cards-and-character {
+    border: 2px var(--dark-green) solid;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+}
+
+.container-for-podium-results-page {
+    border: 2px var(--dark-green) solid;
+    display: flex;
+    width: 45%;
+    justify-content: center;
+    margin-bottom: 10%;
+}
+
+.container-for-result-card {
+    height: 80%;
+    width: 55%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 5%;
+}
 
 .from-results-to-home {
     position: absolute;
     bottom: 20px;
     right: 20px;
     background-color: var(--dark-green);
-    width: 9vw;
+    width: 7vw;
     height: 5vh;
     border-radius: 10px;
     border: transparent;
@@ -31,7 +77,7 @@
     box-shadow: 0px 10px 5px 0px rgba(0,0,0,0.75);
     transition: all 0.2s ease-in-out;
     color: var(--white);
-    font-size: 1.3rem;
+    font-size: 1rem;
 }
 
 .from-results-to-home:hover {

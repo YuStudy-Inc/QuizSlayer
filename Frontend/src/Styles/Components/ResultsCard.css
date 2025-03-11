@@ -7,41 +7,72 @@
 }
 
 .results-card-container {
-    background-color: var(--white) !important;
-    display: flex;
-    flex-direction: column;
+    background-color: var(--white);
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    -webkit-box-shadow: 0px 20px 10px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 20px 10px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 20px 10px 0px rgba(0,0,0,0.75);
 }
 
-/* .results-card-container * {
-    background-color: var(--white);
-} */
-
-/* .results-card-container h1, p {
-    color: var(--black);
-} */
-
-/* .analytics {
+.results-stuff {
+    width: auto;
+    height: 80%;
     display: flex;
     flex-direction: column;
+    gap: 10%;
+    padding: 1.5rem;
+}
+
+.title-in-results-card {
+    font-size: 3rem;
+}
+
+.analytics {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 30%;
+    width: 100%;
+}
+
+.left-results {
+    justify-self: start;
+}
+
+.right-results {
+    justify-self: end;
+}
+
+.analytics p {
+    font-size: 1.4rem;
 }
 
 .progress-bar {
-    width: 70%;
-    height: 10px;
-} */
-
-/* .full-bar {
+    height: auto;
     width: 100%;
-    background-color: var(--black) !important;
-    position: absolute;
-    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.full-bar {
+    width: 100%;
+    height: 20px;
+    background-color: var(--black);
+    border-radius: 20px;
+    margin-top: 10%;
 }
 
 .actual-bar {
-    position: absolute;
     z-index: 10;
-    width: 50%;
+    position: absolute;
+    /* pass it from the game */
+    /* this is scuffed rn, 100% width goes outside the full bar for some reason */
+    height: 20px;
+    border-radius: 20px;
+    width: 10%;
     background-color: var(--light-green) !important;
-} */
+}
 
 
