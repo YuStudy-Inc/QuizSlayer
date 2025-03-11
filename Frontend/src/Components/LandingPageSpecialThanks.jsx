@@ -13,8 +13,8 @@ const LandingPageSpecialThanks = () => {
                     </div>
                     <div className="pictures-and-descriptions"> 
                         <SpecialThanksCards image={crowCharacter} name={"Auralyie"} role={"Background Design"} linkForSocial={"https://www.instagram.com/auralyie/"}/>
-                        <SpecialThanksCards image={armoredSolder} name={"Daniel"} role={"Interviewee"} linkForSocial={"https://www.instagram.com/dnpaxion/"}/>
-                        <SpecialThanksCards image={podium} name={"Justin"} role={"Interviewee"} linkForSocial={"https://www.instagram.com/justin_nagooyen/"}/>
+                        <SpecialThanksCards image={armoredSolder} name={"Daniel"} role={"Interviewee"} linkForSocial={"https://www.linkedin.com/in/danielpasion/"}/>
+                        <SpecialThanksCards image={podium} name={"Justin"} role={"Interviewee"} linkForSocial={"https://www.linkedin.com/in/justin-mn/"}/>
                     </div>
                 </div>
             </div>
