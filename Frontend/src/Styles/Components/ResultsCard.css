@@ -1,0 +1,48 @@
+:root {
+    --black: #1D1D1D;
+    --light-green: #5CDCA0;
+    --dark-green: #5FA785;
+    --red: #B95858;
+    --white: #E8EEEC; 
+}
+
+.results-card-container {
+    width: 30%;
+    height: 40%;
+    background-color: var(--white);
+    display: flex;
+    flex-direction: column;
+}
+
+.results-card-container * {
+    background-color: var(--white);
+}
+
+.results-card-container h1, p {
+    color: var(--black);
+}
+
+.analytics {
+    display: flex;
+    flex-direction: column;
+}
+
+.progress-bar {
+    width: 70%;
+    height: 10px;
+}
+
+.full-bar {
+    width: 100%;
+    background-color: var(--black) !important;
+    position: absolute;
+    z-index: 5;
+}
+
+.actual-bar {
+    position: absolute;
+    z-index: 10;
+    width: ;
+}
+
+
