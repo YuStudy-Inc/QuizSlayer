@@ -11,7 +11,9 @@ const Results = ({didWin, }) => {
         <>
             <div className="results-container">
                 <div className="show-results">
-                    <h1 className="results-title">{didWin ? win : lose}</h1>
+                    <div className="results-title">
+                        <h1>{didWin ? win : lose}</h1>
+                    </div>
                     <div className="container-for-cards-and-character">
                         <Podium />
                         <ResultCard didWin={true} coins={"27"} monsters={"3"} xp={"87"} lvl={"9"}/>

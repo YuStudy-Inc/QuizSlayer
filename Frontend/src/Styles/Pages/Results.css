@@ -11,32 +11,11 @@
     height: 100vh;
     background-color: var(--black);
     display: flex;
-    align-items: center;
     justify-content: center;
 
 }
 
-.results-container * {
-    background-color: var(--black);
-}
 
-.show-results {
-    width: 80%;
-    height: 80%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.results-title {
-    font-size: 4rem;
-    color: var(--white);
-}
-
-.container-for-cards-and-character{
-    display: flex;
-    gap: 20%;
-}
 
 .from-results-to-home {
     position: absolute;

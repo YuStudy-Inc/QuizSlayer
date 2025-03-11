@@ -7,22 +7,20 @@
 }
 
 .results-card-container {
-    width: 30%;
-    height: 40%;
-    background-color: var(--white);
+    background-color: var(--white) !important;
     display: flex;
     flex-direction: column;
 }
 
-.results-card-container * {
+/* .results-card-container * {
     background-color: var(--white);
-}
+} */
 
-.results-card-container h1, p {
+/* .results-card-container h1, p {
     color: var(--black);
-}
+} */
 
-.analytics {
+/* .analytics {
     display: flex;
     flex-direction: column;
 }
@@ -30,9 +28,9 @@
 .progress-bar {
     width: 70%;
     height: 10px;
-}
+} */
 
-.full-bar {
+/* .full-bar {
     width: 100%;
     background-color: var(--black) !important;
     position: absolute;
@@ -42,7 +40,8 @@
 .actual-bar {
     position: absolute;
     z-index: 10;
-    width: ;
-}
+    width: 50%;
+    background-color: var(--light-green) !important;
+} */
 
 
