@@ -29,8 +29,8 @@
 }
 
 .submit_button:hover {
-    
     transform: scale(1.1);
+    background-color: #25d784;
 }
 
 .submit_button:active {

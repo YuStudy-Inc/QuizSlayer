@@ -12,11 +12,19 @@
 }
 
 .input_container {
-    /* position: relative; */
+    position: relative;
     background-color: #E8EEEC;
     display: flex;
+    /* display:inline-block; */
     align-items: center;
     justify-content: center;
     flex-direction: row;
     margin: 1rem;
+}
+
+.password_toggle {
+    color: #000000;
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
 }
