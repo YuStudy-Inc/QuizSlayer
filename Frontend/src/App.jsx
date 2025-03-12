@@ -1,5 +1,5 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-import { LandingPage, Home, Login} from "./Pages/Pages";
+import { LandingPage, Home, LoginSignup} from "./Pages/Pages";
 
 function App() {
 	return (
@@ -8,7 +8,7 @@ function App() {
 				<Routes>
 					<Route index element={<LandingPage />}/>
 					<Route path='/' element={<LandingPage />}/>
-					<Route path='/login' element={<Login />}/>
+					<Route path='/login' element={<LoginSignup />}/>
 					<Route path='/home' element={<Home />}/>
 				</Routes>
 			</BrowserRouter>

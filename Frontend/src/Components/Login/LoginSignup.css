@@ -1,0 +1,33 @@
+* {
+    background: transparent;
+}
+
+.login_signup_box {
+    position: relative;
+    background-color: #E8EEEC;
+    width: 90vw;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 20px;
+}
+
+.submit_button {
+    position: relative;
+    color: #E8EEEC;
+    font-size: 3rem;
+    background-color: #5CDCA0;
+    border-radius: 20px;
+    border-color: transparent;
+    width: 15rem;
+    height: 5rem;
+    margin-top: 10vh;
+}
+
+.welcome_text {
+    font-size: 3rem;
+    margin-bottom: 10vh;
+    padding-top: 2rem;
+}
