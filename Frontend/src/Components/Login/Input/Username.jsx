@@ -4,8 +4,8 @@ import "./Input.css"
 const Username = () => {
     return (
         <div className="input_container">
-            <img src={user_icon} alt="user icon" class="icon"></img>
-            <input class="input_box" type="text"></input>
+            <img src={user_icon} alt="user icon" className="icon"></img>
+            <input className="input_box" type="text"></input>
         </div>
     );
 }

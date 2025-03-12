@@ -24,6 +24,21 @@
     width: 15rem;
     height: 5rem;
     margin-top: 10vh;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.submit_button:hover {
+    
+    transform: scale(1.1);
+}
+
+.submit_button:active {
+    transform: scale(0.9);
+    transform: translateY(2px);
+    -webkit-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
 }
 
 .welcome_text {

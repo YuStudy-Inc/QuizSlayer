@@ -10,7 +10,7 @@ const Login = () => {
                 <h1 className="welcome_text">WELCOME BACK ADVENTURER</h1>
                 <Username></Username>
                 <Password></Password>
-                <input type="submit" class="submit_button" id="login" value="Login" ></input>
+                <input type="submit" className="submit_button" id="login" value="Login" ></input>
             </div>
         </>
     )
