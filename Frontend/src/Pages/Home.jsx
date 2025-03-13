@@ -1,4 +1,4 @@
-import Navbar from "../Components/Navbar"
+// import Navbar from "../Components/Navbar"
 import Alert from "../Components/Alert"
 import Podium from "../Components/Podium"
 import TodoList from "../Components/TodoList"
@@ -9,7 +9,7 @@ const Home = () => {
     return(
         <>
             {/* <Alert text="Ready to Begin" buttonOneText="no" functionButtonOne={() => {}} buttonTwoText="yes" functionButtonTwo={() => {}}/> */}
-            <Navbar />
+            {/* <Navbar /> */}
             <div className="home-container">
                 <div className="home-cards-container">
                     <TodoList className="home-todo-list" />
