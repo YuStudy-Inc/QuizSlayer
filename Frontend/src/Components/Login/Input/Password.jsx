@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import lockIcon from "../../../assets/Login/lock_icon.png"
 
-import { Icon, SvgIcon } from '@mui/material';
+import { SvgIcon } from '@mui/material';
 import eye from '@mui/icons-material/VisibilityOutlined';
 import eyeOff from '@mui/icons-material/VisibilityOffOutlined';
 
@@ -26,7 +26,7 @@ const Password = () => {
     return (
         <div className="input_container">
             <img src={lockIcon} alt="lock icon" className="icon"></img>
-            <input className="input_box" type={type} value={password} onChange={(e) => setPassword(e.target.value)}></input>
+            <input className="input_box" type={type} placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)}></input>
             <span className="password_toggle" onClick={togglePasswordDisplay}>
                 <SvgIcon component={icon}></SvgIcon>
             </span>
