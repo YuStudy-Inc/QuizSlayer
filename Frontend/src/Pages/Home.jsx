@@ -10,15 +10,23 @@ const Home = () => {
     const [characters, setCharacters] = useState([])
 
     const getCharacters = () => {
-        fetch("http://127.0.0.1:3000/getCharacters")
+        fetch("http://127.0.0.1:3000/getCharacters", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+          })
         .then(response => {
-            if (!response.status === 200) {
+            if (response.status !== 200) {
                 throw new Error(`error: ${response.status}`)
             }
             return response.json()
         })
         .then(data => {
             console.log(data)
+            const arrayOfNames = Object.values(data.characters)
+
+            setCharacters(arrayOfNames)
         })
         .catch (e => {
         console.error(e)
@@ -36,9 +44,11 @@ const Home = () => {
                     <Podium className="home-podium" />  
                     <FriendsActive className="home-friends-active" />
                 </div>
-                <button type="button" onClick={getCharacters}>get the characters</button>
+                <button type="button" onClick={getCharacters} style={{width:"300px",height:"300px"}}>get the characters</button>
+                {characters && characters.map((character) => (
+                    <p>{character.name}</p>
+                ))}
             </div>
-            {characters && (<p>{characters}</p>)}
         </>
     )
 }

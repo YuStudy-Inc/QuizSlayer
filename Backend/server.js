@@ -4,10 +4,13 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import bcrypt from 'bcrypt'
 import mongoose from 'mongoose';
+import cors from "cors"
 
 const app = express()
+app.use(cors({ origin: "http://localhost:5173" }));
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
+
 const port = 3000
 
 let dbReady = await DatabaseConnection();
