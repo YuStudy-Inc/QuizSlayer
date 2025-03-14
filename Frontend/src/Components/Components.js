@@ -6,15 +6,19 @@ import LandingPageAboutUs from "./LandingPageAboutUs";
 import Navbar from "./Navbar";
 import Podium from "./Podium";
 import TodoList from "./TodoList";
+import Login from "./Login/Login"
+import Signup from "./Login/Signup"
 
 export {
     Alert,
     FriendsActive,
-    HowtoPlayTitle,
+    // HowtoPlayTitle,
     LandingPageTitle,
     LandingPageHowToPlay,
     LandingPageAboutUs,
     Navbar,
     Podium,
-    TodoList
+    TodoList,
+    Login,
+    Signup,
 }

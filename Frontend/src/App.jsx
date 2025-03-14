@@ -8,7 +8,7 @@ function App() {
 				<Routes>
 					<Route index element={<LandingPage />}/>
 					<Route path='/' element={<LandingPage />}/>
-					<Route path='/login' element={<Login />}/>
+					<Route path='/login' element={<LoginSignup />}/>
 					<Route path='/home' element={<Home />}/>
 					<Route path='/results' element={<Results />}/>
 				</Routes>

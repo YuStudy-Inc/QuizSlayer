@@ -1,0 +1,30 @@
+.icon {
+    width: 3rem;
+    margin-right: 1rem;
+}
+
+.input_box {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #000000;
+    width: 25rem;
+    font-size: 2rem;
+}
+
+.input_container {
+    position: relative;
+    background-color: #E8EEEC;
+    display: flex;
+    /* display:inline-block; */
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    margin: 1rem;
+}
+
+.password_toggle {
+    color: #000000;
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+}

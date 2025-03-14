@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react"
 import "../Styles/Components/LandingPageTitle.css"
 import { logo, backgroundFight } from "../assets/Pictures.js"
 import LoadingScreen from "../Pages/LoadingScreen.jsx"
-
+import { useNavigate } from "react-router-dom"
 
 const LandingPageTitle = () => {
     const [isLoaded, setIsLoaded] = useState(false)
@@ -45,6 +45,13 @@ const LandingPageTitle = () => {
         wipeLoadingScreenOff()
     }, [])
 
+    const navigate = useNavigate();
+    const routeLogin = (isLogin) => {
+        navigate('login', {
+            state: {isLogin}
+        })
+    }
+
     
     return (
         <>
@@ -55,8 +62,8 @@ const LandingPageTitle = () => {
                     {/* the logo looks ass rn, imma fix it but that's the rough sketch */}
                     <img className="logo-big" src={logo} alt="logo-for-title" />
                     <div className="button-container-title">
-                        <button className="login-button">Login</button>
-                        <button className="signup-button">Sign Up</button>
+                        <button className="login-button" onClick={() => routeLogin(true)}>Login</button>
+                        <button className="signup-button" onClick={() => routeLogin(false)}>Sign Up</button>
                     </div>
                 </div>
             </div>

@@ -1,8 +1,8 @@
 import "../Styles/Pages/LandingPage.css"
 //why this no work ???
-/* import { LandingPageTitle, LandingPageHowToPlay } from "../Components/Components.js" */
-import LandingPageTitle from "../Components/LandingPageTitle"
-import LandingPageHowToPlay from "../Components/LandingPageHowToPlay"
+import { LandingPageTitle, LandingPageHowToPlay } from "../Components/Components.js"
+// import LandingPageTitle from "../Components/LandingPageTitle"
+// import LandingPageHowToPlay from "../Components/LandingPageHowToPlay"
 import LandingPageAboutUs from "../Components/LandingPageAboutUs.jsx"
 import LandingPageDevs from "../Components/LandingPageDevs.jsx"
 import LandingPageSpecialThanks from "../Components/LandingPageSpecialThanks.jsx"
@@ -25,7 +25,7 @@ const LandingPage = () => {
 
         window.addEventListener("scroll", handleScroll)
         return () => window.removeEventListener("scroll", handleScroll)
-    }, [])
+    }, [])    
     
     
     return (
