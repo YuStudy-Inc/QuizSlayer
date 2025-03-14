@@ -17,7 +17,7 @@
 
 }
 .results-title {
-    border: 2px var(--dark-green) solid;
+    /* border: 2px var(--dark-green) solid; */
     height: 15%;
 }
 
@@ -29,7 +29,7 @@
 
 
 .show-results {
-    border: 2px var(--dark-green) solid;
+    /* border: 2px var(--dark-green) solid; */
     width: 80%;
     height: 85%;
     display: flex;
@@ -39,7 +39,7 @@
 
 
 .container-for-cards-and-character {
-    border: 2px var(--dark-green) solid;
+    /* border: 2px var(--dark-green) solid; */
     height: 100%;
     width: 100%;
     display: flex;
@@ -48,7 +48,7 @@
 }
 
 .container-for-podium-results-page {
-    border: 2px var(--dark-green) solid;
+    /* border: 2px var(--dark-green) solid; */
     display: flex;
     width: 45%;
     justify-content: center;
