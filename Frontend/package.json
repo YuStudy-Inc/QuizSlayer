@@ -11,6 +11,10 @@
     "devStart": "nodemon ../Backend/server.js"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/icons-material": "^6.4.7",
+    "@mui/material": "^6.4.7",
     "express": "^4.21.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
