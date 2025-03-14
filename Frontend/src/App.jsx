@@ -1,5 +1,6 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import { LandingPage, Home, Collection, LoginSignup, Results} from "./Pages/Pages";
+import { Navbar } from './Components/Components'
 
 function App() {
 	return (
@@ -9,9 +10,9 @@ function App() {
 					<Route index element={<LandingPage />}/>
 					<Route path='/' element={<LandingPage />}/>
 					<Route path='/login' element={<LoginSignup />}/>
-					<Route path='' element = {<Navbar />}>
-						<Route path='home' element={<Home />}/>
-						<Route path='collection' element={<Collection/>}/>
+					<Route path='' element={<Navbar/>}>
+							<Route path='home' element={<Home />}/>
+							<Route path='collection' element={<Collection/>}/>
 					</Route>
 					<Route path='/results' element={<Results />}/>
 				</Routes>

@@ -10,6 +10,7 @@
     position: fixed;
     display: flex;
     width: 50%;
+    height: 5vh;
     align-items: center;
     justify-content: space-between;
     margin-top: 3%;
