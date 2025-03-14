@@ -1,19 +1,19 @@
 import logo from "../assets/logo.png";
-import armoredSolder from "../assets/armoredSoldier.png";
-import backgroundFight from "../assets/backgroundFight.png"
-import bananaPeel from "../assets/bananaPeel.png";
-import bucketHat from "../assets/bucketHat.png";
-import capyBaraCharacter from "../assets/capyBaraCharacter.png";
-import chiikawaBackground from "../assets/chiikawaBackground.jpg"
-import crowCharacter from "../assets/crowCharacter.png";
-import diamondHelment from "../assets/diamondHelmet.png";
-import duckCharacter from "../assets/duckCharacter.png";
-import frogCharacter from "../assets/frogCharacter.png";
-import nightCap from "../assets/nightCap.png";
-import podium from "../assets/podium.jpg";
-import pot from "../assets/pot.png";
-import raccoonCharacter from "../assets/raccoonCharacter.png";
-import wizardHat from "../assets/wizardHat.png";
+import armoredSolder from "../assets/Enemies/armoredSoldier.png";
+import backgroundFight from "../assets/Backgrounds/backgroundFight.png"
+import bananaPeel from "../assets/Hats/bananaPeel.png";
+import bucketHat from "../assets/Hats/bucketHat.png";
+import capyBaraCharacter from "../assets/Characters/capyBaraCharacter.png";
+import chiikawaBackground from "../assets/Backgrounds/chiikawaBackground.jpg"
+import crowCharacter from "../assets/Characters/crowCharacter.png";
+import diamondHelment from "../assets/Hats/diamondHelmet.png";
+import duckCharacter from "../assets/Characters/duckCharacter.png";
+import frogCharacter from "../assets/Characters/frogCharacter.png";
+import nightCap from "../assets/Hats/nightCap.png";
+import podium from "../assets/Characters/podium.jpg";
+import pot from "../assets/Hats/pot.png";
+import raccoonCharacter from "../assets/Characters/raccoonCharacter.png";
+import wizardHat from "../assets/Hats/wizardHat.png";
 
 export {
     logo,

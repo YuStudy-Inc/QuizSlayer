@@ -22,26 +22,27 @@
 /* 2880px x 1080px */
 @keyframes slow-pan {
     0% {
-        transform: translateX(-900px);
+        transform: translateX(0px);
     }
     100% {
-        transform: translateX(550px);
+        /* leave this for now, figure out a way to make it responsive on all screens */
+        transform: translateX(calc(-2880px + 1920px));
     }
 }
 
-.black-triangle-thingy {
-    position: relative;
-    clip-path: polygon(0 0, 30% 0, 100% 100%, 0% 100%);
+.container-for-the-things-on-the-page {
     height: 100vh;
-    z-index: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5%;
 }
 
 .logo-big {
-    position: absolute;
     height: 512px;
     aspect-ratio: 1/1;
-    top: 10%;
-    left: 12%;
     animation: hover 4s infinite ease-in-out;
 }
 
@@ -74,13 +75,10 @@
 }
 
 .button-container-title {
-    position: absolute;
     width: 30%;
     z-index: 4;
-    left: 10%;
-    bottom: 20%;
     display: flex;
-    justify-content: end;
+    justify-content: center;
     gap: 20%;
 }
 

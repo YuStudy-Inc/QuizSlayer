@@ -58,7 +58,7 @@ const LandingPageTitle = () => {
             {(!isLoaded || isTransitioning) && <LoadingScreen isLoaded={isLoaded} />}
             <div className="background-for-title-page">
                 <img id="bg-image" className="moving-background" src={backgroundFight} alt="" />
-                <div id="triangle" className="black-triangle-thingy">
+                <div className="container-for-the-things-on-the-page">
                     {/* the logo looks ass rn, imma fix it but that's the rough sketch */}
                     <img className="logo-big" src={logo} alt="logo-for-title" />
                     <div className="button-container-title">
