@@ -1,5 +1,5 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-import { LandingPage, Home, LoginSignup} from "./Pages/Pages";
+import { Home, Collection, LandingPage, LoginSignup} from "./Pages/Pages";
 import { Navbar } from "./Components/Components"
 
 function App() {
@@ -10,9 +10,9 @@ function App() {
 					<Route index element={<LandingPage />}/>
 					<Route path='/' element={<LandingPage />}/>
 					<Route path='/login' element={<LoginSignup />}/>
-					{/* <Route path='/home' element={<Home />}/> */}
 					<Route path='' element = {<Navbar />}>
 						<Route path='home' element={<Home />}/>
+						<Route path='collection' element={<Collection/>}/>
 					</Route>
 				</Routes>
 			</BrowserRouter>
