@@ -1,6 +1,4 @@
-* {
-    margin: 0;
-}
+
 
 .home-todo-list {
     order: 1;
@@ -13,7 +11,9 @@
 }
 
 .home-cards-container {
+    margin: 0;
     height: 100vh;
+    background-color: var(--black);
     display: flex;
     justify-content: space-around;
     gap: 10%;
