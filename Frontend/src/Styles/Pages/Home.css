@@ -13,7 +13,12 @@
 .home-cards-container {
     margin: 0;
     height: 100vh;
-    background-color: var(--black);
+    /* background-color: var(--black); */
+    background-image: url("../../assets/Backgrounds/backgroundFight.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
     display: flex;
     justify-content: space-around;
     gap: 10%;

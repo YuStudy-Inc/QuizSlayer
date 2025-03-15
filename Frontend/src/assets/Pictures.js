@@ -1,5 +1,5 @@
 import logo from "../assets/logo.png";
-import armoredSolder from "../assets/Enemies/armoredSoldier.png";
+import armoredSolder from "../assets/Enemies/armoredSoldierEnemy.png";
 import backgroundFight from "../assets/Backgrounds/backgroundFight.png"
 import bananaPeel from "../assets/Hats/bananaPeel.png";
 import bucketHat from "../assets/Hats/bucketHat.png";
