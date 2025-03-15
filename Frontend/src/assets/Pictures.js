@@ -1,19 +1,31 @@
 import logo from "../assets/logo.png";
+
 import armoredSolder from "../assets/Enemies/armoredSoldierEnemy.png";
+import chicken from "../assets/Enemies/chickenEnemy.png";
+import triceratops from "../assets/Enemies/triceratopsEnemy.png";
+
 import backgroundFight from "../assets/Backgrounds/backgroundFight.png"
+import chiikawaBackground from "../assets/Backgrounds/chiikawaBackground.jpg"
+
 import bananaPeel from "../assets/Hats/bananaPeel.png";
 import bucketHat from "../assets/Hats/bucketHat.png";
-import capyBaraCharacter from "../assets/Characters/capyBaraCharacter.png";
-import chiikawaBackground from "../assets/Backgrounds/chiikawaBackground.jpg"
-import crowCharacter from "../assets/Characters/crowCharacter.png";
 import diamondHelment from "../assets/Hats/diamondHelmet.png";
+import wizardHat from "../assets/Hats/wizardHat.png";
+import nightCap from "../assets/Hats/nightCap.png";
+import pot from "../assets/Hats/pot.png";
+
 import duckCharacter from "../assets/Characters/duckCharacter.png";
 import frogCharacter from "../assets/Characters/frogCharacter.png";
-import nightCap from "../assets/Hats/nightCap.png";
-import podium from "../assets/Characters/podium.jpg";
-import pot from "../assets/Hats/pot.png";
 import raccoonCharacter from "../assets/Characters/raccoonCharacter.png";
-import wizardHat from "../assets/Hats/wizardHat.png";
+import capyBaraCharacter from "../assets/Characters/capyBaraCharacter.png";
+import crowCharacter from "../assets/Characters/crowCharacter.png";
+import podium from "../assets/Characters/podium.jpg";
+
+import fryingPan from "../assets/Weapons/fryingPan.png";
+import ironSword from "../assets/Weapons/ironSword.png";
+import playfulCloud from "../assets/Weapons/playfulCloud.png";
+import someonesGun from "../assets/Weapons/someonesGun.png";
+import redBalloon from "../assets/Weapons/redBalloon.png";
 
 export {
     logo,
@@ -22,6 +34,8 @@ export {
     bananaPeel,
     bucketHat,
     capyBaraCharacter,
+    chicken,
+    triceratops,
     chiikawaBackground,
     crowCharacter,
     diamondHelment,
@@ -31,7 +45,12 @@ export {
     podium,
     pot,
     raccoonCharacter,
-    wizardHat
+    wizardHat,
+    fryingPan,
+    ironSword,
+    playfulCloud,
+    someonesGun,
+    redBalloon
 }
 
 //bruh im so lazy i had to make chatGPT write this 😭😭😭😭😭
