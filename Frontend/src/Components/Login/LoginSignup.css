@@ -1,6 +1,6 @@
-* {
+/* * {
     background: transparent;
-}
+} */
 
 .login_signup_box {
     position: relative;
@@ -15,6 +15,7 @@
 }
 
 .login_signup_container {
+    background-color: #9D7D48;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,6 +53,7 @@
 }
 
 .welcome_text {
+    background: transparent;
     font-size: 3rem;
     margin-bottom: 10vh;
     padding-top: 2rem;
@@ -63,16 +65,18 @@
 } */
 
 .to_login_arrow {
-    position: absolute;
     left: 35px;
     right: auto;
-    transform: scale(2);
 }
 
 .to_signup_arrow {
-    position: absolute;
     left: auto;
     right: 35px;
+}
+
+.login_signup_arrow {
+    position: absolute;
+    background: transparent;
     transform: scale(2);
 }
 
