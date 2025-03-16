@@ -1,0 +1,10 @@
+.quiz-container{
+    width: 100%;
+    height: 100vh;
+    background-color: var(--black);
+    display: flex;
+    padding-left: 50px;;
+    flex-direction: column;
+    align-items:flex-start;
+    justify-content: space-around;
+}
