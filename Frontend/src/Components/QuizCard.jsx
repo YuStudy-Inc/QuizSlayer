@@ -1,4 +1,5 @@
-import "../Styles/Components/QuizzesCard.css"
+import "../styles/Components/QuizCard.css"
+import playButton from "../assets/Quizzes/playButton.png"
 import { useNavigate } from "react-router-dom"; 
 const QuizCard = ({category, title, url }) => {
     const navigate = useNavigate();
@@ -11,7 +12,9 @@ const QuizCard = ({category, title, url }) => {
           <div className="quiz-card-container">
             <div className="quiz-stuff">
                 <span className="quiz-text"> {title}</span>
-                <button className="play-button" onClick={handlePlayClick}>▶ Play</button>
+                <button className="play-button" onClick={handlePlayClick}>
+                    <img src={playButton} alt="" />
+                </button>
             </div>
         </div>
         </>

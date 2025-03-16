@@ -1,10 +1,91 @@
+:root {
+    --black: #1D1D1D;
+    --light-green: #5CDCA0;
+    --dark-green: #5FA785;
+    --red: #B95858;
+    --white: #E8EEEC; 
+}
+
 .quiz-container{
     width: 100%;
     height: 100vh;
     background-color: var(--black);
     display: flex;
-    padding-left: 50px;;
-    flex-direction: column;
-    align-items:flex-start;
-    justify-content: space-around;
+    align-items: end;
+    justify-content: center;
 }
+
+.all-the-quizzes {
+    /* border: 1px solid var(--light-green); */
+    position: relative;
+    width: 90%;
+    height: 85%;
+    display: flex;
+    flex-direction: column;
+    gap: 5%;
+}
+
+.title-quizzes {
+    color: var(--white);
+    font-size: 3.5rem;
+}
+
+.quizlist-indent {
+    display: flex;
+    justify-content: center;
+}
+
+.quizlist {
+    /* border: 1px solid var(--light-green); */
+    position: relative;
+    width: 90%;
+    max-height: 70vh;
+    left: 5%;
+    display: flex;
+    flex-direction: column;
+    gap: 10%;
+    overflow-y: auto;
+}
+
+.quizlist::-webkit-scrollbar {
+    width: 8px;
+}
+
+.quizlist::-webkit-scrollbar-thumb {
+    background-color: var(--light-green);
+    border-radius: 5px;
+}
+
+.container-for-quiz-card {
+    /* border: 1px solid var(--light-green); */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+}
+
+.quiz-progress-titles {
+    font-size: 2.5rem;
+}
+
+.todo-quizzes {
+    color: var(--red);
+}
+
+.in-progress-quizzes {
+    color: #AFB252;
+}
+
+.finished-quizzes {
+    color: var(--dark-green);
+}
+
+.quizCards {
+    display: flex;
+    flex-direction: column;
+    min-height: fit-content;
+    flex-grow: 1;
+    gap: 30px;   
+}
+
