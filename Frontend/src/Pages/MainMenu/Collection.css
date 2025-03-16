@@ -14,15 +14,15 @@
 
 .collection_page_outer_container {
     position:relative;
-    top: 18vh;
+    top: 10vh;
     display: flex;
     flex-direction: row;
-    flex-basis: 0;
+    /* flex-basis: 0; */
     flex: 1 1 0;
     column-gap: 5%;
     padding: 0rem 5rem;
-
-    align-items: center;
+    height: 80%;
+    align-items: end;
     justify-content: center;
 }
 .collection_page_left_container {
@@ -30,18 +30,22 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 45%;
+    /* border: 1px solid var(--light-green); */
 }
 
 .collection_page_right_container {
     flex-basis: 100%;
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    gap: 8rem;
+    height: 85%;
+    /* border: 1px solid var(--light-green); */
 }
 
 .collection_page_select_category_header {
     color: var(--white);
-    font-size: 1.5rem;
+    font-size: 2rem;
     padding: 1rem 0rem;
 }
 
@@ -55,6 +59,7 @@
 .collection_page_select_arrow {
     color: var(--light-green);
     transition: 0.3s;
+    font-size: 2rem;
 }
 
 .collection_page_select_arrow:hover {
@@ -71,4 +76,29 @@
     color: var(--white);
     text-align: center;
     flex-basis: 90%;
+}
+
+.gatcha button {
+    background-color: var(--white);
+    width: 5rem;
+    aspect-ratio: 1/1;
+    position: absolute;
+    bottom: 35px;
+    right: 35px;
+    border: none;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s ease-in-out;
+}
+
+.gatcha button:hover {
+    background-color: var(--light-green);
+    transform: scale(1.1);
+}
+
+.gatcha img {
+    width: 75%;
+    aspect-ratio: 1/1;
 }

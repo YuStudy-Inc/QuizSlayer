@@ -1,4 +1,5 @@
 import Podium from "../../Components/Podium"
+import lootBox from "../../assets/Collection/lootBox.png"
 
 import "./Collection.css"
 
@@ -36,6 +37,11 @@ const Collection = () => {
                             </div>
                         </div>
                     </div>
+                </div>
+                <div className="gatcha">
+                    <button className="gatcha-button">
+                        <img src={lootBox} alt="" />
+                    </button>
                 </div>
             </div>
         </>
