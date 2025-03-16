@@ -1,6 +1,6 @@
 import "../Styles/index.css"
 import "../Styles/Components/Navbar.css"
-import { Link } from "react-router-dom"
+import { Outlet, Link } from "react-router-dom"
 
 const Navbar = () => {    
     return (
@@ -38,6 +38,7 @@ const Navbar = () => {
                     </div>
                 </div>
             </div>
+            <Outlet />
         </>
     )
 }
