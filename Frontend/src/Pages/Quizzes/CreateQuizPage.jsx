@@ -49,6 +49,9 @@ const CreateQuizPage =() =>{
         <h2>Cards</h2>
 
         </div>
+        <div className="create-button">
+            <button>Add</button>
+        </div>
         </div>
 
     </>

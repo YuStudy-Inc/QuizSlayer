@@ -57,4 +57,16 @@ body{
     justify-content: center;
     margin-bottom: 40px;
   }
+  .create-button button {
+    padding: 15px 30px;
+    font-size: 1.2em;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .create-button button:hover{
+    background-color: #45a049;
+  }
   
