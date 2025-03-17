@@ -1,0 +1,60 @@
+:root {
+    --black: #1D1D1D;
+    --light-green: #5CDCA0;
+    --dark-green: #5FA785;
+    --red: #B95858;
+    --white: #E8EEEC; 
+}
+body{
+    background-color: var(--black);
+}
+.create-quiz-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.left-section, .right-section {
+    width: 45%;
+  }
+.drop-zone {
+    color: var(--white);
+    width: 100%;
+    height: 150px;
+    border: 2px dashed #aaa;
+    border-radius: 10px;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+  }
+  .drop-zone:hover {
+    background-color: var(--light-green);
+  }
+  .file-input {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+.title-section {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 30px;
+  }
+  
+  .two-side-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 30px;
+  }
+  .card-section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+  }
+  

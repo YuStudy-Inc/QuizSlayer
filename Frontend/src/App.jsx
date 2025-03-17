@@ -1,5 +1,5 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-import { LandingPage, Home, Collection, LoginSignup, Quizzes, Results} from "./Pages/Pages";
+import { LandingPage, Home, Collection, LoginSignup, Quizzes, Results, CreateQuizPage} from "./Pages/Pages";
 import { Navbar } from './Components/Components'
 
 function App() {
@@ -16,6 +16,7 @@ function App() {
 					</Route>
 					<Route path='/results' element={<Results />}/>
 					<Route path='/quizzes' element={<Quizzes />}/>
+					<Route path='/createquizpage' element={<CreateQuizPage />}/>
 				</Routes>
 			</BrowserRouter>
 		</>
