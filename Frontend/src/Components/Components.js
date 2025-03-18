@@ -8,6 +8,7 @@ import Podium from "./Podium";
 import TodoList from "./TodoList";
 import Login from "./Login/Login"
 import Signup from "./Login/Signup"
+import FlashCard from "./FlashCard"
 
 export {
     Alert,
@@ -21,4 +22,5 @@ export {
     TodoList,
     Login,
     Signup,
+    FlashCard,
 }
