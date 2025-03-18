@@ -13,10 +13,10 @@ function App() {
 					<Route path='' element={<Navbar/>}>
 							<Route path='home' element={<Home />}/>
 							<Route path='collection' element={<Collection/>}/>
+							<Route path='/quizzes' element={<Quizzes />}/>
 					</Route>
+					<Route path='/createquiz' element={<CreateQuizPage />}/>
 					<Route path='/results' element={<Results />}/>
-					<Route path='/quizzes' element={<Quizzes />}/>
-					<Route path='/createquizpage' element={<CreateQuizPage />}/>
 				</Routes>
 			</BrowserRouter>
 		</>
