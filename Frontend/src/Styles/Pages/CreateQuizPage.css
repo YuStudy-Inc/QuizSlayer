@@ -228,3 +228,37 @@ span input:focus {
 	opacity: 0;
 	cursor: pointer;
 }
+
+.create-that-quiz {
+	position: absolute;
+	bottom: 35px;
+	right: 35px;
+
+}
+
+.create-that-quiz-button {
+    background-color: var(--white);
+    width: 7vw;
+	height: 5vh;
+    border: none;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease-in-out;
+}
+
+.create-that-quiz-button:hover {
+    background-color: var(--light-green);
+    transform: scale(1.2);
+}
+
+.create-that-quiz-button h1 {
+    font-size: 1.5rem;
+	color: var(--black);
+	transition: color 0.2s ease-in-out;
+}
+
+.create-that-quiz-button h1:hover {
+	color: var(--white);
+}

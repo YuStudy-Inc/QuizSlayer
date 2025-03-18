@@ -1,16 +1,30 @@
 import "../../Styles/Pages/CreateQuizPage.css"
 import plus from "../../assets/Quizzes/plus.png"
 import download from "../../assets/Quizzes/download.png"
-import FlashCard from "../../Components/FlashCard.jsx";
+import { FlashCard, FlashCardCreationOverlay } from "../../Components/Components.js";
 import { useState } from 'react';
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const CreateQuizPage = () => {
 	const [title, setTitle] = useState('')
 	const [description, setDescription] = useState('')
 	const [fileName, setFileName] = useState("");
+	const [showCardCreationOverlay, setShowCardCreationOverlay] = useState(false)
 
 	const navigate = useNavigate()
+
+	const handleQuizCreation = () => {
+		/* backend stuff */
+		navigate('/quizzes')
+	}
+
+	const createCard = () => {
+		setShowCardCreationOverlay(true)
+	}
+
+	const handleCardCreationClose = () => {
+		setShowCardCreationOverlay(false)
+	}
 
 	const handleDropZoneClick = () => {
 		document.getElementById("file-upload").click();
@@ -62,7 +76,7 @@ const CreateQuizPage = () => {
 								</div>
 							</div>
 							<div className="create-card">
-								<button className="create-card-button">
+								<button className="create-card-button" onClick={createCard}>
 									<img src={plus} alt="" />
 								</button>
 							</div>
@@ -84,6 +98,14 @@ const CreateQuizPage = () => {
 						</div>
 					</div>
 				</div>
+				<div className="create-that-quiz">
+					<button className="create-that-quiz-button" onClick={handleQuizCreation}>
+						<h1>Create</h1>
+					</button>
+				</div>
+				{showCardCreationOverlay && (
+					<FlashCardCreationOverlay close={handleCardCreationClose}/>
+				)}
 			</div>
 		</>
 	)

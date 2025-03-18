@@ -9,6 +9,7 @@ import TodoList from "./TodoList";
 import Login from "./Login/Login"
 import Signup from "./Login/Signup"
 import FlashCard from "./FlashCard"
+import FlashCardCreationOverlay from "./FlashCardCreationOverlay"
 
 export {
     Alert,
@@ -23,4 +24,5 @@ export {
     Login,
     Signup,
     FlashCard,
+    FlashCardCreationOverlay,
 }

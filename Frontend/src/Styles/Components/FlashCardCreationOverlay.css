@@ -1,0 +1,111 @@
+.overlay-flashcard {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+}
+
+.nvm {
+	position: absolute;
+	width: 4rem;
+	aspect-ratio: 1/1;
+	left: 40px;
+	top: 35px;
+	border: none;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease-in-out;
+}
+
+.nvm:hover {
+    background-color: var(--light-green);
+    transform: scale(1.1);
+}
+
+.title-overlay {
+    width: 70%;
+}
+
+.title-overlay h1 {
+    color: var(--white);
+    font-size: 3.5rem;
+}
+
+.flashcard-itself {
+    width: 70%;
+    height: 30vh;
+    background-color: var(--white);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.question-flashcard-overlay,
+.answer-flashcard-overlay {
+    padding: 1rem;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+}
+
+.question-flashcard-overlay input,
+.answer-flashcard-overlay input {
+    width: 90%;
+	background: none;
+	border: none;
+	color: var(--black);
+	font-size: 1.5rem;
+	border-bottom: 2px solid var(--black);
+	transition: border-bottom 0.2s ease-in-out;
+}
+
+.question-flashcard-overlay input:focus,
+.answer-flashcard-overlay input:focus {
+	border-bottom: 2px solid var(--light-green);
+	outline: none;
+}
+
+.create-that-flashcard {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.create-that-flashcard-button {
+    width: 30%;
+    height: 7vh;
+    border: none;
+    border-radius: 20px;
+    background-color: var(--white);
+    transition: all 0.2s ease-in-out;
+}
+
+.create-that-flashcard-button:hover {
+    background-color: var(--light-green);
+    transform: scale(1.1);
+}
+
+.create-that-flashcard-button h1 {
+    color: var(--black);
+    font-size: 1.5rem;
+    transition: color 0.2s ease-in-out;
+}
+
+.create-that-flashcard-button h1:hover {
+    color: var(--white);
+}
+
+
+
+
+
+
