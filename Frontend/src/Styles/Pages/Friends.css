@@ -1,0 +1,13 @@
+.friends-container {
+    width: 100%;
+    height: 100vh;
+    background-color: var(--black);
+    display: flex;
+    align-items: end;
+    justify-content: center;
+}
+
+.amigos {
+    width: 90%;
+    height: 85vh;
+}
