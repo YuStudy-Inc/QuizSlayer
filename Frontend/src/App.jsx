@@ -1,5 +1,5 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-import { LandingPage, Home, Collection, LoginSignup, Quizzes, Results, CreateQuizPage} from "./Pages/Pages";
+import { LandingPage, Home, Collection, LoginSignup, Quizzes, Results, CreateQuizPage, Friends} from "./Pages/Pages";
 import { Navbar } from './Components/Components'
 
 function App() {

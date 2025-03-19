@@ -3,8 +3,13 @@ import plus from "../assets/Quizzes/plus.png"
 
 const AddAFriend = ({ close }) => {
 
-    const handlelose = () => {
+    const handleClose = () => {
         close()
+    }
+
+    const getThatFriend = () => {
+       /*  backendStuff */
+       close()
     }
 
 
@@ -12,7 +17,7 @@ const AddAFriend = ({ close }) => {
         <>
             <div className="find-a-friend-overlay">
                 <div className="back-button-overlay">
-                    <button className="nvm" onClick={close}>
+                    <button className="nvm" onClick={handleClose}>
                         <h1>&lt;</h1>
                     </button>
                 </div>
@@ -22,10 +27,11 @@ const AddAFriend = ({ close }) => {
                     </div>
                     <div className="type-in-username">
                         <input type="text" />
-                        <button>
+                        <button onClick={getThatFriend}>
                             <img src={plus} alt="" />
-                        </button>
+                        </button> 
                     </div>
+                    {/* need to add error messages in case the username doesn't exist or there is nothing in the input */}
                 </div>
             </div>
         </>
