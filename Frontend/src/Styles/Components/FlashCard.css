@@ -1,0 +1,20 @@
+.flashcard-container {
+    width: 100%;
+    height: 10rem;
+    background-color: var(--white);
+    border-radius: 10px;
+    display: flex;
+    
+}
+
+.question, .answer {
+    font-size: 1.3rem;
+}
+
+.question {
+    width: 100%;
+}
+
+.answer {
+    width: 100%;
+}

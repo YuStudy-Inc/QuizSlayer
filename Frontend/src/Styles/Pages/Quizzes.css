@@ -89,3 +89,28 @@
     gap: 30px;   
 }
 
+.create-quiz button {
+    background-color: var(--white);
+    width: 5rem;
+    aspect-ratio: 1/1;
+    position: absolute;
+    bottom: 35px;
+    right: 35px;
+    border: none;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s ease-in-out;
+}
+
+.create-quiz button:hover {
+    background-color: var(--light-green);
+    transform: scale(1.1);
+}
+
+.create-quiz img {
+    width: 50%;
+    aspect-ratio: 1/1;
+}
+
