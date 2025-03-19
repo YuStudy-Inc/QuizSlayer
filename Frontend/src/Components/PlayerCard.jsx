@@ -1,7 +1,7 @@
 import "../styles/Components/PlayerCard.css"
 import playerIcon from "../assets/Characters/frogCharacter.png"
 import { useNavigate } from "react-router-dom"; 
-const PlayerCard = ({score, playerName, url }) => {
+const PlayerCard = ({rank, score, playerName, url }) => {
 
     const handleClick = () => {
         window.location.href = url; // Redirects to external links
@@ -11,13 +11,16 @@ const PlayerCard = ({score, playerName, url }) => {
     return (
         <>
             <button className="player-card-container" onClick = {handleClick}>
-                <div className="player-card">
-                    <span className = "player-info">
-                        <img className="player-img" src={playerIcon} alt="" /> 
-                        <span className="player-name"> {playerName}</span>
+                <span className = "player-info">
+                    <h1>{rank}</h1>
+                    <img className="player-img" src={playerIcon} alt="" /> 
+                    <span className="player-name"> 
+                        <p>{playerName}</p>
                     </span>
-                    <span className="player-score"> Monsters Slain #{score} </span>
-                </div>
+                </span>
+                <span className="player-score"> 
+                    <p> Monsters Slain {score} </p>
+                </span>
             </button>
         </>
     )
