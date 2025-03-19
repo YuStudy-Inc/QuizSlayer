@@ -1,6 +1,6 @@
-import User from './schemas/Schemas.js';
+import User from '../schemas/Schemas.js';
 import bcrypt from 'bcrypt'
-import { validEmail, validPassword } from "./validators.js";
+import { validEmail, validPassword } from "../utils/validators.js";
 
 const hashPassword = ((password) => {
     const saltRounds = 10
@@ -130,18 +130,18 @@ export const editUserPassword = async (req,res) => {
     } 
 }
 
-export default deleteUser = async(req, res)=>{
+export const deleteUser = async(req, res)=>{
     const {id} = req.params;
     try{
         const deleteUser = await User.findByIdAndDelete(id);
         if(!deleteUser){
-            console.log("Could not find User");
+            res.status(404).json({error: 'User not found'})
             return;
         }
-        console.log("User Deleted Succesfully!");
+        res.status(200).json({message: 'User deleted sucessfully!'})
     }
     catch(error){
-        console.log("Error trying to delete user")
+        res.status(500).json({error: 'Error trying to delete User'})
         console.log(error);
     }
 }

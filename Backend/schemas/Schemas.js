@@ -5,7 +5,7 @@ import Question from './Question.js'
 import Quiz from './Quiz.js'
 import User from './User.js'
 
-export {
+export default{
     Character,
     Enemy,
     Item,

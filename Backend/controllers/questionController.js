@@ -1,4 +1,4 @@
-import Question from './schemas/Schemas.js';
+import Question from '../schemas/Schemas.js';
 
 function isInt(value) {
     return !isNaN(value) && parseInt(Number(value)) == value && !isNaN(parseInt(value, 10));
