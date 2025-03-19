@@ -1,7 +1,7 @@
 import Podium from "../../Components/Podium"
 import lootBox from "../../assets/Collection/lootBox.png"
 
-import "./Collection.css"
+import "../../Styles/Pages/Collection.css"
 
 const Collection = () => {
     return (
