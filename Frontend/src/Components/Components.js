@@ -10,6 +10,7 @@ import Login from "./Login/Login"
 import Signup from "./Login/Signup"
 import FlashCard from "./FlashCard"
 import FlashCardCreationOverlay from "./FlashCardCreationOverlay"
+import PlayerCard from "./PlayerCard"
 
 export {
     Alert,
@@ -25,4 +26,5 @@ export {
     Signup,
     FlashCard,
     FlashCardCreationOverlay,
+    PlayerCard,
 }

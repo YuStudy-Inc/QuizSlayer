@@ -1,0 +1,43 @@
+.player-card-container {
+    width: 100%;
+    background-color: var(--white);
+    height: 100px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.player-img {
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
+    width: 75px;
+    aspect-ratio: 1/1;
+    background-color: var(--dark-green);
+    border-radius: 50%;
+
+}
+
+.player-card {
+    width: 95%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.player-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.player-name {
+    font-size: 2rem;
+}
+
+
+.player-score {
+    font-size: 2rem;
+}
