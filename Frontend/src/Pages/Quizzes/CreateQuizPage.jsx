@@ -82,7 +82,9 @@ const CreateQuizPage = () => {
 							</div>
 						</div>
 						<div className="right-side">
-							<h1>Create Using AI</h1>
+							<div className="create-ai-title">
+								<h1>Create Using AI</h1>
+							</div>
 							<div className="drop-zone" onClick={handleDropZoneClick}>
 								{/* Display file name or default text */}
 								{fileName ? (<p>`Selected file:${fileName}`</p>) : (<img src={download} />)}

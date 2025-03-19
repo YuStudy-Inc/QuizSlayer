@@ -1,10 +1,11 @@
 .flashcard-container {
-    width: 100%;
+    width: calc(100% - 2rem);
     height: 10rem;
     background-color: var(--white);
     border-radius: 10px;
     display: flex;
-    
+    padding: 1rem;
+
 }
 
 .question, .answer {
@@ -15,6 +16,14 @@
     width: 100%;
 }
 
+.divider {
+    height: 100%;
+    width: 5px;
+    border-radius: 10px;
+    background-color: var(--light-green);
+}
+
 .answer {
     width: 100%;
+    padding-left: 1rem ;
 }

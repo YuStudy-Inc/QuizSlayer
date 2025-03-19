@@ -25,6 +25,10 @@
     font-size: 3rem;
 }
 
+.wise-words-from-this-dev h1, .wise-words-from-this-dev p {
+    background-color: transparent;
+}
+
 .dev-links {
     width: 100%;
     display: flex;
@@ -36,6 +40,7 @@
     width: fit-content;
     color: var(--black);
     text-decoration: none;
+    background: transparent;
     transition: color 0.2s ease-in-out;
     animation: dev-hover 4s infinite ease-in-out;
 }
