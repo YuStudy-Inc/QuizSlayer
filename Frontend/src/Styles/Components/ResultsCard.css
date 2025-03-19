@@ -1,11 +1,3 @@
-:root {
-    --black: #1D1D1D;
-    --light-green: #5CDCA0;
-    --dark-green: #5FA785;
-    --red: #B95858;
-    --white: #E8EEEC; 
-}
-
 .results-card-container {
     background-color: var(--white);
     width: 100%;

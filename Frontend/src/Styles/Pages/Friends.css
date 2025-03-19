@@ -1,0 +1,108 @@
+.friends-container {
+    width: 100%;
+    height: 100vh;
+    background-color: var(--black);
+    display: flex;
+    align-items: end;
+    justify-content: center;
+}
+
+.amigos {
+    width: 90%;
+    height: 85vh;
+    display: flex;
+    gap: 10%;
+    justify-content: space-between;
+}
+
+.left-side-amigos {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.title-for-friends {
+    height: 10vh;
+}
+
+.title-for-friends h1 {
+    color: var(--white);
+    font-size: 3.5rem;
+}
+
+.scroll-for-more-friends {
+    max-height: calc(85vh - 10vh);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10%;
+    flex-grow: 1;
+    padding: 1rem 8px 1rem 0;
+    gap: 2.5rem;
+}
+
+.scroll-for-more-friends::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scroll-for-more-friends::-webkit-scrollbar-thumb {
+    background-color: var(--light-green);
+    border-radius: 5px;
+}
+
+.right-side-amigos {
+    width: 40%;
+    height: 100%;
+    display: flex;
+}
+
+.podium-plus-info {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3rem;
+}
+
+.podi {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.info {
+    width: 100%;
+    height: 10rem;
+    background-color: var(--white);
+    border-radius: 20px;
+    padding: 1rem;
+}
+
+.add-a-friend-button {
+    background-color: var(--white);
+    width: 4rem;
+    aspect-ratio: 1/1;
+    position: absolute;
+    bottom: 35px;
+    right: 35px;
+    border: none;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s ease-in-out;
+    cursor: pointer;
+}
+
+.add-a-friend-button:hover {
+    background-color: var(--light-green);
+    transform: scale(1.1);
+}
+
+.add-a-friend-button img {
+    width: 50%;
+    aspect-ratio: 1/1;
+}
