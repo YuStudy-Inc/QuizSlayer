@@ -1,4 +1,5 @@
-import Quiz from '../schemas/Schemas.js';
+import Schemas from '../schemas/Schemas.js';
+const Quiz = Schemas.Quiz
 export const createQuiz = async(req, res) => {
     try {
         const { title, description } = req.body

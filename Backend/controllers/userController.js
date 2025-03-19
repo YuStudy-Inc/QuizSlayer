@@ -1,7 +1,7 @@
-import User from '../schemas/Schemas.js';
+import schemas from '../schemas/Schemas.js';
 import bcrypt from 'bcrypt'
 import { validEmail, validPassword } from "../utils/validators.js";
-
+const User = schemas.User
 const hashPassword = ((password) => {
     const saltRounds = 10
     return bcrypt.hash(password, saltRounds)

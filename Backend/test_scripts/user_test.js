@@ -4,9 +4,10 @@
 
 // Add a character to the database.
 import dotenv from 'dotenv';
-import { Item, User } from '../schemas/Schemas.js'
+import  schemas  from '../schemas/Schemas.js'
 import mongoose from 'mongoose';
 
+const User = schemas.User;
 dotenv.config({path: '../.env'})
 const URI = process.env.MONGODB_URI
 console.log(URI)
@@ -20,12 +21,12 @@ catch (error) {
     console.log("An error occured while connecting to the database: ");
     console.log(error)
 }
-
+console.log("User model:", User); // Debugging
 // const item1 = await Item.findById(2);
 // console.log(item1.id)
 
 // Add new user to database
-let newUser = new User({
+const newUser = new User({
     username: "useless",
     email: "abttobedelted@gmail.com",
     password: "password",

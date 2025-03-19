@@ -20,7 +20,6 @@ app.use("/quizzes", quizRoutes)
 app.use("/questions", questionRoutes)
 
 const port = 3000
-
 const startBackEnd = async () => {
     try {
         await DatabaseConnection()
