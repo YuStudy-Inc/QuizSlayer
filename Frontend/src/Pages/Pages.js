@@ -1,4 +1,4 @@
-import { Home, Collection, Friends } from './MainMenu/MainMenu.js'
+import { Home, Collection, Friends, Leaderboard } from './MainMenu/MainMenu.js'
 import LandingPage from './LandingPage.jsx';
 import Results from './Results.jsx'
 import LoginSignup from './LoginSignup/LoginSignup.jsx'
@@ -12,5 +12,6 @@ export {
     LoginSignup,
     Friends,
     Quizzes,
-    CreateQuizPage
+    CreateQuizPage,
+    Leaderboard
 }

@@ -11,6 +11,7 @@ import Signup from "./Login/Signup"
 import FriendCard from "./FriendCard";
 import FlashCard from "./FlashCard"
 import FlashCardCreationOverlay from "./FlashCardCreationOverlay"
+import PlayerCard from "./PlayerCard"
 import AddAFriend from "./AddAFriend";
 
 export {
@@ -28,5 +29,6 @@ export {
     FriendCard,
     FlashCard,
     FlashCardCreationOverlay,
+    PlayerCard,
     AddAFriend,
 }

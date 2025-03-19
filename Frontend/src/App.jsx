@@ -1,5 +1,5 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-import { LandingPage, Home, Collection, LoginSignup, Quizzes, Results, CreateQuizPage, Friends} from "./Pages/Pages";
+import { LandingPage, Home, Collection, LoginSignup, Quizzes, Results, CreateQuizPage, Friends, Leaderboard} from "./Pages/Pages";
 import { Navbar } from './Components/Components'
 
 function App() {
@@ -15,6 +15,7 @@ function App() {
 							<Route path='/collection' element={<Collection/>}/>
 							<Route path='/friends' element={<Friends/>}/>
 							<Route path='/quizzes' element={<Quizzes />}/>
+							<Route path='/leaderboard' element={<Leaderboard />}/>
 					</Route>
 					<Route path='/createquiz' element={<CreateQuizPage />}/>
 					<Route path='/results' element={<Results />}/>
