@@ -1,11 +1,3 @@
-:root {
-	--black: #1D1D1D;
-	--light-green: #5CDCA0;
-	--dark-green: #5FA785;
-	--red: #B95858;
-	--white: #E8EEEC;
-}
-
 .create-quiz-container {
 	width: 100%;
 	height: 100vh;
@@ -28,6 +20,7 @@
     align-items: center;
     justify-content: center;
     transition: all 0.2s ease-in-out;
+	cursor: pointer;
 }
 
 .back-button:hover {
@@ -148,7 +141,8 @@ span input:focus {
 	align-items: center;
 	justify-content: center;
 	cursor: pointer;
-	transition: all 0.2s ease-in-out
+	transition: all 0.2s ease-in-out;
+	cursor: pointer;
 }
 
 .create-card-button:hover {
@@ -167,11 +161,15 @@ span input:focus {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	align-items: start;
+	align-items: end;
 	gap: 2rem;
 }
 
-.right-side h1 {
+.create-ai-title {
+	width: 81%;
+}
+
+.create-ai-title h1 {
 	font-size: 1.5rem;
 	color: transparent;
 	background: linear-gradient(90deg, #ca5858 0%, #e2b96d 25%, #e2e26b 37.5%, #61d461 50%, #5edbdb 62.5%, #5a5ae2 75%, #df89df 87.5%, #ca5858 100%) left/200% 100%;
@@ -246,6 +244,7 @@ span input:focus {
     align-items: center;
     justify-content: center;
     transition: all 0.2s ease-in-out;
+	cursor: pointer;
 }
 
 .create-that-quiz-button:hover {

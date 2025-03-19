@@ -7,6 +7,7 @@ const FlashCard = ({ questionInput, answerInput }) => {
                 <div className="question">
                     <p>{questionInput}</p>
                 </div>
+                <div className="divider"></div>
                 <div className="answer">
                     <p>{answerInput}</p>
                 </div>

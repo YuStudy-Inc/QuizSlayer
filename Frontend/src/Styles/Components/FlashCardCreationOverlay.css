@@ -40,7 +40,7 @@
 
 .flashcard-itself {
     width: 70%;
-    height: 30vh;
+    height: 25vh;
     background-color: var(--white);
     border-radius: 20px;
     display: flex;
@@ -87,6 +87,7 @@
     border-radius: 20px;
     background-color: var(--white);
     transition: all 0.2s ease-in-out;
+    cursor: pointer;
 }
 
 .create-that-flashcard-button:hover {
