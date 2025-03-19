@@ -8,8 +8,10 @@ import Podium from "./Podium";
 import TodoList from "./TodoList";
 import Login from "./Login/Login"
 import Signup from "./Login/Signup"
+import FriendCard from "./FriendCard";
 import FlashCard from "./FlashCard"
 import FlashCardCreationOverlay from "./FlashCardCreationOverlay"
+import AddAFriend from "./AddAFriend";
 
 export {
     Alert,
@@ -23,6 +25,8 @@ export {
     TodoList,
     Login,
     Signup,
+    FriendCard,
     FlashCard,
     FlashCardCreationOverlay,
+    AddAFriend,
 }

@@ -1,13 +1,13 @@
 import Collection from './Collection.jsx';
-// import Quizzes from './Quizzes.jsx';
+//import Quizzes from './Quizzes.jsx';
 import Home from './Home.jsx';
-// import Friends from './Friends.jsx';
+import Friends from './Friends.jsx';
 // import Leaderboards from './Leaderboards';
 
 export {
     Collection,
-    // Quizzes,
+   // Quizzes,
     Home,
-    // Friends,
+    Friends,
     // Leaderboards
 }

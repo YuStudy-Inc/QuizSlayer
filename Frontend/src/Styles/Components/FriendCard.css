@@ -1,0 +1,24 @@
+.one-friend {
+    height: 5rem;
+    display: grid;
+    grid-template-columns: 0.34fr 2.3fr 0.5fr;
+    align-content: center;
+    background: transparent;
+    border-radius: 10px;
+}
+
+.profilepic img {
+    width: 3rem;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+}
+
+.name, .level {
+    display: flex;
+    align-items: center;
+}
+
+.name h1, .level h1 {
+    font-size: 1.5rem;
+    color: var(--white);
+}
