@@ -53,13 +53,14 @@ export const deleteQuiz = async(req, res)=>{
     try{
         const deletedQuiz = await Quiz.findByIdAndDelete(id);
         if(!deletedQuiz){
-            console.log("Quiz was not found")
+            res.status(500).json({error: "Quiz was not found"})
             return;
         }
-        console.log("Quiz deleted successfully!")
+        res.status(200).json({
+            message: 'Quiz deleted successfullly' }) 
     }
     catch(err){
-        console.log("An error occured while connecting to the database: ");
+        res.status(500).json({error: "Quiz not found"})
         console.log(err)
     }
 }

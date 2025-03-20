@@ -89,16 +89,18 @@ export const editUser = async (req,res) => {
         //need to check if username is taken. 
         const tempUser = await User.findOne({username: req.body.username})
         if(tempUser){
-            res.status(404).json({error: 'Username taken'})
+            res.status(409).json({error: 'Username taken'})
             return; 
         }
         //Only changes the parameter that was included in the json req
-        const result = await User.findOneAndUpdate({_id: userId}, {$set: req.body})
+        const result = await User.findOneAndUpdate({_id: userId}, {$set: req.body}).select("username email -_id");
         console.log(result);
 
-        res.status(200).json({updatedCount: result.modifiedCount}) 
+        // res.status(200).json({updatedCount: result.modifiedCount}) 
+        res.status(200).json({message: 'Username update: ', user: result}) 
     } catch (e) {
         res.status(500).json({error: 'User not modified'})
+        console.log(e)
     }
 }
 

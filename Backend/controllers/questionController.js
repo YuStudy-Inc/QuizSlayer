@@ -1,12 +1,14 @@
 import Schemas from '../schemas/Schemas.js';
+import mongoose from 'mongoose';
 const Question = Schemas.Question
+const Quiz = Schemas.Quiz
 function isInt(value) {
     return !isNaN(value) && parseInt(Number(value)) == value && !isNaN(parseInt(value, 10));
 }
 
 export const createQuestion = async(req, res) => {
     try {
-        const { quizID, question, choices, answer, difficulty, right, wrong } = req.body
+        const { quizID, question, answer, difficulty, right, wrong } = req.body
 
         //difficulty will be drop down menu for easy, medium, hard
         if (!question || !answer || !difficulty || !right || !wrong)
