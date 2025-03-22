@@ -1,5 +1,5 @@
 import Podium from "../../Components/Podium"
-import lootBox from "../../assets/Collection/lootBox.png"
+import lootBox from "../../assets/Collection/lootbox.png"
 
 import "../../Styles/Pages/Collection.css"
 

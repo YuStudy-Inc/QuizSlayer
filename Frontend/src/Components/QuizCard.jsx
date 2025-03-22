@@ -1,4 +1,4 @@
-import "../styles/Components/QuizCard.css"
+import "../Styles/Components/QuizCard.css"
 import playButton from "../assets/Quizzes/playButton.png"
 import { useNavigate } from "react-router-dom"; 
 const QuizCard = ({category, title, url }) => {
