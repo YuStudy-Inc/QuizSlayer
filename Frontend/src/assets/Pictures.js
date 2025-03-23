@@ -26,6 +26,7 @@ import ironSword from "../assets/Weapons/ironSword.png";
 import playfulCloud from "../assets/Weapons/playfulCloud.png";
 import someonesGun from "../assets/Weapons/someonesGun.png";
 import redBalloon from "../assets/Weapons/redBalloon.png";
+import sign404 from "../assets/sign404.png";
 
 export {
     logo,
@@ -50,7 +51,8 @@ export {
     ironSword,
     playfulCloud,
     someonesGun,
-    redBalloon
+    redBalloon,
+    sign404
 }
 
 //bruh im so lazy i had to make chatGPT write this 😭😭😭😭😭

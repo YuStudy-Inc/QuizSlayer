@@ -3,6 +3,7 @@ import LandingPage from './LandingPage.jsx';
 import Results from './Results.jsx'
 import LoginSignup from './LoginSignup/LoginSignup.jsx'
 import CreateQuizPage from './Quizzes/CreateQuizPage.jsx';
+import PageNotFound from "./PageNotFound.jsx";
 
 export {
     LandingPage,
@@ -14,4 +15,5 @@ export {
     Friends,
     Leaderboard,
     Results,
+    PageNotFound,
 }
