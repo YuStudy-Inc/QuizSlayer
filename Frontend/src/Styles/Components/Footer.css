@@ -17,3 +17,15 @@
     color: var(--white);
     margin-left: 20px;
 }
+
+@media (max-width: 1200px) {
+    .footer-container h1 {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-container h1 {
+        font-size: 0.8rem;
+    }
+}

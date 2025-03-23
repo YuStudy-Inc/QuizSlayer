@@ -1,14 +1,9 @@
 import "../Styles/Pages/LandingPage.css"
 //why this no work ???
-import { LandingPageTitle, LandingPageHowToPlay } from "../Components/Components.js"
-// import LandingPageTitle from "../Components/LandingPageTitle"
-// import LandingPageHowToPlay from "../Components/LandingPageHowToPlay"
-import LandingPageAboutUs from "../Components/LandingPageAboutUs.jsx"
-import LandingPageDevs from "../Components/LandingPageDevs.jsx"
-import LandingPageSpecialThanks from "../Components/LandingPageSpecialThanks.jsx"
-import Footer from "../Components/Footer.jsx"
+import { LandingPageTitle, LandingPageHowToPlay, LandingPageAboutUs, LandingPageDevs, LandingPageSpecialThanks, Footer } from "../Components/Components.js"
 import { logo } from "../assets/Pictures.js"
 import { useEffect, useState } from "react"
+import LoadingScreen from "./LoadingScreen.jsx"
 
 const LandingPage = () => {
     const [showingTheLogo, setShowingTheLogo] = useState(false)
@@ -30,14 +25,15 @@ const LandingPage = () => {
     
     return (
         <>
-            <div className="landing-page-container"></div>
-            <img className={`corner-logo ${showingTheLogo ? "visible" : ""}`} src={logo} alt="small-logo" />
-            <LandingPageTitle />
-            <LandingPageHowToPlay />
-            <LandingPageAboutUs />
-            <LandingPageDevs />
-            <LandingPageSpecialThanks />
-            <Footer />
+            <div className="landing-page-container">
+                <img className={`corner-logo ${showingTheLogo ? "visible" : ""}`} src={logo} alt="small-logo" />
+                <LandingPageTitle />
+                <LandingPageHowToPlay />
+                <LandingPageAboutUs />
+                <LandingPageDevs />
+                <LandingPageSpecialThanks />
+                <Footer />
+            </div>
         </>
     )
 }

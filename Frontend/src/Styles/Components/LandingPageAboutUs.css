@@ -8,11 +8,9 @@
     justify-content: center;
 }
 
-.about-us-container * {
-    background-color: inherit;
-}
-
 .about-us {
+    width: 90%;
+    height: 100vh;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -22,7 +20,7 @@
     display: flex;
     flex-direction: column;
     gap: 30px;
-    width: 30%;
+    width: 25%;
 }
 
 .about-us-words {
@@ -39,4 +37,68 @@
 
 .about-us-words p {
     text-align: end;
+}
+
+@media (max-width: 1200px) {
+    .about-us-words h1 {
+        font-size: 2.5rem;
+        border-bottom: 15px solid var(--white);
+    }
+
+    .about-us-words p {
+        font-size: 0.8rem;
+    }
+
+    .how-to-actually img {
+        width: 40%;
+    }
+
+    .about-us-pictures {
+        width: 40%;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-us-words h1 {
+        font-size: 1.5rem;
+        border-bottom: 10px solid var(--white);
+    }
+
+    .about-us-words p {
+        font-size: 0.6rem;
+    }
+
+    .how-to-actually img {
+        width: 40%;
+    }
+
+    .about-us-pictures {
+        width: 50%;
+    }
+}
+
+@media (max-width: 400px) {
+    .about-us {
+        width: 90%;
+        height: 60vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 2rem;
+    }
+
+    .about-us-pictures {
+        width: 70%;
+    }
+}
+
+@media (min-width: 1920px) {
+    .about-us-pictures {
+        width: 40%;
+        flex-direction: row;
+    }
+
+    .about-us-pictures img {
+        width: 40%;
+    }
 }
