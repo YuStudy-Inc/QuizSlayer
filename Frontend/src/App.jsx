@@ -1,5 +1,5 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-import { LandingPage, Home, Collection, LoginSignup, Quizzes, Results, CreateQuizPage, Friends, Leaderboard} from "./Pages/Pages";
+import { LandingPage, Home, Collection, LoginSignup, Quizzes, Results, CreateQuizPage, Friends, Leaderboard, PageNotFound} from "./Pages/Pages";
 import { Navbar } from './Components/Components'
 
 function App() {
@@ -19,6 +19,7 @@ function App() {
 					</Route>
 					<Route path='/createquiz' element={<CreateQuizPage />}/>
 					<Route path='/results' element={<Results />}/>
+					<Route path="*" element={<PageNotFound />}/>
 				</Routes>
 			</BrowserRouter>
 		</>
