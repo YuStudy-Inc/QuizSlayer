@@ -32,7 +32,7 @@ const LandingPage = () => {
                 <LandingPageAboutUs />
                 <LandingPageDevs />
                 <LandingPageSpecialThanks />
-                {/* <Footer /> */}
+                <Footer />
             </div>
         </>
     )

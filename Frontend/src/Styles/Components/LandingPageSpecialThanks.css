@@ -14,6 +14,7 @@
     flex-direction: column;
     align-items: start;
     gap: 100px;
+
 }
 
 .special-thanks-title {
@@ -30,17 +31,43 @@
 .pictures-and-descriptions {
     width: 100%;
     display: flex;
-    
+    justify-content: space-between;
 }
 
 @media (max-width: 1200px) {
-    
+    .special-thanks-title {
+        font-size: 2.5rem;
+    }
+
+    .underline-thanks {
+        height: 10px;
+        background-color: var(--white);
+        width: 30%;
+    }
 }
 
 @media (max-width: 768px) {
-    
+    .special-thanks-title {
+        font-size: 1.5rem;
+    }
+
+    .underline-thanks {
+        height: 7px;
+        background-color: var(--white);
+        width: 30%;
+    }
 }
 
 @media (max-width: 400px) {
-    
+    .thank-you {
+        gap: 0;
+        width: 80%;
+        height: 85%;
+    }
+
+    .pictures-and-descriptions {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
 }

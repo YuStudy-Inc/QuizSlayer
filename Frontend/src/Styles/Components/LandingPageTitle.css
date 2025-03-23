@@ -1,3 +1,7 @@
+:root {
+    --image-width: 2880px;
+}
+
 .background-for-title-page {
     position: relative;
     width: 100%;
@@ -9,7 +13,7 @@
     position: absolute;
     object-fit: cover;
     animation: slow-pan 60s linear infinite alternate;
-    width: 100vw;
+    width: min(var(--image-width), 200vw);
     height: 100vh;
 }
 
@@ -20,7 +24,7 @@
     }
     100% {
         /* leave this for now, figure out a way to make it responsive on all screens */
-        transform: translateX(-100vw);
+        transform: translateX(calc(100vw - var(--image-width)));
     }
 }
 
@@ -88,8 +92,27 @@
     box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
 }
 
+@media screen and (max-width: 1500px) {
+    :root {
+        --image-width: 192vw;
+    }
+
+    .moving-background {
+        width: min(var(--image-width), 192vw);
+        animation: slow-pan 70s linear infinite alternate;
+    }
+
+}
 
 @media screen and (max-width: 1200px) {
+    :root {
+        --image-width: 240vw;
+    }
+
+    .moving-background {
+        width: min(var(--image-width), 240vw);
+    }
+
     .logo-big {
         height: 408px;
         aspect-ratio: 1/1;
@@ -116,6 +139,15 @@
 }
 
 @media screen and (max-width: 768px) {
+    :root {
+        --image-width: 375vw;
+    }
+
+    .moving-background {
+        width: min(var(--image-width), 375vw);
+        animation: slow-pan 80s linear infinite alternate;
+    }
+
     .logo-big {
         height: 350px;
         aspect-ratio: 1/1;
@@ -143,6 +175,15 @@
 }
 
 @media screen and (max-width: 480px) {
+    :root {
+        --image-width: 720vw;
+    }
+
+    .moving-background {
+        width: min(var(--image-width), 720vw);
+        animation: slow-pan 90s linear infinite alternate;
+    }
+
     .logo-big {
         height: 250px;
         aspect-ratio: 1/1;
@@ -154,6 +195,10 @@
 
     .button-container-title {
         width: 60%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
     }
 
     .button-container-title button {

@@ -7,29 +7,10 @@ import { useNavigate } from "react-router-dom"
 const LandingPageTitle = () => {
     const [isLoaded, setIsLoaded] = useState(false)
     const [isTransitioning, setIsTransitioning] = useState(false)
-    //const [maxTranslate, setMaxTranslate] = useState(0)
-    /* const isInitialLoad = useRef(true)
-
-    const handleImageLoad = () => {
-        const img = document.getElementById("bg-image")
-        const triangleThingy = document.getElementById("triangle")
-        
-        if (img && triangleThingy) {
-            const imageWidth = img.width
-            const triangleRightEdge = triangleThingy.offsetLeft + triangleThingy.offsetWidth
-            
-            const maxTranslateValue = imageWidth - triangleRightEdge
-            setMaxTranslate(maxTranslateValue)
-            document.documentElement.style.setProperty("--max-translate", `${maxTranslate}px`)
-        }
-    } */
-
-    /* THIS IS SO FUCKING STUPID LIKE HOW CAN I JUST LIKE LET THIS LOAD FIRST */
 
     const wipeLoadingScreenOff = () => {
         const timer = setTimeout(() => {
             setIsTransitioning(true)
-            //document.documentElement.style.setProperty("--max-translate", `${maxTranslate}px`);
             const transitionTimer = setTimeout(() => {
                 setIsLoaded(true); 
                 setIsTransitioning(false);
@@ -51,7 +32,6 @@ const LandingPageTitle = () => {
             state: {isLogin}
         })
     }
-
     
     return (
         <>

@@ -20,7 +20,7 @@
     display: flex;
     flex-direction: column;
     gap: 30px;
-    width: 30%;
+    width: 25%;
 }
 
 .about-us-words {
@@ -52,6 +52,10 @@
     .how-to-actually img {
         width: 40%;
     }
+
+    .about-us-pictures {
+        width: 40%;
+    }
 }
 
 @media (max-width: 768px) {
@@ -67,6 +71,10 @@
     .how-to-actually img {
         width: 40%;
     }
+
+    .about-us-pictures {
+        width: 50%;
+    }
 }
 
 @media (max-width: 400px) {
@@ -81,5 +89,16 @@
 
     .about-us-pictures {
         width: 70%;
+    }
+}
+
+@media (min-width: 1920px) {
+    .about-us-pictures {
+        width: 40%;
+        flex-direction: row;
+    }
+
+    .about-us-pictures img {
+        width: 40%;
     }
 }
