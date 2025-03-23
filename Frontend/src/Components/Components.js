@@ -3,6 +3,8 @@ import FriendsActive from "./FriendsActive";
 import LandingPageTitle from "./LandingPageTitle";
 import LandingPageHowToPlay from "./LandingPageHowToPlay";
 import LandingPageAboutUs from "./LandingPageAboutUs";
+import LandingPageDevs from "./LandingPageDevs";
+import LandingPageSpecialThanks from "./LandingPageSpecialThanks";
 import Navbar from "./Navbar";
 import Podium from "./Podium";
 import TodoList from "./TodoList";
@@ -13,14 +15,16 @@ import FlashCard from "./FlashCard"
 import FlashCardCreationOverlay from "./FlashCardCreationOverlay"
 import PlayerCard from "./PlayerCard"
 import AddAFriend from "./AddAFriend";
+import Footer from "./Footer";
 
 export {
     Alert,
     FriendsActive,
-    // HowtoPlayTitle,
     LandingPageTitle,
     LandingPageHowToPlay,
     LandingPageAboutUs,
+    LandingPageDevs,
+    LandingPageSpecialThanks,
     Navbar,
     Podium,
     TodoList,
@@ -31,4 +35,5 @@ export {
     FlashCardCreationOverlay,
     PlayerCard,
     AddAFriend,
+    Footer,
 }

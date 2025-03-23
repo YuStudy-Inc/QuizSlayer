@@ -56,6 +56,7 @@ const LandingPageTitle = () => {
     return (
         <>
             {(!isLoaded || isTransitioning) && <LoadingScreen isLoaded={isLoaded} />}
+            <LoadingScreen isLoaded={false}/>
             <div className="background-for-title-page">
                 <img id="bg-image" className="moving-background" src={backgroundFight} alt="" />
                 <div className="container-for-the-things-on-the-page">

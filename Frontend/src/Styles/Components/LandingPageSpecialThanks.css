@@ -8,14 +8,10 @@
     justify-content: center;
 }
 
-.special-thanks-container * {
-    background-color: var(--light-green);
-}
-
 .thank-you {
+    width: 80%;
     display: flex;
     flex-direction: column;
-    width: 70%;
     align-items: start;
     gap: 100px;
 }
@@ -32,6 +28,19 @@
 }
 
 .pictures-and-descriptions {
+    width: 100%;
     display: flex;
-    gap: 25%;
+    
+}
+
+@media (max-width: 1200px) {
+    
+}
+
+@media (max-width: 768px) {
+    
+}
+
+@media (max-width: 400px) {
+    
 }

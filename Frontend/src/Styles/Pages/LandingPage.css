@@ -32,3 +32,8 @@
 ::-webkit-scrollbar-thumb:hover {
     background: var(--light-green);
 }
+
+.landing-page-container {
+    width: 100vw;
+    overflow-x: hidden;
+}
