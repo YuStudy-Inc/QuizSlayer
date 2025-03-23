@@ -17,7 +17,7 @@ import pot from "../assets/Hats/pot.png";
 import duckCharacter from "../assets/Characters/duckCharacter.png";
 import frogCharacter from "../assets/Characters/frogCharacter.png";
 import raccoonCharacter from "../assets/Characters/raccoonCharacter.png";
-import capyBaraCharacter from "../assets/Characters/capyBaraCharacter.png";
+import capyBaraCharacter from "../assets/Characters/capybaraCharacter.png";
 import crowCharacter from "../assets/Characters/crowCharacter.png";
 import podium from "../assets/Characters/podium.jpg";
 

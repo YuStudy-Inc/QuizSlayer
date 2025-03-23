@@ -1,4 +1,4 @@
-import "../Styles/Components/Todolist.css"
+import "../Styles/Components/TodoList.css"
 
 const TodoList = ({ className = "", quizzesToDo }) => {
     return (
