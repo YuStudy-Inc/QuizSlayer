@@ -244,12 +244,23 @@ span input:focus {
     align-items: center;
     justify-content: center;
     transition: all 0.2s ease-in-out;
+	-webkit-box-shadow: 0px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 10px 5px 0px rgba(0,0,0,0.75);
 	cursor: pointer;
 }
 
 .create-that-quiz-button:hover {
     background-color: var(--light-green);
     transform: scale(1.2);
+}
+
+.create-that-quiz-button:active {
+	transform: scale(0.9);
+    transform: translateY(2px);
+	-webkit-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
 }
 
 .create-that-quiz-button h1 {

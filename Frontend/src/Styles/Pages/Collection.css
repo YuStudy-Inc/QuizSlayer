@@ -98,12 +98,24 @@
     align-items: center;
     justify-content: center;
     transition: all 0.2s ease-in-out;
+    -webkit-box-shadow: 0px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 10px 5px 0px rgba(0,0,0,0.75);
     cursor: pointer;
 }
 
 .gatcha button:hover {
     background-color: var(--light-green);
     transform: scale(1.1);
+}
+
+.gatcha button:active {
+    transform: scale(0.9);
+    transform: translateY(2px);
+    -webkit-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
+
 }
 
 .gatcha img {
