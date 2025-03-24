@@ -1,0 +1,321 @@
+.settings-container {
+    width: 100%;
+    height: 100vh;
+    background-color: var(--black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-options {
+    width: 90%;
+    height: 75vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.settings-title {
+    height: 10%;
+    width: 100%;
+}
+
+.settings-title h1 {
+    font-size: 4rem;
+    color: var(--white);
+}
+
+.settings-contents {
+    height: 90%;
+    width: 70%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.left-options {
+    height: 50%;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.left-options button {
+    background-color: transparent;
+    color: transparent;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+}
+
+.left-options h1 {
+    width: 100%;
+    text-align: center;
+    font-size: 2rem;
+    color: var(--white);
+    transition: color 0.1s ease-in-out;
+}
+
+.left-options h1:hover {
+    color: var(--light-green);
+}
+
+.divider-settings {
+    height: 70%;
+    width: 3px;
+    background-color: var(--white);
+    border-radius: 10px;
+}
+
+.right-changing-options {
+    width: 40%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-settings,
+.password-settings,
+.account-settings {
+    opacity: 0;
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    visibility: hidden;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.move {
+    transform: translateY(50px);
+    transition: transform 0.4 ease-in-out, opacity 0.2s ease-in-out;
+}
+
+.active-settings .move {
+    transform: translateY(0);
+}
+
+.move:nth-child(1) {
+    transition-delay: 0.1s;
+}
+
+.move:nth-child(2) {
+    transition-delay: 0.2s;
+}
+
+.move:nth-child(3) {
+    transition-delay: 0.3s;
+}
+
+.move:nth-child(4) {
+    transition-delay: 0.4s;
+}
+
+.profile-settings {
+    height: 70%;
+}
+
+.profile-settings.active-settings {
+    height: 100%;
+}
+
+.profile-picture-edit {
+    position: relative;
+    height: 15%;
+    aspect-ratio: 1/1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-picture-rn {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.black-overlay-for-the-profile-pic {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.30);
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out
+}
+
+.profile-picture-edit:hover .black-overlay-for-the-profile-pic {
+    opacity: 1;
+}
+
+.pencil-profile-pic {
+    position: absolute;
+    height: 35%;
+    height: 35%;
+    z-index: 2;
+}
+
+.profile-picture-edit input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: 3;
+    cursor: pointer;
+}
+
+.username-edit {
+    height: 15%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: start;
+}
+
+.username-edit h1,
+.old-password h1,
+.password-edit h1,
+.password-edit-again h1 {
+    font-size: 2rem;
+    color: var(--white);
+    width: 100%;
+}
+
+.username-edit input,
+.old-password input,
+.password-edit input,
+.password-edit-again input {
+    width: calc(100% - 4px);
+    background: transparent;
+    border: none;
+    font-size: 2rem;
+    border-bottom: 2px solid var(--white);
+    color: var(--white);
+    background: none;
+    transition: border-bottom 0.1s ease-in-out;
+}
+
+.username-edit input:focus,
+.old-password input:focus,
+.password-edit input:focus,
+.password-edit-again input:focus {
+    border-bottom: 2px solid var(--light-green);
+    outline: none;
+}
+
+.description-edit {
+    height: 30%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.description-edit h1 {
+    font-size: 2rem;
+    color: var(--white);
+}
+
+.description-edit textarea {
+    width: calc(100% - 8px);
+    height: auto;
+    min-height: 2rem;
+    background: transparent;
+    border: 2px solid var(--white);
+    border-radius: 5px;
+    flex-grow: 1;
+    resize: none;
+    font-size: 1rem;
+    color: var(--white);
+    transition: all 0.1s ease-in-out;
+}
+
+.description-edit textarea:focus {
+    border: 2px solid var(--light-green);
+    outline: 1px solid var(--light-green);
+}
+
+.submit-profile-edit,
+.submit-password-edit,
+.submit-logout-account,
+.submit-delete-account {
+    width: 10rem;
+    height: 3rem;
+    background-color: var(--white);
+    border: none;
+    border-radius: 20px;
+    -webkit-box-shadow: 0px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 10px 5px 0px rgba(0,0,0,0.75);
+    transition: all 0.2s ease-in-out;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.submit-profile-edit:hover,
+.submit-password-edit:hover,
+.submit-logout-account:hover,
+.submit-delete-account:hover {
+    transform: scale(1.1);
+    background-color: var(--light-green);
+    color: var(--white);
+}
+
+.submit-profile-edit:active,
+.submit-password-edit:active,
+.submit-logout-account:active,
+.submit-delete-account:active {
+    transform: scale(0.9);
+    transform: translateY(2px);
+    -webkit-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
+}
+
+.submit-logout-account,
+.submit-delete-account {
+    width: 14rem;
+    height: 4rem;
+    font-size: 1.2rem;
+}
+
+.submit-delete-account:hover {
+    background-color: var(--red) !important;
+}
+
+.password-settings {
+    height: 60%;
+}
+
+.password-settings.active-settings {
+    height: 80%;
+}
+
+.account-settings {
+    height: 40%;
+}
+
+.account-settings.active-settings {
+    height: 50%;
+}
+
+.active-settings {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+    display: flex;
+    position: relative;
+}
+
+
