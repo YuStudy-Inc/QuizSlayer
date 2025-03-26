@@ -12,6 +12,8 @@ FROM nginx:alpine
 COPY --from=builder /app/dist /usr/share/nginx/html
 COPY default.conf /etc/nginx/conf.d/
 
+RUN mkdir /security
+
 RUN --mount=type=secret,id=PRIVATE_KEY \
     --mount=type=secret,id=SSL_CERT \
     cat run/secrets/PRIVATE_KEY > ./security/_.quizslayer.com_private_key.key \
