@@ -3,13 +3,14 @@ name: Deploy on EC2-Instance
 on:
   workflow_run:
     workflows: ["Docker Image CI"]
+    branches: [deploy]
     types: [completed]
 
 jobs:
   deploy:
     name: Deploy to EC2
     runs-on: ubuntu-latest
-
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
     
     - name: Deploy via SSH
