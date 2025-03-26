@@ -41,7 +41,8 @@ jobs:
         username: ${{secrets.USERNAME}}
         key: ${{secrets.EC2_SSH_KEY}}
         script: | 
+
           sudo docker pull thomastejedor/quiz-slayer-env:latest
           sudo docker rm -f cicd-pipeline-container || true
-          sudo docker run -itd -p 80:80 -p 443:443 --name cicd-pipeline-container thomastejedor/quiz-slayer-env
+          sudo docker run -itd --mount type=bind,src=./security/quizslayer.com_ssl_certificate.cer,dst=/etc/nginx/certs/quizslayer.com_ssl_certificate.cer --mount type=bind,src=./security/_.quizslayer.com_private_key.key,dst=/etc/nginx/certs/_.quizslayer.com_private_key.key -p 80:80 -p 443:443 --name cicd-pipeline-container thomastejedor/quiz-slayer-env
     
