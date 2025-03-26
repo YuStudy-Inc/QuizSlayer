@@ -12,14 +12,21 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+      with:
+
     - name: Login Dockerhub 
       env:
         DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
         DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
       run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+    
+    - name: Build Docker Container
+      uses: docker/build-push-action@v6
+      with:
+        context: ./Frontend
+        tags: thomastejedor/quiz-slayer-env:latest
+        secrets: |
+          "PRIVATE_KEY=${{secrets.PRIVATE_SSL_KEY}}"
+          "SSL_CERT=${{secrets.SSL_CERT}}"
 
-    - name: Build the Docker image
-      run: docker build -t quiz-slayer-env Frontend/.
-    - name: Push Docker image
-      run: docker push thomastejedor/quiz-slayer-env:latest
     
