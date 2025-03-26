@@ -3,7 +3,6 @@ name: Deploy on EC2-Instance
 on:
   workflow_run:
     workflows: ["Docker Image CI"]
-    branches: ["deploy"]
     types: [completed]
 
 jobs:
@@ -19,4 +18,4 @@ jobs:
         host: ${{secrets.HOST_DNS}}
         username: ${{secrets.EC2_USER}}
         key: ${{secrets.EC2_SSH_KEY}}
-      
+    -
