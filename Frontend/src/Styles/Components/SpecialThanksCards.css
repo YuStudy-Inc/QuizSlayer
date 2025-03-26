@@ -1,11 +1,14 @@
 .special-thanks-card-container {
+    width: 30%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     gap: 10px;
 }
 
 .special-thanks-card-container img {
-    width: 300px;
+    width: 80%;
     aspect-ratio: 1/1;
 }
 
@@ -16,9 +19,11 @@
 
 .special-thanks-card-container p {
     color: var(--white);
+    font-size: 1rem;
 }
 
 .special-thanks-card-container a {
+    font-size: 1rem;    
     display: inline-block;
     width: fit-content;
     color: var(--white);
@@ -40,5 +45,51 @@
     }
     100% {
         transform: translateY(0px);
+    }
+}
+
+@media (max-width: 1200px) {
+    .special-thanks-card-container h1 {
+        font-size: 2rem;
+    }
+
+    .special-thanks-card-container p {
+        font-size: 0.8rem;
+    }
+
+    .special-thanks-card-container a {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .special-thanks-card-container h1 {
+        font-size: 1rem;
+    }
+
+    .special-thanks-card-container p {
+        font-size: 0.6rem;
+    }
+
+    .special-thanks-card-container a {
+        font-size: 0.6rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .special-thanks-card-container {
+        width: 50%;
+    }
+
+    .special-thanks-card-container h1 {
+        font-size: 1.8rem;
+    }
+
+    .special-thanks-card-container p {
+        font-size: 0.8rem;
+    }
+
+    .special-thanks-card-container a {
+        font-size: 0.8rem;
     }
 }

@@ -1,5 +1,5 @@
 .developer-container {
-    width: 70%;
+    width: 90%;
     gap: 7%;
     display: none;
 }
@@ -9,7 +9,7 @@
 }
 
 .developer-container img {
-    height: 350px;
+    width: 30%;
     aspect-ratio: 1/1;
     background-color: var(--dark-green);
 }
@@ -23,6 +23,10 @@
 
 .wise-words-from-this-dev h1 {
     font-size: 3rem;
+}
+
+.wise-words-from-this-dev p {
+    font-size: 1rem;
 }
 
 .wise-words-from-this-dev h1, .wise-words-from-this-dev p {
@@ -39,6 +43,7 @@
     display: inline-block;
     width: fit-content;
     color: var(--black);
+    font-size: 1rem;
     text-decoration: none;
     background: transparent;
     transition: color 0.2s ease-in-out;
@@ -61,3 +66,85 @@
     }
 }
 
+@media (max-width: 1300px) {
+    .wise-words-from-this-dev h1 {
+        font-size: 2rem;
+    }
+
+    .wise-words-from-this-dev p {
+        font-size: 0.8rem;
+    }
+
+    .dev-links {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 1000px) {
+    .developer-container.is-active  {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .developer-container img {
+        width: 80%;
+    }
+
+    .wise-words-from-this-dev {
+        align-items: center;
+    }
+
+    .dev-links {
+        align-items: center;
+    }
+
+    .dev-links a {
+        font-size: 0.8rem;
+    }
+
+}
+
+@media (max-width: 768px) {
+    .developer-container img {
+        width: 80%;
+    }
+
+    .wise-words-from-this-dev h1 {
+        font-size: 1.5rem;
+    }
+
+    .wise-words-from-this-dev p {
+        font-size: 0.6rem;
+    }
+
+    .dev-links a {
+        font-size: 0.6rem;
+    }
+}
+
+@media (max-width: 500px) {
+    .developer-container img {
+        width: 80%;
+    }
+
+    .wise-words-from-this-dev h1 {
+        font-size: 1rem;
+    }
+
+    .wise-words-from-this-dev p {
+        font-size: 0.6rem;
+    }
+
+    .dev-links a {
+        font-size: 0.6rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .developer-container img {
+        width: 80%;
+    }
+}

@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom"
+
 import Username from "./Input/Username";
 import Password from "./Input/Password";
 
@@ -7,8 +9,13 @@ import leftArrow from '@mui/icons-material/ArrowBackIosRounded';
 import "./LoginSignup.css"
 
 const Signup = ({ onToggle }) => {
+
+    const navigate = useNavigate();
+    const routeHome = () => {
+        navigate('../home')
+    }
+
     const handleClick = () => {
-        console.log(0)
         onToggle();
     }
 
@@ -20,7 +27,7 @@ const Signup = ({ onToggle }) => {
                 <Username></Username>
                 <Password></Password>
                 <Password></Password>
-                <input type="submit" className="submit_button" id="signup" value="Sign Up" ></input>
+                <input type="submit" className="submit_button" id="signup" value="Sign Up" onClick={() => routeHome()}></input>
                 <span className="to_login_arrow login_signup_arrow" onClick={handleClick}>
                     <SvgIcon component={leftArrow}></SvgIcon>
                 </span>
