@@ -3,8 +3,7 @@ name: Deploy on EC2-Instance
 on:
   workflow_run:
     workflows: ["Docker Image CI"]
-    types:
-    - completed
+    types: [completed]
 
 jobs:
   deploy:
