@@ -38,7 +38,7 @@ jobs:
       uses: appleboy/ssh-action@v0.1.10
       with:
         host: ${{secrets.HOST_DNS}}
-        username: ${{secrets.EC2_USER}}
+        username: ${{secrets.USERNAME}}
         key: ${{secrets.EC2_SSH_KEY}}
         script: | 
           sudo docker pull thomastejedor/quiz-slayer-env:latest
