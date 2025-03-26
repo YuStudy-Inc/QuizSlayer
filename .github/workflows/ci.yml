@@ -30,6 +30,7 @@ jobs:
           "SSL_CERT=${{secrets.SSL_CERT}}"
 
   deploy:
+    needs: build
     runs-on: ubuntu-latest
     steps:
     
@@ -39,11 +40,8 @@ jobs:
         host: ${{secrets.HOST_DNS}}
         username: ${{secrets.EC2_USER}}
         key: ${{secrets.EC2_SSH_KEY}}
-    
-    - name: Pull Docker image
-      run: sudo docker pull thomastejedor/quiz-slayer-env:latest
-    - name: Delete old docker container
-      run: sudo docker rm -f cicd-pipeline-container || true
-    - name: Run Docker Container
-      run: sudo docker run -itd -p 80:80 -p 443:443 cicd-pipeline-container thomastejedor/quiz-slayer-env
+      script: |
+        sudo docker pull thomastejedor/quiz-slayer-env:latest
+        sudo docker rm -f cicd-pipeline-container || true
+        sudo docker run -itd -p 80:80 -p 443:443 cicd-pipeline-container thomastejedor/quiz-slayer-env
     
