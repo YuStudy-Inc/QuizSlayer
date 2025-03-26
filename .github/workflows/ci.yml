@@ -28,10 +28,9 @@ jobs:
         secrets: |
           "PRIVATE_KEY=${{secrets.PRIVATE_SSL_KEY}}"
           "SSL_CERT=${{secrets.SSL_CERT}}"
+
   deploy:
-    name: Deploy to EC2
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
     
     - name: Deploy via SSH
