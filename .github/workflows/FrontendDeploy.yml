@@ -2,7 +2,9 @@ name: Docker Image CI
 
 on:
   push:
-    branches: ["deploy"]
+    branches: ["master"]
+    paths:
+      - Frontend/**
 
 env:
     DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
@@ -28,7 +30,6 @@ jobs:
         secrets: |
           "PRIVATE_KEY=${{secrets.PRIVATE_SSL_KEY}}"
           "SSL_CERT=${{secrets.SSL_CERT}}"
-
   deploy:
     needs: build
     runs-on: ubuntu-latest
