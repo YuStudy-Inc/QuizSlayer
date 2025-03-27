@@ -68,6 +68,10 @@
         font-size: 2rem;
     }
 
+    .developer-container img {
+        width: 40%;
+    }
+
     .wise-words-from-this-dev p {
         font-size: 0.8rem;
     }
@@ -87,7 +91,7 @@
     }
 
     .developer-container img {
-        width: 80%;
+        width: 60%;
     }
 
     .wise-words-from-this-dev {
@@ -124,7 +128,7 @@
 
 @media (max-width: 500px) {
     .developer-container img {
-        width: 80%;
+        width: 90%;
     }
 
     .wise-words-from-this-dev h1 {
@@ -142,6 +146,6 @@
 
 @media (max-width: 400px) {
     .developer-container img {
-        width: 80%;
+        width: 100%;
     }
 }

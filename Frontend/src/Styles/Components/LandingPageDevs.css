@@ -42,6 +42,7 @@
     flex-grow: 1;
     align-items: center;
     justify-content: center;
+    gap: 20px;
 }
 
 .carousel {
@@ -52,8 +53,9 @@
 .developer-box {
     display: flex;
     align-items: flex-start;
-    transform: translateX(calc((var(--developer) * -100%)));
+    transform: translateX(calc((var(--developer) * -100%) + var(--developer) * -20px)); /* Selected_Dev_Index * -100% (developer box width) + Selected_Dev_Index * -20px (gap)*/
     transition: all 250ms ease-in-out;
+    gap: 20px;
 }
 
 .landing-page-carousel-container button {
