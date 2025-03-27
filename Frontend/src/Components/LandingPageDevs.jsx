@@ -6,22 +6,27 @@ import Developer from "./Developer"
 
 const LandingPageDevs = () => {
     const [whoActive, setWhoActive] = useState(0)
-    const [direction, setDirection] = useState(null)
+    const [disabled, setDisabled] = useState("left")
 
     const handleClickLeft = () => {
-        setDirection("right")
         if (whoActive === 0)
-            setWhoActive(3)
+            return;
+        else if (whoActive === 1)
+            setDisabled("left")
         else
-            setWhoActive(whoActive - 1)
+            setDisabled("");
+        setWhoActive(whoActive - 1)
+        
     } 
 
     const handleClickRight = () => {
-        setDirection("left")
         if (whoActive === 3)
-            setWhoActive(0)
+            return;
+        else if (whoActive == 2)
+            setDisabled("right")
         else
-            setWhoActive(whoActive + 1)
+            setDisabled("");
+        setWhoActive(whoActive + 1)
     } 
 
     return (
@@ -33,7 +38,7 @@ const LandingPageDevs = () => {
                         <div className="underline"></div>
                     </div>
                     <div className="landing-page-carousel-container">
-                        <button onClick={handleClickLeft}><h1>&lt;</h1></button>
+                        <button onClick={handleClickLeft} className={disabled === "left" ? "disable" : ""}><h1>&lt;</h1></button>
                         <div className="carousel">
                             <div className="developer-box" style={{ '--developer': whoActive}}>
                                 <Developer imageOfThem={duckCharacter} name={"Nick Amancio"} description={"hello huzz"} LinkedIn={"https://www.linkedin.com/in/nicholas-amancio/"} GitHub={"https://github.com/Nickthecan"}/>
@@ -42,7 +47,7 @@ const LandingPageDevs = () => {
                                 <Developer imageOfThem={raccoonCharacter} name={"Alvan Zhuang"} description={"hello huzz"} LinkedIn={"https://www.linkedin.com/in/alvanzhuang/"} GitHub={"https://github.com/AlvanZ"}/>
                             </div>
                         </div>
-                        <button onClick={handleClickRight}><h1>&gt;</h1></button>
+                        <button onClick={handleClickRight} className={disabled === "right" ? "disable" : ""}><h1>&gt;</h1></button>
                     </div>
                 </div>
             </div>
