@@ -1,4 +1,5 @@
 .meet-the-devs-container {
+    --developer: 0;
     position: relative;
     background-color: var(--white);
     width: 100%;
@@ -36,27 +37,26 @@
     background-color: var(--black);
 }
 
-.carousel {
-    flex-grow: 1;
+.landing-page-carousel-container {
     display: flex;
+    flex-grow: 1;
     align-items: center;
-    justify-content: space-between;
-    width: 70%;
+    justify-content: center;
 }
 
-/* .carousel span {
-    transition: transform 0.5s ease-in-out;
-} */
+.carousel {
+    width: 60%;
+    overflow:hidden;
+}
 
 .developer-box {
-    width: 100%;
-    height: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    transform: translateX(calc((var(--developer) * -100%)));
+    transition: all 250ms ease-in-out;
 }
 
-.carousel button {
+.landing-page-carousel-container button {
     border: none;
     height: 60px;
     width: 60px;
@@ -69,12 +69,12 @@
     background: transparent;
 }
 
-.carousel button:hover {
+.landing-page-carousel-container button:hover {
     color: var(--light-green);
     transform: scale(1.1);
 }
 
-.carousel button:active {
+.landing-page-carousel-container button:active {
     transform: scale(0.9);
 }
 
@@ -83,13 +83,13 @@
         font-size: 2.5rem;
     }
 
-    .carousel button {
+    .landing-page-carousel-container button {
         font-size: 2rem;
     }
 }
 
 @media (max-width: 768px) {
-    .carousel {
+    .landing-page-carousel-container {
         width: 90%;
     }
 
@@ -97,17 +97,17 @@
         font-size: 1.5rem;
     }
 
-    .carousel button {
+    .landing-page-carousel-container button {
         font-size: 1.5rem;
     }
 }
 
 @media (max-width: 400px) {
-    .carousel {
+    .landing-page-carousel-container {
         width: 90%;
     }
 
-    .carousel button {
+    .landing-page-carousel-container button {
         font-size: 1rem;
     }
 }

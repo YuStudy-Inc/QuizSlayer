@@ -1,10 +1,7 @@
 .developer-container {
-    width: 90%;
+    min-width: 100%;
+    /* width: 90vw; */
     gap: 7%;
-    display: none;
-}
-
-.developer-container.is-active  {
     display: flex;
 }
 
@@ -81,7 +78,7 @@
 }
 
 @media (max-width: 1000px) {
-    .developer-container.is-active  {
+    .developer-container  {
         display: flex;
         flex-direction: column;
         justify-content: center;
