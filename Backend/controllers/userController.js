@@ -1,5 +1,5 @@
 import schemas from '../schemas/Schemas.js';
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import { validEmail, validPassword } from "../utils/validators.js";
 const User = schemas.User
 const hashPassword = ((password) => {
@@ -62,7 +62,7 @@ export const createUser = async(req, res) => {
 export const loginUser = async(req, res) => {
     try {
         const {username, password} = req.body
-        
+        console.log("Here!")
         const user = await User.findOne( {username} )
         if (!user)
             res.status(404).json({ message: "User not found" })

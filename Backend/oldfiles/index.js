@@ -5,13 +5,14 @@ import questionRoutes from './routes/questionRoutes.js'
 import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
+import serverless from 'serverless-http';
 
 //idk if it's better to put this in the .env file
-const frontEndLocalHost = "http://localhost:5173"
+// const frontEndLocalHost = "http://localhost:5173"
 
+// app.use(cors({ origin: frontEndLocalHost }))
 const app = express()
-
-app.use(cors({ origin: frontEndLocalHost }))
+app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
@@ -33,3 +34,9 @@ const startBackEnd = async () => {
 }
 
 startBackEnd()
+
+
+app.get("/", (req, res) => {
+    res.json({ message: "QuizSlayer Backend is running!" });
+});
+export const handler = serverless(app);
