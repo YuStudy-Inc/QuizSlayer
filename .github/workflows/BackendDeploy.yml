@@ -6,13 +6,13 @@ on:
     paths:
       - Backend/**
 
-strategy:
-  matrix:
-    node-version: [22.x]
-
 jobs:
   deploy_lambda:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [22.x]
 
     steps:
       - uses: actions/checkout@v4
