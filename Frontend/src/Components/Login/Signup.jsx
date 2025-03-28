@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom"
 
+import Email from "./Input/Email";
 import Username from "./Input/Username";
 import Password from "./Input/Password";
 
@@ -24,6 +25,7 @@ const Signup = ({ onToggle }) => {
         <div className="login_signup_container">
             <div className="login_signup_box">
                 <h1 className="welcome_text">HELP WANTED</h1>
+                <Email></Email>
                 <Username></Username>
                 <Password></Password>
                 <Password></Password>
