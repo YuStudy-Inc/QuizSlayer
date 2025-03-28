@@ -7,7 +7,7 @@ const Leaderboard = () => {
                 <div className ="full-leaderboard">
                     <h1 className="title-leaderboard">Top 10</h1>
                     <div className="player-score-list">
-                            <PlayerCard rank="1" score = {0} playerName = "Player" url = "/" />
+                            <PlayerCard rank="1" score = {0} playerName = "ToxicController" url = "/" />
                             <PlayerCard rank="6" score = {0} playerName = "Player" url = "/" />
                             <PlayerCard rank="2" score = {0} playerName = "Player" url = "/" />
                             <PlayerCard rank="7" score = {0} playerName = "Player" url = "/" />
