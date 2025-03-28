@@ -6,22 +6,27 @@ import Developer from "./Developer"
 
 const LandingPageDevs = () => {
     const [whoActive, setWhoActive] = useState(0)
-    const [direction, setDirection] = useState(null)
+    const [disabled, setDisabled] = useState("left")
 
     const handleClickLeft = () => {
-        setDirection("right")
         if (whoActive === 0)
-            setWhoActive(3)
+            return;
+        else if (whoActive === 1)
+            setDisabled("left")
         else
-            setWhoActive(whoActive - 1)
+            setDisabled("");
+        setWhoActive(whoActive - 1)
+        
     } 
 
     const handleClickRight = () => {
-        setDirection("left")
         if (whoActive === 3)
-            setWhoActive(0)
+            return;
+        else if (whoActive == 2)
+            setDisabled("right")
         else
-            setWhoActive(whoActive + 1)
+            setDisabled("");
+        setWhoActive(whoActive + 1)
     } 
 
     return (
@@ -32,16 +37,17 @@ const LandingPageDevs = () => {
                         <h1> Meet The Developers</h1>
                         <div className="underline"></div>
                     </div>
-                    <div className="carousel">
-                        <button onClick={handleClickLeft}><h1>&lt;</h1></button>
-                        {/* I need a sliding animation but idk how to do that. I need it to slide to the left when clicked left and vice versa */}
-                        <div className="developer-box">
-                            <Developer imageOfThem={duckCharacter} name={"Nick Amancio"} description={"hello huzz"} LinkedIn={"https://www.linkedin.com/in/nicholas-amancio/"} GitHub={"https://github.com/Nickthecan"} active={whoActive === 0}/>
-                            <Developer imageOfThem={capyBaraCharacter} name={"Joshua Ho"} description={"hello bruzz"} LinkedIn={"https://www.linkedin.com/in/joshua-h-ho/"} GitHub={"https://github.com/jhhocs"} active={whoActive === 1}/>
-                            <Developer imageOfThem={frogCharacter} name={"Thomas Tejedor"} description={"nah🥀she's🥀got🥀u🥀blushing🥀twin🥀ah🥀hell🥀nah🥀twin🥀u🥀gotta🥀lock🥀up🥀twin🥀bruh🥀this🥀not🥀even🥀u🥀twin🥀on🥀fonem🥀grave🥀bru🥀𝓮𝓾𝓪𝓪𝓱𝓱.😇"} LinkedIn={"https://www.linkedin.com/in/thomas-tejedor-576b952a7/"} GitHub={"https://github.com/ThomasTejedor"} active={whoActive === 2}/>
-                            <Developer imageOfThem={raccoonCharacter} name={"Alvan Zhuang"} description={"hello huzz"} LinkedIn={"https://www.linkedin.com/in/alvanzhuang/"} GitHub={"https://github.com/AlvanZ"} active={whoActive === 3}/>
+                    <div className="landing-page-carousel-container">
+                        <button onClick={handleClickLeft} className={disabled === "left" ? "disable" : ""}><h1>&lt;</h1></button>
+                        <div className="carousel">
+                            <div className="developer-box" style={{ '--developer': whoActive}}>
+                                <Developer imageOfThem={duckCharacter} name={"Nick Amancio"} description={"hello huzz"} LinkedIn={"https://www.linkedin.com/in/nicholas-amancio/"} GitHub={"https://github.com/Nickthecan"}/>
+                                <Developer imageOfThem={capyBaraCharacter} name={"Joshua Ho"} description={"hello bruzz"} LinkedIn={"https://www.linkedin.com/in/joshua-h-ho/"} GitHub={"https://github.com/jhhocs"}/>
+                                <Developer imageOfThem={frogCharacter} name={"Thomas Tejedor"} description={"nah🥀she's🥀got🥀u🥀blushing🥀twin🥀ah🥀hell🥀nah🥀twin🥀u🥀gotta🥀lock🥀up🥀twin🥀bruh🥀this🥀not🥀even🥀u🥀twin🥀on🥀fonem🥀grave🥀bru🥀𝓮𝓾𝓪𝓪𝓱𝓱.😇"} LinkedIn={"https://www.linkedin.com/in/thomas-tejedor-576b952a7/"} GitHub={"https://github.com/ThomasTejedor"}/>
+                                <Developer imageOfThem={raccoonCharacter} name={"Alvan Zhuang"} description={"hello huzz"} LinkedIn={"https://www.linkedin.com/in/alvanzhuang/"} GitHub={"https://github.com/AlvanZ"}/>
+                            </div>
                         </div>
-                        <button onClick={handleClickRight}><h1>&gt;</h1></button>
+                        <button onClick={handleClickRight} className={disabled === "right" ? "disable" : ""}><h1>&gt;</h1></button>
                     </div>
                 </div>
             </div>

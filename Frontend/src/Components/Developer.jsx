@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom"
 import "../Styles/Components/Developer.css"
 
-const Developer = ({ imageOfThem, name, description, LinkedIn, GitHub, active }) => {
+const Developer = ({ imageOfThem, name, description, LinkedIn, GitHub }) => {
     return (
         <>
-            <div className={`developer-container ${active ? "is-active" : ""}`}>
+            <div className={`developer-container`}>
                 <img src={imageOfThem} alt="" />
                 <div className="wise-words-from-this-dev">
                     <h1>{name}</h1>
