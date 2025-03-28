@@ -1,0 +1,49 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: ["master"]
+    paths:
+      - Frontend/**
+
+env:
+    DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
+    DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+
+jobs:
+  
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Login Dockerhub
+      run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+    
+    - name: Build Docker Container
+      uses: docker/build-push-action@v6
+      with:
+        context: ./Frontend
+        tags: thomastejedor/quiz-slayer-env:latest
+        push: true
+        secrets: |
+          "PRIVATE_KEY=${{secrets.PRIVATE_SSL_KEY}}"
+          "SSL_CERT=${{secrets.SSL_CERT}}"
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    
+    - name: Deploy via SSH
+      uses: appleboy/ssh-action@v0.1.10
+      with:
+        host: ${{secrets.HOST_DNS}}
+        username: ${{secrets.USERNAME}}
+        key: ${{secrets.EC2_SSH_KEY}}
+        script: | 
+
+          sudo docker pull thomastejedor/quiz-slayer-env:latest
+          sudo docker rm -f cicd-pipeline-container || true
+          sudo docker run -itd --mount type=bind,src=./security/quizslayer.com_ssl_certificate.cer,dst=/etc/nginx/certs/quizslayer.com_ssl_certificate.cer --mount type=bind,src=./security/_.quizslayer.com_private_key.key,dst=/etc/nginx/certs/_.quizslayer.com_private_key.key -p 80:80 -p 443:443 --name cicd-pipeline-container thomastejedor/quiz-slayer-env
+    
