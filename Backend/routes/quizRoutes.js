@@ -7,5 +7,7 @@ const router = express.Router();
 router.post('/createQuiz', createQuiz)
 router.put('/editQuiz/:id', editQuiz)
 router.delete('/deleteQuiz/:id', deleteQuiz)
-
+router.get('/', (req, res) => {
+    res.send('Users route works!');
+  });
 export default router

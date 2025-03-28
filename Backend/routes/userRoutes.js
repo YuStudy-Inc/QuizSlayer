@@ -8,5 +8,8 @@ router.put('/editUser/:id', editUser);
 router.put('/editUser/password/:id', editUserPassword);
 router.delete('/deleteUser/:id', deleteUser);
 /* router.get('/getFriends/:id', getFriendsFromUserID) */
-
+router.get('/', (req, res) => {
+    res.send('Users route works!');
+  });
+  
 export default router;
