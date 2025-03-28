@@ -44,7 +44,7 @@ export const createQuestion = async(req, res) => {
         await newQuestion.save()
 
         res.status(200).json({
-            "message": "Question Created Successfull",
+            "message": "Question Created Successfully",
             "question": newQuestion
         })
 
