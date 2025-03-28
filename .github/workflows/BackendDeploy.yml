@@ -7,7 +7,7 @@ on:
       - Backend/**
 
 jobs:
-  deploy_lambda:
+  deploy-lambda:
     runs-on: ubuntu-latest
 
     strategy:
@@ -33,6 +33,6 @@ jobs:
           aws-region: us-east-1
       
       - name: Updates node modules
-      - run: cd Backend $$ npm ci
-      - run: zip -r publish.zip ./Backend/*
-      - run: aws lambda update-function-code --function-name=QuizSlayerBackend --zip-file=fileb://publish.zip
+        run: cd Backend $$ npm ci
+        run: zip -r publish.zip ./Backend/*
+        run: aws lambda update-function-code --function-name=QuizSlayerBackend --zip-file=fileb://publish.zip
