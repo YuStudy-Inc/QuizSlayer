@@ -68,7 +68,7 @@ export const editQuestion = async (req,res) => {
 
         console.log(result);
         res.status(200).json({
-            message: "Question updated Successfull",
+            message: "Question updated Successfully",
             object: result
         }) 
 
