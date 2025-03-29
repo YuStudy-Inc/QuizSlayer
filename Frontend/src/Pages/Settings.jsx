@@ -32,7 +32,7 @@ const Settings = () => {
                         </div>
                         <div className="divider-settings"></div>
                         <div className="right-changing-options">
-                            <div className="profile-settings ">
+                            <div className="profile-settings active-settings ">
                                 <div className="profile-picture-edit move">
                                     <img className="pencil-profile-pic" src={pencil} alt="" />
                                     <div className="black-overlay-for-the-profile-pic"></div>

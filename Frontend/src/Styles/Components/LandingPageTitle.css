@@ -39,7 +39,7 @@
 }
 
 .logo-big {
-    height: 512px;
+    height: 50%;
     aspect-ratio: 1/1;
     animation: hover 4s infinite ease-in-out;
 }
@@ -149,7 +149,7 @@
     }
 
     .logo-big {
-        height: 350px;
+        height: 40%;
         aspect-ratio: 1/1;
         top: 20%;
     }
