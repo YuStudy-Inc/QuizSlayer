@@ -20,7 +20,9 @@ const Home = () => {
                 </div>
                 <div className="home-cards-container">
                     <TodoList className="home-todo-list" />
-                    <Podium className="home-podium" />  
+                    <div className="podium-centerer-home">
+                        <Podium className="home-podium" />  
+                    </div>
                     <FriendsActive className="home-friends-active" />
                 </div>
             </div>

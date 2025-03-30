@@ -1,27 +1,21 @@
-
-
-.home-todo-list {
-    order: 1;
-}
-.home-podium {
-    order: 2;
-}
-.home-friends-active {
-    order: 3;
-}
-
-.home-cards-container {
-    margin: 0;
+.home-container {
+    width: 100%;
     height: 100vh;
-    /* background-color: var(--black); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-image: url("../../assets/Backgrounds/backgroundFight.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
+}
+
+.home-cards-container {
+    height: 100vh;
+    width: 90%; 
     display: flex;
     justify-content: space-around;
-    gap: 10%;
     align-items: center;
 }
 
@@ -54,6 +48,16 @@
     aspect-ratio: 1/1;
     border-radius: 50%;
     border: 2px solid var(--black);
+}
+
+.podium-centerer-home {
+    height: 100vh;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+    margin-bottom: 10%;
 }
 
 @media only screen and (max-width: 1200px) {

@@ -39,7 +39,7 @@ const Friends = () => {
                     </div>
                     <div className="right-side-amigos">
                         <div className="podium-plus-info">
-                            <div className="podi">
+                            <div className="podium-centerer-friends">
                                 <Podium />
                             </div>
                             <div className="info">

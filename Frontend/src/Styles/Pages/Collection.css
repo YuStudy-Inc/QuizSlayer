@@ -1,12 +1,16 @@
-.collection_page {
-    background-color: var(--black);
+.collection-page {
     height: 100vh;
     width: 100%;
     display: flex;
     align-items: end;
+    background-image: url("../../assets/Backgrounds/backgroundCollectionQuizzes.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
 }
 
-.collection_page_outer_container {
+.collection-page-outer-container {
     position: relative;
     height: 85%;
     width: 90%;
@@ -16,14 +20,14 @@
     justify-content: space-between;
     gap: 10vw;
 }
-.collection_page_left_container {
+.collection-page-left-container {
     flex-basis: 100%;
     display: flex;
-    align-items: center;
-    justify-content: center;
     flex-direction: column;
+    align-items: center;
+    justify-content: start;
     height: 95%;
-    gap: 40%;
+    gap: 10%;
     /* border: 1px solid var(--light-green); */
 }
 
@@ -37,7 +41,15 @@
     color: var(--white);
 }
 
-.collection_page_right_container {
+.podium-centerer-collection {
+    width: 70%;
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: start
+}
+
+.collection-page-right-container {
     flex-basis: 75%;
     display: flex;
     flex-direction: column;
@@ -52,36 +64,36 @@
     gap: 1rem;
 }
 
-.collection_page_select_category_header {
+.collection-page-select-category-header {
     color: var(--white);
     font-size: 2rem;
     padding: 1rem 0rem;
 }
 
-.collection_page_select_container {
+.collection-page-select-container {
     display: flex;
     flex-direction: row;
     font-size: 1.5rem;
     width: 100%;
 }
 
-.collection_page_select_arrow {
+.collection-page-select-arrow {
     color: var(--light-green);
     transition: 0.2s;
     font-size: 2rem;
 }
 
-.collection_page_select_arrow:hover {
+.collection-page-select-arrow:hover {
     cursor: pointer;
     transform: scale(1.2);
 }
 
-.collection_page_select_arrow.right {
+.collection-page-select-arrow.right {
     justify-self: right;
     text-align: right;
 }
 
-.collection_page_select_text {
+.collection-page-select-text {
     color: var(--white);
     text-align: center;
     flex-basis: 90%;
