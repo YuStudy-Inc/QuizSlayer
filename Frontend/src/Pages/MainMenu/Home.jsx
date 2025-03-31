@@ -21,7 +21,7 @@ const Home = () => {
                 <div className="home-cards-container">
                     <TodoList className="home-todo-list" />
                     <div className="podium-centerer-home">
-                        <Podium className="home-podium" />  
+                        <Podium className="home-podium" />
                     </div>
                     <FriendsActive className="home-friends-active" />
                 </div>
