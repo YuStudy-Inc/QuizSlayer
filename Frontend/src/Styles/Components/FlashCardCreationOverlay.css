@@ -8,13 +8,14 @@
     align-items: center;
     justify-content: center;
     position: absolute;
+    z-index: 1001;
 }
 
 .nvm {
 	position: absolute;
 	width: 4rem;
 	aspect-ratio: 1/1;
-	left: 40px;
+	left: 35px;
 	top: 35px;
 	border: none;
     border-radius: 10px;
@@ -105,8 +106,48 @@
     color: var(--white);
 }
 
+@media only screen and (max-width: 1350px) {
+    .title-overlay h1 {
+        font-size: 2.5rem;
+    }
 
+    .create-that-flashcard-button h1 {
+        font-size: 1rem;
+    }
+}
 
+@media only screen and (max-width: 768px) {
+    .nvm {
+        width: 48px !important;
+        height: 48px;
+    }
+
+    .title-overlay h1 {
+        font-size: 1.5rem;
+    }
+
+    .flashcard-itself {
+        flex-direction: column;
+        justify-content: center;
+        gap: 2rem;
+    }
+
+    .question-flashcard-overlay input {
+        font-size: 1rem;
+    }
+    .answer-flashcard-overlay input {
+        font-size: 1rem;
+    }
+
+    .create-that-flashcard-button {
+        width: 12rem;
+        height: 3rem;
+    }
+
+    .create-that-flashcard-button h1 {
+        font-size: 0.8rem;
+    }
+}
 
 
 

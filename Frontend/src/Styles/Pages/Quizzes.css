@@ -123,3 +123,12 @@
     aspect-ratio: 1/1;
 }
 
+@media only screen and (max-width: 768px) {
+    .title-quizzes {
+        font-size: 2.5rem;
+    }  
+
+    .quiz-progress-titles {
+        font-size: 2rem;
+    }
+}
