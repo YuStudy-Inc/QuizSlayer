@@ -8,6 +8,7 @@
     align-items: center;
     justify-content: center;
     position: absolute;
+    z-index: 1000;
 }
 
 .nvm {
@@ -94,5 +95,49 @@
     aspect-ratio: 1/1;
 }
 
+@media only screen and (max-width: 1000px) {
+    .find-a-friend-title h1 {
+        font-size: 1.5rem;
+    }
+}
 
+
+@media only screen and (max-width: 768px) {
+    .find-a-friend-container {
+        width: 80%;
+    }
+
+    .type-in-username {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .find-a-friend-title h1 {
+        font-size: 1.2rem;
+    }
+
+    .nvm {
+        top: 20px;
+        left: 20px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .find-a-friend-title h1 {
+        font-size: 1rem;
+    }
+
+    .type-in-username {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .type-in-username button {
+        width: 30%;
+    }    
+}
 
