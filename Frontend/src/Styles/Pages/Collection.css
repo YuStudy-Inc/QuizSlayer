@@ -1,6 +1,6 @@
 .collection-page {
-    height: 100vh;
     width: 100%;
+    height: 100vh;
     display: flex;
     align-items: end;
     background-image: url("../../assets/Backgrounds/backgroundCollectionQuizzes.png");
@@ -46,7 +46,7 @@
     height: 70%;
     display: flex;
     justify-content: center;
-    align-items: start
+    align-items: end;
 }
 
 .collection-page-right-container {
@@ -72,9 +72,28 @@
 
 .collection-page-select-container {
     display: flex;
-    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     font-size: 1.5rem;
     width: 100%;
+    gap: 5rem;
+}
+
+.collection-page-select-container img {
+    width: 6rem;
+    height: 6rem;
+}
+
+.character-image {
+    transform: scale(1.5);
+}
+
+.hat-image {
+    transform: scale(3);
+}
+
+.weapon-image {
+    transform: scale(2);
 }
 
 .collection-page-select-arrow {
@@ -135,4 +154,59 @@
 .gatcha img {
     width: 75%;
     aspect-ratio: 1/1;
+}
+
+@media only screen and (max-width: 1200px) {
+    .collection-title h1 {
+        font-size: 2.5rem;
+    }
+
+    .collection-page-select-category-header {
+        font-size: 1.5rem;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .collection-page-outer-container {
+        flex-direction: column;
+        gap: 0;
+        align-items: center;
+        justify-content: start;
+    }
+
+    .podium-centerer-collection {
+        width: 30rem;
+    }
+
+    .collection-page-right-container {
+        flex-direction: row;
+        gap: 0;
+        justify-content: space-between;
+        max-width: 300px;
+        overflow-x: auto;
+    }
+
+    .collection-page-right-container::-webkit-scrollbar {
+        height: 5px;
+    }
+
+    .carousels {
+        transform: scale(0.7);
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .collection-title h1 {
+        font-size: 2rem;
+    }
+
+    .podium-centerer-collection {
+        width: 20rem;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .podium-centerer-collection {
+        width: 15rem;
+    }
 }

@@ -1,5 +1,6 @@
 import Podium from "../../Components/Podium"
 import lootBox from "../../assets/Collection/lootbox.png"
+import {duckCharacter, bucketHat, playfulCloud} from "../../assets/Pictures.js"
 
 import "../../Styles/Pages/Collection.css"
 
@@ -21,7 +22,7 @@ const Collection = () => {
                             <h2 className="collection-page-select-category-header">character</h2>
                             <div className="collection-page-select-container">
                                 <p className="collection-page-select-arrow">	&#60; </p>
-                                <p className="collection-page-select-text">character 1</p>
+                                <img className="character-image" src={duckCharacter} alt="" />
                                 <p className="collection-page-select-arrow right"> &#62; </p>
                             </div>
                         </div>
@@ -29,7 +30,7 @@ const Collection = () => {
                             <h2 className="collection-page-select-category-header">hat</h2>
                             <div className="collection-page-select-container">
                                 <p className="collection-page-select-arrow">	&#60; </p>
-                                <p className="collection-page-select-text">hat 1</p>
+                                <img className="hat-image" src={bucketHat} alt="" />
                                 <p className="collection-page-select-arrow right"> &#62; </p>
                             </div>
                         </div>
@@ -37,7 +38,7 @@ const Collection = () => {
                             <h2 className="collection-page-select-category-header">weapon</h2>
                             <div className="collection-page-select-container">
                                 <p className="collection-page-select-arrow">	&#60; </p>
-                                <p className="collection-page-select-text">weapon 1</p>
+                                <img className="weapon-image" src={playfulCloud} alt="" />
                                 <p className="collection-page-select-arrow right"> &#62; </p>
                             </div>
                         </div>

@@ -125,6 +125,7 @@
 .shown {
     opacity: 1;
     visibility: visible;
+    z-index: 100;
 }
 
 @media only screen and (max-width: 1200px) {
