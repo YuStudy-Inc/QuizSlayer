@@ -44,3 +44,60 @@
 .player-score p{
     font-size: 1.5rem;
 }
+
+@media only screen and (max-width: 1200px) {
+    .player-name {
+        font-size: 1.2rem;
+    }
+
+    .player-score p {
+        font-size: 1.2rem;
+    }
+}
+
+@media only screen and (max-width: 1000px) and (max-height: 800px){
+    .player-card-container {
+        height: 5rem;
+    }
+
+    .player-img {
+        height: 2=3rem;
+    }
+
+    .player-name {
+        font-size: 2rem;
+    }
+
+    .player-score p {
+        font-size: 2rem;
+    }
+}
+
+@media only screen and (max-height: 800px) {
+    .player-card-container {
+        height: 3.5rem;
+    }
+
+    .player-img {
+        height: 2rem;
+    }
+
+    .player-name {
+        font-size: 1.3rem;
+    }
+
+    .player-score p {
+        font-size: 1.3rem;
+    }
+}
+
+@media only screen and (max-width: 1200px) and (max-height: 800px) {
+    .player-name {
+        font-size: 0.8rem;
+    }
+
+    .player-score p {
+        font-size: 0.8rem;
+    }
+}
+
