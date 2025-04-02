@@ -1,27 +1,21 @@
-
-
-.home-todo-list {
-    order: 1;
-}
-.home-podium {
-    order: 2;
-}
-.home-friends-active {
-    order: 3;
-}
-
-.home-cards-container {
-    margin: 0;
+.home-container {
+    width: 100%;
     height: 100vh;
-    /* background-color: var(--black); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-image: url("../../assets/Backgrounds/backgroundFight.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
+}
+
+.home-cards-container {
+    height: 100vh;
+    width: 90%; 
     display: flex;
     justify-content: space-around;
-    gap: 10%;
     align-items: center;
 }
 
@@ -56,19 +50,86 @@
     border: 2px solid var(--black);
 }
 
+.podium-centerer-home {
+    height: 100vh;
+    width: 30rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+    margin-bottom: 10%;
+}
+
+.info-on-the-normal {
+    height: 90%;
+    display: flex;
+}
+
+.toggle-spread {
+    background-color: var(--white);
+    border: none;
+    border-radius: 10px;
+    width: 3rem;
+    height: 11rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease-in-out;
+    -webkit-box-shadow: 0px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 10px 5px 0px rgba(0,0,0,0.75);
+    cursor: pointer;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+
+}
+
+.toggle-spread:hover {
+    background-color: var(--light-green);
+    transform: scale(1.1);
+}
+
+.spread-out-container {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.spread-out {
+    background: var(--white);
+    width: calc(60% - 2rem);
+    height: calc(60% - 2rem);
+    padding: 1rem;
+}
+
+.spread-out h1 {
+    height: 10%;
+}
+
+.info-on-the-spread-out {
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+}
+
+.none {
+    justify-content: center;
+    align-items: center;
+}
+
+.shown {
+    opacity: 1;
+    visibility: visible;
+    z-index: 100;
+}
+
 @media only screen and (max-width: 1200px) {
-    .home-cards-container {
-        flex-direction: column; 
-        align-items: center;
-        gap: 2rem;
-    }
-    .home-todo-list {
-        order: 2 !important;
-    }
-    .home-podium {
-        order: -1 !important;
-    }
-    .home-friends-active {
-        order: 3 !important;
+    .profile-button-to-access-settings {
+        height: 5%;
     }
 }

@@ -318,4 +318,204 @@
     position: relative;
 }
 
+.left-options-mobile {
+    opacity: 0;
+    visibility: 0;
+    position: absolute;
+}
+
+.settings-button-nav {
+    color: var(--white);
+    border: none;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
+    cursor: pointer;
+    background: transparent;
+    opacity: 0;
+    position: absolute;
+    visibility: hidden;
+}
+
+@media only screen and (max-width: 1200px) {
+    .settings-title h1 {
+        font-size: 2.5rem;
+    }
+
+    .left-options h1 {
+        font-size: 1.5rem;
+    }
+
+    .profile-picture-edit {
+        height: 12%;
+    }
+
+    .profile-settings h1 {
+        font-size: 1.5rem;
+    }
+
+    .password-settings h1 {
+        font-size: 1.2rem;
+    }
+
+    .profile-settings input {
+        font-size: 1.5rem;
+    }
+
+    .password-settings input {
+        font-size: 1.2rem;
+    }
+
+    .right-changing-options textarea {
+        font-size: 0.8rem;
+    }
+
+    .submit-logout-account,
+    .submit-delete-account {
+        width: 11rem;
+        height: 3.5rem;
+        font-size: 1rem;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .settings-title h1 {
+        font-size: 2rem;
+    }
+
+    .left-options h1 {
+        font-size: 1.2rem;
+    }
+
+    .profile-picture-edit {
+        height: 10%;
+    }
+
+    .profile-settings h1 {
+        font-size: 1.2rem;
+    }
+
+    .password-settings h1 {
+        font-size: 1rem;
+    }
+
+    .profile-settings input {
+        font-size: 1.2rem;
+    }
+
+    .password-settings input {
+        font-size: 
+        1rem;
+    }
+
+    .right-changing-options textarea {
+        font-size: 0.6rem;
+    }
+
+    .submit-profile-edit,
+    .submit-password-edit {
+        width: 8.5rem;
+        height: 2.5rem;
+        font-size: 0.7rem;
+    }
+
+    .submit-logout-account,
+    .submit-delete-account {
+        width: 9rem;
+        height: 3rem;
+        font-size: 0.8rem;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .container-options {
+        height: 80vh;
+    }
+    .settings-title h1 {
+        font-size: 2.5rem;   
+    }
+
+    .settings-contents {
+        flex-direction: column;
+        width: 90%;
+        gap: 1rem;
+    }
+
+    .divider-settings,
+    .left-options {
+        opacity: 0;
+        visibility: hidden;
+        position: absolute;
+        width: 0;
+        height: 0;
+    }
+
+    .left-options-mobile,
+    .settings-button-nav {
+        opacity: 1;
+        visibility: visible;
+        position: relative;
+    }
+
+    .left-options-mobile {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .left-options-mobile h1 {
+        color: var(--white);
+    }
+
+    .hidden {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .right-changing-options {
+        width: 100%;
+    }
+
+    .profile-picture-edit {
+        height: 15%;
+    }
+
+    .profile-settings h1 {
+        font-size: 1.5rem;
+    }
+
+    .password-settings h1 {
+        font-size: 1.5rem;
+    }
+
+    .profile-settings input {
+        font-size: 1.5rem;
+    }
+
+    .password-settings input {
+        font-size: 
+        1.5rem;
+    }
+
+    .right-changing-options textarea {
+        font-size: 1.2rem;
+    }
+
+    .submit-profile-edit,
+    .submit-password-edit {
+        width: 10rem;
+        height: 3rem;
+        font-size: 1rem;
+    }
+
+    .submit-logout-account,
+    .submit-delete-account {
+        width: 14rem;
+        height: 4rem;
+        font-size: 1.2rem;
+    }
+}
+
+
+
 

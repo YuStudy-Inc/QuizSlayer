@@ -19,7 +19,7 @@ import frogCharacter from "../assets/Characters/frogCharacter.png";
 import raccoonCharacter from "../assets/Characters/raccoonCharacter.png";
 import capyBaraCharacter from "../assets/Characters/capybaraCharacter.png";
 import crowCharacter from "../assets/Characters/crowCharacter.png";
-import podium from "../assets/Characters/podium.jpg";
+import podium from "../assets/Characters/podium.png";
 
 import fryingPan from "../assets/Weapons/fryingPan.png";
 import ironSword from "../assets/Weapons/ironSword.png";

@@ -1,11 +1,18 @@
 import "../Styles/Components/Podium.css"
-import { podium } from "../assets/Pictures"
+import { podium, duckCharacter, bucketHat, playfulCloud, ironSword, redBalloon, someonesGun,  fryingPan} from "../assets/Pictures"
 
-const Podium = ({ className = "" }) => {
+const Podium = () => {
     return(
         /* I guess Ill be drawing the Podium, it will look cooler */
         /* place holder for now */
-        <img className={`the-podium ${className}`} src={podium} alt="" />
+        <>
+            <div className="the-podium">
+                <img className="weapon-on-podium" src={playfulCloud} alt="" />
+                <img className="hat-on-podium" src={bucketHat} alt="" />
+                <img className="character-on-podium" src={duckCharacter} alt="" />
+                <img className="podium" src={podium} alt="" />
+            </div>
+        </>
     )
 }
 

@@ -1,11 +1,29 @@
 import "../Styles/Pages/Settings.css"
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import maomao from "../assets/Friends/maomao.jpg"
 import pencil from "../assets/Quizzes/pencil.png"
 
 const Settings = () => {
-
+    const settingsOptions = ["Profile", "Password", "Account"]
+    const [whichSettings, setWhichSettings] = useState(0)
     const navigate = useNavigate()
+
+    const handleLeftSettings = () => {
+        const optionRightNow = whichSettings
+        if (optionRightNow !== 0) {
+            setWhichSettings(optionRightNow - 1)
+            toggleActive(`${settingsOptions[optionRightNow - 1].toLowerCase()}-settings`)
+        }
+    }
+
+    const handleRightSettings = () => {
+        const optionRightNow = whichSettings
+        if (optionRightNow !== 2) {
+            setWhichSettings(optionRightNow + 1)
+            toggleActive(`${settingsOptions[optionRightNow + 1].toLowerCase()}-settings`)
+        }
+    }
 
     const toggleActive = (whichSettings) => {
         document.querySelector(".active-settings")?.classList.toggle("active-settings")
@@ -30,9 +48,14 @@ const Settings = () => {
                             <button onClick={() => toggleActive("password-settings")}><h1>Password</h1></button>
                             <button onClick={() => toggleActive("account-settings")}><h1>Account</h1></button>
                         </div>
+                        <div className="left-options-mobile">
+                            <button onClick={handleLeftSettings} className={`settings-button-nav ${whichSettings === 0 ? "hidden": ""}`}><h1>&lt;</h1></button>
+                            <h1>{settingsOptions[whichSettings]}</h1>
+                            <button onClick={handleRightSettings} className={`settings-button-nav ${whichSettings === 2 ? "hidden": ""}`}><h1>&gt;</h1></button>
+                        </div>
                         <div className="divider-settings"></div>
                         <div className="right-changing-options">
-                            <div className="profile-settings ">
+                            <div className="profile-settings active-settings ">
                                 <div className="profile-picture-edit move">
                                     <img className="pencil-profile-pic" src={pencil} alt="" />
                                     <div className="black-overlay-for-the-profile-pic"></div>

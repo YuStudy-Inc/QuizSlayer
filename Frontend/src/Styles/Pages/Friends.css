@@ -52,8 +52,19 @@
     border-radius: 5px;
 }
 
+.right-side-amigos-for-mobile {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+}
+
+.podium-plus-info-for-mobile {
+    display: flex;
+    align-items: center;
+}
+
 .right-side-amigos {
-    width: 40%;
+    width: 50%;
     height: 100%;
     display: flex;
 }
@@ -64,17 +75,20 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 3rem;
+    align-items: center;
+    gap: 1rem;
 }
 
-.podi {
-    width: 100%;
+.podium-centerer-friends {
+    width: 80%;
+    height: 50%;
     display: flex;
     justify-content: center;
+    align-items: end;
 }
 
 .info {
-    width: 100%;
+    width: calc(100% - 2rem);
     height: 10rem;
     background-color: var(--white);
     border-radius: 20px;
@@ -116,4 +130,68 @@
 .add-a-friend-button img {
     width: 50%;
     aspect-ratio: 1/1;
+}
+
+@media only screen and (max-width: 1000px) {
+    .right-side-amigos {
+        opacity: 0;
+        visibility: hidden;
+        position: absolute;
+        height: 10%;
+    }
+
+    .right-side-amigos-for-mobile {
+        opacity: 1;
+        visibility: visible;
+        position: relative;
+    }
+
+    .left-side-amigos {
+        width: 90%;
+    } 
+
+    .title-for-friends h1 {
+        font-size: 2rem;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .podium-plus-info-for-mobile {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .info h1 {
+        font-size: 1.5rem;
+    }
+
+    .info p {
+        font-size: 0.8rem;
+    }
+}
+
+@media only screen and (max-height: 800px) {
+    .podium-centerer-friends {
+        transform: scale(0.8);
+    }
+}
+
+@media only screen and (max-width: 768px) and (max-height: 800px) {
+    .right-side-amigos-for-mobile {
+        height: 50%;
+    }
+
+    .podium-plus-info-for-mobile {
+        height: 120%;
+        flex-direction: row;
+    }
+}
+
+@media only screen and (max-width: 400px) and (max-height: 800px) {
+    .podium-plus-info-for-mobile {
+        transform: scale(0.8);
+        flex-direction: column;
+    }
 }

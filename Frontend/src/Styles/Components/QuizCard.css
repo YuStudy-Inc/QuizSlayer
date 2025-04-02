@@ -41,3 +41,20 @@
     aspect-ratio: 1/1;
 }
 
+@media only screen and (max-width: 768px) {
+    .quiz-card-container {
+        width: 60%;
+    }
+
+    .quiz-text {
+        font-size: 1rem;
+    }
+
+    .quiz-stuff button {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+
+

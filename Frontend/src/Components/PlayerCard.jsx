@@ -1,18 +1,21 @@
 import "../Styles/Components/PlayerCard.css"
 import playerIcon from "../assets/Characters/frogCharacter.png"
 import { useNavigate } from "react-router-dom"; 
-const PlayerCard = ({rank, score, playerName, url }) => {
+const PlayerCard = ({rank, score, playerName }) => {
 
-    const handleClick = () => {
+    //nah we don't need this
+    /* const handleClick = () => {
         window.location.href = url; // Redirects to external links
-    };
+    }; */
 
     //Player img is just temporary
     return (
         <>
-            <button className="player-card-container" onClick = {handleClick}>
-                <span className = "player-info">
+            <div className="player-card-container">
+                <span className="ranking">
                     <h1>{rank}</h1>
+                </span>
+                <span className="player-info">
                     <img className="player-img" src={playerIcon} alt="" /> 
                     <span className="player-name"> 
                         <p>{playerName}</p>
@@ -21,7 +24,23 @@ const PlayerCard = ({rank, score, playerName, url }) => {
                 <span className="player-score"> 
                     <p> Monsters Slain {score} </p>
                 </span>
-            </button>
+            </div>
+            <div className="player-card-container-mobile">
+                <span className="ranking">
+                    <h1>{rank}</h1>
+                </span>
+                <span className="player-info">
+                    <img className="player-img" src={playerIcon} alt="" /> 
+                </span>
+                <span className="player-text-mobile">
+                    <span className="player-name-mobile"> 
+                        <p>{playerName}</p>
+                    </span>
+                    <span className="player-score-mobile"> 
+                        <p> Monsters Slain {score} </p>
+                    </span>
+                </span>
+            </div>
         </>
     )
 }
