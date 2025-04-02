@@ -1,7 +1,7 @@
 .leaderboard-container {
     background-color: var(--black);
     width: 100%;
-    height: 100vh;
+    height: 100dvh;
     display: flex;
     align-items: end;
     justify-content: center;
@@ -26,12 +26,38 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     flex-direction: column;
-    gap: 2rem;
+    row-gap: 2rem;
+    column-gap: 3rem;
+    max-height: 90%;
+    overflow-y: auto;
+    margin-bottom: 1rem;
+    padding-right: 10px;
 }
 
 @media only screen and (max-width: 1000px) {
+    .full-leaderboard {
+        width: 90%;
+        height: 90%;
+        gap: 1rem; 
+    }
+
+    .title-leaderboard {
+        font-size: 2.5rem;
+    }
+
+    .player-score-list {
+        width: 100%;
+        gap: 1rem;
+    }
+
     .player-score-list {
         display: flex;
         flex-direction: column;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .player-score-list {
+        gap: 1.7rem;
     }
 }

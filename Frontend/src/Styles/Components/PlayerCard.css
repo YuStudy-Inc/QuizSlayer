@@ -1,10 +1,10 @@
 .player-card-container {
-    width: 100%;
+    width: calc(100% - 2rem);
     background-color: var(--white);
     height: 5rem;
     border-radius: 20px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 50px 1fr 1fr;
     justify-items: start;
     align-content: center;
     padding: 0 1rem;
@@ -42,7 +42,37 @@
 }
 
 .player-score p{
-    font-size: 1.5rem;
+    font-size: 1rem;
+}
+
+.player-card-container-mobile {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    width: 0%;
+    background-color: var(--white);
+    height: 4rem;
+    border-radius: 20px;
+    display: grid;
+    grid-template-columns: 50px 50px 1fr;
+    justify-items: start;
+    align-content: center;
+    padding: 0 1rem;
+    cursor: pointer;
+}
+
+.player-text-mobile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.player-name-mobile {
+    font-size: 1rem;
+}
+
+.player-score-mobile {
+    font-size: 0.8rem;
 }
 
 @media only screen and (max-width: 1200px) {
@@ -51,17 +81,38 @@
     }
 
     .player-score p {
-        font-size: 1.2rem;
+        font-size: 0.8rem;
     }
 }
 
-@media only screen and (max-width: 1000px) and (max-height: 800px){
+@media only screen and (max-width: 500px) {
     .player-card-container {
-        height: 5rem;
+        opacity: 0;
+        visibility: hidden;
+        position: absolute;
+        width: 0%;
+    }
+
+    .player-card-container * {
+        position: absolute;
+        font-size: 0;
+        height: 0;
+        width: 0;
+    }
+
+    .player-card-container-mobile {
+        opacity: 1;
+        visibility: visible;
+        position: relative;
+        width: calc(100% - 2rem);
+    }
+
+    .ranking h1 {
+        font-size: 1rem;
     }
 
     .player-img {
-        height: 2=3rem;
+        height: 3rem;
     }
 
     .player-name {
@@ -72,6 +123,7 @@
         font-size: 2rem;
     }
 }
+
 
 @media only screen and (max-height: 800px) {
     .player-card-container {
@@ -87,17 +139,25 @@
     }
 
     .player-score p {
-        font-size: 1.3rem;
+        font-size: 0.9rem;
     }
 }
 
 @media only screen and (max-width: 1200px) and (max-height: 800px) {
+    .ranking h1 {
+        font-size: 1.5rem;
+    }
+
     .player-name {
         font-size: 0.8rem;
     }
 
     .player-score p {
-        font-size: 0.8rem;
+        font-size: 0.6rem;
     }
 }
 
+
+@media only screen and (max-width: 1000px) and (max-height: 800px) {
+    
+}
