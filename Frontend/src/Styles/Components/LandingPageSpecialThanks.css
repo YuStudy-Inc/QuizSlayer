@@ -58,7 +58,7 @@
     }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 420px) {
     .thank-you {
         gap: 0;
         width: 80%;

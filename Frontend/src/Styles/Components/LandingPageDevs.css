@@ -109,7 +109,7 @@
     }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 420px) {
     .landing-page-carousel-container {
         width: 90%;
     }

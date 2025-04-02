@@ -144,7 +144,7 @@
     }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 420px) {
     .developer-container img {
         width: 100%;
     }

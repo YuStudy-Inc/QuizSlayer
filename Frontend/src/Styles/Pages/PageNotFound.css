@@ -40,7 +40,7 @@
     }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 420px) {
     .Page-Not-Found-Container img {
         height: 25%;
     }

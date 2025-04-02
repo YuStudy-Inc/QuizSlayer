@@ -76,7 +76,7 @@
     }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 420px) {
     .special-thanks-card-container {
         width: 50%;
     }

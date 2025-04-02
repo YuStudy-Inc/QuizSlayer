@@ -162,7 +162,7 @@
     }
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 420px) {
     .info h1 {
         font-size: 1.5rem;
     }
@@ -189,7 +189,7 @@
     }
 }
 
-@media only screen and (max-width: 400px) and (max-height: 800px) {
+@media only screen and (max-width: 420px) and (max-height: 800px) {
     .podium-plus-info-for-mobile {
         transform: scale(0.8);
         flex-direction: column;
