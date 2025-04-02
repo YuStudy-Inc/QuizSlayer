@@ -318,4 +318,95 @@
     position: relative;
 }
 
+@media only screen and (max-width: 1200px) {
+    .settings-title h1 {
+        font-size: 2.5rem;
+    }
+
+    .left-options h1 {
+        font-size: 1.5rem;
+    }
+
+    .profile-picture-edit {
+        height: 12%;
+    }
+
+    .profile-settings h1 {
+        font-size: 1.5rem;
+    }
+
+    .password-settings h1 {
+        font-size: 1.2rem;
+    }
+
+    .profile-settings input {
+        font-size: 1.5rem;
+    }
+
+    .password-settings input {
+        font-size: 1.2rem;
+    }
+
+    .right-changing-options textarea {
+        font-size: 0.8rem;
+    }
+
+    .submit-logout-account,
+    .submit-delete-account {
+        width: 11rem;
+        height: 3.5rem;
+        font-size: 1rem;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .settings-title h1 {
+        font-size: 2rem;
+    }
+
+    .left-options h1 {
+        font-size: 1.2rem;
+    }
+
+    .profile-picture-edit {
+        height: 10%;
+    }
+
+    .profile-settings h1 {
+        font-size: 1.2rem;
+    }
+
+    .password-settings h1 {
+        font-size: 1rem;
+    }
+
+    .profile-settings input {
+        font-size: 1.2rem;
+    }
+
+    .password-settings input {
+        font-size: 1rem;
+    }
+
+    .right-changing-options textarea {
+        font-size: 0.6rem;
+    }
+
+    .submit-profile-edit,
+    .submit-password-edit {
+        width: 8.5rem;
+        height: 2.5rem;
+        font-size: 0.7rem;
+    }
+
+    .submit-logout-account,
+    .submit-delete-account {
+        width: 9rem;
+        height: 3rem;
+        font-size: 0.8rem;
+    }
+}
+
+
+
 
