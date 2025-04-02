@@ -1,5 +1,9 @@
 .login-signup-container {
-    background-color: #9D7D48;
+    background-image: url("../../assets/Backgrounds/backgroundLogin.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: left;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,11 +13,19 @@
     min-width: 100%;
 }
 
+.if-sign-up {
+    background-position: right !important;
+}
+
 .login-signup-box {
     position: relative;
-    background-color: #E8EEEC;
-    width: 70vw;
-    height: 70vh;
+    background-image: url("../../assets/Backgrounds/loginPaper.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    width: 75vw;
+    height: 90vh;
     display: flex;
     align-items: center;
     justify-content: center;

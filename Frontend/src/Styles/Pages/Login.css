@@ -1,22 +1,18 @@
 .login_page {
     /* 0 = login, 1 = signup  */
+
     --signup: 0; 
     position: absolute;
     width: 100%;
     height: 100%;
     /* background: transparent; */
-    background-color: #9D7D48;
+    background-image: url("../../assets/Backgrounds/backgroundLogin.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: right;
     overflow: hidden;
 }
-
-/* .login_signup_container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    min-height: 100vh;
-    overflow:hidden;
-} */
 
 .login-signup-carousel-container {
     display: flex;
@@ -25,5 +21,4 @@
     overflow: visible;
     transform: translateX(calc((var(--signup) * -100%)));
     transition: all 250ms ease-in-out;
-    background-color: #9D7D48;
 }
