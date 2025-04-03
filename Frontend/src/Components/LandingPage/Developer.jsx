@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import "../Styles/Components/Developer.css"
+import "../../Styles/Components/LandingPage/Developer.css"
 
 const Developer = ({ imageOfThem, name, description, LinkedIn, GitHub }) => {
     return (

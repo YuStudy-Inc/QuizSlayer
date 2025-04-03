@@ -1,4 +1,4 @@
-import "../Styles/Components/ResultsCard.css"
+import "../../Styles/Components/Results/ResultsCard.css"
 
 const ResultCard = ({ didWin, coins, monsters, xp, lvl }) => {
     return (

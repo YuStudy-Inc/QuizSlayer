@@ -1,5 +1,5 @@
-import "../Styles/Components/AddAFriend.css"
-import plus from "../assets/Quizzes/plus.png"
+import "../../Styles/Components/Friends/AddAFriend.css"
+import plus from "../../assets/Quizzes/plus.png"
 
 const AddAFriend = ({ close }) => {
 

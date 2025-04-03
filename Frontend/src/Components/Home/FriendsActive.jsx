@@ -1,4 +1,4 @@
-import "../Styles/Components/FriendsActive.css"
+import "../../Styles/Components/Home/FriendsActive.css"
 import { useState } from "react"
 
 const FriendsActive = ({ className= "", friends }) => {

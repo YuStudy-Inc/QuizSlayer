@@ -1,4 +1,4 @@
-import "../Styles/Components/FriendCard.css"
+import "../../Styles/Components/Friends/FriendCard.css"
 
 const FriendCard = ({ friendPfp, friendName, friendLevel  }) => {
     return (

@@ -1,4 +1,5 @@
-import "../Styles/Components/Footer.css"
+import "../../Styles/Components/LandingPage/Footer.css"
+
 const Footer = () => {
     return (
         <>

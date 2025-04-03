@@ -1,4 +1,4 @@
-import "../Styles/Components/LandingPageAboutUs.css"
+import "../../Styles/Components/LandingPage/LandingPageAboutUs.css"
 import { chiikawaBackground } from "../../assets/Pictures.js"
 
 const LandingPageAboutUs = () => {

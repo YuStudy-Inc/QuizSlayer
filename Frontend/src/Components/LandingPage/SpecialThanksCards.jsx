@@ -1,4 +1,4 @@
-import "../Styles/Components/SpecialThanksCards.css"
+import "../../Styles/Components/LandingPage/SpecialThanksCards.css"
 
 const SpecialThanksCards = ({ image, name, role, linkForSocial }) => {
     return (

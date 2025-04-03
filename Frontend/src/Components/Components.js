@@ -8,14 +8,16 @@ import LandingPageSpecialThanks from "./LandingPage/LandingPageSpecialThanks";
 import Navbar from "./Navbar";
 import Podium from "./Podium";
 import TodoList from "./Home/TodoList";
-import Login from "./Login/Login"
-import Signup from "./Login/Signup"
+import Login from "./LoginSignup/Login"
+import Signup from "./LoginSignup/Signup"
 import FriendCard from "./Friends/FriendCard";
 import FlashCard from "./Quizzes/FlashCard"
 import FlashCardCreationOverlay from "./Quizzes/FlashCardCreationOverlay"
 import PlayerCard from "./Leaderboard/PlayerCard"
 import AddAFriend from "./Friends/AddAFriend";
 import Footer from "./LandingPage/Footer";
+import QuizCard from "./Quizzes/QuizCard"
+import ResultCard from "./Results/ResultCard"
 
 export {
     Alert,
@@ -36,4 +38,6 @@ export {
     PlayerCard,
     AddAFriend,
     Footer,
+    QuizCard,
+    ResultCard
 }

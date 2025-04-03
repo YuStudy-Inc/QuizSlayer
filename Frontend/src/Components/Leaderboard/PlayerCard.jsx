@@ -1,6 +1,5 @@
-import "../Styles/Components/PlayerCard.css"
-import playerIcon from "../assets/Characters/frogCharacter.png"
-import { useNavigate } from "react-router-dom"; 
+import "../../Styles/Components/Leaderboard/PlayerCard.css"
+import playerIcon from "../../assets/Characters/frogCharacter.png" 
 const PlayerCard = ({rank, score, playerName }) => {
 
     //nah we don't need this

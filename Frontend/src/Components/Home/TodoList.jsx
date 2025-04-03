@@ -1,4 +1,4 @@
-import "../Styles/Components/TodoList.css"
+import "../../Styles/Components/Home/TodoList.css"
 import { useState } from "react"
 
 const TodoList = ({ className = "", quizzesToDo }) => {

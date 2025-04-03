@@ -1,5 +1,5 @@
 import { useState } from "react"
-import "../Styles/Components/LandingPageDevs.css"
+import "../../Styles/Components/LandingPage/LandingPageDevs.css"
 import { duckCharacter, capyBaraCharacter, frogCharacter, raccoonCharacter } from "../../assets/Pictures"
 import Developer from "./Developer"
 

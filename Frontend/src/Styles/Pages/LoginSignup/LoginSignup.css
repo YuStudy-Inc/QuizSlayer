@@ -1,5 +1,5 @@
 .login-signup-container {
-    background-image: url("../../assets/Backgrounds/backgroundLogin.png");
+    background-image: url("../../../assets/Backgrounds/backgroundLogin.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -19,7 +19,7 @@
 
 .login-signup-box {
     position: relative;
-    background-image: url("../../assets/Backgrounds/loginPaper.png");
+    background-image: url("../../../assets/Backgrounds/loginPaper.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;

@@ -1,4 +1,4 @@
-import "../../Styles/Pages/Leaderboard.css"
+import "../../Styles/Pages/MainMenu/Leaderboard.css"
 import PlayerCard from "../../Components/Leaderboard/PlayerCard"
 const Leaderboard = () => {
     return (

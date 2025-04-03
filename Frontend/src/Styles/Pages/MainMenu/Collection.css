@@ -3,7 +3,7 @@
     height: 100vh;
     display: flex;
     align-items: end;
-    background-image: url("../../assets/Backgrounds/backgroundCollectionQuizzes.png");
+    background-image: url("../../../assets/Backgrounds/backgroundCollectionQuizzes.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;

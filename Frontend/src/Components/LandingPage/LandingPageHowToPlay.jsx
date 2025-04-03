@@ -1,4 +1,4 @@
-import "../Styles/Components/LandingPageHowToPlay.css"
+import "../../Styles/Components/LandingPage/LandingPageHowToPlay.css"
 import { chiikawaBackground } from "../../assets/Pictures.js"
 
 const HowtoPlayTitle = () => {

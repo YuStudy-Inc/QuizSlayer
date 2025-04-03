@@ -1,4 +1,4 @@
-import "../../Styles/Pages/CreateQuizPage.css"
+import "../../Styles/Pages/MainMenu/CreateQuizPage.css"
 import plus from "../../assets/Quizzes/plus.png"
 import download from "../../assets/Quizzes/download.png"
 import { FlashCard, FlashCardCreationOverlay } from "../../Components/Components.js";

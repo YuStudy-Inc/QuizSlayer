@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react"
-import "../Styles/Components/LandingPageTitle.css"
+import "../../Styles/Components/LandingPage/LandingPageTitle.css"
 import { logo, backgroundFight } from "../../assets/Pictures.js"
 import LoadingScreen from "../../Pages/LoadingScreen.jsx"
 import { useNavigate } from "react-router-dom"

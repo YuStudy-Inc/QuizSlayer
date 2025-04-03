@@ -1,4 +1,4 @@
-import "../Styles/Components/FlashCard.css"
+import "../../Styles/Components/Quizzes/FlashCard.css"
 
 const FlashCard = ({ questionInput, answerInput }) => {
     return (

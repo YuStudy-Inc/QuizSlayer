@@ -6,7 +6,7 @@
     width: 100%;
     height: 100%;
     /* background: transparent; */
-    background-image: url("../../assets/Backgrounds/backgroundLogin.png");
+    background-image: url("../../../assets/Backgrounds/backgroundLogin.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;

@@ -1,4 +1,4 @@
-import "../Styles/Components/LandingPageSpecialThanks.css"
+import "../../Styles/Components/LandingPage/LandingPageSpecialThanks.css"
 import SpecialThanksCards from "./SpecialThanksCards"
 import { crowCharacter, armoredSolder, podium } from "../../assets/Pictures"
 

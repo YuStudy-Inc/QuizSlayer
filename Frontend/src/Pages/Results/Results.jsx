@@ -1,6 +1,5 @@
-import "../Styles/Pages/Results.css"
-import Podium from "../Components/Podium"
-import ResultCard from "../Components/Results/ResultCard"
+import "../../Styles/Pages/Results/Results.css"
+import { Podium, ResultCard } from "../../Components/Components"
 
 
 const Results = ({didWin, }) => {

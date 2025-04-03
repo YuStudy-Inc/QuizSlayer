@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import Username from "./Username";
 import Password from "./Password";
-import "../../Styles/Pages/LoginSignup.css"
+import "../../Styles/Pages/LoginSignup/LoginSignup.css"
 
 const Signup = ({ onToggle }) => {
 
