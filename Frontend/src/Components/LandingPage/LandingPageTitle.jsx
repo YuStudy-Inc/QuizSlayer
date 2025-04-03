@@ -1,7 +1,7 @@
-import { useState, useEffect, useRef } from "react"
 import "../../Styles/Components/LandingPage/LandingPageTitle.css"
+import { useState, useEffect } from "react"
 import { logo, backgroundFight } from "../../assets/Pictures.js"
-import LoadingScreen from "../../Pages/LoadingScreen.jsx"
+import { LoadingScreen } from "../../Pages/Pages.js"
 import { useNavigate } from "react-router-dom"
 
 const LandingPageTitle = () => {

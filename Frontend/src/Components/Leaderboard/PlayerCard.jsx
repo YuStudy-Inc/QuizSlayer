@@ -1,5 +1,6 @@
 import "../../Styles/Components/Leaderboard/PlayerCard.css"
-import playerIcon from "../../assets/Characters/frogCharacter.png" 
+import { maomao } from "../../assets/Pictures" 
+
 const PlayerCard = ({rank, score, playerName }) => {
 
     //nah we don't need this
@@ -15,7 +16,7 @@ const PlayerCard = ({rank, score, playerName }) => {
                     <h1>{rank}</h1>
                 </span>
                 <span className="player-info">
-                    <img className="player-img" src={playerIcon} alt="" /> 
+                    <img className="player-img" src={maomao} alt="" /> 
                     <span className="player-name"> 
                         <p>{playerName}</p>
                     </span>
@@ -29,7 +30,7 @@ const PlayerCard = ({rank, score, playerName }) => {
                     <h1>{rank}</h1>
                 </span>
                 <span className="player-info">
-                    <img className="player-img" src={playerIcon} alt="" /> 
+                    <img className="player-img" src={maomao} alt="" /> 
                 </span>
                 <span className="player-text-mobile">
                     <span className="player-name-mobile"> 

@@ -1,6 +1,6 @@
 import "../../Styles/Components/LandingPage/LandingPageSpecialThanks.css"
 import SpecialThanksCards from "./SpecialThanksCards"
-import { crowCharacter, armoredSolder, podium } from "../../assets/Pictures"
+import { crowCharacter, armoredSolder, triceratops } from "../../assets/Pictures"
 
 const LandingPageSpecialThanks = () => {
     return (
@@ -14,7 +14,7 @@ const LandingPageSpecialThanks = () => {
                     <div className="pictures-and-descriptions"> 
                         <SpecialThanksCards image={crowCharacter} name={"Auralyie"} role={"Background Design"} linkForSocial={"https://www.instagram.com/auralyie/"}/>
                         <SpecialThanksCards image={armoredSolder} name={"Daniel"} role={"Interviewee"} linkForSocial={"https://www.linkedin.com/in/danielpasion/"}/>
-                        <SpecialThanksCards image={podium} name={"Justin"} role={"Interviewee"} linkForSocial={"https://www.linkedin.com/in/justin-mn/"}/>
+                        <SpecialThanksCards image={triceratops} name={"Justin"} role={"Interviewee"} linkForSocial={"https://www.linkedin.com/in/justin-mn/"}/>
                     </div>
                 </div>
             </div>

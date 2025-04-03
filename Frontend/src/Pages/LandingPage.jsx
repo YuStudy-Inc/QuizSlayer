@@ -1,9 +1,7 @@
 import "../Styles/Pages/LandingPage.css"
-//why this no work ???
 import { LandingPageTitle, LandingPageHowToPlay, LandingPageAboutUs, LandingPageDevs, LandingPageSpecialThanks, Footer } from "../Components/Components.js"
 import { logo } from "../assets/Pictures.js"
 import { useEffect, useState } from "react"
-import LoadingScreen from "./LoadingScreen.jsx"
 
 const LandingPage = () => {
     const [showingTheLogo, setShowingTheLogo] = useState(false)
@@ -21,7 +19,6 @@ const LandingPage = () => {
         window.addEventListener("scroll", handleScroll)
         return () => window.removeEventListener("scroll", handleScroll)
     }, [])    
-    
     
     return (
         <>

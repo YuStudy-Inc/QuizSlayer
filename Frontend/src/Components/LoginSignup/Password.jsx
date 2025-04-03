@@ -1,11 +1,8 @@
 import { useState } from "react";
-
 import { lockIcon } from "../../assets/Pictures"
-
 import { SvgIcon } from '@mui/material';
 import eye from '@mui/icons-material/VisibilityOutlined';
 import eyeOff from '@mui/icons-material/VisibilityOffOutlined';
-
 import "../../Styles/Components/LoginSignup/Input.css"
 
 const Password = () => {

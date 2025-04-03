@@ -1,5 +1,5 @@
 import "../Styles/Components/Podium.css"
-import { podium, duckCharacter, bucketHat, playfulCloud, ironSword, redBalloon, someonesGun,  fryingPan} from "../assets/Pictures"
+import { podium, duckCharacter, bucketHat, playfulCloud, ironSword, redBalloon, someonesGun, fryingPan } from "../assets/Pictures"
 
 const Podium = () => {
     return(

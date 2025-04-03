@@ -6,8 +6,6 @@ const FlashCardCreationOverlay = ({ close }) => {
         close()
     }
 
-    
-
     return (
         <> 
             <div className="overlay-flashcard">

@@ -1,8 +1,7 @@
 import "../Styles/Pages/Settings.css"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import maomao from "../assets/Friends/maomao.jpg"
-import pencil from "../assets/Quizzes/pencil.png"
+import { maomao, pencil } from "../assets/Pictures"
 
 const Settings = () => {
     const settingsOptions = ["Profile", "Password", "Account"]

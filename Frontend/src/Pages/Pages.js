@@ -2,6 +2,7 @@ import { Home, Collection, Friends, Leaderboard, Quizzes, CreateQuizPage } from 
 import LoginSignup from './LoginSignup/LoginSignup.jsx'
 import Results from './Results/Results.jsx'
 import LandingPage from './LandingPage.jsx';
+import LoadingScreen from "./LoadingScreen.jsx"
 import PageNotFound from "./PageNotFound.jsx";
 import Settings from "./Settings.jsx"
 
@@ -17,4 +18,5 @@ export {
     Results,
     PageNotFound,
     Settings,
+    LoadingScreen
 }
