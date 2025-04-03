@@ -1,8 +1,6 @@
-import Podium from "../../Components/Podium"
-import lootBox from "../../assets/Collection/lootbox.png"
-import {duckCharacter, bucketHat, playfulCloud} from "../../assets/Pictures.js"
-
-import "../../Styles/Pages/Collection.css"
+import { Podium } from "../../Components/Components.js"
+import { duckCharacter, bucketHat, playfulCloud, lootBox } from "../../assets/Pictures.js"
+import "../../Styles/Pages/MainMenu/Collection.css"
 
 const Collection = () => {
     return (

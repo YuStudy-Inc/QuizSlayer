@@ -1,10 +1,7 @@
-import Alert from "../../Components/Alert"
-import Podium from "../../Components/Podium"
-import TodoList from "../../Components/TodoList"
-import FriendsActive from "../../Components/FriendsActive"
-import "../../Styles/Pages/Home.css"
+import { Alert, Podium, TodoList, FriendsActive } from "../../Components/Components"
+import "../../Styles/Pages/MainMenu/Home.css"
 import { useNavigate } from "react-router-dom"
-import maomao from "../../assets/Friends/maomao.jpg"
+import { maomao } from "../../assets/Pictures"
 
 const Home = () => {
 

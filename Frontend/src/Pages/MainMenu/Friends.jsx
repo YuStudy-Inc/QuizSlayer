@@ -1,7 +1,6 @@
-import "../../Styles/Pages/Friends.css"
+import "../../Styles/Pages/MainMenu/Friends.css"
 import { FriendCard, AddAFriend, Podium } from "../../Components/Components.js"
-import maomao from "../../assets/Friends/maomao.jpg"
-import addUser from "../../assets/Friends/add-user.png"
+import { maomao, addUser } from "../../assets/Pictures.js"
 import { useState } from "react"
 
 const Friends = () => {
@@ -14,7 +13,6 @@ const Friends = () => {
     const imLonely = () => {
         setShowAddFriend(false)
     }
-
 
     return (
         <>

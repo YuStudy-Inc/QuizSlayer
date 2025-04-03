@@ -1,6 +1,6 @@
-import "../../Styles/Pages/Quizzes.css"
-import QuizCard from "../../Components/QuizCard"
-import pencil from "../../assets/Quizzes/pencil.png"
+import "../../Styles/Pages/MainMenu/Quizzes.css"
+import { QuizCard } from "../../Components/Components"
+import { pencil } from "../../assets/Pictures"
 
 const Quizzes = () => {
 	return (

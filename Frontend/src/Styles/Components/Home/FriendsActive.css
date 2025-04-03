@@ -1,0 +1,35 @@
+.friends-active-container {
+    width: calc(20vw - 2rem);
+    height: calc(60vh - 2rem);
+    background-color: var(--white);
+    opacity: 1;
+    visibility: visible;
+    padding: 1rem;
+}
+
+.small-friends-active-container {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+}
+
+.friends-active-container h1 {
+    height: 10%;
+    font-size: 2rem;
+    color: var(--black);
+    background-color: transparent;
+}
+
+@media only screen and (max-width: 1200px) {
+    .friends-active-container {
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+    }
+
+    .small-friends-active-container {
+        opacity: 1;
+        visibility: visible;
+        position: relative;
+    }
+}
