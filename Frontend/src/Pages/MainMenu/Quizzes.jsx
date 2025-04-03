@@ -1,5 +1,5 @@
 import "../../Styles/Pages/Quizzes.css"
-import QuizCard from "../../Components/QuizCard"
+import QuizCard from "../../Components/Quizzes/QuizCard"
 import pencil from "../../assets/Quizzes/pencil.png"
 
 const Quizzes = () => {
