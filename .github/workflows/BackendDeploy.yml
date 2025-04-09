@@ -1,0 +1,40 @@
+name: Lambda Deploy
+
+on:
+  push:
+    branches: ["master"]
+    paths:
+      - Backend/**
+
+jobs:
+  deploy-lambda:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [22.x]
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            Backend/
+
+      - name: Use Node.js 
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{matrix.node-version}} 
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_LAMBDA_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_LAMBDA_SECRET_KEY }}
+          aws-region: us-east-1
+      
+      - name: Updates node modules
+        run: cd Backend && npm ci
+      - name: Puts code into zip folder
+        run: zip -r publish.zip ./Backend/*
+      - name: Deploys zipped folder
+        run: aws lambda update-function-code --function-name=QuizSlayerBackend --zip-file=fileb://publish.zip

@@ -1,7 +1,6 @@
-import "../../Styles/Pages/Friends.css"
+import "../../Styles/Pages/MainMenu/Friends.css"
 import { FriendCard, AddAFriend, Podium } from "../../Components/Components.js"
-import maomao from "../../assets/Friends/maomao.jpg"
-import addUser from "../../assets/Friends/add-user.png"
+import { maomao, addUser } from "../../assets/Pictures.js"
 import { useState } from "react"
 
 const Friends = () => {
@@ -15,7 +14,6 @@ const Friends = () => {
         setShowAddFriend(false)
     }
 
-
     return (
         <>
             <div className="friends-container">
@@ -23,6 +21,18 @@ const Friends = () => {
                     <div className="left-side-amigos">
                         <div className="title-for-friends">
                             <h1>Friends</h1>
+                        </div>
+                        <div className="right-side-amigos-for-mobile">
+                            <div className="podium-plus-info-for-mobile">
+                                <div className="podium-centerer-friends">
+                                    <Podium />
+                                </div>
+                                <div className="info">
+                                    <h1>Nick{/* {getUsernameOfActiveFriend} */}</h1>
+                                    <p>Description :{/*  {getDescriptionOfActiveFriend} */}</p>
+                                    
+                                </div>
+                            </div>
                         </div>
                         <div className="scroll-for-more-friends">
                             <FriendCard friendPfp={maomao} friendName="nick" friendLevel="10" />
@@ -39,7 +49,7 @@ const Friends = () => {
                     </div>
                     <div className="right-side-amigos">
                         <div className="podium-plus-info">
-                            <div className="podi">
+                            <div className="podium-centerer-friends">
                                 <Podium />
                             </div>
                             <div className="info">
