@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom"
-import Username from "./Username";
+import Email from "./Email";
 import Password from "./Password";
 import "../../Styles/Pages/LoginSignup/LoginSignup.css"
 
 const Login = ({onToggle}) => {
 
+    const [validEmail, setValidEmail] = useState(true);
     const [validated, setValidated] = useState(true);
 
     const navigate = useNavigate();
@@ -28,9 +29,10 @@ const Login = ({onToggle}) => {
                     <h1 className="welcome-text">WELCOME BACK ADVENTURER</h1>
                     <form onClick={validateUser}>
                         <div className="input-fields">
-                            <Username></Username>
+                            <Email></Email>
+                            <p className="error-text" hidden={validEmail}>* Invalid email address.</p>
                             <Password></Password>
-                            <p className="error-text" hidden={validated}>* Incorrect username or password</p>
+                            <p className="error-text" hidden={validated}>* Incorrect email or password</p>
                         </div>
                         <input type="submit" className="submit-button" id="login" value="Login"></input>
                     </form>
