@@ -5,7 +5,7 @@ import eye from '@mui/icons-material/VisibilityOutlined';
 import eyeOff from '@mui/icons-material/VisibilityOffOutlined';
 import "../../Styles/Components/LoginSignup/Input.css"
 
-const Password = () => {
+const Password = ({stateChanger}) => {
     const[password, setPassword] = useState("");
     const [icon, setIcon] = useState(eyeOff);
     const [type, setType] = useState("password");
@@ -23,7 +23,7 @@ const Password = () => {
     return (
         <div className="input_container">
             <img src={lockIcon} alt="lock icon" className="icon"></img>
-            <input className="input_box" type={type} placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)}></input>
+            <input className="input_box" type={type} placeholder="password" value={password} onChange={(e) => {setPassword(e.target.value), stateChanger(e.target.value)}}></input>
             <span className="password_toggle" onClick={togglePasswordDisplay}>
                 <SvgIcon component={icon}></SvgIcon>
             </span>

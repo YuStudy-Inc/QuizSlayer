@@ -6,6 +6,10 @@ import "../../Styles/Pages/LoginSignup/LoginSignup.css"
 
 const Login = ({onToggle}) => {
 
+    const [formData, setFormData] = useState({
+        email: '',
+        password: ''
+    });
     const [validEmail, setValidEmail] = useState(true);
     const [validated, setValidated] = useState(true);
 
@@ -18,8 +22,35 @@ const Login = ({onToggle}) => {
         onToggle();
     }
 
-    const validateUser = (event) => {
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        if(!validateEmail(formData.email)) {
+            setValidEmail(false);
+        }
+        else {
+            setValudEmail(true);
+        }
+    }
 
+    const validateEmail = (email) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        return emailRegex.test(email)
+    }
+
+    const handleChange = (event) => {
+
+    }
+
+    const setEmail = (email) => {
+        setFormData(previousState => {
+            return { ...previousState, email: email}
+        })
+    }
+
+    const setPassword = (password) => {
+        setFormData(previousState => {
+            return { ...previousState, password: password}
+        })
     }
 
     return (
@@ -27,11 +58,11 @@ const Login = ({onToggle}) => {
             <div className="login-signup-container">
                 <div className="login-signup-box">
                     <h1 className="welcome-text">WELCOME BACK ADVENTURER</h1>
-                    <form onClick={validateUser}>
+                    <form onSubmit={handleSubmit}>
                         <div className="input-fields">
-                            <Email></Email>
+                            <Email stateChanger={setEmail}></Email>
                             <p className="error-text" hidden={validEmail}>* Invalid email address.</p>
-                            <Password></Password>
+                            <Password stateChanger={setPassword}></Password>
                             <p className="error-text" hidden={validated}>* Incorrect email or password</p>
                         </div>
                         <input type="submit" className="submit-button" id="login" value="Login"></input>
