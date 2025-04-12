@@ -7,6 +7,12 @@ const Notifications = () => {
         <>
             <div className="notifications-container">
                 <FriendRequest incomingFriendPfp={maomao} incomingFriendName="Nick"/>
+                <FriendRequest incomingFriendPfp={maomao} incomingFriendName="Nick"/>
+                <FriendRequest incomingFriendPfp={maomao} incomingFriendName="Nick"/>
+                <FriendRequest incomingFriendPfp={maomao} incomingFriendName="Nick"/>
+                <FriendRequest incomingFriendPfp={maomao} incomingFriendName="Nick"/>
+                <FriendRequest incomingFriendPfp={maomao} incomingFriendName="Nick"/>
+                <FriendRequest incomingFriendPfp={maomao} incomingFriendName="Nick"/>
             </div>
         </>
     )
