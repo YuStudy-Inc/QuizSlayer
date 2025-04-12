@@ -19,12 +19,34 @@
     align-items: center;
 }
 
-.profile-button-to-access-settings {
+.nav-buttons {
     position: absolute;
-    height: 7%;
-    aspect-ratio: 1/1;
     right: 30px;
     top: 30px;
+    height: 7%;
+    width: 10%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 1rem;
+}
+
+.notification-section {
+    position: relative;
+    width: 30%;
+    aspect-ratio: 1/1;
+
+}
+
+.notification-section img {
+    width: 100%;
+    aspect-ratio: 1/1;
+}
+
+.profile-button-to-access-settings {
+    position: relative;
+    width: 30%;
+    aspect-ratio: 1/1;
 }
 
 .profile-button {
@@ -129,7 +151,24 @@
 }
 
 @media only screen and (max-width: 1200px) {
-    .profile-button-to-access-settings {
-        height: 5%;
+    .nav-buttons {
+        width: 15%;
     }
 }
+
+@media only screen and (max-width: 768px) {
+    .nav-buttons {
+        width: 20%;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .nav-buttons {
+        width: 25%;
+        height: 10%;
+        flex-direction: column-reverse;
+        align-items: end;
+    }
+}
+
+
