@@ -38,6 +38,7 @@ import download from "./Quizzes/download.png"
 import pencil from "./Quizzes/pencil.png"
 import playButton from "./Quizzes/playButton.png"
 import plus from "./Quizzes/plus.png"
+import bell from "./Home/bell.png"
 
 export {
     logo,
@@ -72,7 +73,8 @@ export {
     download,
     pencil,
     playButton,
-    plus
+    plus,
+    bell
 }
 
 //bruh im so lazy i had to make chatGPT write this 😭😭😭😭😭

@@ -8,6 +8,8 @@ import LandingPageSpecialThanks from "./LandingPage/LandingPageSpecialThanks";
 import Navbar from "./Navbar";
 import Podium from "./Podium";
 import TodoList from "./Home/TodoList";
+import Notifications from "./Home/Notifications"
+import FriendRequest from "./Home/FriendRequest"
 import Login from "./LoginSignup/Login"
 import Signup from "./LoginSignup/Signup"
 import FriendCard from "./Friends/FriendCard";
@@ -30,6 +32,8 @@ export {
     Navbar,
     Podium,
     TodoList,
+    Notifications,
+    FriendRequest,
     Login,
     Signup,
     FriendCard,

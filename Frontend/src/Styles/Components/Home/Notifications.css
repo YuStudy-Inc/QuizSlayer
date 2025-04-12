@@ -1,0 +1,13 @@
+.notifications-container {
+    width: 30%;
+    height: 85dvh;
+    background-color: var(--black);
+    border-radius: 10px;
+    position: absolute;
+    z-index: 100;
+    right: 30px;
+    top: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
