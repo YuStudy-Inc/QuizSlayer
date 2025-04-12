@@ -36,7 +36,7 @@ app.get("/QuizSlayerBackend", async(req, res) => {
       }
 });
 app.get("/", async(req, res) => {
-    res.json({ message: 'Welcome to the backend bitch!'});
+    res.json({ message: 'Welcome to the backend bitch'});
 });
 
 export const handler = serverless(app);
