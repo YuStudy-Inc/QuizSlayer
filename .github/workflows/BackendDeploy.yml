@@ -35,6 +35,6 @@ jobs:
       - name: Updates node modules
         run: cd Backend && npm ci
       - name: Puts code into zip folder
-        run: zip -r publish.zip *
+        run: cd Backend && zip -r ../publish.zip *
       - name: Deploys zipped folder
         run: aws lambda update-function-code --function-name=QuizSlayerBackend --zip-file=fileb://publish.zip
