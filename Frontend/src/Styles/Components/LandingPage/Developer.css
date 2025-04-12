@@ -1,0 +1,151 @@
+.developer-container {
+    min-width: 100%;
+    /* width: 90vw; */
+    gap: 7%;
+    display: flex;
+}
+
+.developer-container img {
+    width: 30%;
+    aspect-ratio: 1/1;
+    background-color: var(--dark-green);
+}
+
+.wise-words-from-this-dev {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.wise-words-from-this-dev h1 {
+    font-size: 3rem;
+}
+
+.wise-words-from-this-dev p {
+    font-size: 1rem;
+}
+
+.wise-words-from-this-dev h1, .wise-words-from-this-dev p {
+    background-color: transparent;
+}
+
+.dev-links {
+    width: 100%;
+    display: flex;
+    gap: 10%;
+}
+
+.dev-links a {
+    display: inline-block;
+    width: fit-content;
+    color: var(--black);
+    font-size: 1rem;
+    text-decoration: none;
+    background: transparent;
+    transition: color 0.2s ease-in-out;
+    animation: dev-hover 4s infinite ease-in-out;
+}
+
+.dev-links a:hover {
+    color: var(--light-green);
+}
+
+@keyframes dev-hover {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(5px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+@media (max-width: 1300px) {
+    .wise-words-from-this-dev h1 {
+        font-size: 2rem;
+    }
+
+    .developer-container img {
+        width: 40%;
+    }
+
+    .wise-words-from-this-dev p {
+        font-size: 0.8rem;
+    }
+
+    .dev-links {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 1000px) {
+    .developer-container  {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .developer-container img {
+        width: 60%;
+    }
+
+    .wise-words-from-this-dev {
+        align-items: center;
+    }
+
+    .dev-links {
+        align-items: center;
+    }
+
+    .dev-links a {
+        font-size: 0.8rem;
+    }
+
+}
+
+@media (max-width: 768px) {
+    .developer-container img {
+        width: 80%;
+    }
+
+    .wise-words-from-this-dev h1 {
+        font-size: 1.5rem;
+    }
+
+    .wise-words-from-this-dev p {
+        font-size: 0.6rem;
+    }
+
+    .dev-links a {
+        font-size: 0.6rem;
+    }
+}
+
+@media (max-width: 500px) {
+    .developer-container img {
+        width: 90%;
+    }
+
+    .wise-words-from-this-dev h1 {
+        font-size: 1rem;
+    }
+
+    .wise-words-from-this-dev p {
+        font-size: 0.6rem;
+    }
+
+    .dev-links a {
+        font-size: 0.6rem;
+    }
+}
+
+@media (max-width: 420px) {
+    .developer-container img {
+        width: 100%;
+    }
+}

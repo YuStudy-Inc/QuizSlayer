@@ -1,4 +1,4 @@
-import '../../Styles/Pages/Login.css';
+import '../../Styles/Pages/LoginSignup/Login.css';
 import { Login, Signup } from "../../Components/Components";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";

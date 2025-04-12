@@ -1,0 +1,40 @@
+.icon {
+    width: 1.5rem;
+    aspect-ratio: 1/1;
+    margin-right: 1rem;
+}
+
+.input_box {
+    width: 100%;
+	background: none;
+	border: none;
+    /* background-color: var(--white); */
+	color: var(--black);
+	font-size: 1.5rem;
+	border-bottom: 2px solid var(--black);
+	transition: border-bottom 0.2s ease-in-out;
+    outline: none;
+}
+
+.input_box:focus {
+    border-bottom: 2px solid var(--light-green);
+	outline: none;
+}
+
+.input_container {
+    position: relative;
+    background-color: #E8EEEC;
+    display: flex;
+    /* display:inline-block; */
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    margin: 1rem;
+}
+
+.password_toggle {
+    color: #000000;
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+}

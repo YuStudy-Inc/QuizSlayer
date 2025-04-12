@@ -19,14 +19,25 @@ import frogCharacter from "../assets/Characters/frogCharacter.png";
 import raccoonCharacter from "../assets/Characters/raccoonCharacter.png";
 import capyBaraCharacter from "../assets/Characters/capybaraCharacter.png";
 import crowCharacter from "../assets/Characters/crowCharacter.png";
-import podium from "../assets/Characters/podium.jpg";
+import podium from "../assets/Characters/podium.png";
 
 import fryingPan from "../assets/Weapons/fryingPan.png";
 import ironSword from "../assets/Weapons/ironSword.png";
 import playfulCloud from "../assets/Weapons/playfulCloud.png";
 import someonesGun from "../assets/Weapons/someonesGun.png";
 import redBalloon from "../assets/Weapons/redBalloon.png";
+
 import sign404 from "../assets/sign404.png";
+
+import lootBox from "../assets/Collection/lootbox.png";
+import addUser from  "./Friends/add-user.png"
+import maomao from "./Friends/maomao.jpg"
+import lockIcon from "./LoginSignup/lock_icon.png"
+import userIcon from "./LoginSignup/user_icon.png"
+import download from "./Quizzes/download.png"
+import pencil from "./Quizzes/pencil.png"
+import playButton from "./Quizzes/playButton.png"
+import plus from "./Quizzes/plus.png"
 
 export {
     logo,
@@ -52,7 +63,16 @@ export {
     playfulCloud,
     someonesGun,
     redBalloon,
-    sign404
+    sign404,
+    lootBox,
+    addUser,
+    maomao,
+    lockIcon,
+    userIcon,
+    download,
+    pencil,
+    playButton,
+    plus
 }
 
 //bruh im so lazy i had to make chatGPT write this 😭😭😭😭😭
