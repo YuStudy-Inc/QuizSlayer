@@ -7,6 +7,9 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import serverless from 'serverless-http';
 import mongoose from 'mongoose';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 //idk if it's better to put this in the .env file
 // const frontEndLocalHost = "http://localhost:5173"
 
