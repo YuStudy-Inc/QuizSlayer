@@ -99,3 +99,8 @@
     transform: scale(1.2);
     color: var(--light-green);
 }
+
+.error-text {
+    text-align: left;
+    color: rgb(234, 0, 0);
+}
