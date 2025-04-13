@@ -13,7 +13,7 @@ const Login = ({onToggle}) => {
         password: ''
     });
     const [validEmail, setValidEmail] = useState(true);
-    const [hasPassword, setHasPassword] = useState(true);
+    const [validPassword, setValidPassword] = useState(true);
     const [validated, setValidated] = useState(true);
     const [validating, setValidating] = useState(false);
     const validatingRef = useRef(false);
@@ -36,36 +36,39 @@ const Login = ({onToggle}) => {
         } else {
             return;
         }
+        let valid = true;
 
         if(formData.password == "") {
-            setHasPassword(false);
+            setValidPassword(false);
+            valid = false;
         }
         else {
-            setHasPassword(true);
+            setValidPassword(true);
         }
 
         if(!validateEmail(formData.email)) {
-            validatingRef.current = false;
-            setValidating(false);
             setValidEmail(false);
-            return;
+            valid = false;
         }
         else {
             setValidEmail(true);
         }
+
+        if(!valid) {
+            validatingRef.current = false;
+            setValidating(false);
+            return;
+        }
+
         attemptLogin();
     }
 
     const attemptLogin = async () => {
-        let data = {
-            email: formData.email,
-            password: formData.password
-        }
         axios({
             method: "post",
             url: "https://00qy8vpnab.execute-api.us-east-1.amazonaws.com/users/loginUser",
             // url: "http://localhost:3000/users/loginUser",
-            data: data
+            data: formData
         })
         .then((response) => {
             // The response should be a session ID. Just route to home for now.
@@ -126,7 +129,7 @@ const Login = ({onToggle}) => {
                             <Email stateChanger={setEmail}></Email>
                             <p className="error-text" hidden={validEmail}>* Invalid email address.</p>
                             <Password stateChanger={setPassword}></Password>
-                            <p className="error-text" hidden={hasPassword}>* Enter a password</p>
+                            <p className="error-text" hidden={validPassword}>* Enter a password</p>
                             <p className="error-text" hidden={validated}>* Incorrect email or password</p>
                         </div>
                         <input type="submit" className="submit-button" id="login" value="Login" disabled={validating}/>
