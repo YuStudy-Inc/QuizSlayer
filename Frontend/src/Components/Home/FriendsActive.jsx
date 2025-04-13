@@ -1,5 +1,7 @@
 import "../../Styles/Components/Home/FriendsActive.css"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import axios from "axios"
+ 
 
 const FriendsActive = ({ className= "", friends }) => {
     const [showSpreadOut, setShowSpreadOut] = useState(false)
@@ -7,6 +9,12 @@ const FriendsActive = ({ className= "", friends }) => {
     const toggleSpreadOut = () => {
         setShowSpreadOut(!showSpreadOut)
     }
+
+    useEffect(() => {
+        const fetchActiveFriends = async () => {
+            const allActiveFriends = await axios.get("")
+        }
+    }, [])
 
 
     return (

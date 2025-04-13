@@ -11,6 +11,11 @@ const passwordMatch = (async(passwordFromUser, savedPasswordFromDB) => {
     return await bcrypt.compare(passwordFromUser, savedPasswordFromDB)
 })
 
+const changeActiveStatus = (async(user) => {
+    const active = user.active;
+    return await User.findOneAndUpdate({username: user.username}, {active: !active})
+})
+
 export const createUser = async(req, res) => {
     try {
         const { username, email, password, passwordAgain } = req.body
@@ -39,13 +44,19 @@ export const createUser = async(req, res) => {
             username,
             email,
             password: hashedPassword,
+            isOneline: true,
             pfp: "", //pfp string url, save a temp one for now after creation
             description: "", //description, empty for now (could default to "" in the schema)
+            friendsList: [],
+            friendRequest: [],
             inventory: [], //we need to store at least one character in the inventory list
             //[], //or can we have another list for characters ?
             selectedCharacter: 1, //selected character will be the first one
+            selectedHat: 0,
+            selectedWeapon: 0,
             xp: 0, //xp
-            coins: 0 //coins
+            coins: 0, //coins
+            monstersSlain: 0,
         })
         await newUser.save()
         res.status(201).json({
@@ -71,6 +82,8 @@ export const loginUser = async(req, res) => {
         if (!passwordValidated)
             res.status(400).json({ message: "Invalid Password" })
         
+        await changeActiveStatus(user)
+        
         res.status(200).json({
             "message": "Login Successful",
             "user": user
@@ -93,7 +106,7 @@ export const editUser = async (req,res) => {
             return; 
         }
         //Only changes the parameter that was included in the json req
-        const result = await User.findOneAndUpdate({_id: userId}, {$set: req.body}).select("username email -_id");
+        const result = await User.findOneAndUpdate({_id: userId}, {$set: req.body}).select("username description -_id");
         console.log(result);
 
         // res.status(200).json({updatedCount: result.modifiedCount}) 
@@ -148,5 +161,182 @@ export const deleteUser = async(req, res)=>{
     }
 }
 
+//how we get pfp . Still need to research
 
-//need a getFriends from user id
+export const getUsername = async(req, res) => {
+    try {
+        const userId = req.params.id
+        const user = await User.findOne({_id: userId })
+        res.status(200).json({username: user.username})
+    } catch (e) {
+        res.status(500).json({error: 'Error retreiving username'})
+        console.log(e)
+    }
+}
+
+export const getDescription = async(req, res) => {
+    try {
+        const userId = req.params.id
+        const user = await User.findOne({_id: userId })
+        res.status(200).json({description: user.description})
+    } catch (e) {
+        res.status(500).json({error: 'Error retreiving description'})
+        console.log(e)
+    }
+}
+
+export const getActiveFriends = async(req, res) => {
+    try {
+        const userId = req.params.id
+        const user = await User.findOne({_id: userId })
+        const friends = user.friendsList.filter(friend => friend.isOnline === true)
+        res.status(200).json({friends})
+    } catch (e) {
+        res.status(500).json({error: 'Error retreiving active friends'})
+        console.log(e)
+    }
+}
+
+export const getFriends = async(req, res) => {
+    try {
+        const userId = req.params.id
+        const user = await User.findOne({_id: userId })
+        const friends = user.friendsList
+        res.status(200).json({friends})
+    } catch (e) {
+        res.status(500).json({error: 'Error retreiving friends'})
+        console.log(e)
+    }
+}
+
+export const getToDoQuizzes = async(req, res) => {
+    try {
+        const userId = req.params.id
+        const user = await User.findOne({_id: userId })
+        const quizzesStillLeftToDo = user.quizzes.filter(quiz => quiz.completed === false)
+        res.status(200).json({toDoQuizzes})
+    } catch (e) {
+        res.status(500).json({error: 'Error retreiving quizzes under TODO status'})
+        console.log(e)
+    }
+}
+
+export const getCharacterList = async(req, res) => {
+    try {
+        const userId = req.params.id
+        const user = await User.findOne({_id: userId })
+        const characterList = user.characterList
+        res.status(200).json({characterList})
+    } catch (e) {
+        res.status(500).json({error: 'Error retreiving character list'})
+        console.log(e)
+    }
+}
+
+export const getInventory = async(req, res) => {
+    try {
+        const userId = req.params.id
+        const user = await User.findOne({_id: userId })
+        const inventory = user.inventory
+        res.status(200).json({inventory})
+    } catch (e) {
+        res.status(500).json({error: 'Error retreiving inventory'})
+        console.log(e)
+    }
+}
+
+export const getTop10 = async(req, res) => {
+    try {
+        const top10Players = await User.find().sort({monstersSlain: -1}).limit(10)
+        res.status(200).json({top10Players})
+    } catch (e) {
+        res.status(500).json({error: 'Error retreiving top 10'})
+        console.log(e)
+    }
+}
+
+export const getFriendRequests = async(req, res) => {
+    try {
+        const userId = req.params.id
+        const user = await User.findOne({_id: userId })
+        const friendRequests = user.friendRequests
+        res.status(200).json({friendRequests})
+    } catch (e) {
+        res.status(500).json({error: 'Error retreiving friends requests'})
+        console.log(e)
+    }
+}
+
+export const acceptFriendRequest = async(req, res) => {
+    try {
+        const userId = req.params.id
+        const user = await User.findOne({_id: userId })
+
+        if (!user) {
+            user.friendRequest.pop(friendRequest)
+            res.status(404).json({ message: "User not found" })
+        }
+
+        const usersIncomingFriend = await User.findOne({_id: req.body })
+        user.friendsList.push(usersIncomingFriend)
+        //idk if this will work with pop
+        user.friendRequest.pop(usersIncomingFriend)
+        user.save()
+        res.status(200).json({message: 'Friend request accepted!'})
+    } catch (e) {
+        res.status(500).json({error: 'Error accepting friend request'})
+        console.log(e)
+    }
+}
+
+export const rejectFriendRequest = async(req, res) => {
+    try {
+        const userId = req.params.id
+        const user = await User.findOne({_id: userId })
+
+        if (!user)
+            res.status(404).json({ message: "User not found" })
+
+        const usersIncomingFriend = await User.findOne({_id: req.body })
+        //idk if this will work with pop
+        user.friendRequest.pop(usersIncomingFriend)
+        user.save()
+        res.status(200).json({message: 'Friend request rejected!'})
+    } catch (e) {
+        res.status(500).json({error: 'Error rejecting friend request'})
+        console.log(e)
+    }
+}
+
+export const sendFriendRequest = async(req, res) => {
+    try {
+        const userId = req.params.id
+        const user = await User.findOne({_id: userId })
+
+        if (!user)
+            res.status(404).json({ message: "User not found" })
+
+        if (user.id === req.body.username) {
+            res.status(400).json({error: 'Cannot send friend request to yourself'})
+            return;
+        }
+    
+        if (user.friendsList.includes(req.body.username)) {
+            res.status(400).json({error: 'Friend already exists'})
+            return;
+        }
+
+        if (user.friendRequests.includes(req.body.username)) {
+            res.status(400).json({error: 'Friend request already sent'})
+            return;
+        }
+
+        const sentFriendRequest = req.body
+        user.friendRequests.push(sentFriendRequest)
+        user.save()
+        res.status(200).json({message: 'Friend request sent!'})
+    } catch (e) {
+        res.status(500).json({error: 'Error sending friend request'})
+        console.log(e)
+    }
+}

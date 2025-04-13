@@ -6,6 +6,11 @@ const QuizSchema = new Schema({
     //     type: Schema.Types.ObjectId,
     //     required: true,
     // },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
     title: {
         type: String,
         required: true
@@ -13,6 +18,10 @@ const QuizSchema = new Schema({
     description: {
         type: String,
         default: ""
+    },
+    completed: {
+        type: Boolean,
+        default: false
     },
     //we will just have QuizId attached to the questions that are in this quiz and then call all of the questions with the quizID
     /* questions: {

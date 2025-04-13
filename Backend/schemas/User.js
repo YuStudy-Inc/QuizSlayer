@@ -18,6 +18,10 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
+    isOnline: {
+        type: Boolean,
+        default: false
+    },
     pfp: { // TODO
         type: Number,
     },
@@ -26,6 +30,10 @@ const UserSchema = new Schema({
         default: ""
     },
     friendsList: {
+        type: [Schema.Types.ObjectId],
+        default: []
+    },
+    friendRequests: {
         type: [Schema.Types.ObjectId],
         default: []
     },
@@ -57,6 +65,10 @@ const UserSchema = new Schema({
         default: 0
     },
     coins: {
+        type: Number,
+        default: 0
+    },
+    monstersSlain: {
         type: Number,
         default: 0
     },
