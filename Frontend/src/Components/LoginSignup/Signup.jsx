@@ -5,6 +5,8 @@ import Password from "./Password";
 import Email from "./Email"
 import "../../Styles/Pages/LoginSignup/LoginSignup.css"
 
+import axios from "axios";
+
 const Signup = ({ onToggle }) => {
 
     const [formData, setFormData] = useState({
@@ -15,6 +17,7 @@ const Signup = ({ onToggle }) => {
     });
     const [validEmail, setValidEmail] = useState(true);
     const [validUsername, setValidUsername] = useState(true);
+    const [noPassword, setNoPassword] = useState(true);
     const [validPassword, setValidPassword] = useState(true);
     const [matching, setMatching] = useState(true);
 
@@ -41,25 +44,97 @@ const Signup = ({ onToggle }) => {
         } else {
             return;
         }
-
-        if(formData.password == "") {
-            setHasPassword(false);
-        }
-        else {
-            setHasPassword(true);
-        }
+        let valid = true;
 
         if(!validateEmail(formData.email)) {
-            validatingRef.current = false;
-            setValidating(false);
             setValidEmail(false);
-            return;
+            valid = false;
         }
         else {
             setValidEmail(true);
         }
-        attemptLogin();
+
+        if(formData.username == "") {
+            setValidUsername(false);
+            valid = false;
+        }
+        else {
+            setValidUsername(true);
+        }
+
+        if(formData.password == "") {
+            setNoPassword(false);
+            valid = false;
+        }
+        else if(!validatePassword(formData.password)) {
+            setNoPassword(true);
+            setValidPassword(false);
+            valid = false;
+        }
+        else if(formData.password != formData.passwordAgain) {
+            setValidPassword(true);
+            setMatching(false);
+            valid = false;
+        }
+        else {
+            setNoPassword(true);
+            setValidPassword(true);
+            setMatching(true);
+        }
+
+        if(!valid) {
+            validatingRef.current = false;
+            setValidating(false);
+            return;
+        }
+
+        attemptSignup();
     }
+
+    const attemptSignup = async () => {
+            axios({
+                method: "post",
+                url: "https://00qy8vpnab.execute-api.us-east-1.amazonaws.com/users/createUser",
+                // url: "http://localhost:3000/users/createUser",
+                data: formData
+            })
+            .then((response) => {
+                // The response should be a session ID. Just route to home for now.
+                routeHome();
+            })
+            .catch((error) => {
+                const response = error.response
+                if(response) {
+                    console.log(response.data);
+                    console.log(response.status);
+                    console.log(response.headers);
+                }
+                else if(error.request) {
+                    console.log(error.request);
+                }
+                else {
+                    console.log("Error", error.message);
+                }
+                setValidated(false);
+            }).finally(() => {
+                setTimeout(() => {
+                    if(validatingRef.current == true) {
+                        setValidating(false);
+                        validatingRef.current = false;
+                    }
+                },1000)
+            })
+        }
+
+    const validateEmail = (email) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+
+    const validatePassword = ((password) => {
+        const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&_])[A-Za-z\d@$!%*?&_]{9,}$/
+        return passwordRegex.test(password)
+    })
 
     const setEmail = (email) => {
         setFormData(previousState => {
@@ -97,8 +172,9 @@ const Signup = ({ onToggle }) => {
                             <Username stateChanger={setUsername}></Username>
                             <p className="error-text" hidden={validUsername}>* Minimum x characters required</p>
                             <Password stateChanger={setPassword}></Password>
-                            <p className="error-text" hidden={validPassword}>* Invalid password</p>
                             <Password stateChanger={setPasswordAgain}></Password>
+                            <p className="error-text" hidden={noPassword}>* Enter a password</p>
+                            <p className="error-text" hidden={validPassword}>Password must be: <br/> * At least 9 characters <br/> * Includes at least one uppercase letter <br/> * Includes a number <br/> * Includes a special character (@$!%*?&_.)</p>
                             <p className="error-text" hidden={matching}>* Passwords do not match</p>
                         </div>
                         <input type="submit" className="submit-button" id="signup" value="Sign Up" disabled={validating}></input>
