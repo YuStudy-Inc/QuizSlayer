@@ -23,7 +23,7 @@ const Password = ({stateChanger}) => {
     return (
         <div className="input_container">
             <img src={lockIcon} alt="lock icon" className="icon"></img>
-            <input className="input_box" type={type} placeholder="password" value={password} onChange={(e) => {setPassword(e.target.value), stateChanger(e.target.value)}}></input>
+            <input className="input_box" type={type} placeholder="Password" value={password} onChange={(e) => {setPassword(e.target.value), stateChanger(e.target.value)}}></input>
             <span className="password_toggle" onClick={togglePasswordDisplay}>
                 <SvgIcon component={icon}></SvgIcon>
             </span>

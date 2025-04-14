@@ -5,7 +5,7 @@ const Username = ({stateChanger}) => {
     return (
         <div className="input_container">
             <img src={userIcon} alt="user icon" className="icon"></img>
-            <input className="input_box" type="text" placeholder="username" onChange={(e) => {stateChanger(e.target.value)}}></input>
+            <input className="input_box" type="text" placeholder="Username" onChange={(e) => {stateChanger(e.target.value)}}></input>
         </div>
     );
 }
