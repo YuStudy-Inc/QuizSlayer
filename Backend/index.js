@@ -11,10 +11,10 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 //idk if it's better to put this in the .env file
+const app = express()
 // const frontEndLocalHost = "http://localhost:5173"
 
 // app.use(cors({ origin: frontEndLocalHost }))
-const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -24,8 +24,15 @@ app.use("/quizzes", quizRoutes)
 app.use("/questions", questionRoutes)
 
 const tempClient = await DatabaseConnection();
-
-
+const port = 3000;
+try {
+  app.listen(port, () => {
+      console.log(`server is running on port ${port}`);
+  })
+}
+catch (e) {
+  console.error("ts not working gng 🥀🥀🥀")
+}
 
 app.get("/QuizSlayerBackend", async(req, res) => {
     try {

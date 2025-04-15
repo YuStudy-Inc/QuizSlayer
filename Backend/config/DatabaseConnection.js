@@ -1,5 +1,7 @@
 
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+dotenv.config()
 // Uses path of first file to import (should be server.js)
 
 
