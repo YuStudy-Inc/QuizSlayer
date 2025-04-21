@@ -6,7 +6,7 @@ const Email = ({stateChanger}) => {
         <>
             <div className="input_container">
                 <img src={emailIcon} alt="email icon" className="icon"></img>
-                <input className="input_box" type="text" placeholder="email" onChange={ (e) => stateChanger(e.target.value)}></input>
+                <input className="input_box" type="text" placeholder="Email" onChange={ (e) => stateChanger(e.target.value)}></input>
             </div>
         </>
     );
