@@ -60,17 +60,22 @@
     cursor: pointer;
 }
 
-.submit-button:hover {
+.submit-button:hover:not(:disabled) {
     transform: scale(1.1);
     background-color: var(--light-green);
 }
 
-.submit-button:active {
+.submit-button:active:not(:disabled) {
     transform: scale(0.9);
     transform: translateY(2px);
     -webkit-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
     box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
+}
+
+.submit-button:disabled {
+    background-color: gray;
+    cursor:default;
 }
 
 .to-login-arrow {
