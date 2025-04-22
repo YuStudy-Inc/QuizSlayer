@@ -32,7 +32,7 @@ const EditQuizPage = () => {
     useEffect(() => {
         const fetchQuestionsFromQuiz = () => {
             try {
-                const q = axios.get(`${URI}/quizzes/getQuiz/${quizId}`)
+                const q = axios.get(`${URI}/quizzes/getQuestionsFromQuiz/${quizId}`)
                 setQuestions(q)
             }
             catch (e) {
