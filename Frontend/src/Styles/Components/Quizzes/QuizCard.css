@@ -19,7 +19,14 @@
     font-size: 1.5rem;
 }
 
-.play-button {
+.options-for-quiz-card {
+    display: flex;
+    gap: 1rem;
+}
+
+
+.play-button,
+.edit-button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -36,9 +43,18 @@
     background-color: var(--light-green);
 }
 
-.play-button img {
+.play-button img,
+.edit-button img {
     height: 50%;
     aspect-ratio: 1/1;
+}
+
+.edit-button {
+    background-color: var(--yellow);
+}
+
+.edit-button:hover {
+    background-color: var(--light-yellow);
 }
 
 @media only screen and (max-width: 768px) {

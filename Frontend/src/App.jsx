@@ -1,5 +1,5 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-import { LandingPage, Home, Collection, LoginSignup, Quizzes, Results, CreateQuizPage, Friends, Leaderboard, Settings, PageNotFound} from "./Pages/Pages";
+import { LandingPage, Home, Collection, Gatcha, LoginSignup, Quizzes, Results, CreateQuizPage, EditQuizPage, Friends, Leaderboard, Settings, PageNotFound} from "./Pages/Pages";
 import { Navbar } from './Components/Components'
 
 function App() {
@@ -18,6 +18,8 @@ function App() {
 							<Route path='/leaderboard' element={<Leaderboard />}/>
 					</Route>
 					<Route path='/createquiz' element={<CreateQuizPage />}/>
+					<Route path='/editquiz/:id' element={<EditQuizPage />}/>
+					<Route path='/gatcha' element={<Gatcha />}/>
 					<Route path='/results' element={<Results />}/>
 					<Route path='/settings' element={<Settings />}/>
 					<Route path="*" element={<PageNotFound />}/>

@@ -214,7 +214,7 @@ export const getToDoQuizzes = async(req, res) => {
         const userId = req.params.id
         const user = await User.findOne({_id: userId })
         const quizzesStillLeftToDo = user.quizzes.filter(quiz => quiz.completed === false)
-        res.status(200).json({toDoQuizzes})
+        res.status(200).json({quizzesStillLeftToDo})
     } catch (e) {
         res.status(500).json({error: 'Error retreiving quizzes under TODO status'})
         console.log(e)

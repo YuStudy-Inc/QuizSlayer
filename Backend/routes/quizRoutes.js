@@ -1,5 +1,5 @@
 import express from 'express'
-import { createQuiz, editQuiz, deleteQuiz } from '../controllers/quizController.js'
+import { createQuiz, editQuiz, deleteQuiz, getQuestionsFromQuiz } from '../controllers/quizController.js'
 
 const router = express.Router();
 
@@ -7,6 +7,7 @@ const router = express.Router();
 router.post('/createQuiz', createQuiz)
 router.put('/editQuiz/:id', editQuiz)
 router.delete('/deleteQuiz/:id', deleteQuiz)
+router.get('/getQuestionsFromQuiz/:id', getQuestionsFromQuiz)
 router.get('/', (req, res) => {
     res.send('Users route works!');
   });

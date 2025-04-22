@@ -1,5 +1,8 @@
+import { Schema } from 'mongoose';
 import Schemas from '../schemas/Schemas.js';
 const Quiz = Schemas.Quiz
+const Question = Schema.Question
+
 export const createQuiz = async(req, res) => {
     try {
         const { title, description } = req.body
@@ -48,7 +51,7 @@ export const editQuiz = async (req,res) => {
     }
 }
 
-export const deleteQuiz = async(req, res)=>{
+export const deleteQuiz = async(req, res) => {
     const{id} = req.params;
     try{
         const deletedQuiz = await Quiz.findByIdAndDelete(id);
@@ -62,6 +65,25 @@ export const deleteQuiz = async(req, res)=>{
     catch(err){
         res.status(500).json({error: "Quiz not found"})
         console.log(err)
+    }
+}
+
+export const getQuestionsFromQuiz = async(req, res) => {
+    const { id } = req.params;
+    if (!id)
+        res.status(404).json({error: "Quiz not found"})
+
+    try {
+        const result = await Question.find(id)
+        if (!result) {
+            res.status(500).json({error: "Error finding questions for that quiz"})
+            return;
+        }
+        res.status(200).json({message: "questions retreived successfully", "questions": result})
+    }
+    catch (e) {
+        console.log(e)
+        res.status(500).json({error: "Error finding questions for that quiz"})
     }
 }
 
