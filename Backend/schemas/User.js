@@ -22,8 +22,9 @@ const UserSchema = new Schema({
         type: Boolean,
         default: false
     },
-    pfp: { // TODO
-        type: Number,
+    pfp: {
+        type: String,
+        default: "https://profile-pictures-for-quizslayer.s3.us-east-1.amazonaws.com/duckDefault.png"
     },
     description: {
         type: String,

@@ -1,5 +1,6 @@
 import "../../Styles/Components/Home/TodoList.css"
 import { useState, useEffect } from "react"
+import axios from "axios"
 
 const TodoList = ({ className = "" }) => {
     const URI = import.meta.env.VITE_URI

@@ -1,5 +1,8 @@
 import schemas from '../schemas/Schemas.js';
 import bcrypt from 'bcryptjs'
+import s3 from '../config/s3.js';
+import dotenv from 'dotenv'
+
 import { validEmail, validPassword } from "../utils/validators.js";
 const User = schemas.User
 const hashPassword = ((password) => {
@@ -163,7 +166,39 @@ export const deleteUser = async (req, res) => {
     }
 }
 
-//how we get pfp . Still need to research
+export const uploadPfp = [upload.single('file'), async(req, res) => {
+    const userId = req.params.id
+    const file = req.file
+
+    if (!file)
+        return res.status(400).json({ message: "No file uploaded" })
+
+    const fileName = `${Date.now()}-${file.originalname}`
+    const params = {
+        Bucket: process.env.AWS_S3_BUCKET_NAME,
+        Key: fileName,
+        Body: file.buffer,
+        ContentType: file.mimetype,
+        ACL: "public-read"
+    }
+
+    try {
+        const data = await s3.upload(params).promise()
+        const imageURL = data.Location
+
+        const updatedUser = await User.findByIdAndUpdate(userId, {pfp: imageURL }, {new: true})
+
+        res.status(200).json({
+            message: "profile Picture uploaded",
+            imageURL: imageURL,
+            user: updatedUser,
+        })
+    }
+    catch (e) {
+        console.error("error uploading to the s3 bucket", e)
+        res.status(500).json({message: "error uploading to the s3 bucket", error: e})
+    }
+}]
 
 export const getUsername = async (req, res) => {
     try {

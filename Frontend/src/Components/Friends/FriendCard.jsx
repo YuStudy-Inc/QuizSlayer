@@ -9,8 +9,7 @@ const FriendCard = ({ friendPfp, friendName  }) => {
                 </div>
                 <div className="name">
                     <h1>{friendName}</h1>
-                </div>
-                
+                </div>                
             </div>
         </>
     )
