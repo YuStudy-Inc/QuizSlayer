@@ -91,7 +91,7 @@
     cursor: pointer;
 }
 
-.create-that-flashcard-button:hover {
+.create-that-flashcard-button:hover  {
     background-color: var(--light-green);
     transform: scale(1.1);
 }
@@ -102,7 +102,7 @@
     transition: color 0.2s ease-in-out;
 }
 
-.create-that-flashcard-button h1:hover {
+.create-that-flashcard-button:hover h1 {
     color: var(--white);
 }
 

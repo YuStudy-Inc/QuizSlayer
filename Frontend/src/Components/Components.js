@@ -15,6 +15,7 @@ import Signup from "./LoginSignup/Signup"
 import FriendCard from "./Friends/FriendCard";
 import FlashCard from "./Quizzes/FlashCard"
 import FlashCardCreationOverlay from "./Quizzes/FlashCardCreationOverlay"
+import FlashCardEditOverlay from "./Quizzes/FlashCardEditOverlay";
 import PlayerCard from "./Leaderboard/PlayerCard"
 import AddAFriend from "./Friends/AddAFriend";
 import Footer from "./LandingPage/Footer";
@@ -39,6 +40,7 @@ export {
     FriendCard,
     FlashCard,
     FlashCardCreationOverlay,
+    FlashCardEditOverlay,
     PlayerCard,
     AddAFriend,
     Footer,

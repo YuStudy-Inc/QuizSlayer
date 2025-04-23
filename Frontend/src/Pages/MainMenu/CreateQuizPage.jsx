@@ -9,6 +9,7 @@ const CreateQuizPage = () => {
 	const [description, setDescription] = useState('')
 	const [fileName, setFileName] = useState("");
 	const [showCardCreationOverlay, setShowCardCreationOverlay] = useState(false)
+	const [questions, setQuestions] = useState([])
 
 	const navigate = useNavigate()
 
@@ -27,13 +28,15 @@ const CreateQuizPage = () => {
 
 	const handleDropZoneClick = () => {
 		document.getElementById("file-upload").click();
-	};
+	}
+
 	const handleFileChange = (event) => {
 		if (event.target.files.length > 0) {
 			console.log("File input event:", event.target.files); // Debugging
 			setFileName(event.target.files[0].name); // Display selected file name
 		}
-	};
+	}
+
 	return (
 		<>
 			<div className="create-quiz-container">
@@ -65,13 +68,9 @@ const CreateQuizPage = () => {
 
 							<div className="flash-cards-create-container">
 								<div className="flash-cards">
-									{/* flash card components go here */}
-									<FlashCard questionInput={"what is 1 + 1"} answerInput={"2"} />
-									<FlashCard questionInput={"what is 1 + 1"} answerInput={"2"} />
-									<FlashCard questionInput={"what is 1 + 1"} answerInput={"2"} />
-									<FlashCard questionInput={"what is 1 + 1"} answerInput={"2"} />
-									<FlashCard questionInput={"what is 1 + 1"} answerInput={"2"} />
-									<FlashCard questionInput={"what is 1 + 1"} answerInput={"2"} />
+									{questions.map((question) => (
+                                        <FlashCard key={question._id} id={question._id} questionInput={question.questionPrompt} answerInput={question.answer} editing={false} onEdit={() => {}} />
+                                    ))}
 								</div>
 							</div>
 							<div className="create-card">
@@ -105,7 +104,7 @@ const CreateQuizPage = () => {
 					</button>
 				</div>
 				{showCardCreationOverlay && (
-					<FlashCardCreationOverlay close={handleCardCreationClose}/>
+					<FlashCardCreationOverlay close={(handleCardCreationClose)}/>
 				)}
 			</div>
 		</>

@@ -1,8 +1,8 @@
 import "../../Styles/Pages/MainMenu/CreateQuizPage.css"
-import { plus, download } from "../../assets/Pictures.js";
-import { FlashCard, FlashCardCreationOverlay } from "../../Components/Components.js";
+import { plus } from "../../assets/Pictures.js";
+import { FlashCard, FlashCardCreationOverlay, FlashCardEditOverlay } from "../../Components/Components.js";
 import { useEffect, useState } from 'react';
-import { data, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 const EditQuizPage = () => {
@@ -14,33 +14,34 @@ const EditQuizPage = () => {
         completed: ""
     })
     const [questions, setQuestions] = useState([])
+    const [cardBeingEdited, setCardBeingEdited] = useState(null)
     const [showCardCreationOverlay, setShowCardCreationOverlay] = useState(false)
 
     useEffect(() => {
-        const fetchQuiz = () => {
+        const fetchQuiz = async () => {
             try {
-                const quiz = axios.get(`${URI}/quizzes/getQuiz/${quizId}`)
-                setQuizData(quiz)
+                const { data } = await axios.get(`${URI}/quizzes/getQuiz/${quizId}`)
+                setQuizData(data)
             }
             catch (e) {
                 console.log("error retreiving quiz", e)
             }
         }
         fetchQuiz()
-    }, [])
+    }, [URI, quizId])
 
     useEffect(() => {
-        const fetchQuestionsFromQuiz = () => {
+        const fetchQuestionsFromQuiz = async () => {
             try {
-                const q = axios.get(`${URI}/quizzes/getQuestionsFromQuiz/${quizId}`)
-                setQuestions(q)
+                const { data } = await axios.get(`${URI}/quizzes/getQuestionsFromQuiz/${quizId}`)
+                setQuestions(data)
             }
             catch (e) {
                 console.log("error retreiving questions for quiz", e)
             }
         }
         fetchQuestionsFromQuiz()
-    }, [])
+    }, [URI, quizId])
 
 
     const navigate = useNavigate()
@@ -65,6 +66,31 @@ const EditQuizPage = () => {
         setShowCardCreationOverlay(false)
     }
 
+    const handleEditCardOverlay = (id) => {
+        setCardBeingEdited(id)
+    }
+
+    const handleEditCardClose = () => {
+        setCardBeingEdited(null)
+    }
+
+    const handleQuizSaveChanges = async () => {
+        try {
+            const quizResponse = await axios.put(`${URI}/quizzes/editQuiz/${quizId}`, quizData )
+            if (quizResponse.status === 200) {
+                console.log("successfully edited Quiz")
+            }
+
+            const questionsResponse = await axios.put(`${URI}/questions/editQuestion`, {questions})
+            if (questionsResponse.status === 200) {
+                console.log("successfully edited Quiz")
+            }
+            navigate(-1)
+        }
+        catch (e) {
+            console.error("error saving changes to quiz", e)
+        }
+    }
     
     return (
         <>
@@ -77,18 +103,18 @@ const EditQuizPage = () => {
                 <div className="creation-of-flash-cards">
 
                     <div className="title-section">
-                        <h1>Create Quiz</h1>
+                        <h1>Edit Quiz</h1>
                     </div>
                     <div className="two-side-container">
                         <div className="left-side">
                             <label>
                                 <p>Title</p>
-                                <span><input type="text" onChange={handleChange} /></span>
+                                <span><input type="text" name="title" value={quizData.title ? quizData.title : ""} onChange={handleChange} /></span>
                             </label>
 
                             <label>
                                 <p>Description</p>
-                                <span><input type="text" onChange={handleChange} /></span>
+                                <span><input type="text" name="description" value={quizData.description ? quizData.description : ""} onChange={handleChange} /></span>
                             </label>
 
                             <div className="card-section">
@@ -97,13 +123,9 @@ const EditQuizPage = () => {
 
                             <div className="flash-cards-create-container">
                                 <div className="flash-cards">
-                                    {/* flash card components go here */}
-                                    <FlashCard questionInput={"what is 1 + 1"} answerInput={"2"} />
-                                    <FlashCard questionInput={"what is 1 + 1"} answerInput={"2"} />
-                                    <FlashCard questionInput={"what is 1 + 1"} answerInput={"2"} />
-                                    <FlashCard questionInput={"what is 1 + 1"} answerInput={"2"} />
-                                    <FlashCard questionInput={"what is 1 + 1"} answerInput={"2"} />
-                                    <FlashCard questionInput={"what is 1 + 1"} answerInput={"2"} />
+                                    {questions.map((question) => (
+                                        <FlashCard key={question._id} id={question._id} questionInput={question.questionPrompt} answerInput={question.answer} editing={true} onEdit={() => {handleEditCardOverlay(question._id)}} />
+                                    ))}
                                 </div>
                             </div>
                             <div className="create-card">
@@ -115,13 +137,14 @@ const EditQuizPage = () => {
                     </div>
                 </div>
                 <div className="create-that-quiz">
-                    <button className="create-that-quiz-button" onClick={handleQuizCreation}>
-                        <h1>Create</h1>
+                    <button className="edit-that-quiz-button" onClick={handleQuizSaveChanges}>
+                        <h1>Save Changes</h1>
                     </button>
                 </div>
                 {showCardCreationOverlay && (
                     <FlashCardCreationOverlay close={handleCardCreationClose}/>
                 )}
+                 {cardBeingEdited && (<FlashCardEditOverlay id={cardBeingEdited} close={handleEditCardClose}/>)}
             </div>
         </>
     )

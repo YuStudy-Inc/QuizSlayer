@@ -18,6 +18,9 @@ const QuestionSchema = new Schema({
     answer: {
         type: String,
     },
+
+
+    //we might get rid of this and just do a constant damage to the enemy and you
     difficulty: {
         type: String,
     },

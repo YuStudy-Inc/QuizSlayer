@@ -1,4 +1,5 @@
 .flashcard-container {
+    position: relative;
     width: calc(100% - 2rem);
     height: 10rem;
     background-color: var(--white);
@@ -26,4 +27,44 @@
 .answer {
     width: 100%;
     padding-left: 1rem ;
+}
+
+.edit-button-on-the-flashcard {
+    top: 0;
+    left: 0;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.edit-button-on-the-flashcard button {
+    width: 3.5rem;
+    aspect-ratio: 1/1;
+    border: none;
+    background-color: var(--red);
+    border-radius: 20px;
+    opacity: 85%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease-in-out;
+}
+
+.edit-button-on-the-flashcard img {
+    width: 20px;
+    aspect-ratio: 1/1;
+}
+
+.edit-button-on-the-flashcard button:hover {
+    transform: scale(1.2);
+}
+
+.editing {
+    opacity: 1;
+    visibility: visible;
 }
