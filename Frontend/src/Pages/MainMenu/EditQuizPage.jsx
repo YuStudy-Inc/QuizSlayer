@@ -46,11 +46,6 @@ const EditQuizPage = () => {
 
     const navigate = useNavigate()
 
-    const handleQuizCreation = () => {
-        /* backend stuff */
-        navigate('/quizzes')
-    }
-
     const handleChange = (e) => {
         setQuizData(prev => ({
             ...prev,

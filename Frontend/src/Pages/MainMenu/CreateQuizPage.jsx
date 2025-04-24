@@ -5,18 +5,41 @@ import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
 const CreateQuizPage = () => {
-	const [title, setTitle] = useState('')
-	const [description, setDescription] = useState('')
+	const [quizData, setQuizData] = useState({
+        title: "",
+        description: "",
+        completed: ""
+    })
 	const [fileName, setFileName] = useState("");
 	const [showCardCreationOverlay, setShowCardCreationOverlay] = useState(false)
 	const [questions, setQuestions] = useState([])
 
 	const navigate = useNavigate()
 
-	const handleQuizCreation = () => {
-		/* backend stuff */
-		navigate('/quizzes')
+	const handleQuizCreation = async () => {
+		try {
+            const quizResponse = await axios.put(`${URI}/quizzes/createQuiz/`, quizData )
+            if (quizResponse.status === 200) {
+                console.log("successfully created Quiz")
+            }
+
+            const questionsResponse = await axios.post(`${URI}/questions/createQuestion`, {questions})
+            if (questionsResponse.status === 200) {
+                console.log("successfully created Quiz Questions")
+            }
+            navigate(-1)
+        }
+        catch (e) {
+            console.error("error saving changes to quiz", e)
+        }
 	}
+
+	const handleChange = (e) => {
+        setQuizData(prev => ({
+            ...prev,
+            [e.target.name]: e.target.value
+        }))
+    }
 
 	const createCard = () => {
 		setShowCardCreationOverlay(true)
@@ -54,12 +77,12 @@ const CreateQuizPage = () => {
 						<div className="left-side">
 							<label>
 								<p>Title</p>
-								<span><input type="text" value={title} onChange={(e) => setTitle(e.target.value)} /></span>
+								<span><input type="text" name="title" onChange={handleChange} /></span>
 							</label>
 
 							<label>
 								<p>Description</p>
-								<span><input type="text" value={description} onChange={(e) => setDescription(e.target.value)} /></span>
+								<span><input type="text" name="description" onChange={handleChange} /></span>
 							</label>
 
 							<div className="card-section">

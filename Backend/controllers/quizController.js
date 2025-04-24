@@ -68,6 +68,28 @@ export const deleteQuiz = async(req, res) => {
     }
 }
 
+export const getQuizzes = async(req, res) => {
+    try {
+        const userId = req.params.id
+        const quizzes = await Quiz.find({user: userId})
+        res.status(200).json({quizzes})
+    } catch (e) {
+        res.status(500).json({error: 'Error retreiving quizzes'})
+        console.log(e)
+    }
+}
+
+export const getToDoQuizzes = async(req, res) => {
+    try {
+        const userId = req.params.id
+        const quizzesStillLeftToDo = await find({user: userId, completed: false})
+        res.status(200).json({quizzesStillLeftToDo})
+    } catch (e) {
+        res.status(500).json({error: 'Error retreiving quizzes under TODO status'})
+        console.log(e)
+    }
+}
+
 export const getQuestionsFromQuiz = async(req, res) => {
     const { id } = req.params;
     if (!id)

@@ -2,9 +2,26 @@ import "../../Styles/Pages/MainMenu/Quizzes.css"
 import { QuizCard } from "../../Components/Components"
 import { pencil } from "../../assets/Pictures"
 import { useNavigate } from "react-router-dom"
+import { useEffect, useState } from "react"
 
 const Quizzes = () => {
+	const URI = import.meta.env.VITE_URI
 	const navigate = useNavigate();
+	const [quizzes, setQuizzes] = useState([])
+
+	useEffect(() => {
+        const fetchQuizzes = async () => {
+            try {
+                const { data } = await axios.get(`${URI}/quizzes/getQuizzes/${userId}`)
+                setQuizzes(data)
+            }
+            catch (e) {
+                console.log("error retreiving questions for quiz", e)
+            }
+        }
+        fetchQuizzes()
+    }, [URI, userID])
+
 
 	const editThatQuiz = (id) => {
 		navigate(`/editquiz/${id}`)
@@ -14,7 +31,6 @@ const Quizzes = () => {
 
 	return (
 		<>
-			
 			<div className="quiz-container">
 				<div className="all-the-quizzes">
 					<h1 className="title-quizzes">Your Quizzes</h1>
@@ -22,26 +38,17 @@ const Quizzes = () => {
 						<div className="container-for-quiz-card">
 							<h1 className="todo-quizzes quiz-progress-titles">Todo</h1>
 							<div className="quizCards">
-								<QuizCard id={1} category={"Testing"} title={"First Card"} url="/" editThatQuiz={editThatQuiz}/>
-								<QuizCard id={2} category={"Testing"} title={"First Card"} url="/" editThatQuiz={editThatQuiz}/>
-								<QuizCard id={3} category={"Testing"} title={"First Card"} url="/" editThatQuiz={editThatQuiz}/>
-								<QuizCard id={4} category={"Testing"} title={"First Card"} url="/" editThatQuiz={editThatQuiz}/>
-
-							</div>
-						</div>
-						<div className="container-for-quiz-card">
-							<h1 className="in-progress-quizzes quiz-progress-titles">In Progress</h1>
-							<div className="quizCards">
-								<QuizCard id={5} category={"Testing"} title={"First Card"} url="/home" editThatQuiz={editThatQuiz}/>
-								<QuizCard id={6} category={"Testing"} title={"First Card"} url="/home" editThatQuiz={editThatQuiz}/>
-
+								{quizzes.map((quiz) => !quiz.completed ? (
+									<QuizCard key={quiz._id} id={quiz._id} userId={userId} title={quiz.title} url="/" editThatQuiz={() => editThatQuiz(quiz._id)}/>
+								) : null )}
 							</div>
 						</div>
 						<div className="container-for-quiz-card">
 							<h1 className="finished-quizzes quiz-progress-titles">Finished</h1>
 							<div className="quizCards">
-								<QuizCard id={7} category={"Testing"} title={"First Card"} url="/home" editThatQuiz={editThatQuiz}/>
-
+								{quizzes.map((quiz) => quiz.completed ? (
+									<QuizCard key={quiz._id} id={quiz._id} userId={userId} title={quiz.title} url="/" editThatQuiz={() => editThatQuiz(quiz._id)}/>
+								) : null )} 
 							</div>
 						</div>
 					</div>
