@@ -6,6 +6,7 @@ const PasswordSettings = ({
    newPassword,
    newPasswordAgain
 })=>{
+    
     return(
         <div className="password-settings active-settings">
         <div className="old-password move">
@@ -20,7 +21,7 @@ const PasswordSettings = ({
             <h1>Retype New Password</h1>
             <input className="new-password-again" type="text"/>
         </div>
-        <button className="submit-password-edit move">Save Changes</button>
+        <button className="submit-password-edit move" onClick={onSaveChanges}>Save Changes</button>
     </div>
 
     )

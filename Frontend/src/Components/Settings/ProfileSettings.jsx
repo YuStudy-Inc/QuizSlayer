@@ -10,24 +10,37 @@ const ProfileSettings = () => {
   const onProfilePicChange = (e) => {
     // handle profile pic change if needed
   };
-
   const onSaveChanges = async () => {
-    try {
-      const response = await axios.put(
-        `https://00qy8vpnab.execute-api.us-east-1.amazonaws.com/users/editUser/${user._id}`, 
-        {
-          username,
-          description
-        }
-      );
-
-      // update localStorage if needed
-      localStorage.setItem("user", JSON.stringify(response.data.user));
-      alert("Changes saved!");
-    } catch (err) {
-      console.error(err);
-      alert("Failed to save changes.");
-    }
+    axios({
+      method: "put",
+      url: `https://00qy8vpnab.execute-api.us-east-1.amazonaws.com/users/editUser/${user._id}`,
+      data: {
+        username: username,
+        description: description
+      },
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    .then((response) => {
+      console.log("Update Success:", response.data);
+      alert("It worked")
+      // Update local storage or UI with new user data if needed
+      localStorage.setItem('user', JSON.stringify(response.data));
+    })
+    .catch((error) => {
+      const response = error.response;
+      alert("It did not work")
+      if (response) {
+        console.log(response.data);
+        console.log(response.status);
+        console.log(response.headers);
+      } else if (error.request) {
+        console.log(error.request);
+      } else {
+        console.log("Error", error.message);
+      }
+    });
   };
     return(
         <div className="profile-settings active-settings">
