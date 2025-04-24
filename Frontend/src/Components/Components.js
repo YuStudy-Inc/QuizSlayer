@@ -11,6 +11,9 @@ import TodoList from "./Home/TodoList";
 import Notifications from "./Home/Notifications"
 import FriendRequest from "./Home/FriendRequest"
 import Login from "./LoginSignup/Login"
+import AccountSettings from './Settings/AccountSettings'
+import PasswordSettings from './Settings/PasswordSettings'
+import ProfileSettings from './Settings/ProfileSettings'
 import Signup from "./LoginSignup/Signup"
 import FriendCard from "./Friends/FriendCard";
 import FlashCard from "./Quizzes/FlashCard"
@@ -36,6 +39,9 @@ export {
     FriendRequest,
     Login,
     Signup,
+    AccountSettings,
+    PasswordSettings,
+    ProfileSettings,
     FriendCard,
     FlashCard,
     FlashCardCreationOverlay,

@@ -72,6 +72,8 @@ const Login = ({onToggle}) => {
         })
         .then((response) => {
             // The response should be a session ID. Just route to home for now.
+            localStorage.setItem('user', JSON.stringify(response.data.user));
+            console.log(JSON.parse(localStorage.getItem('user')));
             routeHome();
         })
         .catch((error) => {
