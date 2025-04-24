@@ -5,7 +5,7 @@ const Question = Schema.Question
 
 export const createQuiz = async(req, res) => {
     try {
-        const { title, description } = req.body
+        const { title, description } =body
     
         if (!title || !description || title === "" || description === "")
             return res.status(404).json({ message: "Not all fields filled out" })
