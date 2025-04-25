@@ -39,6 +39,7 @@ import mongoose from 'mongoose';
 // }
 mongoose.Promise = global.Promise
 const MONGODB_URI = process.env.MONGODB_URI
+console.log("MONGODB URI: " + MONGODB_URI)
 let cachedClient = null;
 
 // Function to connect to MongoDB
