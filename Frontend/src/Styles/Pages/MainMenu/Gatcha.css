@@ -22,17 +22,28 @@
     gap: 1rem;
 }
 
-.chest {
+.rarity {
+    width: 30%;
+}
+
+.rarity img {
+    width: 100%;
+}
+
+.chest,
+.picture-of-the-thing-you-won {
     width: 30%;
     aspect-ratio: 1/1;
 }
 
-.chest img {
+.chest img,
+.picture-of-the-thing-you-won img {
     width: 100%;
     aspect-ratio: 1/1;
 }
 
-.coins h1 {
+.coins h1,
+.name-of-the-thing-you-won h1{
     color: var(--white);
 }
 

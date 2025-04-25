@@ -33,6 +33,10 @@ import lootBox from "../assets/Collection/lootbox.png";
 import chestClosed from "../assets/Collection/chestClosed.png"
 import chestOpened from "../assets/Collection/chestOpened.png"
 import coins from "../assets/Collection/coins.png"
+import oneStar from "../assets/Collection/oneStar.png"
+import twoStar from "../assets/Collection/twoStar.png"
+import threeStar from "../assets/Collection/threeStar.png"
+import fourStar from "../assets/Collection/fourStar.png"
 import addUser from  "./Friends/add-user.png"
 import maomao from "./Friends/maomao.jpg"
 import lockIcon from "./LoginSignup/lock_icon.png"
@@ -80,7 +84,11 @@ export {
     bell,
     chestClosed,
     chestOpened,
-    coins
+    coins,
+    oneStar,
+    twoStar,
+    threeStar,
+    fourStar
 }
 
 //bruh im so lazy i had to make chatGPT write this 😭😭😭😭😭
