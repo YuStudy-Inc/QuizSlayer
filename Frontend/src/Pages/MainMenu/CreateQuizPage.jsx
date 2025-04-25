@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
 const CreateQuizPage = () => {
+	const URI = import.meta.env.VITE_URI
 	const [quizData, setQuizData] = useState({
         title: "",
         description: "",

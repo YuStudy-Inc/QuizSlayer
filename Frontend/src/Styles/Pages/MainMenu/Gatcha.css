@@ -1,0 +1,90 @@
+.gatcha-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("../../../assets/Backgrounds/backgroundGatcha.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    
+}
+
+.stuff-in-gatcha {
+    width: 90%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.chest {
+    width: 30%;
+    aspect-ratio: 1/1;
+}
+
+.chest img {
+    width: 100%;
+    aspect-ratio: 1/1;
+}
+
+.coins h1 {
+    color: var(--white);
+}
+
+.button-for-gatcha button {
+    background-color: var(--dark-green);
+    padding: 0.5rem 1rem;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 10px;
+    border: transparent;
+    -webkit-box-shadow: 0px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 10px 5px 0px rgba(0,0,0,0.75);
+    transition: all 0.2s ease-in-out;
+    color: var(--white);
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.button-for-gatcha button:hover {
+    transform: scale(1.1);
+}
+
+.button-for-gatcha button:active {
+    transform: scale(0.9);
+    transform: translateY(2px);
+    -webkit-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
+}
+
+.chest-opening {
+    animation: openTheBox 4s ease-in;
+}
+
+@keyframes openTheBox {
+    0% {
+        transform: rotate(-30deg);
+    }
+    20% {
+        transform: rotate(30deg);
+    }
+    40% {
+        transform: rotate(-30deg);
+    }
+    60% {
+        transform: rotate(30deg);
+    }
+    80% {
+        transform: rotate(-30deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}

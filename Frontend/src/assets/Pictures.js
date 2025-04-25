@@ -9,7 +9,7 @@ import chiikawaBackground from "../assets/Backgrounds/chiikawaBackground.jpg"
 
 import bananaPeel from "../assets/Hats/bananaPeel.png";
 import bucketHat from "../assets/Hats/bucketHat.png";
-import diamondHelment from "../assets/Hats/diamondHelmet.png";
+import diamondHelmet from "../assets/Hats/diamondHelmet.png";
 import wizardHat from "../assets/Hats/wizardHat.png";
 import nightCap from "../assets/Hats/nightCap.png";
 import pot from "../assets/Hats/pot.png";
@@ -30,6 +30,9 @@ import redBalloon from "../assets/Weapons/redBalloon.png";
 import sign404 from "../assets/sign404.png";
 
 import lootBox from "../assets/Collection/lootbox.png";
+import chestClosed from "../assets/Collection/chestClosed.png"
+import chestOpened from "../assets/Collection/chestOpened.png"
+import coins from "../assets/Collection/coins.png"
 import addUser from  "./Friends/add-user.png"
 import maomao from "./Friends/maomao.jpg"
 import lockIcon from "./LoginSignup/lock_icon.png"
@@ -51,7 +54,7 @@ export {
     triceratops,
     chiikawaBackground,
     crowCharacter,
-    diamondHelment,
+    diamondHelmet,
     duckCharacter,
     frogCharacter,
     nightCap,
@@ -74,7 +77,10 @@ export {
     pencil,
     playButton,
     plus,
-    bell
+    bell,
+    chestClosed,
+    chestOpened,
+    coins
 }
 
 //bruh im so lazy i had to make chatGPT write this 😭😭😭😭😭

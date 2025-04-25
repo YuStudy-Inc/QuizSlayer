@@ -20,7 +20,7 @@ const Quizzes = () => {
             }
         }
         fetchQuizzes()
-    }, [URI, userID])
+    }, [URI, userId])
 
 
 	const editThatQuiz = (id) => {

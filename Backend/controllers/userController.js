@@ -328,3 +328,9 @@ export const sendFriendRequest = async(req, res) => {
         console.log(e)
     }
 }
+
+//getCoins
+
+//UpdateCoins
+
+//AddCharacter
