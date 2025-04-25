@@ -4,16 +4,17 @@ import { maomao, pencil } from "../../assets/Pictures"
 import axios from "axios"
 const user = JSON.parse(localStorage.getItem('user'));
 const ProfileSettings = () => {
-  const [username, setUsername] = useState(user.username);
-  const [description, setDescription] = useState(user.description);
+  const [username, setUsername] = useState('');
+  const [description, setDescription] = useState('');
   const [profilePic, setProfilePic] = useState(user.pfp)
+  const url =`https://00qy8vpnab.execute-api.us-east-1.amazonaws.com/users/editUser/${user._id}`
   const onProfilePicChange = (e) => {
     // handle profile pic change if needed
   };
   const onSaveChanges = async () => {
     axios({
       method: "put",
-      url: `https://00qy8vpnab.execute-api.us-east-1.amazonaws.com/users/editUser/${user._id}`,
+      url: url,
       data: {
         username: username,
         description: description
