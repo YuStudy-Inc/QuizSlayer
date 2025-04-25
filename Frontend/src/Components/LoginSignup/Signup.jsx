@@ -96,7 +96,8 @@ const Signup = ({ onToggle }) => {
                 method: "post",
                 url: "https://00qy8vpnab.execute-api.us-east-1.amazonaws.com/users/createUser",
                 // url: "http://localhost:3000/users/createUser",
-                data: formData
+                data: formData,
+                withCredentials:true,
             })
             .then((response) => {
                 // The response should be a session ID. Just route to home for now.
