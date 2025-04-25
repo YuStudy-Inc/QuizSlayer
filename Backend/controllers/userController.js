@@ -44,7 +44,7 @@ export const createUser = async (req, res) => {
             username,
             email,
             password: hashedPassword,
-            isOneline: true,
+            isOnline: true,
             pfp: "", //pfp string url, save a temp one for now after creation
             description: "", //description, empty for now (could default to "" in the schema)
             friendsList: [],
@@ -59,6 +59,9 @@ export const createUser = async (req, res) => {
             monstersSlain: 0,
         })
         await newUser.save()
+
+        req.session.userID = newUser._id;
+
         res.status(201).json({
             "message": "new user created",
             "user": newUser
@@ -85,6 +88,8 @@ export const loginUser = async (req, res) => {
             return res.status(400).json({ message: "Invalid Password" })
 
         await changeActiveStatus(user)
+
+        req.session.userID = user._id;
 
         return res.status(200).json({
             "message": "Login Successful",

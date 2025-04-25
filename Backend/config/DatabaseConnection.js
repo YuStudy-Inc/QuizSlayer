@@ -1,4 +1,3 @@
-
 import mongoose from 'mongoose';
 // Uses path of first file to import (should be server.js)
 
@@ -51,6 +50,7 @@ const DatabaseConnection = async () =>{
 
   try {
     const client = await mongoose.connect(MONGODB_URI);
+    // const client = mongoose.createConnection(MONGODB_URI);
     console.log("MongoDB connected successfully");
     cachedClient = client;
     return client;
