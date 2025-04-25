@@ -1,8 +1,11 @@
 import { Podium } from "../../Components/Components.js"
 import { duckCharacter, bucketHat, playfulCloud, lootBox } from "../../assets/Pictures.js"
 import "../../Styles/Pages/MainMenu/Collection.css"
+import { useNavigate } from "react-router-dom"
 
 const Collection = () => {
+    const navigate = useNavigate()
+
     return (
         <>
             <div className="collection-page">
@@ -43,7 +46,7 @@ const Collection = () => {
                     </div>
                 </div>
                 <div className="gatcha">
-                    <button className="gatcha-button">
+                    <button className="gatcha-button" onClick={() => {navigate('/gatcha')}}>
                         <img src={lootBox} alt="" />
                     </button>
                 </div>

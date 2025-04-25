@@ -71,7 +71,7 @@
 }
 
 .in-progress-quizzes {
-    color: #AFB252;
+    color: var(--yellow);
 }
 
 .finished-quizzes {
