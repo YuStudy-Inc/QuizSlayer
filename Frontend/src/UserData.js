@@ -12,6 +12,9 @@ const UserData = (() => {
     }
 
     const updateUserData = () => {
+        userDataCookie = document.cookie
+        .split('; ')
+        .find(row => row.startsWith('userData='));
         if (userDataCookie) {
             userData = JSON.parse(decodeURIComponent(userDataCookie.split('=')[1]));
         } else {

@@ -292,6 +292,53 @@ export const getInventory = async (req, res) => {
     }
 }
 
+export const updateSelections = async (req, res) => {
+    try {
+        const userId = req.session.userID;
+        const { selectedCharacter, selectedHat, selectedWeapon } = req.body;
+
+        const updateFields = {};
+        if (selectedCharacter !== undefined) updateFields.selectedCharacter = selectedCharacter;
+        if (selectedHat !== undefined) updateFields.selectedHat = selectedHat;
+        if (selectedWeapon !== undefined) updateFields.selectedWeapon = selectedWeapon;
+
+        const user = await User.findOneAndUpdate(
+            { _id: userId },
+            { $set: updateFields },
+            { new: true }
+        );
+
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        res.cookie('userData', JSON.stringify({
+            username: user.username,
+            pfp: user.pfp,
+            description: user.description,
+            friendsList: user.friendsList,
+            friendRequests: user.friendRequests,
+            inventory: user.inventory,
+            characterList: user.characterList,
+            selectedCharacter: user.selectedCharacter,
+            selectedHat: user.selectedHat,
+            selectedWeapon: user.selectedWeapon,
+            xp: user.xp,
+            coins: user.coins,
+            monstersSlain: user.monstersSlain
+        }), {
+            // httpOnly: true,
+            // secure: process.env.NODE_ENV === 'production',
+            // sameSite: 'strict'
+        });
+
+        return res.status(200).json({ message: "Selections updated successfully" });
+    } catch (e) {
+        res.status(500).json({ error: "Error updating selections" });
+        console.log(e);
+    }
+};
+
 export const getTop10 = async (req, res) => {
     try {
         const top10Players = await User.find().sort({ monstersSlain: -1 }).limit(10)

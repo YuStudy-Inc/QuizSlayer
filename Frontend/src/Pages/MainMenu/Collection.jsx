@@ -8,6 +8,8 @@ import { useState } from "react"
 import HatsEnum from "../../assets/Hats/HatsEnum.js"
 import WeaponsEnum from "../../assets/Weapons/WeaponsEnum.js"
 
+import axios from "axios";
+
 const Collection = () => {
     const navigate = useNavigate()
 
@@ -36,7 +38,32 @@ const Collection = () => {
         setSelectedWeapon(weapons[newIndex]);
     };
 
+    const hasAll = () => {
+        let hasCharacter = UserData.getCharacterList().includes(parseInt(selectedCharacter));
+        let hasHat = selectedHat == "0" || UserData.getInventory().includes(parseInt(selectedHat));
+        let hasWeapon = selectedWeapon == "0" || UserData.getInventory().includes(parseInt(selectedWeapon));
 
+        return hasCharacter && hasHat && hasWeapon;
+    }
+
+    const save = () => {
+
+        if(!hasAll()) {
+            return;
+        }
+
+        axios({
+            method: "post",
+            // url: "https://00qy8vpnab.execute-api.us-east-1.amazonaws.com/users/updateSelections/",
+            url: "http://localhost:3000/users/updateSelections",
+            data: {
+                selectedCharacter,
+                selectedHat,
+                selectedWeapon
+            },
+            withCredentials:true,
+        })
+    }
 
     return (
         <>
@@ -47,7 +74,13 @@ const Collection = () => {
                             <h1>Collection</h1>
                         </div>
                         <div className="podium-centerer-collection">
-                            <Podium className="collection-podium"/>
+                            {/* <Podium className="collection-podium"/> */}
+                                <Podium 
+                                    className="collection-podium" 
+                                    character={selectedCharacter} 
+                                    hat={selectedHat} 
+                                    weapon={selectedWeapon} 
+                                />
                         </div>
                     </div>
                     <div className="collection-page-right-container test">
@@ -78,7 +111,7 @@ const Collection = () => {
                                 <p className="collection-page-select-arrow right" onClick={() => updateWeapon("right")}> &#62; </p>
                             </div>
                         </div>
-                        <button>Save</button>
+                        <button onClick={() => save()} disabled={!hasAll()}>Save</button>
                     </div>
                 </div>
                 <div className="gatcha">

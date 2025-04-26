@@ -9,7 +9,6 @@ const Home = () => {
     const [openNotifications, setOpenNotifications] = useState(false)
 
     const navigate = useNavigate()
-    UserData.updateUserData();
 
     return(
         <>
