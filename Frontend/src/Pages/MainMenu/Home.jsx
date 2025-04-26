@@ -3,11 +3,13 @@ import "../../Styles/Pages/MainMenu/Home.css"
 import { useNavigate } from "react-router-dom"
 import { maomao, bell } from "../../assets/Pictures"
 import { useState } from "react"
+import UserData from "../../UserData.js"
 
 const Home = () => {
     const [openNotifications, setOpenNotifications] = useState(false)
 
     const navigate = useNavigate()
+    UserData.updateUserData();
 
     return(
         <>

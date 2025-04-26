@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import Email from "./Email";
 import Password from "./Password";
 import "../../Styles/Pages/LoginSignup/LoginSignup.css"
+import UserData from "../../UserData";
 
 import axios from "axios";
 
@@ -20,7 +21,8 @@ const Login = ({onToggle}) => {
 
     const navigate = useNavigate();
     const routeHome = () => {
-        navigate('../home')
+        navigate('../home');
+        window.location.reload();
     }
 
     const handleClick = (event) => {
@@ -72,7 +74,7 @@ const Login = ({onToggle}) => {
             withCredentials:true,
         })
         .then((response) => {
-            // The response should be a session ID. Just route to home for now.
+            UserData.updateUserData();
             routeHome();
         })
         .catch((error) => {

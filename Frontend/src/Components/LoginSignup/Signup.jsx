@@ -4,6 +4,7 @@ import Username from "./Username";
 import Password from "./Password";
 import Email from "./Email"
 import "../../Styles/Pages/LoginSignup/LoginSignup.css"
+import UserData from "../../UserData";
 
 import axios from "axios";
 
@@ -28,6 +29,7 @@ const Signup = ({ onToggle }) => {
     const navigate = useNavigate();
     const routeHome = () => {
         navigate('../home')
+        window.location.reload();
     }
 
     const handleClick = () => {
@@ -100,7 +102,8 @@ const Signup = ({ onToggle }) => {
                 withCredentials:true,
             })
             .then((response) => {
-                // The response should be a session ID. Just route to home for now.
+                UserData.updateUserData();
+                setValidated(validated)
                 routeHome();
             })
             .catch((error) => {
