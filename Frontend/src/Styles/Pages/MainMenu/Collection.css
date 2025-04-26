@@ -118,7 +118,7 @@
     flex-basis: 90%;
 }
 
-.gatcha button {
+.gacha button {
     background-color: var(--white);
     width: 4rem;
     aspect-ratio: 1/1;
@@ -137,12 +137,12 @@
     cursor: pointer;
 }
 
-.gatcha button:hover {
+.gacha button:hover {
     background-color: var(--light-green);
     transform: scale(1.1);
 }
 
-.gatcha button:active {
+.gacha button:active {
     transform: scale(0.9);
     transform: translateY(2px);
     -webkit-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
@@ -151,7 +151,7 @@
 
 }
 
-.gatcha img {
+.gacha img {
     width: 75%;
     aspect-ratio: 1/1;
 }

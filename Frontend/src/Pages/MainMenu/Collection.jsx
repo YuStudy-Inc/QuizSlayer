@@ -45,8 +45,8 @@ const Collection = () => {
                         </div>
                     </div>
                 </div>
-                <div className="gatcha">
-                    <button className="gatcha-button" onClick={() => {navigate('/gatcha')}}>
+                <div className="gacha">
+                    <button className="gacha-button" onClick={() => {navigate('/gacha')}}>
                         <img src={lootBox} alt="" />
                     </button>
                 </div>

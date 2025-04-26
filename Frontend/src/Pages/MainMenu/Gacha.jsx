@@ -1,4 +1,4 @@
-import "../../Styles/Pages/MainMenu/Gatcha.css"
+import "../../Styles/Pages/MainMenu/Gacha.css"
 import { useState, useEffect } from "react"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
@@ -10,7 +10,9 @@ import {
     coins, oneStar, twoStar, threeStar, fourStar 
 } from "../../assets/Pictures"
 
-const Gatcha = () => {  
+const user = JSON.parse(localStorage.getItem('user'));
+
+const Gacha = () => {  
     const URI = import.meta.env.VITE_URI
     const oneStarItems = [
         coins
@@ -53,13 +55,13 @@ const Gatcha = () => {
     
 
     const [usersCoins, setUsersCoins] = useState(100)
-    const [gatchaAnimation, setGatchaAnimation] = useState(false)
+    const [gachaAnimation, setgachaAnimation] = useState(false)
     const [alertForInsufficientFunds, setAlertForInsufficientFunds] = useState(false)
     const [isChestOpen, setIsChestOpen] = useState(false)
     const [stars, setStars] = useState(null)
     const [itemWon, setItemWon] = useState(null)
     const [itemName, setItemName] = useState(null)
-    const [theResultsPageOfTheGatcha, setTheResultsPageOfTheGatcha] = useState(false)
+    const [theResultsPageOfThegacha, setTheResultsPageOfThegacha] = useState(false)
     const [coinsTextIfTheyAlreadyWonThatItem, setCoinsTextIfTheyAlreadyWonThatItem] = useState(null)
 
     const navigate = useNavigate()
@@ -69,18 +71,19 @@ const Gatcha = () => {
     useEffect(() => {
         const fetchUsersCoins = async () => {
             try {
-                const { data } = await axios.get(`${URI}/users/getUsersCoins/${userId}`)
-                setUsersCoins(data)
+                const response = await axios.get(`${URI}/users/getUsersCoins/${user._id}`)
+                if (response.status === 200)
+                    setUsersCoins(response.data)
             }
             catch (e) {
                 console.error("error retreiving user's coins")
             }
         }
         fetchUsersCoins()
-    }, [URI, userId])
+    }, [URI, user._id])
 
     const handleRoll = async () => {
-        setTheResultsPageOfTheGatcha(false)
+        setTheResultsPageOfThegacha(false)
         setCoinsTextIfTheyAlreadyWonThatItem(null)
 
         if (usersCoins < 100) {
@@ -89,17 +92,25 @@ const Gatcha = () => {
         }
         else {
             try {
-                const { data } = await axios.put(`${URI}/users/updateCoins/${userId}`, -100)
-                if (data.status === 200)
+                const response = await axios.put(`${URI}/users/updateCoins/${user._id}`, {
+                    coins: -100
+                })
+                if (response.status === 200)
                     console.log("purchase loot box successful")
                 
                 theGamblingAlgorithm()
 
                 //one star = 50, two stars = 75, three = 100 four == 300
                 try {
-                    const { characterData } = await axios.get(`${URI}/users/getCharacters/${userId}`)
-                    const { inventoryData } = await axios.get(`${URI}/users/getInventory/${userId}`)
-                    if (characterData.includes(itemWon) || inventoryData.includes(itemWon)) {
+                    const characterData = await axios.get(`${URI}/users/getCharacters/${user._id}`)
+                    const inventoryData = await axios.get(`${URI}/users/getInventory/${user._id}`)
+
+                    if (characterData.status !== 200 || inventoryData.status !== 200) {
+                        console.error("Failed to fetch character or inventory data");
+                        return;
+                    }
+
+                    if (characterData.data.includes(itemWon) || inventoryData.data.includes(itemWon)) {
                         switch (stars) {
                             case (oneStar):
                                 coinsIfTheyAlreadyWonThatItem = 50
@@ -128,8 +139,10 @@ const Gatcha = () => {
 
                 if (coinsTextIfTheyAlreadyWonThatItem === null && stars === fourStar) {
                     try {
-                        const { data } = await axios.put(`${URI}/users/addCharacter/${userId}`)
-                        if (data.status === 200)
+                        const response = await axios.put(`${URI}/users/addCharacter/${user._id}`, {
+                            character: itemWon
+                        })
+                        if (response.status === 200)
                             console.log("added new character to User's collection")
                     }
                     catch (e) {
@@ -138,8 +151,10 @@ const Gatcha = () => {
                 }
                 else if (coinsTextIfTheyAlreadyWonThatItem === null) {
                     try {
-                        const { data } = await axios.put(`${URI}/users/addItem/${userId}`)
-                        if (data.status === 200)
+                        const response = await axios.put(`${URI}/users/addItem/${user._id}`, {
+                            item: itemWon
+                        })
+                        if (response.status === 200)
                             console.log("added new item to User's collection")
                     }
                     catch (e) {
@@ -148,8 +163,10 @@ const Gatcha = () => {
                 }
                 else {
                     try {
-                        const { data } = await axios.put(`${URI}/users/updateCoins/${userId}`, coinsIfTheyAlreadyWonThatItem)
-                        if (data.status === 200)
+                        const response = await axios.put(`${URI}/users/updateCoins/${user._id}`, {
+                            coins: coinsIfTheyAlreadyWonThatItem
+                        })
+                        if (response.status === 200)
                             console.log("updated user's balance")
                     }
                     catch (e) {
@@ -157,13 +174,13 @@ const Gatcha = () => {
                     }
                 }
 
-                setGatchaAnimation(true)
+                setgachaAnimation(true)
                 setTimeout(() => {
                     setIsChestOpen(true)
                 }, 4500)
                 setTimeout(() => {
-                    setTheResultsPageOfTheGatcha(true)
-                    setGatchaAnimation(false)
+                    setTheResultsPageOfThegacha(true)
+                    setgachaAnimation(false)
                     setIsChestOpen(false)
                 }, 5000)
             }
@@ -215,15 +232,15 @@ const Gatcha = () => {
 
     return(
         <>
-            <div className="gatcha-container">
-                {!gatchaAnimation ? (<div className="back">
+            <div className="gacha-container">
+                {!gachaAnimation ? (<div className="back">
                     <button className="back-button" onClick={() => navigate('/collection')}>
                         <h1>&lt;</h1>
                     </button>
                 </div>) : null }
                 {alertForInsufficientFunds && (<Alert text={"Insufficient Funds!"} buttonOneText={"Ok"} functionButtonOne={() => {setAlertForInsufficientFunds(false)}}/>)}
-                <div className="stuff-in-gatcha">
-                    {theResultsPageOfTheGatcha ? (
+                <div className="stuff-in-gacha">
+                    {theResultsPageOfThegacha ? (
                         <>
                             <div className="rarity">
                                 <img src={stars} alt="" />
@@ -234,13 +251,13 @@ const Gatcha = () => {
                             <div className="name-of-the-thing-you-won">
                                 <h1>{itemName} {coinsTextIfTheyAlreadyWonThatItem !== null ? `:${coinsTextIfTheyAlreadyWonThatItem}` : ""}</h1>
                             </div>
-                            <div className="button-for-gatcha">
+                            <div className="button-for-gacha">
                                 <button onClick={handleRoll}>Buy Again? : 100 coins</button>
                             </div>
                         </>
                     ) : (
                         <>
-                            {gatchaAnimation ? (
+                            {gachaAnimation ? (
                                 <div className="chest chest-opening">
                                     {isChestOpen ? (
                                         <img src={chestOpened} alt="" />
@@ -256,7 +273,7 @@ const Gatcha = () => {
                                     <div className="coins">
                                         <h1>Your coins: {usersCoins}</h1>
                                     </div>
-                                    <div className="button-for-gatcha">
+                                    <div className="button-for-gacha">
                                         <button onClick={handleRoll}>Buy: 100 coins</button>
                                     </div>
                                 </>
@@ -269,4 +286,4 @@ const Gatcha = () => {
     )
 }
 
-export default Gatcha
+export default Gacha

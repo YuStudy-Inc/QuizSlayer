@@ -1,10 +1,10 @@
-.gatcha-container {
+.gacha-container {
     width: 100%;
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url("../../../assets/Backgrounds/backgroundGatcha.png");
+    background-image: url("../../../assets/Backgrounds/backgroundgacha.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -12,7 +12,7 @@
     
 }
 
-.stuff-in-gatcha {
+.stuff-in-gacha {
     width: 90%;
     height: 50%;
     display: flex;
@@ -47,7 +47,7 @@
     color: var(--white);
 }
 
-.button-for-gatcha button {
+.button-for-gacha button {
     background-color: var(--dark-green);
     padding: 0.5rem 1rem;
     width: fit-content;
@@ -63,11 +63,11 @@
     cursor: pointer;
 }
 
-.button-for-gatcha button:hover {
+.button-for-gacha button:hover {
     transform: scale(1.1);
 }
 
-.button-for-gatcha button:active {
+.button-for-gacha button:active {
     transform: scale(0.9);
     transform: translateY(2px);
     -webkit-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
