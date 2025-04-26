@@ -4,13 +4,14 @@ import { maomao, pencil } from "../../assets/Pictures"
 import axios from "axios"
 import Alert from '../Alert'
 const user = JSON.parse(localStorage.getItem('user'));
+const id = localStorage.getItem('id');
 const ProfileSettings = () => {
   const [username, setUsername] = useState('');
   const [description, setDescription] = useState('');
   const [profilePic, setProfilePic] = useState(user.pfp)
   const [showAlert, setShowAlert] = useState(false)
   const [alertText, setAlertText] = useState('')
-  const url =`https://00qy8vpnab.execute-api.us-east-1.amazonaws.com/users/editUser/${user._id}`
+  const url =`https://00qy8vpnab.execute-api.us-east-1.amazonaws.com/users/editUser/${id}`
   const onProfilePicChange = (e) => {
     // handle profile pic change if needed
   };

@@ -17,7 +17,7 @@ const Login = ({onToggle}) => {
     const [validated, setValidated] = useState(true);
     const [validating, setValidating] = useState(false);
     const validatingRef = useRef(false);
-
+    const url = import.meta.env.VITE_APP_URI || '';
     const navigate = useNavigate();
     const routeHome = () => {
         navigate('../home')
@@ -66,14 +66,14 @@ const Login = ({onToggle}) => {
     const attemptLogin = async () => {
         axios({
             method: "post",
-            url: "https://00qy8vpnab.execute-api.us-east-1.amazonaws.com/users/loginUser",
+            url: `${url}/users/loginUser`,
             // url: "http://localhost:3000/users/loginUser",
             data: formData
         })
         .then((response) => {
             // The response should be a session ID. Just route to home for now.
             localStorage.setItem('user', JSON.stringify(response.data.user));
-            console.log(JSON.parse(localStorage.getItem('user')));
+            localStorage.setItem('id', JSON.stringify(response.data.user._id));
             routeHome();
         })
         .catch((error) => {
