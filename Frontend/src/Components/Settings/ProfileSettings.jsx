@@ -2,15 +2,21 @@ import {useState, useRef} from 'react';
 import "../../Styles/Pages/Settings.css"
 import { maomao, pencil } from "../../assets/Pictures"
 import axios from "axios"
+import Alert from '../Alert'
 const user = JSON.parse(localStorage.getItem('user'));
 const ProfileSettings = () => {
   const [username, setUsername] = useState('');
   const [description, setDescription] = useState('');
   const [profilePic, setProfilePic] = useState(user.pfp)
+  const [showAlert, setShowAlert] = useState(false)
+  const [alertText, setAlertText] = useState('')
   const url =`https://00qy8vpnab.execute-api.us-east-1.amazonaws.com/users/editUser/${user._id}`
   const onProfilePicChange = (e) => {
     // handle profile pic change if needed
   };
+  const closeAlert = () => {
+    setShowAlert(false);
+};
   const onSaveChanges = async () => {
     axios({
       method: "put",
@@ -25,13 +31,17 @@ const ProfileSettings = () => {
     })
     .then((response) => {
       console.log("Update Success:", response.data);
-      alert("It worked")
+      // alert("It worked")
+      setAlertText(response.data.message || "Request successful!");
+      setShowAlert(true);
       // Update local storage or UI with new user data if needed
       localStorage.setItem('user', JSON.stringify(response.data));
     })
     .catch((error) => {
       const response = error.response;
-      alert("It did not work")
+      // alert("It did not work")
+      setAlertText(error.response?.data?.message || "Something went wrong.");
+      setShowAlert(true);
       if (response) {
         console.log(response.data);
         console.log(response.status);
@@ -44,6 +54,15 @@ const ProfileSettings = () => {
     });
   };
     return(
+      <>
+    
+      {showAlert && (
+        <Alert
+          text={alertText}
+          buttonOneText="OK"
+          functionButtonOne={closeAlert}
+          />
+          )}
         <div className="profile-settings active-settings">
         <div className="profile-picture-edit move">
         <img className="pencil-profile-pic" src={pencil} alt="" />
@@ -51,7 +70,6 @@ const ProfileSettings = () => {
         <img className="profile-picture-rn" src={profilePic} alt="" />
           <input className="new-pfp" type="file" onChange={onProfilePicChange} />
         </div>
-  
         <div className="username-edit move">
           <h1>Username</h1>
           <input
@@ -74,8 +92,9 @@ const ProfileSettings = () => {
         <button className="submit-profile-edit move" onClick={onSaveChanges}>
           Save Changes
         </button>
+        
       </div>
-
+      </>
     )
         
     

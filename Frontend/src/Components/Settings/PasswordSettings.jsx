@@ -1,12 +1,18 @@
 import {useState, useRef} from 'react';
 import "../../Styles/Pages/Settings.css"
 import axios from "axios"
+import Alert from '../Alert'
 const user = JSON.parse(localStorage.getItem('user'));
 const PasswordSettings = ()=>{
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [newPasswordAgain, setNewPasswordAgain] = useState('');
+    const [showAlert, setShowAlert] = useState(false)
+    const [alertText, setAlertText] = useState('')
     const url = `https://00qy8vpnab.execute-api.us-east-1.amazonaws.com/users/editUser/password/${user._id}`
+    const closeAlert = () => {
+      setShowAlert(false);
+  };
     const onSaveChanges = async() =>{
         axios({
             method: "put",
@@ -21,13 +27,16 @@ const PasswordSettings = ()=>{
             }
           })
           .then((response) => {
+            setAlertText(response.data.message || "Request successful!");
+            setShowAlert(true);
             console.log("Update Success:", JSON.stringify(response.data));
             alert("It worked")
           })
           .catch((error)=>{
-            console.log("Old Password: ", oldPassword, "New Password", newPassword, "New Password Again", newPasswordAgain)
             const response = error.response;
-            alert("It did not work")
+            setAlertText(error.response?.data?.message || "Something went wrong.");
+            setShowAlert(true);
+            // alert("It did not work")
             if (response) {
                 console.log(response.data);
                 console.log(response.status);
@@ -40,6 +49,14 @@ const PasswordSettings = ()=>{
           });
     };
     return(
+      <>
+        {showAlert && (
+        <Alert
+          text={alertText}
+          buttonOneText="OK"
+          functionButtonOne={closeAlert}
+          />
+          )}
         <div className="password-settings active-settings">
         <div className="old-password move">
             <h1>Old Password</h1>
@@ -66,7 +83,7 @@ const PasswordSettings = ()=>{
         </div>
         <button className="submit-password-edit move" onClick={onSaveChanges}>Save Changes</button>
     </div>
-
+      </>
     )
         
     
