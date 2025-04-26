@@ -1,4 +1,4 @@
-import {useState, useRef} from 'react';
+import {useState, useRef, isValidElement} from 'react';
 import "../../Styles/Pages/Settings.css"
 import axios from "axios"
 import Alert from '../Alert'
@@ -9,6 +9,7 @@ const PasswordSettings = ()=>{
     const [newPasswordAgain, setNewPasswordAgain] = useState('');
     const [showAlert, setShowAlert] = useState(false)
     const [alertText, setAlertText] = useState('')
+    const isInvalid = !oldPassword || !newPassword || newPassword !== newPasswordAgain;
     const url = `https://00qy8vpnab.execute-api.us-east-1.amazonaws.com/users/editUser/password/${user._id}`
     const closeAlert = () => {
       setShowAlert(false);
@@ -30,7 +31,6 @@ const PasswordSettings = ()=>{
             setAlertText(response.data.message || "Request successful!");
             setShowAlert(true);
             console.log("Update Success:", JSON.stringify(response.data));
-            alert("It worked")
           })
           .catch((error)=>{
             const response = error.response;
@@ -81,7 +81,7 @@ const PasswordSettings = ()=>{
             onChange={(e) => setNewPasswordAgain(e.target.value)}
             />
         </div>
-        <button className="submit-password-edit move" onClick={onSaveChanges}>Save Changes</button>
+        <button className="submit-password-edit move" onClick={onSaveChanges} disabled ={isInvalid}>Save Changes</button>
     </div>
       </>
     )

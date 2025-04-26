@@ -46,9 +46,6 @@ const Settings = () => {
                                 <h1>{option}</h1>
                             </button>
                         ))}
-                            {/* <button onClick={() => setActiveSettings("Profile")}><h1>Profile</h1></button>
-                            <button onClick={() => setActiveSettings("Password")}><h1>Password</h1></button>
-                            <button onClick={() => setActiveSettings("Account")}><h1>Account</h1></button> */}
                         </div>
                         <div className="left-options-mobile">
                         <button 
