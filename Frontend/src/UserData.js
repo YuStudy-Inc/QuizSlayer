@@ -11,6 +11,14 @@ const UserData = (() => {
         console.log('User data cookie not found');
     }
 
+    const updateUserData = () => {
+        if (userDataCookie) {
+            userData = JSON.parse(decodeURIComponent(userDataCookie.split('=')[1]));
+        } else {
+            console.log('User data cookie not found');
+        }
+    };
+
     const getUsername = () => {
         return userData?.username;
     };
@@ -116,6 +124,7 @@ const UserData = (() => {
     };
 
     return {
+        updateUserData,
         getUsername,
         setUsername,
         getPfp,
