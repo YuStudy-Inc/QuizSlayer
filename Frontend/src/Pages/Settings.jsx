@@ -19,6 +19,11 @@ const Settings = () => {
     const [newPasswordAgain, setNewPasswordAgain] = useState('');
     const url = import.meta.env.VITE_APP_URI || '';
     const navigate = useNavigate()
+
+    const routeHomePage = () => {
+        navigate('/')
+    }
+    
     const closeAlert = () => {
         setShowAlert(false);
     };
@@ -80,7 +85,76 @@ const Settings = () => {
               console.log("Error", error.message);
             }
     });
-    };
+    }
+
+    const onPasswordSave = async() =>{
+        axios({
+            method: "put",
+            url: `${url}/users/editUser/password/${id}`,
+            data: {
+            oldPassword,
+            newPassword,
+            newPasswordAgain
+            },
+            headers: {
+              "Content-Type": "application/json"
+            }
+          })
+          .then((response) => {
+            setAlertText(response.data.message || "Request successful!");
+            setShowAlert(true);
+            console.log("Update Success:", JSON.stringify(response.data));
+          })
+          .catch((error)=>{
+            const response = error.response;
+            setAlertText(error.response?.data?.message || "Something went wrong.");
+            setShowAlert(true);
+            // alert("It did not work")
+            if (response) {
+                console.log(response.data);
+                console.log(response.status);
+                console.log(response.headers);
+              } else if (error.request) {
+                console.log(error.request);
+              } else {
+                console.log("Error", error.message);
+              }
+          });
+    }
+
+    const deleteAccount = async() =>{
+        axios({
+            method: "delete",
+            url: `${url}/users/deleteUser/${id}`,
+            data: {
+            },
+            headers: {
+              "Content-Type": "application/json"
+            }
+          })
+          .then((response) => {
+            setAlertText(response.data.message || "Request successful!");
+            setShowAlert(true);
+            console.log("Update Success:", JSON.stringify(response.data));
+            routeHomePage()
+          })
+          .catch((error)=>{
+            const response = error.response;
+            setAlertText(error.response?.data?.message || "Something went wrong.");
+            setShowAlert(true);
+            // alert("It did not work")
+            if (response) {
+                console.log(response.data);
+                console.log(response.status);
+                console.log(response.headers);
+              } else if (error.request) {
+                console.log(error.request);
+              } else {
+                console.log("Error", error.message);
+              }
+          });
+    }
+
     return(
         <>
             {showAlert && (
@@ -142,21 +216,32 @@ const Settings = () => {
                             <div className="password-settings">
                                 <div className="old-password move">
                                     <h1>Old Password</h1>
-                                    <input className="old-password" type="text"/>
+                                    <input 
+                                    className="old-password" 
+                                    type="password"
+                                    onChange={(e) => setOldPassword(e.target.value)}
+                                    />
                                 </div>
                                 <div className="password-edit move">
                                     <h1>New Password</h1>
-                                    <input className="new-password" type="text"/>
+                                    <input className="new-password" 
+                                    type="password"
+                                    onChange={(e) => setNewPassword(e.target.value)}
+                                    />
                                 </div>
                                 <div className="password-edit-again move">
                                     <h1>Retype New Password</h1>
-                                    <input className="new-password-again" type="text"/>
+                                    <input 
+                                    className="new-password-again" 
+                                    type="password"
+                                    onChange={(e) => setNewPasswordAgain(e.target.value)}
+                                    />
                                 </div>
-                                <button className="submit-password-edit move">Save Changes</button>
+                                <button className="submit-password-edit move" onClick={onPasswordSave}>Save Changes</button>
                             </div>
                             <div className="account-settings">
-                                <button className="submit-logout-account move">Logout</button>
-                                <button className="submit-delete-account move">Delete Account</button>
+                                <button className="submit-logout-account move" onClick={routeHomePage}>Logout</button>
+                                <button className="submit-delete-account move" onClick={deleteAccount}>Delete Account</button>
                             </div>
                         </div>
                     </div>
