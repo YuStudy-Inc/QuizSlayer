@@ -23,3 +23,5 @@ security/*
 *.njsproj
 *.sln
 *.sw?
+
+.env

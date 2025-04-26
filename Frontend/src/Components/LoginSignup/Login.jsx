@@ -7,6 +7,8 @@ import UserData from "../../UserData";
 
 import axios from "axios";
 
+const endpointUri = import.meta.env.VITE_APP_URI;
+
 const Login = ({onToggle}) => {
 
     const [formData, setFormData] = useState({
@@ -68,8 +70,7 @@ const Login = ({onToggle}) => {
     const attemptLogin = async () => {
         axios({
             method: "post",
-            url: "https://00qy8vpnab.execute-api.us-east-1.amazonaws.com/users/loginUser",
-            // url: "http://localhost:3000/users/loginUser",
+            url: endpointUri + "users/loginUser",
             data: formData,
             withCredentials:true,
         })

@@ -10,6 +10,8 @@ import WeaponsEnum from "../../assets/Weapons/WeaponsEnum.js"
 
 import axios from "axios";
 
+const endpointUri = import.meta.env.VITE_APP_URI;
+
 const Collection = () => {
     const navigate = useNavigate()
 
@@ -54,8 +56,7 @@ const Collection = () => {
 
         axios({
             method: "post",
-            // url: "https://00qy8vpnab.execute-api.us-east-1.amazonaws.com/users/updateSelections/",
-            url: "http://localhost:3000/users/updateSelections",
+            url: endpointUri + "users/updateSelections/",
             data: {
                 selectedCharacter,
                 selectedHat,
