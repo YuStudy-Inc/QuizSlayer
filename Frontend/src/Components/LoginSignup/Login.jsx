@@ -68,7 +68,10 @@ const Login = ({onToggle}) => {
             method: "post",
             url: `${url}/users/loginUser`,
             // url: "http://localhost:3000/users/loginUser",
-            data: formData
+            data: formData,
+            headers: {
+                "Content-Type": "application/json"
+              }
         })
         .then((response) => {
             // The response should be a session ID. Just route to home for now.
