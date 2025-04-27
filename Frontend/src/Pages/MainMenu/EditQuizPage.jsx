@@ -20,7 +20,7 @@ const EditQuizPage = () => {
     useEffect(() => {
         const fetchQuiz = async () => {
             try {
-                const response = await axios.get(`${URI}/quizzes/getQuiz/${quizId}`)
+                const response = await axios.get(`${URI}quizzes/getQuiz/${quizId}`)
                 if (response.status === 200)
                     setQuizData(response.data)
             }
@@ -34,7 +34,7 @@ const EditQuizPage = () => {
     useEffect(() => {
         const fetchQuestionsFromQuiz = async () => {
             try {
-                const response = await axios.get(`${URI}/quizzes/getQuestionsFromQuiz/${quizId}`)
+                const response = await axios.get(`${URI}quizzes/getQuestionsFromQuiz/${quizId}`)
                 if (response.status === 200)
                     setQuestions(response.data)
             }
@@ -73,12 +73,12 @@ const EditQuizPage = () => {
 
     const handleQuizSaveChanges = async () => {
         try {
-            const quizResponse = await axios.put(`${URI}/quizzes/editQuiz/${quizId}`, quizData )
+            const quizResponse = await axios.put(`${URI}quizzes/editQuiz/${quizId}`, quizData )
             if (quizResponse.status === 200) {
                 console.log("successfully edited Quiz")
             }
 
-            const questionsResponse = await axios.put(`${URI}/questions/editQuestion/`, {
+            const questionsResponse = await axios.put(`${URI}questions/editQuestion/`, {
                 questions: questions
             })
             if (questionsResponse.status === 200) {

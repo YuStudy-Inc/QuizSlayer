@@ -19,12 +19,12 @@ const CreateQuizPage = () => {
 
 	const handleQuizCreation = async () => {
 		try {
-            const quizResponse = await axios.put(`${URI}/quizzes/createQuiz/`, quizData )
+            const quizResponse = await axios.put(`${URI}quizzes/createQuiz/`, quizData )
             if (quizResponse.status === 200) {
                 console.log("successfully created Quiz")
             }
 
-            const questionsResponse = await axios.post(`${URI}/questions/createQuestion`, {questions})
+            const questionsResponse = await axios.post(`${URI}questions/createQuestion`, {questions})
             if (questionsResponse.status === 200) {
                 console.log("successfully created Quiz Questions")
             }

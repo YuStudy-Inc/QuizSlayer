@@ -12,7 +12,7 @@ const FlashCardEditOverlay = ({ id, close }) => {
     useEffect(() => {
         const fetchQuestion = async () => {
             try {
-                const response = await axios.get(`${URI}/questions/getQuestion/${id}`)
+                const response = await axios.get(`${URI}questions/getQuestion/${id}`)
                 if (response.status === 200)
                     setQuestionData(response.question, response.answer)
             }

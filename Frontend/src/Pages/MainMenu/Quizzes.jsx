@@ -4,23 +4,26 @@ import { pencil } from "../../assets/Pictures"
 import { useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
 
+const URI = import.meta.env.VITE_URI
+
+
 const Quizzes = () => {
-	const URI = import.meta.env.VITE_URI
 	const navigate = useNavigate();
 	const [quizzes, setQuizzes] = useState([])
 
-	useEffect(() => {
+	/* useEffect(() => {
         const fetchQuizzes = async () => {
             try {
-                const { data } = await axios.get(`${URI}/quizzes/getQuizzes/${userId}`)
-                setQuizzes(data)
+                const response = await axios.get(`${URI}quizzes/getQuizzes/${userId}`)
+				if (response.status === 200)
+                	setQuizzes(response.data)
             }
             catch (e) {
                 console.log("error retreiving questions for quiz", e)
             }
         }
         fetchQuizzes()
-    }, [URI, userId])
+    }, [URI, userId]) */
 
 
 	const editThatQuiz = (id) => {
