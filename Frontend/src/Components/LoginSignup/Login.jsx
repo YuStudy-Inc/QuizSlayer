@@ -7,7 +7,7 @@ import "../../Styles/Pages/LoginSignup/LoginSignup.css"
 import axios from "axios";
 
 const Login = ({onToggle}) => {
-    const url = import.meta.env.VITE_APP_URI || '';
+
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -17,6 +17,7 @@ const Login = ({onToggle}) => {
     const [validated, setValidated] = useState(true);
     const [validating, setValidating] = useState(false);
     const validatingRef = useRef(false);
+    const url = import.meta.env.VITE_APP_URI || '';
 
     const navigate = useNavigate();
     const routeHome = () => {
@@ -69,11 +70,13 @@ const Login = ({onToggle}) => {
             url: `${url}/users/loginUser`,
             // url: "http://localhost:3000/users/loginUser",
             data: formData,
-            withCredentials:true,
+            headers: {
+                "Content-Type": "application/json"
+              }
         })
         .then((response) => {
             // The response should be a session ID. Just route to home for now.
-            localStorage.setItem('user', response.data.user);
+            localStorage.setItem('user', JSON.stringify(response.data.user));
             localStorage.setItem('id', JSON.stringify(response.data.user._id));
             routeHome();
         })
