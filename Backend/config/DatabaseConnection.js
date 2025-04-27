@@ -1,5 +1,8 @@
 
 import mongoose from 'mongoose';
+//comment env when not testing locally
+import dotenv from 'dotenv';
+dotenv.config({path: 'Backend/.env'});
 // Uses path of first file to import (should be server.js)
 
 

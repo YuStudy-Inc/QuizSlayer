@@ -1,5 +1,6 @@
 import Schemas from '../schemas/Schemas.js';
 const Quiz = Schemas.Quiz
+
 export const createQuiz = async(req, res) => {
     try {
         const { title, description } = req.body
@@ -22,6 +23,17 @@ export const createQuiz = async(req, res) => {
     catch (e) {
         console.error("error creating quiz: ", e)
         res.status(500).json({"message": "Error creating quiz", "e": e})
+    }
+}
+
+export const createPDFQuiz = async(req, res) => {
+    try {
+        const file = req.file;
+        return res.status(200).json({
+            message: "no error"
+        });
+    }catch(err) {
+        console.error("error uploading file ")
     }
 }
 
@@ -66,3 +78,24 @@ export const deleteQuiz = async(req, res)=>{
 }
 
 //need a get all quizzes from user id
+export const getQuiz = async(req,res) => {
+    const{id} = req.params;
+    try {
+        
+        const getQuiz = await Quiz.findById(id);
+
+        if(!getQuiz){
+            return res.status(404).json({error: "Quiz was not found"})
+        }
+
+        return res.status(200).json({
+            message: 'Quiz was received successfully',
+            object: getQuiz
+        })
+
+    }
+    catch(err){
+        console.log(err)
+        return res.status(500).json({message: "Server error"})
+    }
+}

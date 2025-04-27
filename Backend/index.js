@@ -36,4 +36,10 @@ app.get("/", async(req, res) => {
     res.json({ message: 'Welcome to the backend bitch'});
 });
 
-export const handler = serverless(app);
+
+//Insure the line below is not commented in production
+//export const handler = serverless(app);
+
+//comment out when not testing locally
+const port = 3000;
+app.listen(port,() =>{})
