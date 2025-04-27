@@ -7,7 +7,7 @@ import "../../Styles/Pages/LoginSignup/LoginSignup.css"
 import axios from "axios";
 
 const Login = ({onToggle}) => {
-
+    const url = import.meta.env.VITE_APP_URI || '';
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -66,13 +66,15 @@ const Login = ({onToggle}) => {
     const attemptLogin = async () => {
         axios({
             method: "post",
-            url: "https://00qy8vpnab.execute-api.us-east-1.amazonaws.com/users/loginUser",
+            url: `${url}/users/loginUser`,
             // url: "http://localhost:3000/users/loginUser",
             data: formData,
             withCredentials:true,
         })
         .then((response) => {
             // The response should be a session ID. Just route to home for now.
+            localStorage.setItem('user', response.data.user);
+            localStorage.setItem('id', JSON.stringify(response.data.user._id));
             routeHome();
         })
         .catch((error) => {

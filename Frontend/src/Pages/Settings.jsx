@@ -7,7 +7,6 @@ const Settings = () => {
     const settingsOptions = ["Profile", "Password", "Account"]
     const [whichSettings, setWhichSettings] = useState(0)
     const navigate = useNavigate()
-
     const handleLeftSettings = () => {
         const optionRightNow = whichSettings
         if (optionRightNow !== 0) {
