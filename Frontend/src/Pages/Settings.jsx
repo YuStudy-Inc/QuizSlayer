@@ -1,9 +1,9 @@
 import "../Styles/Pages/Settings.css"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { maomao, pencil } from "../assets/Pictures"
+import { pencil } from "../assets/Pictures"
 import axios from "axios"
-import Alert from '../components/Alert'
+import { Alert } from "../Components/Components"
 const Settings = () => {
     const id = JSON.parse(localStorage.getItem('id'));
     const user = JSON.parse(localStorage.getItem('user'));
@@ -142,7 +142,6 @@ const Settings = () => {
             const response = error.response;
             setAlertText(error.response?.data?.message || "Something went wrong.");
             setShowAlert(true);
-            // alert("It did not work")
             if (response) {
                 console.log(response.data);
                 console.log(response.status);
