@@ -4,8 +4,10 @@ import { FlashCard, FlashCardCreationOverlay } from "../../Components/Components
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
+const URI = import.meta.env.VITE_URI
+const userId = JSON.parse(localStorage.getItem('id'));
+
 const CreateQuizPage = () => {
-	const URI = import.meta.env.VITE_URI
 	const [quizData, setQuizData] = useState({
         title: "",
         description: "",
@@ -19,12 +21,18 @@ const CreateQuizPage = () => {
 
 	const handleQuizCreation = async () => {
 		try {
-            const quizResponse = await axios.put(`${URI}quizzes/createQuiz/`, quizData )
+            const quizResponse = await axios.post(`${URI}quizzes/createQuiz/`, {
+				quiz: quizData,
+				user: userId //somehow get the id from the user as a foreign key
+			})
             if (quizResponse.status === 200) {
                 console.log("successfully created Quiz")
             }
 
-            const questionsResponse = await axios.post(`${URI}questions/createQuestion`, {questions})
+            const questionsResponse = await axios.post(`${URI}questions/createQuestion`, {
+				questions: questions,
+				quiz: quizData //somehow get the id from the quiz as a foreign key
+			})
             if (questionsResponse.status === 200) {
                 console.log("successfully created Quiz Questions")
             }

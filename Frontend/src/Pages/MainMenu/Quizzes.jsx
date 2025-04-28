@@ -5,13 +5,13 @@ import { useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
 
 const URI = import.meta.env.VITE_URI
-
+const userId = JSON.parse(localStorage.getItem('id'));
 
 const Quizzes = () => {
 	const navigate = useNavigate();
 	const [quizzes, setQuizzes] = useState([])
 
-	/* useEffect(() => {
+	useEffect(() => {
         const fetchQuizzes = async () => {
             try {
                 const response = await axios.get(`${URI}quizzes/getQuizzes/${userId}`)
@@ -23,14 +23,11 @@ const Quizzes = () => {
             }
         }
         fetchQuizzes()
-    }, [URI, userId]) */
-
+    }, [URI, userId])
 
 	const editThatQuiz = (id) => {
 		navigate(`/editquiz/${id}`)
 	}
-
-
 
 	return (
 		<>

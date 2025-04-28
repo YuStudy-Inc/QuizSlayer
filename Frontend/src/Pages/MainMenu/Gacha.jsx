@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
 import Alert from "../../Components/Alert"
+import UserData from "../../UserData.js"
 import {
     chestClosed, chestOpened, playfulCloud, someonesGun, redBalloon, 
     fryingPan, ironSword, nightCap, wizardHat, pot, bananaPeel, diamondHelmet,
@@ -10,10 +11,10 @@ import {
     coins, oneStar, twoStar, threeStar, fourStar 
 } from "../../assets/Pictures"
 
-const user = JSON.parse(localStorage.getItem('user'));
+const URI = import.meta.env.VITE_URI
+const userId = JSON.parse(localStorage.getItem('id'));
 
 const Gacha = () => {  
-    const URI = import.meta.env.VITE_URI
     const oneStarItems = [
         coins
     ]
@@ -54,7 +55,7 @@ const Gacha = () => {
       ]
     
 
-    const [usersCoins, setUsersCoins] = useState(100)
+    const [usersCoins, setUsersCoins] = useState(0)
     const [gachaAnimation, setGachaAnimation] = useState(false)
     const [alertForInsufficientFunds, setAlertForInsufficientFunds] = useState(false)
     const [isChestOpen, setIsChestOpen] = useState(false)
@@ -68,10 +69,10 @@ const Gacha = () => {
 
     let coinsIfTheyAlreadyWonThatItem
 
-    /* useEffect(() => {
+    useEffect(() => {
         const fetchUsersCoins = async () => {
             try {
-                const response = await axios.get(`${URI}users/getUsersCoins/${user._id}`)
+                const response = await axios.get(`${URI}users/getUsersCoins/${userId}`)
                 if (response.status === 200)
                     setUsersCoins(response.data)
             }
@@ -80,7 +81,7 @@ const Gacha = () => {
             }
         }
         fetchUsersCoins()
-    }, [URI, user._id]) */
+    }, [URI, userId])
 
     const handleRoll = async () => {
         setTheResultsPageOfTheGacha(false)
@@ -92,7 +93,7 @@ const Gacha = () => {
         }
         else {
             try {
-                const response = await axios.put(`${URI}users/updateCoins/${user._id}`, {
+                const response = await axios.put(`${URI}users/updateCoins/${userId}`, {
                     coins: -100
                 })
                 if (response.status === 200)
@@ -102,8 +103,8 @@ const Gacha = () => {
 
                 //one star = 50, two stars = 75, three = 100 four == 300
                 try {
-                    const characterData = await axios.get(`${URI}users/getCharacters/${user._id}`)
-                    const inventoryData = await axios.get(`${URI}users/getInventory/${user._id}`)
+                    const characterData = await axios.get(`${URI}users/getCharacters/${userId}`)
+                    const inventoryData = await axios.get(`${URI}users/getInventory/${userId}`)
 
                     if (characterData.status !== 200 || inventoryData.status !== 200) {
                         console.error("Failed to fetch character or inventory data");
@@ -139,7 +140,7 @@ const Gacha = () => {
 
                 if (coinsTextIfTheyAlreadyWonThatItem === null && stars === fourStar) {
                     try {
-                        const response = await axios.put(`${URI}users/addCharacter/${user._id}`, {
+                        const response = await axios.put(`${URI}users/addCharacter/${userId}`, {
                             character: itemWon
                         })
                         if (response.status === 200)
@@ -151,7 +152,7 @@ const Gacha = () => {
                 }
                 else if (coinsTextIfTheyAlreadyWonThatItem === null) {
                     try {
-                        const response = await axios.put(`${URI}users/addItem/${user._id}`, {
+                        const response = await axios.put(`${URI}users/addItem/${userId}`, {
                             item: itemWon
                         })
                         if (response.status === 200)
@@ -163,7 +164,7 @@ const Gacha = () => {
                 }
                 else {
                     try {
-                        const response = await axios.put(`${URI}users/updateCoins/${user._id}`, {
+                        const response = await axios.put(`${URI}users/updateCoins/${userId}`, {
                             coins: coinsIfTheyAlreadyWonThatItem
                         })
                         if (response.status === 200)
