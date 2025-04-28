@@ -46,6 +46,7 @@
 }
 
 .submit-button {
+    font-family: "bungee", sans-serif;
     background-color: var(--dark-green);
     width: 11vw;
     height: 7vh;

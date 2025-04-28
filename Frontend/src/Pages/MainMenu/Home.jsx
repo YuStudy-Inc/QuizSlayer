@@ -2,7 +2,7 @@ import { Alert, Podium, TodoList, FriendsActive, Notifications } from "../../Com
 import "../../Styles/Pages/MainMenu/Home.css"
 import { useNavigate } from "react-router-dom"
 import { maomao, bell } from "../../assets/Pictures"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import UserData from "../../UserData.js"
 
 const URI = import.meta.env.VITE_APP_URI
