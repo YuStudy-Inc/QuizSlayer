@@ -2,6 +2,7 @@ import "../../Styles/Pages/MainMenu/Friends.css"
 import { FriendCard, AddAFriend, Podium } from "../../Components/Components.js"
 import { maomao, addUser } from "../../assets/Pictures.js"
 import { useState } from "react"
+import axios from 'axios'
 
 const Friends = () => {
     const [showAddFriend, setShowAddFriend] = useState(false)
