@@ -10,7 +10,8 @@ import mongoose from 'mongoose';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-// import dotenv from 'dotenv';
+// import dotenv from 'dotenv'
+
 
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
@@ -41,7 +42,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 const tempClient = await DatabaseConnection(); // Ensure DatabaseConnection is an async function that connects to MongoDB
 
-dotenv.config();
+// dotenv.config();
 
 const sessionStore = MongoStore.create({
   mongoUrl: process.env.MONGODB_URI,
@@ -79,8 +80,8 @@ app.get("/", async(req, res) => {
 export const handler = serverless(app);
 
 // For local testing
-// const port = 3000;
+const port = 3000;
 
-// app.listen(port, () => {
-//   console.log(`Example app listening on port ${port}`)
-// })
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
