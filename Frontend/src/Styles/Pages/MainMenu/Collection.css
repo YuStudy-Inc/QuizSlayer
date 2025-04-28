@@ -96,6 +96,12 @@
     transform: scale(2);
 }
 
+.lock {
+    transform: scale(.75);
+    opacity: 75%;
+    position:absolute
+}
+
 .collection-page-select-arrow {
     color: var(--light-green);
     transition: 0.2s;

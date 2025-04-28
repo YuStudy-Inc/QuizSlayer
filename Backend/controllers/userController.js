@@ -12,8 +12,8 @@ const passwordMatch = (async (passwordFromUser, savedPasswordFromDB) => {
 })
 
 const changeActiveStatus = (async (user) => {
-    const active = user.active;
-    return await User.findOneAndUpdate({ username: user.username }, { active: !active })
+    const active = user.isOnline;
+    return await User.findOneAndUpdate({ username: user.username }, { isOnline: !active })
 })
 
 export const createUser = async (req, res) => {
@@ -62,6 +62,26 @@ export const createUser = async (req, res) => {
 
         req.session.userID = newUser._id;
 
+        res.cookie('userData', JSON.stringify({
+            username: user.username,
+            pfp: user.pfp,
+            description: user.description,
+            friendsList: user.friendsList,
+            friendRequests: user.friendRequests,
+            inventory: user.inventory,
+            characterList: user.characterList,
+            selectedCharacter: user.selectedCharacter,
+            selectedHat: user.selectedHat,
+            selectedWeapon: user.selectedWeapon,
+            xp: user.xp,
+            coins: user.coins,
+            monstersSlain: user.monstersSlain
+        }), {
+            // httpOnly: true,
+            // secure: process.env.NODE_ENV === 'production',
+            // sameSite: 'strict'
+        });
+
         res.status(201).json({
             "message": "new user created",
             "user": newUser
@@ -90,6 +110,26 @@ export const loginUser = async (req, res) => {
         await changeActiveStatus(user)
 
         req.session.userID = user._id;
+
+        res.cookie('userData', JSON.stringify({
+            username: user.username,
+            pfp: user.pfp,
+            description: user.description,
+            friendsList: user.friendsList,
+            friendRequests: user.friendRequests,
+            inventory: user.inventory,
+            characterList: user.characterList,
+            selectedCharacter: user.selectedCharacter,
+            selectedHat: user.selectedHat,
+            selectedWeapon: user.selectedWeapon,
+            xp: user.xp,
+            coins: user.coins,
+            monstersSlain: user.monstersSlain
+        }), {
+            // httpOnly: true,
+            // secure: process.env.NODE_ENV === 'production',
+            // sameSite: 'strict'
+        });
 
         return res.status(200).json({
             "message": "Login Successful",
@@ -251,6 +291,53 @@ export const getInventory = async (req, res) => {
         console.log(e)
     }
 }
+
+export const updateSelections = async (req, res) => {
+    try {
+        const userId = req.session.userID;
+        const { selectedCharacter, selectedHat, selectedWeapon } = req.body;
+
+        const updateFields = {};
+        if (selectedCharacter !== undefined) updateFields.selectedCharacter = selectedCharacter;
+        if (selectedHat !== undefined) updateFields.selectedHat = selectedHat;
+        if (selectedWeapon !== undefined) updateFields.selectedWeapon = selectedWeapon;
+
+        const user = await User.findOneAndUpdate(
+            { _id: userId },
+            { $set: updateFields },
+            { new: true }
+        );
+
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        res.cookie('userData', JSON.stringify({
+            username: user.username,
+            pfp: user.pfp,
+            description: user.description,
+            friendsList: user.friendsList,
+            friendRequests: user.friendRequests,
+            inventory: user.inventory,
+            characterList: user.characterList,
+            selectedCharacter: user.selectedCharacter,
+            selectedHat: user.selectedHat,
+            selectedWeapon: user.selectedWeapon,
+            xp: user.xp,
+            coins: user.coins,
+            monstersSlain: user.monstersSlain
+        }), {
+            // httpOnly: true,
+            // secure: process.env.NODE_ENV === 'production',
+            // sameSite: 'strict'
+        });
+
+        return res.status(200).json({ message: "Selections updated successfully" });
+    } catch (e) {
+        res.status(500).json({ error: "Error updating selections" });
+        console.log(e);
+    }
+};
 
 export const getTop10 = async (req, res) => {
     try {

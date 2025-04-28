@@ -26,7 +26,7 @@ const allowedOrigins = ['http://localhost:5173', 'https://www.quizslayer.com/']
 const corsOptions = {
   origin: function (origin, callback) {
     if (allowedOrigins.includes(origin) || !origin) {
-      callback(null, true);
+      callback(null, origin);
     } else {
       callback(new Error('Not allowed by CORS'));
     }
