@@ -7,7 +7,6 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import serverless from 'serverless-http';
 import mongoose from 'mongoose';
-import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 // import dotenv from 'dotenv';
