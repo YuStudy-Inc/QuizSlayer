@@ -10,9 +10,8 @@ import mongoose from 'mongoose';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-
 // import dotenv from 'dotenv';
-
+// dotenv.config({path: 'Backend/.env'});
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
 
@@ -22,13 +21,12 @@ import MongoStore from 'connect-mongo';
 
 // app.use(cors({ origin: frontEndLocalHost }))
 const app = express()
-//Shit is gonna be gone later
-const allowedOrigins = ['http://localhost:5173', 'https://www.quizslayer.com/']
 
+const allowedOrigins = ['http://localhost:5173', 'https://www.quizslayer.com/']
 const corsOptions = {
   origin: function (origin, callback) {
     if (allowedOrigins.includes(origin) || !origin) {
-      callback(null, true);
+      callback(null, origin);
     } else {
       callback(new Error('Not allowed by CORS'));
     }
@@ -80,8 +78,8 @@ app.get("/", async(req, res) => {
 
 export const handler = serverless(app);
 
-// For local testing
-// const port = 3000;
+//For local testing
+// const port = 5173;
 
 // app.listen(port, () => {
 //   console.log(`Example app listening on port ${port}`)

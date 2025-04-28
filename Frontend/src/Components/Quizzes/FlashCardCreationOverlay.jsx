@@ -1,6 +1,8 @@
 import "../../Styles/Components/Quizzes/FlashCardCreationOverlay.css"
 
 const FlashCardCreationOverlay = ({ close }) => {
+
+    
     const handleCardCreation =() => {
         /* backend stuff */
         close()

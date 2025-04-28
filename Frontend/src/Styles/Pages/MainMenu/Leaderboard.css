@@ -1,10 +1,15 @@
 .leaderboard-container {
-    background-color: var(--black);
     width: 100%;
-    height: 100dvh;
+    height: 100vh;
     display: flex;
     align-items: end;
     justify-content: center;
+    background-image: url("../../../assets/Backgrounds/backgroundFriendsLeaderBoard.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    filter: brightness(90%);
 }
 
 .full-leaderboard {
@@ -17,7 +22,7 @@
 }
 
 .title-leaderboard {
-    color: var(--white);
+    color: #ffff;
     font-size: 3.5rem;
 }
 
