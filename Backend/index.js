@@ -21,7 +21,7 @@ import MongoStore from 'connect-mongo';
 // app.use(cors({ origin: frontEndLocalHost }))
 const app = express()
 
-const allowedOrigins = ['http://localhost:5173', 'https://www.quizslayer.com/']
+const allowedOrigins = ['http://localhost:5173', 'https://www.quizslayer.com']
 const corsOptions = {
   origin: function (origin, callback) {
     if (allowedOrigins.includes(origin) || !origin) {
