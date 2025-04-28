@@ -47,7 +47,7 @@ import playButton from "./Quizzes/playButton.png"
 import plus from "./Quizzes/plus.png"
 import bell from "./Home/bell.png"
 
-import lock from "../assets/lock.png"
+import lock from "../assets/Collection/lock.png"
 
 export {
     lock,
