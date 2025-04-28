@@ -5,6 +5,9 @@ import { maomao, bell } from "../../assets/Pictures"
 import { useState } from "react"
 import UserData from "../../UserData.js"
 
+const URI = import.meta.env.VITE_APP_URI
+const userId = JSON.parse(localStorage.getItem('id'))
+
 const Home = () => {
     const [openNotifications, setOpenNotifications] = useState(false)
     const [userCharacter, setUserCharacter] = useState(1)
@@ -15,22 +18,20 @@ const Home = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        const getUser = () => {
-            const getUser = async () => {
-                try {
-                    const user = await axios.get(`${URI}/users/getUser/{id}`)
-                    setUserCharacter(user.data.selectedCharacter)
-                    setUserWeapon(user.data.selectedWeapon)
-                    setUserHat(user.data.selectedHat)
-                    setUserPfp(user.data.pfp)
-                }
-                catch (e) {
-                    console.log(e)
-                }
+        const getUser = async () => {
+            try {
+                const user = await axios.get(`${URI}users/getUser/${userId}`)
+                setUserCharacter(user.data.selectedCharacter)
+                setUserWeapon(user.data.selectedWeapon)
+                setUserHat(user.data.selectedHat)
+                setUserPfp(user.data.pfp)
             }
-            getUser()
+            catch (e) {
+                console.log(e)
+            }
         }
-    })
+        getUser()
+    }, [URI, userId])
 
     return(
         <>

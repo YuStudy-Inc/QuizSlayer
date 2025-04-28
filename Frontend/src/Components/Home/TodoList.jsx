@@ -2,8 +2,10 @@ import "../../Styles/Components/Home/TodoList.css"
 import { useState, useEffect } from "react"
 import axios from "axios"
 
+const URI = import.meta.env.VITE_APP_URI
+const userId = JSON.parse(localStorage.getItem('id'))
+
 const TodoList = ({ className = "" }) => {
-    const URI = import.meta.env.VITE_URI
     const [showSpreadOut, setShowSpreadOut] = useState(false)
     const [quizzesToDo, setQuizzesToDo] = useState([])
 
@@ -14,7 +16,7 @@ const TodoList = ({ className = "" }) => {
     useEffect(() => {
         const fetchToDoQuizzes = async () => {
             try {
-                const allToDoQuizzes = await axios.get(`${URI}/users/getUsersToDoQuizzes`)
+                const allToDoQuizzes = await axios.get(`${URI}users/getUsersToDoQuizzes/${userId}`)
                 setQuizzesToDo(allToDoQuizzes.data)
             }
             catch (e) {
@@ -22,7 +24,7 @@ const TodoList = ({ className = "" }) => {
             }
         }
         fetchToDoQuizzes()
-    }, [])
+    }, [URI, userId])
 
     return (
         <>

@@ -4,9 +4,10 @@ import axios from "axios"
 import { FriendCard } from "../Components"
 import { maomao } from "../../assets/Pictures"
 
+const URI = import.meta.env.VITE_APP_URI
+const userId = JSON.parse(localStorage.getItem('id'))
 
-const FriendsActive = ({ className= "", }) => {
-    const URI = import.meta.env.VITE_URI
+const FriendsActive = ({ className= "" }) => {
     const [showSpreadOut, setShowSpreadOut] = useState(false)
     const [friends, setFriends] = useState([])
 
@@ -17,7 +18,7 @@ const FriendsActive = ({ className= "", }) => {
     useEffect(() => {
         const fetchActiveFriends = async () => {
             try {
-                const allActiveFriends = await axios.get(`${URI}/users/getUsersFriends`)
+                const allActiveFriends = await axios.get(`${URI}users/getUsersFriends/${userId}`)
                 setFriends(allActiveFriends.data)
             }
             catch (e) {
@@ -25,7 +26,7 @@ const FriendsActive = ({ className= "", }) => {
             }
         }
         fetchActiveFriends()
-    }, [])
+    }, [URI, userId])
 
 
     return (
