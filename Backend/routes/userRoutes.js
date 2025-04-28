@@ -1,7 +1,7 @@
 import express from 'express';
 import { createUser, loginUser, editUser, editUserPassword, deleteUser, getUsername, getDescription, 
   getActiveFriends, getFriends, getToDoQuizzes, getCharacterList, getInventory, getTop10, 
-  getFriendRequests, acceptFriendRequest, rejectFriendRequest, sendFriendRequest } from '../controllers/userController.js';
+  getFriendRequests, acceptFriendRequest, rejectFriendRequest, sendFriendRequest, updateSelections} from '../controllers/userController.js';
 
 const router = express.Router();
 router.post('/createUser', createUser);
