@@ -95,15 +95,15 @@ export const createUser = async(req, res) => {
 
 export const loginUser = async(req, res) => {
     try {
-        const {username, password} = req.body
+        const {email, password} = req.body
         console.log("Here!")
-        const user = await User.findOne( {username} )
+        const user = await User.findOne( {email: email} )
         if (!user)
-            res.status(404).json({ message: "User not found" })
+            return res.status(404).json({ message: "User not found" })
         
         const passwordValidated = await passwordMatch(password, user.password) 
         if (!passwordValidated)
-            res.status(400).json({ message: "Invalid Password" })
+            return res.status(400).json({ message: "Invalid Password" })
         
         await changeActiveStatus(user)
 
@@ -136,7 +136,7 @@ export const loginUser = async(req, res) => {
     } 
     catch (e) {
         console.error("error logging in: ", e)
-        res.status(500).json({"message": "Error logging in", "e": e})
+        return res.status(500).json({"message": "Error logging in", "e": e})
     }
 }
 
