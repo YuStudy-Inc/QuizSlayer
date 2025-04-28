@@ -1,9 +1,9 @@
-
 import mongoose from 'mongoose';
-import dotenv from 'dotenv';
-dotenv.config()
+// import dotenv from 'dotenv'
+// dotenv.config()
 // Uses path of first file to import (should be server.js)
-
+// import dotenv from 'dotenv';
+// dotenv.config({path: 'Backend/.env'});
 
 // const DatabaseConnection = async () => {
 //     let ready = false;
@@ -41,6 +41,7 @@ dotenv.config()
 // }
 mongoose.Promise = global.Promise
 const MONGODB_URI = process.env.MONGODB_URI
+console.log("MONGODB URI: " + MONGODB_URI)
 let cachedClient = null;
 
 // Function to connect to MongoDB
@@ -52,6 +53,7 @@ const DatabaseConnection = async () =>{
 
   try {
     const client = await mongoose.connect(MONGODB_URI);
+    // const client = mongoose.createConnection(MONGODB_URI);
     console.log("MongoDB connected successfully");
     cachedClient = client;
     return client;

@@ -2,7 +2,8 @@ import { Alert, Podium, TodoList, FriendsActive, Notifications } from "../../Com
 import "../../Styles/Pages/MainMenu/Home.css"
 import { useNavigate } from "react-router-dom"
 import { maomao, bell } from "../../assets/Pictures"
-import { useEffect, useState } from "react"
+import { useState } from "react"
+import UserData from "../../UserData.js"
 
 const Home = () => {
     const [openNotifications, setOpenNotifications] = useState(false)

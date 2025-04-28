@@ -4,18 +4,51 @@ import { FlashCard, FlashCardCreationOverlay } from "../../Components/Components
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
+const URI = import.meta.env.VITE_URI
+const userId = JSON.parse(localStorage.getItem('id'));
+
 const CreateQuizPage = () => {
-	const [title, setTitle] = useState('')
-	const [description, setDescription] = useState('')
+	const [quizData, setQuizData] = useState({
+        title: "",
+        description: "",
+        completed: ""
+    })
 	const [fileName, setFileName] = useState("");
 	const [showCardCreationOverlay, setShowCardCreationOverlay] = useState(false)
+	const [questions, setQuestions] = useState([])
 
 	const navigate = useNavigate()
 
-	const handleQuizCreation = () => {
-		/* backend stuff */
-		navigate('/quizzes')
+	const handleQuizCreation = async () => {
+		try {
+            const quizResponse = await axios.post(`${URI}quizzes/createQuiz/`, {
+				quiz: quizData,
+				user: userId //somehow get the id from the user as a foreign key
+			})
+            if (quizResponse.status === 200) {
+                console.log("successfully created Quiz")
+            }
+
+            const questionsResponse = await axios.post(`${URI}questions/createQuestion`, {
+				questions: questions,
+				quiz: quizData //somehow get the id from the quiz as a foreign key
+			})
+            if (questionsResponse.status === 200) {
+                console.log("successfully created Quiz Questions")
+            }
+            navigate(-1)
+        }
+        catch (e) {
+            console.error("error saving changes to quiz", e)
+        }
 	}
+
+	const handleChange = (e) => {
+        setQuizData(prev => ({
+            ...prev,
+            [e.target.name]: e.target.value
+        }))
+    }
 
 	const createCard = () => {
 		setShowCardCreationOverlay(true)
@@ -27,13 +60,15 @@ const CreateQuizPage = () => {
 
 	const handleDropZoneClick = () => {
 		document.getElementById("file-upload").click();
-	};
+	}
+
 	const handleFileChange = (event) => {
 		if (event.target.files.length > 0) {
 			console.log("File input event:", event.target.files); // Debugging
 			setFileName(event.target.files[0].name); // Display selected file name
 		}
-	};
+	}
+
 	return (
 		<>
 			<div className="create-quiz-container">
@@ -51,12 +86,12 @@ const CreateQuizPage = () => {
 						<div className="left-side">
 							<label>
 								<p>Title</p>
-								<span><input type="text" value={title} onChange={(e) => setTitle(e.target.value)} /></span>
+								<span><input type="text" name="title" onChange={handleChange} /></span>
 							</label>
 
 							<label>
 								<p>Description</p>
-								<span><input type="text" value={description} onChange={(e) => setDescription(e.target.value)} /></span>
+								<span><input type="text" name="description" onChange={handleChange} /></span>
 							</label>
 
 							<div className="card-section">
@@ -65,13 +100,9 @@ const CreateQuizPage = () => {
 
 							<div className="flash-cards-create-container">
 								<div className="flash-cards">
-									{/* flash card components go here */}
-									<FlashCard questionInput={"what is 1 + 1"} answerInput={"2"} />
-									<FlashCard questionInput={"what is 1 + 1"} answerInput={"2"} />
-									<FlashCard questionInput={"what is 1 + 1"} answerInput={"2"} />
-									<FlashCard questionInput={"what is 1 + 1"} answerInput={"2"} />
-									<FlashCard questionInput={"what is 1 + 1"} answerInput={"2"} />
-									<FlashCard questionInput={"what is 1 + 1"} answerInput={"2"} />
+									{questions.map((question) => (
+                                        <FlashCard key={question._id} id={question._id} questionInput={question.questionPrompt} answerInput={question.answer} editing={false} onEdit={() => {}} />
+                                    ))}
 								</div>
 							</div>
 							<div className="create-card">
@@ -105,7 +136,7 @@ const CreateQuizPage = () => {
 					</button>
 				</div>
 				{showCardCreationOverlay && (
-					<FlashCardCreationOverlay close={handleCardCreationClose}/>
+					<FlashCardCreationOverlay close={(handleCardCreationClose)}/>
 				)}
 			</div>
 		</>

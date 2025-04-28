@@ -1,8 +1,11 @@
+import { Schema } from 'mongoose';
 import Schemas from '../schemas/Schemas.js';
 const Quiz = Schemas.Quiz
+const Question = Schema.Question
+
 export const createQuiz = async(req, res) => {
     try {
-        const { title, description } = req.body
+        const { title, description } =body
     
         if (!title || !description || title === "" || description === "")
             return res.status(404).json({ message: "Not all fields filled out" })
@@ -48,7 +51,7 @@ export const editQuiz = async (req,res) => {
     }
 }
 
-export const deleteQuiz = async(req, res)=>{
+export const deleteQuiz = async(req, res) => {
     const{id} = req.params;
     try{
         const deletedQuiz = await Quiz.findByIdAndDelete(id);
@@ -62,6 +65,47 @@ export const deleteQuiz = async(req, res)=>{
     catch(err){
         res.status(500).json({error: "Quiz not found"})
         console.log(err)
+    }
+}
+
+export const getQuizzes = async(req, res) => {
+    try {
+        const userId = req.params.id
+        const quizzes = await Quiz.find({user: userId})
+        res.status(200).json({quizzes})
+    } catch (e) {
+        res.status(500).json({error: 'Error retreiving quizzes'})
+        console.log(e)
+    }
+}
+
+export const getToDoQuizzes = async(req, res) => {
+    try {
+        const userId = req.params.id
+        const quizzesStillLeftToDo = await find({user: userId, completed: false})
+        res.status(200).json({quizzesStillLeftToDo})
+    } catch (e) {
+        res.status(500).json({error: 'Error retreiving quizzes under TODO status'})
+        console.log(e)
+    }
+}
+
+export const getQuestionsFromQuiz = async(req, res) => {
+    const { id } = req.params;
+    if (!id)
+        res.status(404).json({error: "Quiz not found"})
+
+    try {
+        const result = await Question.find(id)
+        if (!result) {
+            res.status(500).json({error: "Error finding questions for that quiz"})
+            return;
+        }
+        res.status(200).json({message: "questions retreived successfully", "questions": result})
+    }
+    catch (e) {
+        console.log(e)
+        res.status(500).json({error: "Error finding questions for that quiz"})
     }
 }
 

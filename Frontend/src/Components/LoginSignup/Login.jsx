@@ -3,8 +3,11 @@ import { useNavigate } from "react-router-dom"
 import Email from "./Email";
 import Password from "./Password";
 import "../../Styles/Pages/LoginSignup/LoginSignup.css"
+import UserData from "../../UserData";
 
 import axios from "axios";
+
+const URI = import.meta.env.VITE_APP_URI;
 
 const Login = ({onToggle}) => {
 
@@ -17,10 +20,11 @@ const Login = ({onToggle}) => {
     const [validated, setValidated] = useState(true);
     const [validating, setValidating] = useState(false);
     const validatingRef = useRef(false);
-
+    const url = import.meta.env.VITE_APP_URI || '';
     const navigate = useNavigate();
     const routeHome = () => {
-        navigate('../home')
+        navigate('../home');
+        window.location.reload();
     }
 
     const handleClick = (event) => {
@@ -66,12 +70,16 @@ const Login = ({onToggle}) => {
     const attemptLogin = async () => {
         axios({
             method: "post",
-            url: "https://00qy8vpnab.execute-api.us-east-1.amazonaws.com/users/loginUser",
-            // url: "http://localhost:3000/users/loginUser",
-            data: formData
+            url: URI + "users/loginUser",
+            data: formData,
+            headers: {
+                "Content-Type": "application/json"
+              }
         })
         .then((response) => {
-            // The response should be a session ID. Just route to home for now.
+            localStorage.setItem('user', JSON.stringify(response.data.user));
+            localStorage.setItem('id', JSON.stringify(response.data.user._id));
+            UserData.updateUserData();
             routeHome();
         })
         .catch((error) => {

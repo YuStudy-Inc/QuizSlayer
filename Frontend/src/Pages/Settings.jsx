@@ -1,12 +1,32 @@
 import "../Styles/Pages/Settings.css"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { maomao, pencil } from "../assets/Pictures"
-
+import { pencil } from "../assets/Pictures"
+import axios from "axios"
+import { Alert } from "../Components/Components"
 const Settings = () => {
+    const id = JSON.parse(localStorage.getItem('id'));
+    const user = JSON.parse(localStorage.getItem('user'));
     const settingsOptions = ["Profile", "Password", "Account"]
     const [whichSettings, setWhichSettings] = useState(0)
+    const [username, setUsername] = useState(user.username || '');
+    const [description, setDescription] = useState(user.description || '');
+    const [profilePic, setProfilePic] = useState(user.pfp || null);
+    const [showAlert, setShowAlert] = useState(false)
+    const [alertText, setAlertText] = useState('')
+    const [oldPassword, setOldPassword] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+    const [newPasswordAgain, setNewPasswordAgain] = useState('');
+    const url = import.meta.env.VITE_APP_URI || '';
     const navigate = useNavigate()
+
+    const routeHomePage = () => {
+        navigate('/')
+    }
+    
+    const closeAlert = () => {
+        setShowAlert(false);
+    };
 
     const handleLeftSettings = () => {
         const optionRightNow = whichSettings
@@ -29,8 +49,120 @@ const Settings = () => {
         document.querySelector(`.${whichSettings}`)?.classList.toggle("active-settings")
     }
 
+    //Settings saving
+    const onSaveProfile = async() =>{
+        axios({
+            method: "put",
+            url: `${url}/users/editUser/${id}`,
+            data: {
+              username: username,
+              description: description
+            },
+            headers: {
+              "Content-Type": "application/json"
+            }
+          })
+          .then((response) => {
+            console.log("Update Success:", response.data);
+            // alert("It worked")
+            setAlertText(response.data.message || "Request successful!");
+            setShowAlert(true);
+            // Update local storage or UI with new user data if needed
+            localStorage.setItem('user', JSON.stringify(response.data));
+          })
+          .catch((error) => {
+            const response = error.response;
+            // alert("It did not work")
+            setAlertText(error.response?.data?.message || "Something went wrong.");
+            setShowAlert(true);
+            if (response) {
+              console.log(response.data);
+              console.log(response.status);
+              console.log(response.headers);
+            } else if (error.request) {
+              console.log(error.request);
+            } else {
+              console.log("Error", error.message);
+            }
+    });
+    }
+
+    const onPasswordSave = async() =>{
+        axios({
+            method: "put",
+            url: `${url}/users/editUser/password/${id}`,
+            data: {
+            oldPassword,
+            newPassword,
+            newPasswordAgain
+            },
+            headers: {
+              "Content-Type": "application/json"
+            }
+          })
+          .then((response) => {
+            setAlertText(response.data.message || "Request successful!");
+            setShowAlert(true);
+            console.log("Update Success:", JSON.stringify(response.data));
+          })
+          .catch((error)=>{
+            const response = error.response;
+            setAlertText(error.response?.data?.message || "Something went wrong.");
+            setShowAlert(true);
+            // alert("It did not work")
+            if (response) {
+                console.log(response.data);
+                console.log(response.status);
+                console.log(response.headers);
+              } else if (error.request) {
+                console.log(error.request);
+              } else {
+                console.log("Error", error.message);
+              }
+          });
+    }
+
+    const deleteAccount = async() =>{
+        axios({
+            method: "delete",
+            url: `${url}/users/deleteUser/${id}`,
+            data: {
+            },
+            headers: {
+              "Content-Type": "application/json"
+            }
+          })
+          .then((response) => {
+            setAlertText(response.data.message || "Request successful!");
+            setShowAlert(true);
+            console.log("Update Success:", JSON.stringify(response.data));
+            routeHomePage()
+          })
+          .catch((error)=>{
+            const response = error.response;
+            setAlertText(error.response?.data?.message || "Something went wrong.");
+            setShowAlert(true);
+            if (response) {
+                console.log(response.data);
+                console.log(response.status);
+                console.log(response.headers);
+              } else if (error.request) {
+                console.log(error.request);
+              } else {
+                console.log("Error", error.message);
+              }
+          });
+    }
+
     return(
         <>
+            {showAlert && (
+            <Alert
+          text={alertText}
+          buttonOneText="OK"
+          functionButtonOne={closeAlert}
+          />
+          )}
             <div className="settings-container">
                 <div className="back">
 					<button className="back-button" onClick={() => navigate('/home')}>
@@ -58,37 +190,57 @@ const Settings = () => {
                                 <div className="profile-picture-edit move">
                                     <img className="pencil-profile-pic" src={pencil} alt="" />
                                     <div className="black-overlay-for-the-profile-pic"></div>
-                                    <img className="profile-picture-rn" src={maomao} alt="" />
+                                    <img className="profile-picture-rn" src={profilePic} alt="" />
                                     <input className="new-pfp" type="file" />
                                 </div>
                                 <div className="username-edit move">
                                     <h1>username</h1>
-                                    <input className="new-username" type="text"/>
+                                    <input
+                                    className="new-username"
+                                    type="text"
+                                    value={username}
+                                    onChange={(e) => setUsername(e.target.value)}
+                                />
                                 </div>
                                 <div className="description-edit move">
                                     <h1>Description</h1>
-                                    <textarea className="new-description"></textarea>
+                                    <textarea
+                                    className="new-description"
+                                    value={description}
+                                    onChange={(e) => setDescription(e.target.value)}
+                                />
                                 </div>
-                                <button className="submit-profile-edit move">Save Changes</button>
+                                <button className="submit-profile-edit move" onClick={onSaveProfile}>Save Changes</button>
                             </div>
                             <div className="password-settings">
                                 <div className="old-password move">
                                     <h1>Old Password</h1>
-                                    <input className="old-password" type="text"/>
+                                    <input 
+                                    className="old-password" 
+                                    type="password"
+                                    onChange={(e) => setOldPassword(e.target.value)}
+                                    />
                                 </div>
                                 <div className="password-edit move">
                                     <h1>New Password</h1>
-                                    <input className="new-password" type="text"/>
+                                    <input className="new-password" 
+                                    type="password"
+                                    onChange={(e) => setNewPassword(e.target.value)}
+                                    />
                                 </div>
                                 <div className="password-edit-again move">
                                     <h1>Retype New Password</h1>
-                                    <input className="new-password-again" type="text"/>
+                                    <input 
+                                    className="new-password-again" 
+                                    type="password"
+                                    onChange={(e) => setNewPasswordAgain(e.target.value)}
+                                    />
                                 </div>
-                                <button className="submit-password-edit move">Save Changes</button>
+                                <button className="submit-password-edit move" onClick={onPasswordSave}>Save Changes</button>
                             </div>
                             <div className="account-settings">
-                                <button className="submit-logout-account move">Logout</button>
-                                <button className="submit-delete-account move">Delete Account</button>
+                                <button className="submit-logout-account move" onClick={routeHomePage}>Logout</button>
+                                <button className="submit-delete-account move" onClick={deleteAccount}>Delete Account</button>
                             </div>
                         </div>
                     </div>
