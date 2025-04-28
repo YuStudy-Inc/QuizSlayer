@@ -1,5 +1,5 @@
 import express from 'express';
-import { createQuestion, editQuestion, deleteQuestion, createQuestionFromBuffer } from '../controllers/questionController.js';
+import { createQuestion, editQuestion, deleteQuestion, createQuestionsFromPDF } from '../controllers/questionController.js';
 import multer from 'multer'
 
 const router = express.Router();
