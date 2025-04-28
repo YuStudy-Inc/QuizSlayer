@@ -74,7 +74,9 @@ const Login = ({onToggle}) => {
             data: formData,
             headers: {
                 "Content-Type": "application/json"
-              }
+              },
+            withCredentials:true,
+
         })
         .then((response) => {
             localStorage.setItem('user', JSON.stringify(response.data.user));

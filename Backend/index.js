@@ -10,7 +10,7 @@ import serverless from 'serverless-http';
 //import path from 'path';
 //import { fileURLToPath } from 'url';
 // import dotenv from 'dotenv';
-// dotenv.config({path: 'Backend/.env'});
+// dotenv.config();
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
 
