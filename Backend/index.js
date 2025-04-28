@@ -11,7 +11,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 // import dotenv from 'dotenv';
-
+// dotenv.config({path: 'Backend/.env'});
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
 
@@ -78,8 +78,8 @@ app.get("/", async(req, res) => {
 
 export const handler = serverless(app);
 
-// For local testing
-// const port = 3000;
+//For local testing
+// const port = 5173;
 
 // app.listen(port, () => {
 //   console.log(`Example app listening on port ${port}`)

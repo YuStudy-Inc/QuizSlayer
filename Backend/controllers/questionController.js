@@ -1,5 +1,7 @@
 import Schemas from '../schemas/Schemas.js';
+import OpenAI from "openai";
 import mongoose from 'mongoose';
+import pdf from 'pdf-parse';
 const Question = Schemas.Question
 const Quiz = Schemas.Quiz
 function isInt(value) {
@@ -53,6 +55,87 @@ export const createQuestion = async(req, res) => {
         console.error("error creating question: ", e)
         res.status(500).json({"message": "Error creating question", e})
     }
+}
+
+export const createQuestionsFromPDF = async (err, req, res) => {
+    try {
+        if(err != null){
+            if(err.code === 'LIMIT_FILE_SIZE'){
+                return res.status(413).json({error: 'File too large'});
+            }
+        }
+        if(!req.file){
+            return res.status(400).json({error: 'No file uploaded.'});
+        }
+        if(req.file.mimetype !== 'application/pdf') {
+            return res.status(415).json({error: "Invalid file type. Only PDFS are allowed"});
+        }
+        
+        const dataBuffer = req.file.buffer;
+        const api = process.env.OPENAI_API_KEY;
+        const client = new OpenAI(api);
+        var data; 
+        try{
+            data = await pdf(dataBuffer);
+        }
+        catch(e) {
+            return res.status(415).json({error: "Invalid PDF structure"})
+        }
+        
+        const prompt = "You are a teacher creating a quiz." +
+            " Use the user inputted slide or text information to create 10 questions with a corresponding answers." +
+            " Similar to a flashcard. Do not assume anything outside of the slides"
+            
+        const response = await client.responses.create({
+            model: 'gpt-4o-mini',
+            input: [
+                {
+                    "role": "system",
+                    "content":
+                        prompt,
+                },
+                {
+                    "role": "user",
+                    "content": [{
+                            type: "input_text",
+                            text: data.text
+                        },
+                    ], 
+                },
+            ],
+            text: {
+                format: {
+                    type: "json_schema",
+                    name: "Get_Quiz",
+                    schema: {
+                        type: 'object',
+                        properties: {
+                            questions: {
+                                type: "array",
+                                items: {
+                                    type: 'object',
+                                    properties: {
+                                        question: {"type": "string"},
+                                        answer: {"type": "string"},
+                                    },
+                                    required: ['question', 'answer'],
+                                    additionalProperties: false,
+                                },
+                            },
+                        },
+                        required: ['questions'],
+                        additionalProperties: false,
+                    },
+                }
+            }
+        });
+
+        return res.status(200).json(JSON.parse(response.output_text));
+    } catch (e) {
+        return res.status(500).json({error: "Could not create questions"});
+        
+    }
+
 }
 
 export const editQuestion = async (req,res) => {
