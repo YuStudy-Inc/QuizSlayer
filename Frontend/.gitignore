@@ -24,3 +24,4 @@ security/*
 *.sln
 *.sw?
 .env
+*.env

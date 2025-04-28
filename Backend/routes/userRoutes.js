@@ -26,5 +26,7 @@ router.post('/sendFriendRequest/:id', sendFriendRequest)
 router.get('/', (req, res) => {
     res.send('Users route works!');
   });
+
+router.post('/updateSelections', updateSelections);
   
 export default router;

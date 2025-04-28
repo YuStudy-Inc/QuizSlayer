@@ -5,8 +5,11 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
+const URI = import.meta.env.VITE_URI
+
 const EditQuizPage = () => {
-    const URI = import.meta.env.VITE_URI
+    //I need to find a way to make sure the owner of the quiz can edit it, we don't want people to write to other's quizzes
+
     const { quizId } = useParams();
     const [quizData, setQuizData] = useState({
         title: "",
@@ -20,8 +23,9 @@ const EditQuizPage = () => {
     useEffect(() => {
         const fetchQuiz = async () => {
             try {
-                const { data } = await axios.get(`${URI}/quizzes/getQuiz/${quizId}`)
-                setQuizData(data)
+                const response = await axios.get(`${URI}quizzes/getQuiz/${quizId}`)
+                if (response.status === 200)
+                    setQuizData(response.data)
             }
             catch (e) {
                 console.log("error retreiving quiz", e)
@@ -33,8 +37,9 @@ const EditQuizPage = () => {
     useEffect(() => {
         const fetchQuestionsFromQuiz = async () => {
             try {
-                const { data } = await axios.get(`${URI}/quizzes/getQuestionsFromQuiz/${quizId}`)
-                setQuestions(data)
+                const response = await axios.get(`${URI}quizzes/getQuestionsFromQuiz/${quizId}`)
+                if (response.status === 200)
+                    setQuestions(response.data)
             }
             catch (e) {
                 console.log("error retreiving questions for quiz", e)
@@ -71,12 +76,14 @@ const EditQuizPage = () => {
 
     const handleQuizSaveChanges = async () => {
         try {
-            const quizResponse = await axios.put(`${URI}/quizzes/editQuiz/${quizId}`, quizData )
+            const quizResponse = await axios.put(`${URI}quizzes/editQuiz/${quizId}`, quizData )
             if (quizResponse.status === 200) {
                 console.log("successfully edited Quiz")
             }
 
-            const questionsResponse = await axios.put(`${URI}/questions/editQuestion`, {questions})
+            const questionsResponse = await axios.put(`${URI}questions/editQuestion/`, {
+                questions: questions
+            })
             if (questionsResponse.status === 200) {
                 console.log("successfully edited Quiz")
             }

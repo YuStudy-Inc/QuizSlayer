@@ -5,11 +5,11 @@ import Friends from './Friends.jsx';
 import Leaderboard from './Leaderboard.jsx';
 import CreateQuizPage from "./CreateQuizPage.jsx"
 import EditQuizPage from './EditQuizPage.jsx';
-import Gatcha from './Gatcha.jsx';
+import Gacha from './Gacha.jsx';
 
 export {
     Collection,
-    Gatcha,
+    Gacha,
     Quizzes,
     CreateQuizPage,
     EditQuizPage,

@@ -11,9 +11,9 @@ const passwordMatch = (async(passwordFromUser, savedPasswordFromDB) => {
     return await bcrypt.compare(passwordFromUser, savedPasswordFromDB)
 })
 
-const changeActiveStatus = (async(user) => {
-    const active = user.active;
-    return await User.findOneAndUpdate({username: user.username}, {active: !active})
+const changeActiveStatus = (async (user) => {
+    const active = user.isOnline;
+    return await User.findOneAndUpdate({ username: user.username }, { isOnline: !active })
 })
 
 export const createUser = async(req, res) => {
@@ -59,6 +59,29 @@ export const createUser = async(req, res) => {
             monstersSlain: 0,
         })
         await newUser.save()
+
+        req.session.userID = newUser._id;
+
+        res.cookie('userData', JSON.stringify({
+            username: user.username,
+            pfp: user.pfp,
+            description: user.description,
+            friendsList: user.friendsList,
+            friendRequests: user.friendRequests,
+            inventory: user.inventory,
+            characterList: user.characterList,
+            selectedCharacter: user.selectedCharacter,
+            selectedHat: user.selectedHat,
+            selectedWeapon: user.selectedWeapon,
+            xp: user.xp,
+            coins: user.coins,
+            monstersSlain: user.monstersSlain
+        }), {
+            // httpOnly: true,
+            // secure: process.env.NODE_ENV === 'production',
+            // sameSite: 'strict'
+        });
+
         res.status(201).json({
             "message": "new user created",
             "user": newUser
@@ -83,8 +106,30 @@ export const loginUser = async(req, res) => {
             res.status(400).json({ message: "Invalid Password" })
         
         await changeActiveStatus(user)
-        
-        res.status(200).json({
+
+        req.session.userID = user._id;
+
+        res.cookie('userData', JSON.stringify({
+            username: user.username,
+            pfp: user.pfp,
+            description: user.description,
+            friendsList: user.friendsList,
+            friendRequests: user.friendRequests,
+            inventory: user.inventory,
+            characterList: user.characterList,
+            selectedCharacter: user.selectedCharacter,
+            selectedHat: user.selectedHat,
+            selectedWeapon: user.selectedWeapon,
+            xp: user.xp,
+            coins: user.coins,
+            monstersSlain: user.monstersSlain
+        }), {
+            // httpOnly: true,
+            // secure: process.env.NODE_ENV === 'production',
+            // sameSite: 'strict'
+        });
+
+        return res.status(200).json({
             "message": "Login Successful",
             "user": user
         })
@@ -106,7 +151,11 @@ export const editUser = async (req,res) => {
             return; 
         }
         //Only changes the parameter that was included in the json req
-        const result = await User.findOneAndUpdate({_id: userId}, {$set: req.body}).select("username description -_id");
+        const result = await User.findOneAndUpdate(
+            { _id: userId },
+            { $set: req.body },
+            { new: true } // returns updated user object
+          );
         console.log(result);
 
         // res.status(200).json({updatedCount: result.modifiedCount}) 
@@ -245,7 +294,54 @@ export const getInventory = async(req, res) => {
     }
 }
 
-export const getTop10 = async(req, res) => {
+export const updateSelections = async (req, res) => {
+    try {
+        const userId = req.session.userID;
+        const { selectedCharacter, selectedHat, selectedWeapon } = req.body;
+
+        const updateFields = {};
+        if (selectedCharacter !== undefined) updateFields.selectedCharacter = selectedCharacter;
+        if (selectedHat !== undefined) updateFields.selectedHat = selectedHat;
+        if (selectedWeapon !== undefined) updateFields.selectedWeapon = selectedWeapon;
+
+        const user = await User.findOneAndUpdate(
+            { _id: userId },
+            { $set: updateFields },
+            { new: true }
+        );
+
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        res.cookie('userData', JSON.stringify({
+            username: user.username,
+            pfp: user.pfp,
+            description: user.description,
+            friendsList: user.friendsList,
+            friendRequests: user.friendRequests,
+            inventory: user.inventory,
+            characterList: user.characterList,
+            selectedCharacter: user.selectedCharacter,
+            selectedHat: user.selectedHat,
+            selectedWeapon: user.selectedWeapon,
+            xp: user.xp,
+            coins: user.coins,
+            monstersSlain: user.monstersSlain
+        }), {
+            // httpOnly: true,
+            // secure: process.env.NODE_ENV === 'production',
+            // sameSite: 'strict'
+        });
+
+        return res.status(200).json({ message: "Selections updated successfully" });
+    } catch (e) {
+        res.status(500).json({ error: "Error updating selections" });
+        console.log(e);
+    }
+};
+
+export const getTop10 = async (req, res) => {
     try {
         const top10Players = await User.find().sort({monstersSlain: -1}).limit(10)
         res.status(200).json({top10Players})
