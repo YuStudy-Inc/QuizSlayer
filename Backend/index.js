@@ -41,7 +41,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 const tempClient = await DatabaseConnection(); // Ensure DatabaseConnection is an async function that connects to MongoDB
 
-dotenv.config();
+// dotenv.config();
 
 const sessionStore = MongoStore.create({
   mongoUrl: process.env.MONGODB_URI,

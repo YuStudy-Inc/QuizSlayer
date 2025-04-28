@@ -7,7 +7,7 @@ import UserData from "../../UserData";
 
 import axios from "axios";
 
-const endpointUri = import.meta.env.VITE_APP_URI;
+const URI = import.meta.env.VITE_APP_URI;
 
 const Login = ({onToggle}) => {
 
@@ -20,7 +20,7 @@ const Login = ({onToggle}) => {
     const [validated, setValidated] = useState(true);
     const [validating, setValidating] = useState(false);
     const validatingRef = useRef(false);
-
+    const url = import.meta.env.VITE_APP_URI || '';
     const navigate = useNavigate();
     const routeHome = () => {
         navigate('../home');
@@ -70,11 +70,13 @@ const Login = ({onToggle}) => {
     const attemptLogin = async () => {
         axios({
             method: "post",
-            url: endpointUri + "users/loginUser",
+            url: URI + "users/loginUser",
             data: formData,
             withCredentials:true,
         })
         .then((response) => {
+            localStorage.setItem('user', JSON.stringify(response.data.user));
+            localStorage.setItem('id', JSON.stringify(response.data.user._id));
             UserData.updateUserData();
             routeHome();
         })

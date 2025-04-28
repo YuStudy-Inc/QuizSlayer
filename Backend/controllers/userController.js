@@ -153,7 +153,11 @@ export const editUser = async (req, res) => {
             return;
         }
         //Only changes the parameter that was included in the json req
-        const result = await User.findOneAndUpdate({ _id: userId }, { $set: req.body }).select("username description -_id");
+        const result = await User.findOneAndUpdate(
+            { _id: userId },
+            { $set: req.body },
+            { new: true } // returns updated user object
+          );
         console.log(result);
 
         // res.status(200).json({updatedCount: result.modifiedCount}) 
