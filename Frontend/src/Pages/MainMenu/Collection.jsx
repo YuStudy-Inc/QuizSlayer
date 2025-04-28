@@ -10,7 +10,7 @@ import WeaponsEnum from "../../assets/Weapons/WeaponsEnum.js"
 
 import axios from "axios";
 
-const endpointUri = import.meta.env.VITE_APP_URI;
+const URI = import.meta.env.VITE_APP_URI;
 
 const Collection = () => {
     const navigate = useNavigate()
@@ -56,7 +56,7 @@ const Collection = () => {
 
         axios({
             method: "post",
-            url: endpointUri + "users/updateSelections/",
+            url: URI + "users/updateSelections/",
             data: {
                 selectedCharacter,
                 selectedHat,
