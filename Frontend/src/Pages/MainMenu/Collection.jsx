@@ -116,8 +116,13 @@ const Collection = () => {
                                 <p className="collection-page-select-arrow right" onClick={() => updateWeapon("right")}> &#62; </p>
                             </div>
                         </div>
-                        <button onClick={() => save()} disabled={!hasAll()}>Save</button>
+                        <div className="save-character-outfit">
+                            <button onClick={() => save()} disabled={!hasAll()}>Save</button>
+                        </div>
                     </div>
+                    <div className="save-character-outfit-small">
+                            <button onClick={() => save()} disabled={!hasAll()}>Save</button>
+                        </div>
                 </div>
                 <div className="gacha">
                     <button className="gacha-button" onClick={() => {navigate('/gacha')}}>
