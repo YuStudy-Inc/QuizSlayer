@@ -48,7 +48,18 @@ const Settings = () => {
         document.querySelector(".active-settings")?.classList.toggle("active-settings")
         document.querySelector(`.${whichSettings}`)?.classList.toggle("active-settings")
     }
-
+    const handlePfp = (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setProfilePic(reader.result); // update preview
+        };
+        reader.readAsDataURL(file);
+        // Optionally store or send `file` to backend here
+        console.log('Selected file:', file);
+      }
+    };
     //Settings saving
     const onSaveProfile = async() =>{
         axios({
@@ -88,7 +99,7 @@ const Settings = () => {
             }
     });
     }
-
+  
     const onPasswordSave = async() =>{
         axios({
             method: "put",
@@ -123,7 +134,7 @@ const Settings = () => {
               }
           });
     }
-
+    
     const deleteAccount = async() =>{
         axios({
             method: "delete",
@@ -193,7 +204,7 @@ const Settings = () => {
                                     <img className="pencil-profile-pic" src={pencil} alt="" />
                                     <div className="black-overlay-for-the-profile-pic"></div>
                                     <img className="profile-picture-rn" src={profilePic} alt="" />
-                                    <input className="new-pfp" type="file" />
+                                    <input className="new-pfp" type="file" accept="image/*" onChange={handlePfp} />
                                 </div>
                                 <div className="username-edit move">
                                     <h1>username</h1>
