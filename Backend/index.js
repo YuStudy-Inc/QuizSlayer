@@ -55,6 +55,7 @@ app.use(session({
   saveUninitialized: true,
   store: sessionStore,
   cookie: {
+    sameSite: 'None',
     secure:false,
     maxAge: 1000 * 60 * 60 * 24 // 1 day
   }
@@ -84,5 +85,5 @@ export const handler = serverless(app);
 // const port = 5173;
 
 // app.listen(port, () => {
-//   console.log(`Example app listening on port ${port}`)
+  // console.log(`Example app listening on port ${port}`)
 // })

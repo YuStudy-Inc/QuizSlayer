@@ -87,6 +87,7 @@ export const createUser = async(req, res) => {
 
         res.status(201).json({
             "message": "new user created",
+            "headers": {'Set-Cookie': req.headers.cookie || ''},
             "user": newUser
         })
     }
@@ -134,6 +135,7 @@ export const loginUser = async(req, res) => {
 
         return res.status(200).json({
             "message": "Login Successful",
+            "headers": {'Set-Cookie': req.headers.cookie || ''},
             "user": user
         })
     } 
@@ -213,39 +215,44 @@ export const deleteUser = async(req, res)=>{
     }
 }
 
-export const uploadPfp = [upload.single('file'), async(req, res) => {
-    const userId = req.params.id
-    const file = req.file
+// + import multer from 'multer'
+// + 
+// + // Configure multer for file uploads
+// + const upload = multer();
 
-    if (!file)
-        return res.status(400).json({ message: "No file uploaded" })
+// export const uploadPfp = [upload.single('file'), async(req, res) => {
+//     const userId = req.params.id
+//     const file = req.file
 
-    const fileName = `${Date.now()}-${file.originalname}`
-    const params = {
-        Bucket: process.env.AWS_S3_BUCKET_NAME,
-        Key: fileName,
-        Body: file.buffer,
-        ContentType: file.mimetype,
-        ACL: "public-read"
-    }
+//     if (!file)
+//         return res.status(400).json({ message: "No file uploaded" })
 
-    try {
-        const data = await s3.upload(params).promise()
-        const imageURL = data.Location
+//     const fileName = `${Date.now()}-${file.originalname}`
+//     const params = {
+//         Bucket: process.env.AWS_S3_BUCKET_NAME,
+//         Key: fileName,
+//         Body: file.buffer,
+//         ContentType: file.mimetype,
+//         ACL: "public-read"
+//     }
 
-        const updatedUser = await User.findByIdAndUpdate(userId, {pfp: imageURL }, {new: true})
+//     try {
+//         const data = await s3.upload(params).promise()
+//         const imageURL = data.Location
 
-        res.status(200).json({
-            message: "profile Picture uploaded",
-            imageURL: imageURL,
-            user: updatedUser,
-        })
-    }
-    catch (e) {
-        console.error("error uploading to the s3 bucket", e)
-        res.status(500).json({message: "error uploading to the s3 bucket", error: e})
-    }
-}]
+//         const updatedUser = await User.findByIdAndUpdate(userId, {pfp: imageURL }, {new: true})
+
+//         res.status(200).json({
+//             message: "profile Picture uploaded",
+//             imageURL: imageURL,
+//             user: updatedUser,
+//         })
+//     }
+//     catch (e) {
+//         console.error("error uploading to the s3 bucket", e)
+//         res.status(500).json({message: "error uploading to the s3 bucket", error: e})
+//     }
+// }]
 
 export const getUsername = async(req, res) => {
     try {
@@ -369,7 +376,10 @@ export const updateSelections = async (req, res) => {
             sameSite: 'None'
         });
 
-        return res.status(200).json({ message: "Selections updated successfully" });
+        return res.status(200).json({ 
+            message: "Selections updated successfully",
+            headers: {'Set-Cookie': req.headers.cookie || ''}
+         });
     } catch (e) {
         res.status(500).json({ error: "Error updating selections" });
         console.log(e);
