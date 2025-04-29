@@ -65,28 +65,29 @@ export const createUser = async(req, res) => {
 
         req.session.userID = newUser._id;
 
-        res.cookie('userData', JSON.stringify({
-            username: user.username,
-            pfp: user.pfp,
-            description: user.description,
-            friendsList: user.friendsList,
-            friendRequests: user.friendRequests,
-            inventory: user.inventory,
-            characterList: user.characterList,
-            selectedCharacter: user.selectedCharacter,
-            selectedHat: user.selectedHat,
-            selectedWeapon: user.selectedWeapon,
-            xp: user.xp,
-            coins: user.coins,
-            monstersSlain: user.monstersSlain
-        }), {
-            // httpOnly: true,
-            secure: true,
-            sameSite: 'None'
-        });
+        // res.cookie('userData', JSON.stringify({
+        //     username: user.username,
+        //     pfp: user.pfp,
+        //     description: user.description,
+        //     friendsList: user.friendsList,
+        //     friendRequests: user.friendRequests,
+        //     inventory: user.inventory,
+        //     characterList: user.characterList,
+        //     selectedCharacter: user.selectedCharacter,
+        //     selectedHat: user.selectedHat,
+        //     selectedWeapon: user.selectedWeapon,
+        //     xp: user.xp,
+        //     coins: user.coins,
+        //     monstersSlain: user.monstersSlain
+        // }), {
+        //     // httpOnly: true,
+        //     secure: true,
+        //     sameSite: 'None'
+        // });
 
         res.status(201).json({
             "message": "new user created",
+            "headers": {'Set-Cookie': req.headers.cookie || ''},
             "user": newUser
         })
     }
@@ -214,6 +215,11 @@ export const deleteUser = async(req, res)=>{
         console.log(error);
     }
 }
+
+// + import multer from 'multer'
+// + 
+// + // Configure multer for file uploads
+// + const upload = multer();
 
 // export const uploadPfp = [upload.single('file'), async(req, res) => {
 //     const userId = req.params.id
@@ -364,27 +370,31 @@ export const updateSelections = async (req, res) => {
             return res.status(404).json({ error: "User not found" });
         }
 
-        res.cookie('userData', JSON.stringify({
-            username: user.username,
-            pfp: user.pfp,
-            description: user.description,
-            friendsList: user.friendsList,
-            friendRequests: user.friendRequests,
-            inventory: user.inventory,
-            characterList: user.characterList,
-            selectedCharacter: user.selectedCharacter,
-            selectedHat: user.selectedHat,
-            selectedWeapon: user.selectedWeapon,
-            xp: user.xp,
-            coins: user.coins,
-            monstersSlain: user.monstersSlain
-        }), {
-            // httpOnly: true,
-            secure: true,
-            sameSite: 'None'
-        });
+        // res.cookie('userData', JSON.stringify({
+        //     username: user.username,
+        //     pfp: user.pfp,
+        //     description: user.description,
+        //     friendsList: user.friendsList,
+        //     friendRequests: user.friendRequests,
+        //     inventory: user.inventory,
+        //     characterList: user.characterList,
+        //     selectedCharacter: user.selectedCharacter,
+        //     selectedHat: user.selectedHat,
+        //     selectedWeapon: user.selectedWeapon,
+        //     xp: user.xp,
+        //     coins: user.coins,
+        //     monstersSlain: user.monstersSlain
+        // }), {
+        //     // httpOnly: true,
+        //     secure: true,
+        //     sameSite: 'None'
+        // });
 
-        return res.status(200).json({ message: "Selections updated successfully" });
+        return res.status(200).json({ 
+            message: "Selections updated successfully",
+            headers: {'Set-Cookie': req.headers.cookie || ''},
+            user: user
+         });
     } catch (e) {
         res.status(500).json({ error: "Error updating selections" });
         console.log(e);
