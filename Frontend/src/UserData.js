@@ -13,6 +13,7 @@ const UserData = (() => {
 
     const updateUserData = (user) => {
         localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('id', JSON.stringify(user._id));
         userData = user;
         // userDataCookie = document.cookie
         // .split('; ')

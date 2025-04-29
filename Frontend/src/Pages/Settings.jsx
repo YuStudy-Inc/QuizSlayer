@@ -4,14 +4,14 @@ import { useNavigate } from "react-router-dom"
 import { pencil } from "../assets/Pictures"
 import axios from "axios"
 import { Alert } from "../Components/Components"
+import UserData from "../UserData"
 const Settings = () => {
     const id = JSON.parse(localStorage.getItem('id'));
-    const user = JSON.parse(localStorage.getItem('user'));
     const settingsOptions = ["Profile", "Password", "Account"]
     const [whichSettings, setWhichSettings] = useState(0)
-    const [username, setUsername] = useState(user.username || '');
-    const [description, setDescription] = useState(user.description || '');
-    const [profilePic, setProfilePic] = useState(user.pfp || null);
+    const [username, setUsername] = useState(UserData.getUsername() || '');
+    const [description, setDescription] = useState(UserData.getDescription()|| '');
+    const [profilePic, setProfilePic] = useState(UserData.getPfp() || null);
     const [showAlert, setShowAlert] = useState(false)
     const [alertText, setAlertText] = useState('')
     const [oldPassword, setOldPassword] = useState('');
@@ -68,7 +68,9 @@ const Settings = () => {
             setAlertText(response.data.message || "Request successful!");
             setShowAlert(true);
             // Update local storage or UI with new user data if needed
-            localStorage.setItem('user', JSON.stringify(response.data));
+            // localStorage.setItem('user', JSON.stringify(response.data));
+            // console.log(response.data.user);
+            UserData.updateUserData(response.data.user);
           })
           .catch((error) => {
             const response = error.response;
