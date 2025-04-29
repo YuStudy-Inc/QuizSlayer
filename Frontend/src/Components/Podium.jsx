@@ -19,7 +19,7 @@ const Podium = ({character, hat, weapon}) => {
     }
 
     useEffect(() => {
-        UserData.updateUserData();
+        // UserData.updateUserData();
         updatePodium();
     })
 
