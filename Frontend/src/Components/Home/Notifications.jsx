@@ -11,9 +11,9 @@ const Notifications = () => {
     const [friendRequests, setFriendRequests] = useState([])
 
     useEffect(() => {
-        const getFriendRequests = () => {
+        const getFriendRequests = async () => {
             try {
-                const response = axios.get(`${URI}users/getFriendRequests/${userId}`)
+                const response = await axios.get(`${URI}users/getFriendRequests/${userId}`)
                 if (response.status === 200)
                     setFriendRequests(response.data)
             }

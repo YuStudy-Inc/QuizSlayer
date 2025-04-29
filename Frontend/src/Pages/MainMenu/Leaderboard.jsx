@@ -1,23 +1,38 @@
 import "../../Styles/Pages/MainMenu/Leaderboard.css"
 import { PlayerCard } from "../../Components/Components"
+import {useState, useEffect} from "react"
+
+const URI = import.meta.env.VITE_APP_URI
 
 const Leaderboard = () => {
+    const [leaderBoard, setLeaderBoard] = useState([])
+
+    useEffect(() => {
+        const getLeaderBoard = async () => {
+            try {
+                const response = await axios.get(`${URI}users/getTop10`)
+                if (response.status === 200)
+                    setLeaderBoard(response.data)
+            }
+            catch (e) {
+                console.error("Error fetching leaderboard", e)
+            }
+        }
+        getLeaderBoard()
+    }, [URI])
+
+
     return (
         <>
             <div className="leaderboard-container">
                 <div className ="full-leaderboard">
                     <h1 className="title-leaderboard">Top 10</h1>
                     <div className="player-score-list">
-                            <PlayerCard rank="1" score = {0} playerName = "ToxicController" url = "/" />
-                            <PlayerCard rank="2" score = {0} playerName = "Player" url = "/" />
-                            <PlayerCard rank="3" score = {0} playerName = "Player" url = "/" />
-                            <PlayerCard rank="4" score = {0} playerName = "Player" url = "/" />
-                            <PlayerCard rank="5" score = {0} playerName = "Player" url = "/" />
-                            <PlayerCard rank="6" score = {0} playerName = "Player" url = "/" />
-                            <PlayerCard rank="7" score = {0} playerName = "Player" url = "/" />
-                            <PlayerCard rank="8" score = {0} playerName = "Player" url = "/" />
-                            <PlayerCard rank="9" score = {0} playerName = "Player" url = "/" />
-                            <PlayerCard rank="10" score = {0} playerName = "Player" url = "/" />
+                        {leaderBoard.length !== 0 ? (leaderBoard.map((player, index) => (
+                            <PlayerCard key={index} rank={index + 1} playerName={player.username} playerPfp={player.pfp} monstersSlain={player.monstersSlain} />
+                        ))) : (
+                            <h1>No Player Data Available</h1>
+                        )}
                     </div>
                 </div>
             </div>
