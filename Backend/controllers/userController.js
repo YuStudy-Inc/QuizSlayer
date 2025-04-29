@@ -78,8 +78,8 @@ export const createUser = async(req, res) => {
             monstersSlain: user.monstersSlain
         }), {
             // httpOnly: true,
-            // secure: process.env.NODE_ENV === 'production',
-            // sameSite: 'strict'
+            secure: true,
+            sameSite: 'None'
         });
 
         res.status(201).json({
@@ -125,8 +125,8 @@ export const loginUser = async(req, res) => {
             monstersSlain: user.monstersSlain
         }), {
             // httpOnly: true,
-            // secure: process.env.NODE_ENV === 'production',
-            // sameSite: 'strict'
+            secure: true,
+            sameSite: 'None'
         });
 
         return res.status(200).json({
@@ -330,8 +330,8 @@ export const updateSelections = async (req, res) => {
             monstersSlain: user.monstersSlain
         }), {
             // httpOnly: true,
-            // secure: process.env.NODE_ENV === 'production',
-            // sameSite: 'strict'
+            secure: true,
+            sameSite: 'None'
         });
 
         return res.status(200).json({ message: "Selections updated successfully" });
