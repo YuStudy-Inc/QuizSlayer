@@ -103,7 +103,7 @@ const Signup = ({ onToggle }) => {
                 withCredentials:true,
             })
             .then((response) => {
-                UserData.updateUserData();
+                UserData.updateUserData(response.data.user);
                 setValidated(validated)
                 routeHome();
             })

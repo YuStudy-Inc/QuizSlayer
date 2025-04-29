@@ -56,13 +56,17 @@ const Collection = () => {
 
         axios({
             method: "post",
-            url: URI + "users/updateSelections/",
+            url: URI + "users/updateSelections",
             data: {
                 selectedCharacter,
                 selectedHat,
                 selectedWeapon
             },
             withCredentials:true,
+        })
+        .then( (response) => {
+            console.log("Updating");
+            UserData.updateUserData(response.data.user);
         })
     }
 
