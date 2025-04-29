@@ -4,7 +4,7 @@ import { pencil } from "../../assets/Pictures"
 import { useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
 
-const URI = import.meta.env.VITE_URI
+const URI = import.meta.env.VITE_APP_URI
 const userId = JSON.parse(localStorage.getItem('id'));
 
 const Quizzes = () => {

@@ -1,21 +1,46 @@
 import "../../Styles/Components/Home/TodoList.css"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import axios from "axios"
 
-const TodoList = ({ className = "", quizzesToDo }) => {
+const URI = import.meta.env.VITE_APP_URI
+const userId = JSON.parse(localStorage.getItem('id'))
+
+const TodoList = ({ className = "" }) => {
     const [showSpreadOut, setShowSpreadOut] = useState(false)
+    const [quizzesToDo, setQuizzesToDo] = useState([])
 
     const toggleSpreadOut = () => {
         setShowSpreadOut(!showSpreadOut)
     }
 
+    useEffect(() => {
+        const fetchToDoQuizzes = async () => {
+            try {
+                const allToDoQuizzes = await axios.get(`${URI}users/getUsersToDoQuizzes/${userId}`)
+                setQuizzesToDo(allToDoQuizzes.data)
+            }
+            catch (e) {
+                console.log(e)
+            }
+        }
+        fetchToDoQuizzes()
+    }, [URI, userId])
+
     return (
         <>
             <div className={`todolist-container ${className}`}>
                 <h1>Todo</h1>
-                {/* add the list of quizzes todo from the db */}
-                <div className="info-on-the-normal none">
+                {quizzesToDo.length !== 0 ? (
+                    <div className="info-on-the-normal">
+                        {quizzesToDo.map((quiz) => (
+                            <h1>{quiz.title}</h1>
+                        ))}
+                    </div>
+                ) : (
+                    <div className="info-on-the-normal none">
                         <p>No Quizzes to do!</p>
                     </div>
+                )}
             </div>
 
             <div className="small-todolist-container">

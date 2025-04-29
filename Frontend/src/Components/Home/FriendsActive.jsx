@@ -1,10 +1,15 @@
 import "../../Styles/Components/Home/FriendsActive.css"
 import { useEffect, useState } from "react"
 import axios from "axios"
- 
+import { FriendCard } from "../Components"
+import { maomao } from "../../assets/Pictures"
 
-const FriendsActive = ({ className= "", friends }) => {
+const URI = import.meta.env.VITE_APP_URI
+const userId = JSON.parse(localStorage.getItem('id'))
+
+const FriendsActive = ({ className= "" }) => {
     const [showSpreadOut, setShowSpreadOut] = useState(false)
+    const [friends, setFriends] = useState([])
 
     const toggleSpreadOut = () => {
         setShowSpreadOut(!showSpreadOut)
@@ -12,19 +17,34 @@ const FriendsActive = ({ className= "", friends }) => {
 
     useEffect(() => {
         const fetchActiveFriends = async () => {
-            const allActiveFriends = await axios.get("")
+            try {
+                const allActiveFriends = await axios.get(`${URI}users/getUsersFriends/${userId}`)
+                setFriends(allActiveFriends.data)
+            }
+            catch (e) {
+                console.log(e)
+            }
         }
-    }, [])
+        fetchActiveFriends()
+    }, [URI, userId])
 
 
     return (
         <>
             <div className={`friends-active-container ${className}`}>
                 <h1>Active</h1>
-                {/* add the list of friends from the db */}
-                <div className="info-on-the-normal none">
-                    <p>No Friends Active...</p>
-                </div>
+                {friends.length !== 0 ? (
+                    <div className="info-on-the-normal">
+                       {friends.map((friend) => (
+                            <FriendCard friendPfp={friend.pfp} friendName={friend.username} />
+                       ))}
+                    </div>
+                ): (
+                    <div className="info-on-the-normal none">
+                        <p>No Friends Active...</p>
+                    </div>
+                )}
+                
             </div>
 
             <div className="small-friends-active-container">

@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
-const URI = import.meta.env.VITE_URI
+const URI = import.meta.env.VITE_APP_URI
 
 const EditQuizPage = () => {
     //I need to find a way to make sure the owner of the quiz can edit it, we don't want people to write to other's quizzes

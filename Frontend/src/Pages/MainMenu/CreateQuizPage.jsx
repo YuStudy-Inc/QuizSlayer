@@ -4,7 +4,7 @@ import { FlashCard, FlashCardCreationOverlay } from "../../Components/Components
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
-const URI = import.meta.env.VITE_URI
+const URI = import.meta.env.VITE_APP_URI
 const userId = JSON.parse(localStorage.getItem('id'));
 
 const CreateQuizPage = () => {

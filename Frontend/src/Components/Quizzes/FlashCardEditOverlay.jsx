@@ -3,7 +3,7 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 
 const FlashCardEditOverlay = ({ id, close }) => {
-    const URI = import.meta.env.VITE_URI
+    const URI = import.meta.env.VITE_APP_URI
     const [questionData, setQuestionData] = useState({
         question: "",
         answer: ""

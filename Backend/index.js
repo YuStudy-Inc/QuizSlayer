@@ -64,7 +64,6 @@ app.use("/users", userRoutes)
 app.use("/quizzes", quizRoutes)
 app.use("/questions", questionRoutes)
 
-
 app.get("/QuizSlayerBackend", async(req, res) => {
     try {
         const client = tempClient;

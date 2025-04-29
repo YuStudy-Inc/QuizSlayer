@@ -11,7 +11,7 @@ import {
     coins, oneStar, twoStar, threeStar, fourStar 
 } from "../../assets/Pictures"
 
-const URI = import.meta.env.VITE_URI
+const URI = import.meta.env.VITE_APP_URI
 const userId = JSON.parse(localStorage.getItem('id'));
 
 const Gacha = () => {  
