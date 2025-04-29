@@ -6,6 +6,7 @@ import axios from 'axios'
 
 const URI = import.meta.env.VITE_APP_URI
 const userId = JSON.parse(localStorage.getItem('id'))
+
 const Friends = () => {
     const [showAddFriend, setShowAddFriend] = useState(false)
     const [selectedFriend, setSelectedFriend] = useState(null);

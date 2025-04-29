@@ -4,14 +4,14 @@ import { useNavigate } from "react-router-dom"
 import { pencil } from "../assets/Pictures"
 import axios from "axios"
 import { Alert } from "../Components/Components"
+import UserData from "../UserData"
 const Settings = () => {
     const id = JSON.parse(localStorage.getItem('id'));
-    const user = JSON.parse(localStorage.getItem('user'));
     const settingsOptions = ["Profile", "Password", "Account"]
     const [whichSettings, setWhichSettings] = useState(0)
-    const [username, setUsername] = useState(user.username || '');
-    const [description, setDescription] = useState(user.description || '');
-    const [profilePic, setProfilePic] = useState(user.pfp || null);
+    const [username, setUsername] = useState(UserData.getUsername() || '');
+    const [description, setDescription] = useState(UserData.getDescription()|| '');
+    const [profilePic, setProfilePic] = useState(UserData.getPfp() || null);
     const [showAlert, setShowAlert] = useState(false)
     const [alertText, setAlertText] = useState('')
     const [oldPassword, setOldPassword] = useState('');
@@ -48,7 +48,18 @@ const Settings = () => {
         document.querySelector(".active-settings")?.classList.toggle("active-settings")
         document.querySelector(`.${whichSettings}`)?.classList.toggle("active-settings")
     }
-
+    const handlePfp = (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setProfilePic(reader.result); // update preview
+        };
+        reader.readAsDataURL(file);
+        // Optionally store or send `file` to backend here
+        console.log('Selected file:', file);
+      }
+    };
     //Settings saving
     const onSaveProfile = async() =>{
         axios({
@@ -68,7 +79,9 @@ const Settings = () => {
             setAlertText(response.data.message || "Request successful!");
             setShowAlert(true);
             // Update local storage or UI with new user data if needed
-            localStorage.setItem('user', JSON.stringify(response.data));
+            // localStorage.setItem('user', JSON.stringify(response.data));
+            // console.log(response.data.user);
+            UserData.updateUserData(response.data.user);
           })
           .catch((error) => {
             const response = error.response;
@@ -86,7 +99,7 @@ const Settings = () => {
             }
     });
     }
-
+  
     const onPasswordSave = async() =>{
         axios({
             method: "put",
@@ -121,7 +134,7 @@ const Settings = () => {
               }
           });
     }
-
+    
     const deleteAccount = async() =>{
         axios({
             method: "delete",
@@ -191,7 +204,7 @@ const Settings = () => {
                                     <img className="pencil-profile-pic" src={pencil} alt="" />
                                     <div className="black-overlay-for-the-profile-pic"></div>
                                     <img className="profile-picture-rn" src={profilePic} alt="" />
-                                    <input className="new-pfp" type="file" />
+                                    <input className="new-pfp" type="file" accept="image/*" onChange={handlePfp} />
                                 </div>
                                 <div className="username-edit move">
                                     <h1>username</h1>

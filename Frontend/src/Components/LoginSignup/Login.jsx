@@ -81,7 +81,7 @@ const Login = ({onToggle}) => {
         .then((response) => {
             console.log(response);
             // localStorage.setItem('user', JSON.stringify(response.data.user));
-            localStorage.setItem('id', JSON.stringify(response.data.user._id));
+            // localStorage.setItem('id', JSON.stringify(response.data.user._id));
             UserData.updateUserData(response.data.user);
             routeHome();
         })
