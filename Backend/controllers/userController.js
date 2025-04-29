@@ -113,29 +113,30 @@ export const loginUser = async(req, res) => {
 
         req.session.userID = user._id;
 
-        // res.cookie('userData', JSON.stringify({
-        //     username: user.username,
-        //     pfp: user.pfp,
-        //     description: user.description,
-        //     friendsList: user.friendsList,
-        //     friendRequests: user.friendRequests,
-        //     inventory: user.inventory,
-        //     characterList: user.characterList,
-        //     selectedCharacter: user.selectedCharacter,
-        //     selectedHat: user.selectedHat,
-        //     selectedWeapon: user.selectedWeapon,
-        //     xp: user.xp,
-        //     coins: user.coins,
-        //     monstersSlain: user.monstersSlain
-        // }), {
-        //     // httpOnly: true,
-        //     secure: true,
-        //     sameSite: 'None'
-        // });
+        res.cookie('userData', JSON.stringify({
+            username: user.username,
+            pfp: user.pfp,
+            description: user.description,
+            friendsList: user.friendsList,
+            friendRequests: user.friendRequests,
+            inventory: user.inventory,
+            characterList: user.characterList,
+            selectedCharacter: user.selectedCharacter,
+            selectedHat: user.selectedHat,
+            selectedWeapon: user.selectedWeapon,
+            xp: user.xp,
+            coins: user.coins,
+            monstersSlain: user.monstersSlain
+        }), {
+            // httpOnly: true,
+            httpOnly: false,
+            secure: true,
+            sameSite: 'None'
+        });
 
         return res.status(200).json({
             "message": "Login Successful",
-            "headers": {'Set-Cookie': req.headers.cookie || ''},
+            "headers": {'Set-Cookie': res.cookie || ''},
             "user": user
         })
     } 
@@ -297,6 +298,19 @@ export const getFriends = async(req, res) => {
     } catch (e) {
         res.status(500).json({error: 'Error retreiving friends'})
         console.log(e)
+    }
+}
+export const getFriendData = async(req, res) =>{
+    try{
+        const user = await User.findOne({_id: req.params.id}, 'username xp pfp');
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        res.status(200).json(user);
+    }
+    catch (error) {
+        console.error('Error fetching friend data:', error);
+        res.status(500).json({ message: 'Server Error' });
     }
 }
 

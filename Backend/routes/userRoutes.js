@@ -1,7 +1,7 @@
 import express from 'express';
 import { createUser, loginUser, editUser, editUserPassword, deleteUser, getUsername, getDescription, 
   getActiveFriends, getFriends, getToDoQuizzes, getCharacterList, getInventory, getTop10, 
-  getFriendRequests, acceptFriendRequest, rejectFriendRequest, sendFriendRequest, updateSelections} from '../controllers/userController.js';
+  getFriendRequests, acceptFriendRequest, rejectFriendRequest, sendFriendRequest, updateSelections, getFriendData} from '../controllers/userController.js';
 
 const router = express.Router();
 router.post('/createUser', createUser);
@@ -18,6 +18,7 @@ router.get('/getCharacterList/:id', getCharacterList)
 router.get('/getInventory/:id', getInventory)
 router.get('/getTop10/:id', getTop10)
 router.get('/getFriendRequests/:id', getFriendRequests)
+router.get('/getFriendData/:id', getFriendData);
 router.post('/acceptFriendRequest/:id', acceptFriendRequest)
 router.post('/rejectFriendRequest/:id', rejectFriendRequest)
 router.post('/sendFriendRequest/:id', sendFriendRequest)
