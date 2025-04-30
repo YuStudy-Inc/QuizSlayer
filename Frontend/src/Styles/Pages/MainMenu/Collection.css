@@ -124,6 +124,34 @@
     flex-basis: 90%;
 }
 
+.save-character-outfit {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.save-character-outfit-small {
+    margin-bottom: 2rem;
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+}
+
+.save-character-outfit button,
+.save-character-outfit-small button {
+    padding: 0.5rem 1rem;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 10px;
+    transition: all 0.2s ease-in-out;
+    -webkit-box-shadow: 0px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 10px 5px 0px rgba(0,0,0,0.75);
+    cursor: pointer;
+}
+
 .gacha button {
     background-color: var(--white);
     width: 4rem;
@@ -143,18 +171,22 @@
     cursor: pointer;
 }
 
-.gacha button:hover {
+.gacha button:hover,
+.save-character-outfit button:hover,
+.save-character-outfit-small button:hover {
     background-color: var(--light-green);
+    color: var(--white);
     transform: scale(1.1);
 }
 
-.gacha button:active {
+.gacha button:active,
+.save-character-outfit button:active,
+.save-character-outfit-small button:active {
     transform: scale(0.9);
     transform: translateY(2px);
     -webkit-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
     box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
-
 }
 
 .gacha img {
@@ -198,6 +230,18 @@
 
     .carousels {
         transform: scale(0.7);
+    }
+
+    .save-character-outfit {
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+    }
+
+    .save-character-outfit-small {
+        visibility: visible;
+        opacity: 1;
+        position: relative;
     }
 }
 

@@ -39,6 +39,18 @@
     padding-right: 10px;
 }
 
+.no-score {
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.no-one-is-winning {
+    font-size: 2.5rem;
+    color: #fff;
+}
+
 @media only screen and (max-width: 1000px) {
     .full-leaderboard {
         width: 90%;
@@ -59,10 +71,18 @@
         display: flex;
         flex-direction: column;
     }
+
+    .no-one-is-winning {
+        font-size: 2rem;
+    }
 }
 
 @media only screen and (max-width: 768px) {
     .player-score-list {
         gap: 1.7rem;
+    }
+
+    .no-one-is-winning {
+        font-size: 1.5rem;
     }
 }

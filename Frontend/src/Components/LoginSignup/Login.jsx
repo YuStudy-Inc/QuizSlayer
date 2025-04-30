@@ -24,7 +24,7 @@ const Login = ({onToggle}) => {
     const navigate = useNavigate();
     const routeHome = () => {
         navigate('../home');
-        window.location.reload();
+        // window.location.reload();
     }
 
     const handleClick = (event) => {
@@ -79,9 +79,10 @@ const Login = ({onToggle}) => {
 
         })
         .then((response) => {
-            localStorage.setItem('user', JSON.stringify(response.data.user));
-            localStorage.setItem('id', JSON.stringify(response.data.user._id));
-            UserData.updateUserData();
+            console.log(response);
+            // localStorage.setItem('user', JSON.stringify(response.data.user));
+            // localStorage.setItem('id', JSON.stringify(response.data.user._id));
+            UserData.updateUserData(response.data.user);
             routeHome();
         })
         .catch((error) => {

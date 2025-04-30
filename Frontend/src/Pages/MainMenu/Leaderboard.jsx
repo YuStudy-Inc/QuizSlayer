@@ -27,11 +27,11 @@ const Leaderboard = () => {
             <div className="leaderboard-container">
                 <div className ="full-leaderboard">
                     <h1 className="title-leaderboard">Top 10</h1>
-                    <div className="player-score-list">
+                    <div className={`player-score-list ${leaderBoard.length === 0 ? "no-score" : ""}`}>
                         {leaderBoard.length !== 0 ? (leaderBoard.map((player, index) => (
                             <PlayerCard key={index} rank={index + 1} playerName={player.username} playerPfp={player.pfp} monstersSlain={player.monstersSlain} />
                         ))) : (
-                            <h1>No Player Data Available</h1>
+                            <h1 className="no-one-is-winning">No Player Data Available</h1>
                         )}
                     </div>
                 </div>

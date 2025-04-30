@@ -100,6 +100,12 @@
     padding: 1rem;
 }
 
+.not-selected-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .add-a-friend-button {
     background-color: var(--white);
     width: 4rem;
