@@ -5,6 +5,7 @@ import { pencil } from "../assets/Pictures"
 import axios from "axios"
 import { Alert } from "../Components/Components"
 
+const URI = import.meta.env.VITE_APP_URI || '';
 const AWS_BUCKET_NAME = import.meta.env.VITE_APP_AWS_S3_BUCKET_NAME
 const AWS_REGION = import.meta.env.VITE_APP_AWS_REGION
 
@@ -16,12 +17,12 @@ const Settings = () => {
 	const [username, setUsername] = useState(user.username || '');
 	const [description, setDescription] = useState(user.description || '');
 	const [profilePic, setProfilePic] = useState(user.pfp || null);
+	const [previewURL, setPreviewURL] = useState(null);
 	const [showAlert, setShowAlert] = useState(false)
 	const [alertText, setAlertText] = useState('')
 	const [oldPassword, setOldPassword] = useState('');
 	const [newPassword, setNewPassword] = useState('');
 	const [newPasswordAgain, setNewPasswordAgain] = useState('');
-	const URI = import.meta.env.VITE_APP_URI || '';
 	const navigate = useNavigate()
 
 	const routeHomePage = () => {
@@ -30,6 +31,14 @@ const Settings = () => {
 
 	const closeAlert = () => {
 		setShowAlert(false);
+	};
+
+	const handleFileChange = (e) => {
+		const file = e.target.files[0];
+		if (file) {
+			setProfilePic(file)
+			setPreviewURL(URL.createObjectURL(file))
+		}
 	};
 
 	const handleLeftSettings = () => {
@@ -166,7 +175,7 @@ const Settings = () => {
 		const fileType = profilePic.type
 
 		// get the preSigned url
-		const response = await axios.post(`${url}users/presignedPfpURL/${userId}`, {
+		const response = await axios.post(`${URI}users/presignedPfpURL/${userId}`, {
 			fileName,
 			fileType
 		})
@@ -182,7 +191,6 @@ const Settings = () => {
 
 		const imageURL = `https://${AWS_BUCKET_NAME}.s3.${AWS_REGION}.amazonaws.com/${key}`
 		// probably works
-		setProfilePic(profilePic)
 		return imageURL
 	}
 
@@ -222,8 +230,8 @@ const Settings = () => {
 								<div className="profile-picture-edit move">
 									<img className="pencil-profile-pic" src={pencil} alt="" />
 									<div className="black-overlay-for-the-profile-pic"></div>
-									<img className="profile-picture-rn" src={profilePic} alt="" />
-									<input className="new-pfp" type="file" />
+									<img className="profile-picture-rn"  src={previewURL || profilePic} alt="" />
+									<input className="new-pfp" type="file" accept="image/png, image/jpeg" onChange={handleFileChange}/>
 								</div>
 								<div className="username-edit move">
 									<h1>username</h1>
