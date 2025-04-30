@@ -11,7 +11,7 @@ router.put('/editUser/password/:id', editUserPassword);
 router.delete('/deleteUser/:id', deleteUser);
 router.get('/getUsername/:id', getUsername)
 router.get('/getDescription/:id', getDescription)
-router.get('/getActiveFriends/:id', getActiveFriends)
+router.get('/getUsersActiveFriends/:id', getActiveFriends)
 router.get('/getFriends/:id', getFriends)
 router.get('/getToDoQuizzes/:id', getToDoQuizzes)
 router.get('/getCharacterList/:id', getCharacterList)
