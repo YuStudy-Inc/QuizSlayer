@@ -165,6 +165,7 @@ const Settings = () => {
 		const fileName = profilePic.name
 		const fileType = profilePic.type
 
+		// get the preSigned url
 		const response = await axios.post(`${url}users/presignedPfpURL/${userId}`, {
 			fileName,
 			fileType
@@ -172,16 +173,15 @@ const Settings = () => {
 
 		const { uploadURL, key } = response.data
 
-		// 2. Upload the file directly to S3
+		// uploading to s3
 		await axios.put(uploadURL, file, {
 			headers: {
 				'Content-Type': fileType
 			}
 		})
 
-		// 3. Save the image URL to your user in MongoDB
 		const imageURL = `https://${AWS_BUCKET_NAME}.s3.${AWS_REGION}.amazonaws.com/${key}`
-
+		// probably works
 		setProfilePic(profilePic)
 		return imageURL
 	}
