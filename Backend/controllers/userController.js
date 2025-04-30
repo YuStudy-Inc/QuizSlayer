@@ -1,10 +1,19 @@
 import schemas from '../schemas/Schemas.js';
 import bcrypt from 'bcryptjs'
 import s3 from '../config/s3.js';
+import aws from 'aws-sdk'
 import dotenv from 'dotenv'
-
 import { validEmail, validPassword } from "../utils/validators.js";
+
 const User = schemas.User
+
+const s3 = new aws.s3({
+    region: process.env.AWS_REGION,
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    signatureVersion: 'v4',
+}) 
+
 const hashPassword = ((password) => {
     const saltRounds = 10
     return bcrypt.hash(password, saltRounds)
@@ -213,39 +222,36 @@ export const deleteUser = async(req, res)=>{
     }
 }
 
-export const uploadPfp = [upload.single('file'), async(req, res) => {
-    const userId = req.params.id
-    const file = req.file
+export const generatePreSignedURLForThePFPBecauseTheBucketIsPublicAndIDontWantThoseHackersAbusingTheBucketThroughIdkWhatButIReallyDontWantAWSToChargeMe = async (req, res) => {
+    const { filename, fileType } = req.body
+    const userId = req.params.id;
 
-    if (!file)
-        return res.status(400).json({ message: "No file uploaded" })
+    const allowedTypes = ['image/jpeg', 'image/png'];
+    const allowedExtensions = /\.(jpe?g|png)$/i;
 
-    const fileName = `${Date.now()}-${file.originalname}`
+    if (!allowedTypes.includes(fileType) || !allowedExtensions.test(fileName)) {
+        return res.status(400).json({ error: 'Invalid file type. Only JPG and PNG are allowed.' });
+    }
+
+    const key = `users/${userId}/${Date.now()}-${filename}`
+
     const params = {
         Bucket: process.env.AWS_S3_BUCKET_NAME,
-        Key: fileName,
-        Body: file.buffer,
-        ContentType: file.mimetype,
-        ACL: "public-read"
+        Key: key,
+        Expires: 60,
+        contentType: fileType,
+        ACL: 'public-read'
     }
 
     try {
-        const data = await s3.upload(params).promise()
-        const imageURL = data.Location
-
-        const updatedUser = await User.findByIdAndUpdate(userId, {pfp: imageURL }, {new: true})
-
-        res.status(200).json({
-            message: "profile Picture uploaded",
-            imageURL: imageURL,
-            user: updatedUser,
-        })
+        const uploadURL = await s3.getSignedUrlPromise('putObject', params)
+        res.status(200).json({uploadURL, key})
     }
     catch (e) {
-        console.error("error uploading to the s3 bucket", e)
-        res.status(500).json({message: "error uploading to the s3 bucket", error: e})
+        console.error("error generating the presigned URL", e)
+        res.status(500).json({error: "could not generate presigned URL"})
     }
-}]
+}
 
 export const getUsername = async(req, res) => {
     try {
