@@ -35,18 +35,16 @@ export const editQuiz = async (req,res) => {
         const quizId = req.params.id
         
         //Only changes the parameter that was included in the json req
-        const result = await Quiz.findOneAndUpdate({_id: quizId}, {$set: req.body}, {new: true})
-        if(result == null){
+        const updatedQuiz = await Quiz.findOneAndUpdate({_id: quizId}, {$set: req.body}, {new: true})
+        if(updatedQuiz == null){
             res.status(404).json({error: 'No Quiz with that ID'})
             return;
         }
         
-        console.log(result);
         res.status(200).json({
             message: 'Quiz edited successfullly',
-            object: result
+            quiz: updatedQuiz
         }) 
-
     } catch (e) {
         res.status(500).json({error: "Quiz not modified"})
         console.log(e)

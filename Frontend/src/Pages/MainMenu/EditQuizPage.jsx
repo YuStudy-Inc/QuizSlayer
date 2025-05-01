@@ -19,6 +19,10 @@ const EditQuizPage = () => {
     const [cardBeingEdited, setCardBeingEdited] = useState(null)
     const [showCardCreationOverlay, setShowCardCreationOverlay] = useState(false)
 
+    const cardsEdited = []
+    const cardsDeleted = []
+    const cardsAdded = []
+
     useEffect(() => {
         if (!quizId) return 
 
@@ -77,12 +81,28 @@ const EditQuizPage = () => {
         setCardBeingEdited(null)
     }
 
+    const handleCardDeletion = (questionId) => {
+        cardsDeleted.push(questionId)
+        const newListOfQuestions = questions.filter(question => question._id !== questionId)
+        setQuestions(newListOfQuestions)
+    }
+
     const handleQuizSaveChanges = async () => {
         try {
-            const quizResponse = await axios.put(`${URI}quizzes/editQuiz/${quizId}`, quizData )
+            const quizResponse = await axios.post(`${URI}quizzes/editQuiz/${quizId}`, {
+                title: quizData.title,
+                description: quizData.description,
+            },
+            {
+                withCredentials: true
+            })
+
             if (quizResponse.status === 200) {
                 console.log("successfully edited Quiz")
             }
+
+            const quizId = quizResponse.data.quiz._id
+
 
             const questionsResponse = await axios.put(`${URI}questions/editQuestion/`, {
                 questions: questions
@@ -128,8 +148,8 @@ const EditQuizPage = () => {
 
                             <div className="flash-cards-create-container">
                                 <div className="flash-cards">
-                                    {questions.map((question) => (
-                                        <FlashCard key={question._id} id={question._id} questionInput={question.questionPrompt} answerInput={question.answer} editing={true} onEdit={() => {handleEditCardOverlay(question._id)}} />
+                                    {questions.map((question, index) => (
+                                        <FlashCard key={index} questionInput={question.questionPrompt} answerInput={question.answer} editing={true} onEdit={() => {handleEditCardOverlay(index, quizId, question._id, question.questionPrompt, question.answer, questions, setQuestions, cardsEdited)}} onDelete={() => {handleCardDeletion(question._id)}}/>
                                     ))}
                                 </div>
                             </div>
@@ -147,7 +167,7 @@ const EditQuizPage = () => {
                     </button>
                 </div>
                 {showCardCreationOverlay && (
-                    <FlashCardCreationOverlay close={handleCardCreationClose}/>
+                    <FlashCardCreationOverlay makeNewCard={setQuestions} areYouEditing={true} createdCardsList={cardsAdded} close={handleCardCreationClose}/>
                 )}
                  {cardBeingEdited && (<FlashCardEditOverlay id={cardBeingEdited} close={handleEditCardClose}/>)}
             </div>

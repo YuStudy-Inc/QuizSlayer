@@ -1,7 +1,7 @@
-import { bananaPeel, bucketHat, diamondHelmet, nightCap, pot, sign404, wizardHat } from "../Pictures";
+import { bananaPeel, bucketHat, diamondHelmet, nightCap, pot, wizardHat, nothing } from "../Pictures";
 
 const HatsEnum = Object.freeze({
-    0: sign404,
+    0: nothing,
     1: bucketHat,
     2: diamondHelmet,
     3: bananaPeel,

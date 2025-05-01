@@ -159,6 +159,3 @@ export const deleteQuestion = async(req, res)=>{
         console.log(err);
     }
 }
-
-
-//need a get all questions from quiz id

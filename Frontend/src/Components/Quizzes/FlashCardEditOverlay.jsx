@@ -2,29 +2,42 @@ import "../../Styles/Components/Quizzes/FlashCardCreationOverlay.css"
 import { useState, useEffect } from "react"
 import axios from "axios"
 
-const FlashCardEditOverlay = ({ id, close }) => {
+const FlashCardEditOverlay = ({ index, quizId, questionId, questionPrompt, answer, questions, setQuestions, cardsEdited, close }) => {
     const URI = import.meta.env.VITE_APP_URI
+    const prevQuestion = questionPrompt
+    const prevAnswer = answer
+
     const [questionData, setQuestionData] = useState({
-        question: "",
-        answer: ""
+        questionPrompt: questionPrompt,
+        answer: answer
     })
 
-    useEffect(() => {
+    /* useEffect(() => {
         const fetchQuestion = async () => {
             try {
                 const response = await axios.get(`${URI}questions/getQuestion/${id}`)
                 if (response.status === 200)
-                    setQuestionData(response.question, response.answer)
+                    setQuestionData(response.data.questionPrompt, response.data.answer)
             }
             catch (e) {
                 console.error("error fetching question", e)
             }
         }
         fetchQuestion()
-    }, [URI, id])
+    }, [URI, id]) */
 
     const handleCardEdit = () => {
+        if (prevQuestion.equals(questionData.questionPrompt) || prevAnswer.equals(questionData.answer)) return;
         
+        const newListOfQuestions = [... questions]
+        newListOfQuestions[index] = {
+            _id: questionId,
+            quizId: quizId,
+            questionPrompt: questionData.questionPrompt,
+            answer: questionData.answer
+        }
+        setQuestions(newListOfQuestions)
+        cardsEdited.push(questionId)
         close()
     }
 

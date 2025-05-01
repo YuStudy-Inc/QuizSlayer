@@ -2,7 +2,7 @@ import "../../Styles/Components/Quizzes/FlashCardCreationOverlay.css"
 import { useState } from "react"
 
 
-const FlashCardCreationOverlay = ({ makeNewCard, close }) => {
+const FlashCardCreationOverlay = ({ makeNewCard, areYouEditing = false, createdCardsList = null, close }) => {
     const [newQuestion, setNewQuestion] = useState("")
     const [newAnswer, setNewAnswer] = useState("")
     
@@ -11,11 +11,21 @@ const FlashCardCreationOverlay = ({ makeNewCard, close }) => {
             return;
         }
 
+        const tempId = Date.now() 
+
         makeNewCard((prevCard) => [... prevCard, {
-            _id: Date.now(),
+            _id: tempId,
             questionPrompt: newQuestion,
             answer: newAnswer
         }])
+
+        if (editing) {
+            createdCardsList.push({
+                _id: tempId,
+                questionPrompt: newQuestion,
+                answer: newAnswer
+            })
+        }
         close()
     }
 
