@@ -34,12 +34,17 @@ const CreateQuizPage = () => {
                 console.log("successfully created Quiz")
             }
 
-			const quizId = quizResponse.data.quiz.quizId
+			console.log(quizResponse.data)
+			
+			const quizId = quizResponse.data.quiz._id
+			console.log(quizId)
 
 			const updatedQuestionsWithNewId = questions.map(question => ({
 				...question,
 				quizId: quizId
 			}))
+
+			console.log(updatedQuestionsWithNewId)
 
             const questionsResponse = await axios.post(`${URI}questions/createQuestions`, {
 				questions: updatedQuestionsWithNewId,

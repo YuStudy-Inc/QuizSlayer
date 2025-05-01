@@ -1,7 +1,7 @@
 import { Schema } from 'mongoose';
 import Schemas from '../schemas/Schemas.js';
 const Quiz = Schemas.Quiz
-const Question = Schema.Question
+const Question = Schemas.Question
 
 export const createQuiz = async(req, res) => {
     try {
@@ -70,10 +70,22 @@ export const deleteQuiz = async(req, res) => {
     }
 }
 
+export const getQuiz = async(req, res) => {
+    try {
+        const quizId = req.params.id
+        const quizzes = await Quiz.findOne({_id : quizId})
+        res.status(200).json({quizzes})
+    } catch (e) {
+        res.status(500).json({error: 'Error retreiving quiz'})
+        console.log(e)
+    }
+}
+
 export const getQuizzes = async(req, res) => {
     try {
         const userId = req.params.id
         const quizzes = await Quiz.find({user: userId})
+        console.log(quizzes)
         res.status(200).json({quizzes})
     } catch (e) {
         res.status(500).json({error: 'Error retreiving quizzes'})
@@ -93,16 +105,11 @@ export const getToDoQuizzes = async(req, res) => {
 }
 
 export const getQuestionsFromQuiz = async(req, res) => {
-    const { id } = req.params;
-    if (!id)
+    const quizId = req.params.id;
+    if (!quizId)
         res.status(404).json({error: "Quiz not found"})
-
     try {
-        const result = await Question.find(id)
-        if (!result) {
-            res.status(500).json({error: "Error finding questions for that quiz"})
-            return;
-        }
+        const result = await Question.find({ quizId: quizId })
         res.status(200).json({message: "questions retreived successfully", "questions": result})
     }
     catch (e) {

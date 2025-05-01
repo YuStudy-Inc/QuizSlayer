@@ -9,7 +9,6 @@ const URI = import.meta.env.VITE_APP_URI
 
 const EditQuizPage = () => {
     //I need to find a way to make sure the owner of the quiz can edit it, we don't want people to write to other's quizzes
-
     const { quizId } = useParams();
     const [quizData, setQuizData] = useState({
         title: "",
@@ -21,32 +20,36 @@ const EditQuizPage = () => {
     const [showCardCreationOverlay, setShowCardCreationOverlay] = useState(false)
 
     useEffect(() => {
+        if (!quizId) return 
+
         const fetchQuiz = async () => {
             try {
                 const response = await axios.get(`${URI}quizzes/getQuiz/${quizId}`)
                 if (response.status === 200)
-                    setQuizData(response.data)
+                    setQuizData(response.data.quizzes)
             }
             catch (e) {
                 console.log("error retreiving quiz", e)
             }
         }
         fetchQuiz()
-    }, [URI, quizId])
+    }, [quizId, URI])
 
     useEffect(() => {
+        if (!quizId) return 
+
         const fetchQuestionsFromQuiz = async () => {
             try {
                 const response = await axios.get(`${URI}quizzes/getQuestionsFromQuiz/${quizId}`)
                 if (response.status === 200)
-                    setQuestions(response.data)
+                    setQuestions(response.data.questions)
             }
             catch (e) {
                 console.log("error retreiving questions for quiz", e)
             }
         }
         fetchQuestionsFromQuiz()
-    }, [URI, quizId])
+    }, [quizId, URI])
 
 
     const navigate = useNavigate()

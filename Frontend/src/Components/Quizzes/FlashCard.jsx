@@ -2,7 +2,7 @@ import "../../Styles/Components/Quizzes/FlashCard.css"
 import { pencil } from "../../assets/Pictures"
 import { useState } from "react"
 
-const FlashCard = ({ key, id, questionInput, answerInput, editing, onEdit }) => {
+const FlashCard = ({ questionInput, answerInput, editing, onEdit }) => {
     
 
     
