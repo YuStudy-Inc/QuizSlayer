@@ -19,8 +19,8 @@ router.post('/createQuestionsFromPDF', (req,res,next) => {
   })
 });
 router.post('/createQuestions', createQuestions)
-router.put('/editQuestion/:id', editQuestion)
-router.delete('/deleteQuestion/:id', deleteQuestion)
+router.put('/editQuestions', editQuestion)
+router.delete('/deleteQuestions', deleteQuestion)
 router.get('/', (req, res) => {
     res.send('Users route works!');
   });

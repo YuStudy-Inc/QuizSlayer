@@ -121,21 +121,25 @@ export const createQuestionsFromPDF = async (err, req, res) => {
 
 }
 
-export const editQuestion = async (req,res) => {
+export const editQuestions = async (req,res) => {
     try {
-        const questionId = req.params.id
-        
-        //Only changes the parameter that was included in the json req
-        const result = await Question.findOneAndUpdate({_id: questionId}, {$set: req.body}, {new: true})
-        if(result == null){
-            res.status(404).json({error: 'No Question with that ID'})
-            return;
+        const questions = req.body.questions
+
+        const editedQuestions = []
+
+        for (const question of questions) {
+            const edited = await Question.findOneAndUpdate({_id: question.quizId}, {$set: question}, {new: true})
+
+            if(edited === null){
+                res.status(404).json({error: 'No Question with that ID'})
+                return;
+            }
+            editedQuestions.push(edited)
         }
 
-        console.log(result);
         res.status(200).json({
             message: "Question updated Successfully",
-            object: result
+            questions: editedQuestions
         }) 
 
     } catch (e) {
@@ -144,15 +148,19 @@ export const editQuestion = async (req,res) => {
     }
 }
 
-export const deleteQuestion = async(req, res)=>{
-    const{id} = req.params;
+export const deleteQuestions = async(req, res)=>{
     try{
-        const deleteQuestion  = await Question.findByIdAndDelete(id);
-        if(!deleteQuestion){
-            console.log("Could not find question");
-            return;
+        const questions = req.body.questions
+
+        for (const question of questions) {
+            const deleteQuestion  = await Question.findByIdAndDelete(question.questionId);
+            if(!deleteQuestion){
+                console.log("Could not find question");
+                return;
+            }
+            console.log("Deleted Quiz question successfully!");
         }
-        console.log("Deleted Quiz question successfully!");
+
     }
     catch(err){
         console.log("Error occured while connecting to database");

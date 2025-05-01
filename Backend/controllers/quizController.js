@@ -115,5 +115,3 @@ export const getQuestionsFromQuiz = async(req, res) => {
         res.status(500).json({error: "Error finding questions for that quiz"})
     }
 }
-
-//need a get all quizzes from user id

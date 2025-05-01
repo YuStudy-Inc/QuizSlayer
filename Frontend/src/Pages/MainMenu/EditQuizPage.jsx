@@ -102,13 +102,29 @@ const EditQuizPage = () => {
             }
 
             const quizId = quizResponse.data.quiz._id
+            
+            const updatedQuestionsWithNewId = cardsAdded.map(question => ({
+				...question,
+				quizId: quizId
+			}))
 
-
-            const questionsResponse = await axios.put(`${URI}questions/editQuestion/`, {
-                questions: questions
+            const editedQuestionsResponse = await axios.put(`${URI}questions/editQuestions`, {
+                questions: cardsEdited
             })
-            if (questionsResponse.status === 200) {
-                console.log("successfully edited Quiz")
+            if (editedQuestionsResponse.status === 200) {
+                console.log("successfully added edited questions to Quiz")
+            }
+            const deletedQuestionsResponse = await axios.put(`${URI}questions/deleteQuestions`, {
+                questions: cardsDeleted
+            })
+            if (deletedQuestionsResponse.status === 200) {
+                console.log("successfully added edited questions to Quiz")
+            }
+            const createdQuestionsResponse = await axios.put(`${URI}questions/createQuestions`, {
+                questions: updatedQuestionsWithNewId
+            })
+            if (createdQuestionsResponse.status === 200) {
+                console.log("successfully added edited questions to Quiz")
             }
             navigate(-1)
         }
