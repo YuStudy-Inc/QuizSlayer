@@ -1,5 +1,5 @@
 import express from 'express';
-import { createQuestion, editQuestion, deleteQuestion, createQuestionsFromPDF } from '../controllers/questionController.js';
+import { createQuestions, editQuestion, deleteQuestion, createQuestionsFromPDF } from '../controllers/questionController.js';
 import multer from 'multer'
 
 const router = express.Router();
@@ -18,7 +18,7 @@ router.post('/createQuestionsFromPDF', (req,res,next) => {
     createQuestionsFromPDF(err,req,res);
   })
 });
-router.post('/createQuestion', createQuestion)
+router.post('/createQuestions', createQuestions)
 router.put('/editQuestion/:id', editQuestion)
 router.delete('/deleteQuestion/:id', deleteQuestion)
 router.get('/', (req, res) => {

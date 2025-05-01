@@ -3,6 +3,7 @@ import { plus, download } from "../../assets/Pictures.js";
 import { FlashCard, FlashCardCreationOverlay } from "../../Components/Components.js";
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const URI = import.meta.env.VITE_APP_URI
 const userId = JSON.parse(localStorage.getItem('id'));
@@ -11,7 +12,6 @@ const CreateQuizPage = () => {
 	const [quizData, setQuizData] = useState({
         title: "",
         description: "",
-        completed: ""
     })
 	const [fileName, setFileName] = useState("");
 	const [showCardCreationOverlay, setShowCardCreationOverlay] = useState(false)
@@ -21,18 +21,33 @@ const CreateQuizPage = () => {
 
 	const handleQuizCreation = async () => {
 		try {
-            const quizResponse = await axios.post(`${URI}quizzes/createQuiz/`, {
-				quiz: quizData,
-				user: userId //somehow get the id from the user as a foreign key
+            const quizResponse = await axios.post(`${URI}quizzes/createQuiz`, {
+				userId: userId,
+				title: quizData.title,
+				description: quizData.description,
+				completed: false,
+			},
+			{
+				withCredentials: true
 			})
             if (quizResponse.status === 200) {
                 console.log("successfully created Quiz")
             }
 
-            const questionsResponse = await axios.post(`${URI}questions/createQuestion`, {
-				questions: questions,
-				quiz: quizData //somehow get the id from the quiz as a foreign key
+			const quizId = quizResponse.data.quiz.quizId
+
+			const updatedQuestionsWithNewId = questions.map(question => ({
+				...question,
+				quizId: quizId
+			}))
+
+            const questionsResponse = await axios.post(`${URI}questions/createQuestions`, {
+				questions: updatedQuestionsWithNewId,
+			},
+			{
+				withCredentials: true
 			})
+
             if (questionsResponse.status === 200) {
                 console.log("successfully created Quiz Questions")
             }
@@ -48,6 +63,7 @@ const CreateQuizPage = () => {
             ...prev,
             [e.target.name]: e.target.value
         }))
+		console.log(quizData)
     }
 
 	const createCard = () => {

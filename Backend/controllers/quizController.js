@@ -5,18 +5,20 @@ const Question = Schema.Question
 
 export const createQuiz = async(req, res) => {
     try {
-        const { title, description } =body
+        const { userId, title, description, completed } = req.body
     
-        if (!title || !description || title === "" || description === "")
+        if (!userId || !title || !description || userId === "" || title === "" || description === "")
             return res.status(404).json({ message: "Not all fields filled out" })
     
         const newQuiz = new Quiz({
+            user: userId,
             title,
             description,
-            questions: [] // list of question objects
-
+            completed
         })
+
         await newQuiz.save()
+
         res.status(200).json({
             "message": "Quiz Created Successfully",
             "quiz": newQuiz

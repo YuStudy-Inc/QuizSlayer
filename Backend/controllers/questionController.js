@@ -4,50 +4,33 @@ import mongoose from 'mongoose';
 import pdf from 'pdf-parse';
 const Question = Schemas.Question
 const Quiz = Schemas.Quiz
-function isInt(value) {
-    return !isNaN(value) && parseInt(Number(value)) == value && !isNaN(parseInt(value, 10));
-}
 
-export const createQuestion = async(req, res) => {
+export const createQuestions = async(req, res) => {
     try {
-        const { quizID, question, answer, difficulty, right, wrong } = req.body
+        const questions = req.body.questions
+        console.log(questions)
 
-        //difficulty will be drop down menu for easy, medium, hard
-        if (!question || !answer || !difficulty || !right || !wrong)
-            return res.status(404).json({ message: "Not all fields filled out" })
+        const createdQuestions = []
 
-        if (question === "" || answer === "")
-            return res.status(404).json({ message: "Question and/or answer not filled out" })
-
-        if (!isInt(right) || !isInt(wrong))
-            return res.status(400).json({ message: "points right or points wrong is not a valid number" })
-
-        const turnQuizStringIntoAIDObjectBecauseGodKnowsWhyIHaveToConvertIt = new mongoose.Types.ObjectId(quizID);
-        const quizAssociatedWithTheQuestion = await Quiz.findById(turnQuizStringIntoAIDObjectBecauseGodKnowsWhyIHaveToConvertIt)
-        if (!quizAssociatedWithTheQuestion)
-            return res.status(404).json({ message: "Quiz not found" })
-
-        const newQuestion = new Question({
-            quizId: turnQuizStringIntoAIDObjectBecauseGodKnowsWhyIHaveToConvertIt,
-            question,
-            answer, 
-            difficulty,
-            right,
-            wrong
-        }) 
-
-        //we gonna remove the list of questions in the Quiz object because that just makes everything harder.
-        /* const turnQuizStringIntoAIDObjectBecauseGodKnowsWhyIHaveToConvertIt = new mongoose.Types.ObjectId(quizID);
-        const quizAssociatedWithTheQuestion = await Quiz.findById(turnQuizStringIntoAIDObjectBecauseGodKnowsWhyIHaveToConvertIt)
-        if (!quizAssociatedWithTheQuestion)
-            return res.status(404).json({ message: "Quiz not found" })
-        
-        quizAssociatedWithTheQuestion.questions.push(newQuestion) */
-        await newQuestion.save()
+        for (const question of questions) {
+            if (!question.quizId)
+                return res.status(404).json({ message: "Quiz not found" })
+    
+            if (!question.questionPrompt || !question.answer || question.questionPrompt === "" || question.answer === "")
+                return res.status(404).json({ message: "Not all fields filled out" })
+    
+            const newQuestion = new Question({
+                quizId: question.quizId,
+                questionPrompt: question.questionPrompt,
+                answer: question.answer,
+            }) 
+            await newQuestion.save()
+            createdQuestions.push(newQuestion)
+        }
 
         res.status(200).json({
-            "message": "Question Created Successfully",
-            "question": newQuestion
+            "message": "Questions Created Successfully",
+            "question": createQuestions
         })
 
     }

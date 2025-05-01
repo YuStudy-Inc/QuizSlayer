@@ -1,11 +1,20 @@
 import "../../Styles/Components/Quizzes/FlashCardCreationOverlay.css"
+import { useState } from "react"
+
 
 const FlashCardCreationOverlay = ({ makeNewCard, close }) => {
-
+    const [newQuestion, setNewQuestion] = useState("")
+    const [newAnswer, setNewAnswer] = useState("")
     
     const handleCardCreation =() => {
+        if (!newQuestion || !newAnswer) {
+            return;
+        }
+
         makeNewCard((prevCard) => [... prevCard, {
-            
+            _id: Date.now(),
+            questionPrompt: newQuestion,
+            answer: newAnswer
         }])
         close()
     }
@@ -23,10 +32,10 @@ const FlashCardCreationOverlay = ({ makeNewCard, close }) => {
                 </div>
                 <div className="flashcard-itself">
                     <div className="question-flashcard-overlay">
-                        <input type="text" placeholder="Question"/>
+                        <input type="text" placeholder="Question" value={newQuestion} onChange={(e) => {setNewQuestion(e.target.value)}}/>
                     </div>
                     <div className="answer-flashcard-overlay">
-                        <input type="text" placeholder="Answer"/>
+                        <input type="text" placeholder="Answer" value={newAnswer} onChange={(e) => {setNewAnswer(e.target.value)}}/>
                     </div>
                 </div>
                 <div className="create-that-flashcard">
