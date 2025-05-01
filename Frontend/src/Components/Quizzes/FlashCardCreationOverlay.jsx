@@ -1,10 +1,12 @@
 import "../../Styles/Components/Quizzes/FlashCardCreationOverlay.css"
 
-const FlashCardCreationOverlay = ({ close }) => {
+const FlashCardCreationOverlay = ({ makeNewCard, close }) => {
 
     
     const handleCardCreation =() => {
-        /* backend stuff */
+        makeNewCard((prevCard) => [... prevCard, {
+            
+        }])
         close()
     }
 
