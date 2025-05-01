@@ -3,16 +3,10 @@ import bcrypt from 'bcryptjs'
 import s3 from '../config/s3.js';
 import aws from 'aws-sdk'
 import dotenv from 'dotenv'
+
 import { validEmail, validPassword } from "../utils/validators.js";
 
 const User = schemas.User
-
-const s3 = new aws.s3({
-    region: process.env.AWS_REGION,
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-    signatureVersion: 'v4',
-}) 
 
 const hashPassword = ((password) => {
     const saltRounds = 10
@@ -319,7 +313,7 @@ export const getToDoQuizzes = async(req, res) => {
     try {
         const userId = req.params.id
         const user = await User.findOne({_id: userId })
-        const quizzesStillLeftToDo = user.quizzes.filter(quiz => quiz.completed === false)
+        const toDoQuizzes = user.quizzes.filter(quiz => quiz.completed === false)
         res.status(200).json({toDoQuizzes})
     } catch (e) {
         res.status(500).json({error: 'Error retreiving quizzes under TODO status'})

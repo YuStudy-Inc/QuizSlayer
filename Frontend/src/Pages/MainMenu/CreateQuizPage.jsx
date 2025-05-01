@@ -136,7 +136,7 @@ const CreateQuizPage = () => {
 					</button>
 				</div>
 				{showCardCreationOverlay && (
-					<FlashCardCreationOverlay close={(handleCardCreationClose)}/>
+					<FlashCardCreationOverlay makeNewCard={setQuestions} close={(handleCardCreationClose)}/>
 				)}
 			</div>
 		</>
