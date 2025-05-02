@@ -28,15 +28,18 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    align-items: end;
 }
 
 .about-us-words h1 {
     font-size: 4rem;
     border-bottom: 20px solid var(--white);
+    width: fit-content;
 }
 
 .about-us-words p {
     text-align: end;
+    width: 90%;
 }
 
 @media (max-width: 1200px) {

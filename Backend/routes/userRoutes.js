@@ -11,13 +11,13 @@ router.put('/editUser/password/:id', editUserPassword);
 router.delete('/deleteUser/:id', deleteUser);
 router.get('/getUsername/:id', getUsername)
 router.get('/getDescription/:id', getDescription)
-router.get('/getActiveFriends/:id', getActiveFriends)
+router.get('/getUsersActiveFriends/:id', getActiveFriends)
 router.get('/getFriends/:id', getFriends)
 router.get('/getToDoQuizzes/:id', getToDoQuizzes)
 router.get('/getCharacterList/:id', getCharacterList)
 router.get('/getInventory/:id', getInventory)
 router.get('/getTop10/:id', getTop10)
-router.get('/getFriendRequests/:id', getFriendRequests)
+router.get('/getUsersFriendRequests/:id', getFriendRequests)
 router.get('/getFriendData/:id', getFriendData);
 router.post('/acceptFriendRequest/:id', acceptFriendRequest)
 router.post('/rejectFriendRequest/:id', rejectFriendRequest)

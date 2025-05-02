@@ -152,12 +152,13 @@ export const loginUser = async(req, res) => {
 export const editUser = async (req,res) => {
     try {
         const userId = req.params.id
-        
+        const user = await User.findOne({_id: userId});
         //need to check if username is taken. 
-        const tempUser = await User.findOne({username: req.body.username})
-        if(tempUser){
-            res.status(409).json({error: 'Username taken'})
-            return; 
+        if (req.body.username) {
+            const tempUser = await User.findOne({ username: req.body.username });
+            if (tempUser && tempUser._id.toString() !== user._id.toString()) {
+                return res.status(409).json({ error: 'Username taken' });
+            }
         }
         //Only changes the parameter that was included in the json req
         const result = await User.findOneAndUpdate(
@@ -168,7 +169,7 @@ export const editUser = async (req,res) => {
         console.log(result);
 
         // res.status(200).json({updatedCount: result.modifiedCount}) 
-        res.status(200).json({message: 'Username update: ', user: result}) 
+        res.status(200).json({message: 'User updated! ', user: result}) 
     } catch (e) {
         res.status(500).json({error: 'User not modified'})
         console.log(e)

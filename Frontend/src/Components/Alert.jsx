@@ -1,6 +1,19 @@
 import "../Styles/Components/Alert.css"
+import { useEffect } from "react"
 
-const Alert = ({text, buttonOneText, functionButtonOne, buttonTwoText, functionButtonTwo }) => {
+const Alert = ({text, buttonOneText, functionButtonOne, buttonTwoText, functionButtonTwo, show }) => {
+    useEffect(() => {
+        if (show) {
+            document.body.style.overflow = 'hidden';
+        }
+
+        return () => {
+            document.body.style.overflow = 'auto';
+        };
+    }, [show]);
+
+    if (!show) return null;
+
     return(
         <>
             <div className="dim-background">
