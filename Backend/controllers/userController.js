@@ -22,6 +22,28 @@ const changeActiveStatus = (async (user) => {
     return await User.findOneAndUpdate({ username: user.username }, { isOnline: !active })
 })
 
+export const getUser = async(req, res) => {
+    try {
+        const userId = req.session.userID;
+
+        const user = await User.findById(userId);
+
+        if(!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        return res.status(200).json({ 
+            message: "User found",
+            user: user
+         });
+
+    }
+    catch (e){
+        console.error("Error getting user: ", e)
+        res.status(500).json({"message": "Error getting user", "e": e})
+    }
+}
+
 export const createUser = async(req, res) => {
     try {
         const { username, email, password, passwordAgain } = req.body
@@ -68,26 +90,6 @@ export const createUser = async(req, res) => {
 
         req.session.userID = newUser._id;
 
-        // res.cookie('userData', JSON.stringify({
-        //     username: user.username,
-        //     pfp: user.pfp,
-        //     description: user.description,
-        //     friendsList: user.friendsList,
-        //     friendRequests: user.friendRequests,
-        //     inventory: user.inventory,
-        //     characterList: user.characterList,
-        //     selectedCharacter: user.selectedCharacter,
-        //     selectedHat: user.selectedHat,
-        //     selectedWeapon: user.selectedWeapon,
-        //     xp: user.xp,
-        //     coins: user.coins,
-        //     monstersSlain: user.monstersSlain
-        // }), {
-        //     // httpOnly: true,
-        //     secure: true,
-        //     sameSite: 'None'
-        // });
-
         res.status(201).json({
             "message": "new user created",
             "headers": {'Set-Cookie': req.headers.cookie || ''},
@@ -115,27 +117,6 @@ export const loginUser = async(req, res) => {
         await changeActiveStatus(user)
 
         req.session.userID = user._id;
-
-        res.cookie('userData', JSON.stringify({
-            username: user.username,
-            pfp: user.pfp,
-            description: user.description,
-            friendsList: user.friendsList,
-            friendRequests: user.friendRequests,
-            inventory: user.inventory,
-            characterList: user.characterList,
-            selectedCharacter: user.selectedCharacter,
-            selectedHat: user.selectedHat,
-            selectedWeapon: user.selectedWeapon,
-            xp: user.xp,
-            coins: user.coins,
-            monstersSlain: user.monstersSlain
-        }), {
-            // httpOnly: true,
-            httpOnly: false,
-            secure: true,
-            sameSite: 'None'
-        });
 
         return res.status(200).json({
             "message": "Login Successful",
@@ -365,26 +346,6 @@ export const updateSelections = async (req, res) => {
         if (!user) {
             return res.status(404).json({ error: "User not found" });
         }
-
-        // res.cookie('userData', JSON.stringify({
-        //     username: user.username,
-        //     pfp: user.pfp,
-        //     description: user.description,
-        //     friendsList: user.friendsList,
-        //     friendRequests: user.friendRequests,
-        //     inventory: user.inventory,
-        //     characterList: user.characterList,
-        //     selectedCharacter: user.selectedCharacter,
-        //     selectedHat: user.selectedHat,
-        //     selectedWeapon: user.selectedWeapon,
-        //     xp: user.xp,
-        //     coins: user.coins,
-        //     monstersSlain: user.monstersSlain
-        // }), {
-        //     // httpOnly: true,
-        //     secure: true,
-        //     sameSite: 'None'
-        // });
 
         return res.status(200).json({ 
             message: "Selections updated successfully",
