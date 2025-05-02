@@ -25,10 +25,12 @@
 .words-how-to h1 {
     font-size: 4rem;
     border-bottom: 20px solid var(--black);
+    width: fit-content;
 }
 
 .words-how-to p {
     font-size: 1.2rem;
+    width: 90%;
 }
 
 .how-to-actually img {
