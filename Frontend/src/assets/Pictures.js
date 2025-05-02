@@ -6,6 +6,10 @@ import triceratops from "../assets/Enemies/triceratopsEnemy.png";
 
 import backgroundFight from "../assets/Backgrounds/backgroundFight.png"
 import chiikawaBackground from "../assets/Backgrounds/chiikawaBackground.jpg"
+import battle from '../assets/Backgrounds/battle.png'
+import friends from '../assets/Backgrounds/friends.png'
+import home from '../assets/Backgrounds/home.png'
+import quiz from '../assets/Backgrounds/quiz.png'
 
 import bananaPeel from "../assets/Hats/bananaPeel.png";
 import bucketHat from "../assets/Hats/bucketHat.png";
@@ -91,7 +95,11 @@ export {
     oneStar,
     twoStar,
     threeStar,
-    fourStar
+    fourStar,
+    battle,
+    friends,
+    home,
+    quiz
 }
 
 //bruh im so lazy i had to make chatGPT write this 😭😭😭😭😭
