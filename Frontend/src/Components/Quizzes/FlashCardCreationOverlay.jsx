@@ -19,7 +19,7 @@ const FlashCardCreationOverlay = ({ makeNewCard, areYouEditing = false, createdC
             answer: newAnswer
         }])
 
-        if (editing) {
+        if (areYouEditing) {
             createdCardsList.push({
                 _id: tempId,
                 questionPrompt: newQuestion,
