@@ -61,10 +61,10 @@ const FlashCardEditOverlay = ({ index, quizId, questionId, questionPrompt, answe
                 </div>
                 <div className="flashcard-itself">
                     <div className="question-flashcard-overlay">
-                        <input type="text" value={questionData.question} placeholder="Question" onChange={handleQuestionChange}/>
+                        <input type="text" name="questionPrompt" value={questionData.questionPrompt} placeholder="Question" onChange={handleQuestionChange}/>
                     </div>
                     <div className="answer-flashcard-overlay">
-                        <input type="text" value={questionData.answer} placeholder="Answer" onChange={handleQuestionChange}/>
+                        <input type="text" name="answer" value={questionData.answer} placeholder="Answer" onChange={handleQuestionChange}/>
                     </div>
                 </div>
                 <div className="create-that-flashcard">

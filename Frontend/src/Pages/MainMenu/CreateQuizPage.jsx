@@ -33,11 +33,8 @@ const CreateQuizPage = () => {
             if (quizResponse.status === 200) {
                 console.log("successfully created Quiz")
             }
-
-			console.log(quizResponse.data)
 			
 			const quizId = quizResponse.data.quiz._id
-			console.log(quizId)
 
 			const updatedQuestionsWithNewId = questions.map(question => ({
 				...question,

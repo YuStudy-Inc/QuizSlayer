@@ -149,7 +149,7 @@ export const editQuestions = async (req,res) => {
 }
 
 export const deleteQuestions = async(req, res)=>{
-    try{
+    try {
         const questions = req.body.questions
 
         for (const question of questions) {

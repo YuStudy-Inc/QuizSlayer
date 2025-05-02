@@ -1,5 +1,5 @@
 import express from 'express';
-import { createQuestions, editQuestion, deleteQuestion, createQuestionsFromPDF } from '../controllers/questionController.js';
+import { createQuestions, editQuestions, deleteQuestions, createQuestionsFromPDF } from '../controllers/questionController.js';
 import multer from 'multer'
 
 const router = express.Router();
@@ -19,8 +19,8 @@ router.post('/createQuestionsFromPDF', (req,res,next) => {
   })
 });
 router.post('/createQuestions', createQuestions)
-router.put('/editQuestions', editQuestion)
-router.delete('/deleteQuestions', deleteQuestion)
+router.put('/editQuestions', editQuestions)
+router.delete('/deleteQuestions', deleteQuestions)
 router.get('/', (req, res) => {
     res.send('Users route works!');
   });

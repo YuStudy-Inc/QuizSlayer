@@ -89,7 +89,7 @@ const EditQuizPage = () => {
 
     const handleQuizSaveChanges = async () => {
         try {
-            const quizResponse = await axios.post(`${URI}quizzes/editQuiz/${quizId}`, {
+            const quizResponse = await axios.put(`${URI}quizzes/editQuiz/${quizId}`, {
                 title: quizData.title,
                 description: quizData.description,
             },
@@ -101,11 +101,11 @@ const EditQuizPage = () => {
                 console.log("successfully edited Quiz")
             }
 
-            const quizId = quizResponse.data.quiz._id
+            const updatedQuizId = quizResponse.data.quiz._id
             
             const updatedQuestionsWithNewId = cardsAdded.map(question => ({
 				...question,
-				quizId: quizId
+				quizId: updatedQuizId
 			}))
 
             const editedQuestionsResponse = await axios.put(`${URI}questions/editQuestions`, {
