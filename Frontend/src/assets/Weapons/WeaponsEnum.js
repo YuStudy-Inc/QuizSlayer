@@ -1,7 +1,7 @@
-import { fryingPan, ironSword, playfulCloud, redBalloon, sign404, someonesGun } from "../Pictures";
+import { fryingPan, ironSword, playfulCloud, redBalloon, someonesGun, nothing } from "../Pictures";
 
 const WeaponsEnum = Object.freeze({
-    0: sign404,
+    0: nothing,
     7: ironSword,
     8: fryingPan,
     9: redBalloon,

@@ -32,6 +32,7 @@ import someonesGun from "../assets/Weapons/someonesGun.png";
 import redBalloon from "../assets/Weapons/redBalloon.png";
 
 import sign404 from "../assets/sign404.png";
+import nothing from "../assets/nothing.png"
 
 import lootBox from "../assets/Collection/lootbox.png";
 import chestClosed from "../assets/Collection/chestClosed.png"
@@ -47,6 +48,7 @@ import lockIcon from "./LoginSignup/lock_icon.png"
 import userIcon from "./LoginSignup/user_icon.png"
 import download from "./Quizzes/download.png"
 import pencil from "./Quizzes/pencil.png"
+import trash from "./Quizzes/trash.png"
 import playButton from "./Quizzes/playButton.png"
 import plus from "./Quizzes/plus.png"
 import bell from "./Home/bell.png"
@@ -86,6 +88,7 @@ export {
     userIcon,
     download,
     pencil,
+    trash,
     playButton,
     plus,
     bell,
@@ -96,6 +99,7 @@ export {
     twoStar,
     threeStar,
     fourStar,
+    nothing,
     battle,
     friends,
     home,

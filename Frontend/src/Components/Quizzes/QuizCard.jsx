@@ -2,7 +2,7 @@ import "../../Styles/Components/Quizzes/QuizCard.css"
 import { playButton, pencil } from "../../assets/Pictures"
 import { useNavigate } from "react-router-dom"; 
 
-const QuizCard = ({key, id, userId, title, url, editThatQuiz }) => {
+const QuizCard = ({ title, url, editThatQuiz }) => {
     const navigate = useNavigate();
 
     const handlePlayClick = () => {
@@ -16,7 +16,7 @@ const QuizCard = ({key, id, userId, title, url, editThatQuiz }) => {
             <div className="quiz-stuff">
                 <span className="quiz-text"> {title}</span>
                 <div className="options-for-quiz-card">
-                    <button className="edit-button" onClick={() => editThatQuiz(userId)}>
+                    <button className="edit-button" onClick={() => editThatQuiz()}>
                         <img src={pencil} alt="" />
                     </button>
                     <button className="play-button" onClick={handlePlayClick}>
