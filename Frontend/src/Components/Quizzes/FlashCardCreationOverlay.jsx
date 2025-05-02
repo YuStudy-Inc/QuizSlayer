@@ -11,17 +11,14 @@ const FlashCardCreationOverlay = ({ makeNewCard, areYouEditing = false, createdC
             return;
         }
 
-        const tempId = Date.now() 
 
         makeNewCard((prevCard) => [... prevCard, {
-            _id: tempId,
             questionPrompt: newQuestion,
             answer: newAnswer
         }])
 
         if (areYouEditing) {
-            createdCardsList.push({
-                _id: tempId,
+            createdCardsList.current.push({
                 questionPrompt: newQuestion,
                 answer: newAnswer
             })

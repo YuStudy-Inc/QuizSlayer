@@ -1,7 +1,7 @@
 import "../../Styles/Pages/MainMenu/CreateQuizPage.css"
 import { plus } from "../../assets/Pictures.js";
 import { FlashCard, FlashCardCreationOverlay, FlashCardEditOverlay } from "../../Components/Components.js";
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
@@ -19,9 +19,9 @@ const EditQuizPage = () => {
     const [cardBeingEdited, setCardBeingEdited] = useState(null)
     const [showCardCreationOverlay, setShowCardCreationOverlay] = useState(false)
 
-    const cardsEdited = []
-    const cardsDeleted = []
-    const cardsAdded = []
+    const cardsEditedRef = useRef([])
+    const cardsDeletedRef = useRef([])
+    const cardsAddedRef = useRef([])
 
     useEffect(() => {
         if (!quizId) return 
@@ -72,9 +72,9 @@ const EditQuizPage = () => {
     const handleCardCreationClose = () => {
         setShowCardCreationOverlay(false)
     }
-
-    const handleEditCardOverlay = (id) => {
-        setCardBeingEdited(id)
+    //index, quizId, question._id, question.questionPrompt, question.answer, questions, setQuestions, cardsEdited
+    const handleEditCardOverlay = (index, quizId, questionId, questionPrompt, answer) => {
+        setCardBeingEdited({index, quizId, questionId, questionPrompt, answer})
     }
 
     const handleEditCardClose = () => {
@@ -82,12 +82,20 @@ const EditQuizPage = () => {
     }
 
     const handleCardDeletion = (questionId) => {
-        cardsDeleted.push(questionId)
+        cardsDeletedRef.current.push(questionId)
         const newListOfQuestions = questions.filter(question => question._id !== questionId)
         setQuestions(newListOfQuestions)
     }
 
     const handleQuizSaveChanges = async () => {
+        const cardsEdited = cardsEditedRef.current;
+        const cardsDeleted = cardsDeletedRef.current;
+        const cardsAdded = cardsAddedRef.current;
+
+        console.log(cardsEdited)
+        console.log(cardsDeleted)
+        console.log(cardsAdded)
+
         try {
             const quizResponse = await axios.put(`${URI}quizzes/editQuiz/${quizId}`, {
                 title: quizData.title,
@@ -108,20 +116,29 @@ const EditQuizPage = () => {
 				quizId: updatedQuizId
 			}))
 
+            console.log(updatedQuestionsWithNewId)
+
             const editedQuestionsResponse = await axios.put(`${URI}questions/editQuestions`, {
                 questions: cardsEdited
+            },
+            {
+                withCredentials: true
             })
             if (editedQuestionsResponse.status === 200) {
                 console.log("successfully added edited questions to Quiz")
             }
-            const deletedQuestionsResponse = await axios.put(`${URI}questions/deleteQuestions`, {
-                questions: cardsDeleted
+            const deletedQuestionsResponse = await axios.delete(`${URI}questions/deleteQuestions`, {
+                data: { questions: cardsDeleted },
+                withCredentials: true
             })
             if (deletedQuestionsResponse.status === 200) {
                 console.log("successfully added edited questions to Quiz")
             }
-            const createdQuestionsResponse = await axios.put(`${URI}questions/createQuestions`, {
+            const createdQuestionsResponse = await axios.post(`${URI}questions/createQuestions`, {
                 questions: updatedQuestionsWithNewId
+            },
+            {
+                withCredentials: true
             })
             if (createdQuestionsResponse.status === 200) {
                 console.log("successfully added edited questions to Quiz")
@@ -165,7 +182,7 @@ const EditQuizPage = () => {
                             <div className="flash-cards-create-container">
                                 <div className="flash-cards">
                                     {questions.map((question, index) => (
-                                        <FlashCard key={index} questionInput={question.questionPrompt} answerInput={question.answer} editing={true} onEdit={() => {handleEditCardOverlay(index, quizId, question._id, question.questionPrompt, question.answer, questions, setQuestions, cardsEdited)}} onDelete={() => {handleCardDeletion(question._id)}}/>
+                                        <FlashCard key={index} questionInput={question.questionPrompt} answerInput={question.answer} editing={true} onEdit={() => {handleEditCardOverlay(index, quizId, question._id, question.questionPrompt, question.answer)}} onDelete={() => {handleCardDeletion(question._id)}}/>
                                     ))}
                                 </div>
                             </div>
@@ -183,9 +200,10 @@ const EditQuizPage = () => {
                     </button>
                 </div>
                 {showCardCreationOverlay && (
-                    <FlashCardCreationOverlay makeNewCard={setQuestions} areYouEditing={true} createdCardsList={cardsAdded} close={handleCardCreationClose}/>
+                    <FlashCardCreationOverlay makeNewCard={setQuestions} areYouEditing={true} createdCardsList={cardsAddedRef} close={handleCardCreationClose}/>
                 )}
-                 {cardBeingEdited && (<FlashCardEditOverlay id={cardBeingEdited} close={handleEditCardClose}/>)}
+               {/*  index, quizId, questionId, questionPrompt, answer, questions, setQuestions, cardsEdited, close  */}
+                {cardBeingEdited && (<FlashCardEditOverlay index={cardBeingEdited.index} quizId={cardBeingEdited.quizId} questionId={cardBeingEdited.questionId} questionPrompt={cardBeingEdited.questionPrompt} answer={cardBeingEdited.answer} questions={questions} setQuestions={setQuestions} cardsEditedRef={cardsEditedRef} close={handleEditCardClose}/>)}
             </div>
         </>
     )

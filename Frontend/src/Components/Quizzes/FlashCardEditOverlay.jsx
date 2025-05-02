@@ -1,9 +1,8 @@
 import "../../Styles/Components/Quizzes/FlashCardCreationOverlay.css"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import axios from "axios"
 
-const FlashCardEditOverlay = ({ index, quizId, questionId, questionPrompt, answer, questions, setQuestions, cardsEdited, close }) => {
-    const URI = import.meta.env.VITE_APP_URI
+const FlashCardEditOverlay = ({ index, quizId, questionId, questionPrompt, answer, questions, setQuestions, cardsEditedRef, close }) => {
     const prevQuestion = questionPrompt
     const prevAnswer = answer
 
@@ -12,22 +11,8 @@ const FlashCardEditOverlay = ({ index, quizId, questionId, questionPrompt, answe
         answer: answer
     })
 
-    /* useEffect(() => {
-        const fetchQuestion = async () => {
-            try {
-                const response = await axios.get(`${URI}questions/getQuestion/${id}`)
-                if (response.status === 200)
-                    setQuestionData(response.data.questionPrompt, response.data.answer)
-            }
-            catch (e) {
-                console.error("error fetching question", e)
-            }
-        }
-        fetchQuestion()
-    }, [URI, id]) */
-
     const handleCardEdit = () => {
-        if (prevQuestion.equals(questionData.questionPrompt) || prevAnswer.equals(questionData.answer)) return;
+        if (prevQuestion === questionData.questionPrompt && prevAnswer === questionData.answer) return;
         
         const newListOfQuestions = [... questions]
         newListOfQuestions[index] = {
@@ -37,7 +22,12 @@ const FlashCardEditOverlay = ({ index, quizId, questionId, questionPrompt, answe
             answer: questionData.answer
         }
         setQuestions(newListOfQuestions)
-        cardsEdited.push(questionId)
+        cardsEditedRef.current.push({
+            _id: questionId,
+            quizId: quizId,
+            questionPrompt: questionData.questionPrompt,
+            answer: questionData.answer
+        })
         close()
     }
 

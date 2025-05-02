@@ -8,29 +8,26 @@ const Quiz = Schemas.Quiz
 export const createQuestions = async(req, res) => {
     try {
         const questions = req.body.questions
-        console.log(questions)
-
-        const createdQuestions = []
-
+        
         for (const question of questions) {
             if (!question.quizId)
-                return res.status(404).json({ message: "Quiz not found" })
-    
-            if (!question.questionPrompt || !question.answer || question.questionPrompt === "" || question.answer === "")
-                return res.status(404).json({ message: "Not all fields filled out" })
-    
-            const newQuestion = new Question({
-                quizId: question.quizId,
-                questionPrompt: question.questionPrompt,
-                answer: question.answer,
-            }) 
-            await newQuestion.save()
-            createdQuestions.push(newQuestion)
+                return res.status(400).json({ message: "Missing quizId in question" });
+
+            if (!question.questionPrompt?.trim() || !question.answer?.trim())
+                return res.status(400).json({ message: "All fields must be filled out" });
         }
+        
+        const newQuestions = questions.map(question => ({
+            quizId: question.quizId,
+            questionPrompt: question.questionPrompt,
+            answer: question.answer,
+        }))
+
+        const createdQuestions = await Question.insertMany(newQuestions)
 
         res.status(200).json({
             "message": "Questions Created Successfully",
-            "question": createQuestions
+            "question": createdQuestions
         })
 
     }
@@ -125,24 +122,22 @@ export const editQuestions = async (req,res) => {
     try {
         const questions = req.body.questions
 
-        const editedQuestions = []
-
-        for (const question of questions) {
-            const edited = await Question.findOneAndUpdate({_id: question.quizId}, {$set: question}, {new: true})
-
-            if(edited === null){
-                res.status(404).json({error: 'No Question with that ID'})
-                return;
+        const updatedQuestions = questions.map(question => ({
+            updateOne: {
+                filter: { _id: question._id },
+                update: { $set: question }
             }
-            editedQuestions.push(edited)
-        }
+        }));
+
+        const editedQuestions = await Question.bulkWrite(updatedQuestions);
 
         res.status(200).json({
             message: "Question updated Successfully",
             questions: editedQuestions
         }) 
 
-    } catch (e) {
+    } 
+    catch (e) {
         res.status(500).json({error: "Question not modified"})
         console.log(e)
     }
@@ -152,18 +147,18 @@ export const deleteQuestions = async(req, res)=>{
     try {
         const questions = req.body.questions
 
-        for (const question of questions) {
-            const deleteQuestion  = await Question.findByIdAndDelete(question.questionId);
-            if(!deleteQuestion){
-                console.log("Could not find question");
-                return;
-            }
-            console.log("Deleted Quiz question successfully!");
+        if (!Array.isArray(questions) || questions.length === 0) {
+            return res.status(400).json({ message: "No questions deleted" });
         }
 
+        const getOuttaHere = await Question.deleteMany({ _id: { $in: questions } })
+        res.status(200).json({
+            message: "Questions deleted successfully",
+            deletedQuestions : getOuttaHere
+        });
     }
-    catch(err){
-        console.log("Error occured while connecting to database");
-        console.log(err);
+    catch(e) {
+        console.log("error deleting questions", e)
+        res.status(500).json({ message: "Internal server error", error: e});
     }
 }
