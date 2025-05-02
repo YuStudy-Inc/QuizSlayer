@@ -92,10 +92,6 @@ const EditQuizPage = () => {
         const cardsDeleted = cardsDeletedRef.current;
         const cardsAdded = cardsAddedRef.current;
 
-        console.log(cardsEdited)
-        console.log(cardsDeleted)
-        console.log(cardsAdded)
-
         try {
             const quizResponse = await axios.put(`${URI}quizzes/editQuiz/${quizId}`, {
                 title: quizData.title,
