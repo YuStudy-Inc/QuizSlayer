@@ -1,30 +1,33 @@
 import "../../Styles/Components/Quizzes/FlashCardCreationOverlay.css"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import axios from "axios"
 
-const FlashCardEditOverlay = ({ id, close }) => {
-    const URI = import.meta.env.VITE_APP_URI
+const FlashCardEditOverlay = ({ index, quizId, questionId, questionPrompt, answer, questions, setQuestions, cardsEditedRef, close }) => {
+    const prevQuestion = questionPrompt
+    const prevAnswer = answer
+
     const [questionData, setQuestionData] = useState({
-        question: "",
-        answer: ""
+        questionPrompt: questionPrompt,
+        answer: answer
     })
 
-    useEffect(() => {
-        const fetchQuestion = async () => {
-            try {
-                const response = await axios.get(`${URI}questions/getQuestion/${id}`)
-                if (response.status === 200)
-                    setQuestionData(response.question, response.answer)
-            }
-            catch (e) {
-                console.error("error fetching question", e)
-            }
-        }
-        fetchQuestion()
-    }, [URI, id])
-
     const handleCardEdit = () => {
+        if (prevQuestion === questionData.questionPrompt && prevAnswer === questionData.answer) return;
         
+        const newListOfQuestions = [... questions]
+        newListOfQuestions[index] = {
+            _id: questionId,
+            quizId: quizId,
+            questionPrompt: questionData.questionPrompt,
+            answer: questionData.answer
+        }
+        setQuestions(newListOfQuestions)
+        cardsEditedRef.current.push({
+            _id: questionId,
+            quizId: quizId,
+            questionPrompt: questionData.questionPrompt,
+            answer: questionData.answer
+        })
         close()
     }
 
@@ -48,10 +51,10 @@ const FlashCardEditOverlay = ({ id, close }) => {
                 </div>
                 <div className="flashcard-itself">
                     <div className="question-flashcard-overlay">
-                        <input type="text" value={questionData.question} placeholder="Question" onChange={handleQuestionChange}/>
+                        <input type="text" name="questionPrompt" value={questionData.questionPrompt} placeholder="Question" onChange={handleQuestionChange}/>
                     </div>
                     <div className="answer-flashcard-overlay">
-                        <input type="text" value={questionData.answer} placeholder="Answer" onChange={handleQuestionChange}/>
+                        <input type="text" name="answer" value={questionData.answer} placeholder="Answer" onChange={handleQuestionChange}/>
                     </div>
                 </div>
                 <div className="create-that-flashcard">

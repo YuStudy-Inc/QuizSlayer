@@ -1,8 +1,8 @@
 import "../../Styles/Components/Quizzes/FlashCard.css"
-import { pencil } from "../../assets/Pictures"
+import { pencil, trash } from "../../assets/Pictures"
 import { useState } from "react"
 
-const FlashCard = ({ key, id, questionInput, answerInput, editing, onEdit }) => {
+const FlashCard = ({ questionInput, answerInput, editing, onEdit, onDelete }) => {
     
 
     
@@ -17,8 +17,11 @@ const FlashCard = ({ key, id, questionInput, answerInput, editing, onEdit }) => 
                     <p>{answerInput}</p>
                 </div>
                 <div className={`edit-button-on-the-flashcard ${editing ? "editing" : ""}`}>
-                    <button onClick={onEdit}>
+                    <button className="edit-flashcard" onClick={onEdit}>
                         <img src={pencil} alt="" />
+                    </button>
+                    <button className="delete-flashcard" onClick={onDelete}>
+                        <img src={trash} alt="" />
                     </button>
                 </div>
             </div>

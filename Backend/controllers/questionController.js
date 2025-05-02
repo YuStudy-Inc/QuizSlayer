@@ -4,50 +4,30 @@ import mongoose from 'mongoose';
 import pdf from 'pdf-parse';
 const Question = Schemas.Question
 const Quiz = Schemas.Quiz
-function isInt(value) {
-    return !isNaN(value) && parseInt(Number(value)) == value && !isNaN(parseInt(value, 10));
-}
 
-export const createQuestion = async(req, res) => {
+export const createQuestions = async(req, res) => {
     try {
-        const { quizID, question, answer, difficulty, right, wrong } = req.body
-
-        //difficulty will be drop down menu for easy, medium, hard
-        if (!question || !answer || !difficulty || !right || !wrong)
-            return res.status(404).json({ message: "Not all fields filled out" })
-
-        if (question === "" || answer === "")
-            return res.status(404).json({ message: "Question and/or answer not filled out" })
-
-        if (!isInt(right) || !isInt(wrong))
-            return res.status(400).json({ message: "points right or points wrong is not a valid number" })
-
-        const turnQuizStringIntoAIDObjectBecauseGodKnowsWhyIHaveToConvertIt = new mongoose.Types.ObjectId(quizID);
-        const quizAssociatedWithTheQuestion = await Quiz.findById(turnQuizStringIntoAIDObjectBecauseGodKnowsWhyIHaveToConvertIt)
-        if (!quizAssociatedWithTheQuestion)
-            return res.status(404).json({ message: "Quiz not found" })
-
-        const newQuestion = new Question({
-            quizId: turnQuizStringIntoAIDObjectBecauseGodKnowsWhyIHaveToConvertIt,
-            question,
-            answer, 
-            difficulty,
-            right,
-            wrong
-        }) 
-
-        //we gonna remove the list of questions in the Quiz object because that just makes everything harder.
-        /* const turnQuizStringIntoAIDObjectBecauseGodKnowsWhyIHaveToConvertIt = new mongoose.Types.ObjectId(quizID);
-        const quizAssociatedWithTheQuestion = await Quiz.findById(turnQuizStringIntoAIDObjectBecauseGodKnowsWhyIHaveToConvertIt)
-        if (!quizAssociatedWithTheQuestion)
-            return res.status(404).json({ message: "Quiz not found" })
+        const questions = req.body.questions
         
-        quizAssociatedWithTheQuestion.questions.push(newQuestion) */
-        await newQuestion.save()
+        for (const question of questions) {
+            if (!question.quizId)
+                return res.status(400).json({ message: "Missing quizId in question" });
+
+            if (!question.questionPrompt?.trim() || !question.answer?.trim())
+                return res.status(400).json({ message: "All fields must be filled out" });
+        }
+        
+        const newQuestions = questions.map(question => ({
+            quizId: question.quizId,
+            questionPrompt: question.questionPrompt,
+            answer: question.answer,
+        }))
+
+        const createdQuestions = await Question.insertMany(newQuestions)
 
         res.status(200).json({
-            "message": "Question Created Successfully",
-            "question": newQuestion
+            "message": "Questions Created Successfully",
+            "question": createdQuestions
         })
 
     }
@@ -138,44 +118,47 @@ export const createQuestionsFromPDF = async (err, req, res) => {
 
 }
 
-export const editQuestion = async (req,res) => {
+export const editQuestions = async (req,res) => {
     try {
-        const questionId = req.params.id
-        
-        //Only changes the parameter that was included in the json req
-        const result = await Question.findOneAndUpdate({_id: questionId}, {$set: req.body}, {new: true})
-        if(result == null){
-            res.status(404).json({error: 'No Question with that ID'})
-            return;
-        }
+        const questions = req.body.questions
 
-        console.log(result);
+        const updatedQuestions = questions.map(question => ({
+            updateOne: {
+                filter: { _id: question._id },
+                update: { $set: question }
+            }
+        }));
+
+        const editedQuestions = await Question.bulkWrite(updatedQuestions);
+
         res.status(200).json({
             message: "Question updated Successfully",
-            object: result
+            questions: editedQuestions
         }) 
 
-    } catch (e) {
+    } 
+    catch (e) {
         res.status(500).json({error: "Question not modified"})
         console.log(e)
     }
 }
 
-export const deleteQuestion = async(req, res)=>{
-    const{id} = req.params;
-    try{
-        const deleteQuestion  = await Question.findByIdAndDelete(id);
-        if(!deleteQuestion){
-            console.log("Could not find question");
-            return;
+export const deleteQuestions = async(req, res)=>{
+    try {
+        const questions = req.body.questions
+
+        if (!Array.isArray(questions) || questions.length === 0) {
+            return res.status(400).json({ message: "No questions deleted" });
         }
-        console.log("Deleted Quiz question successfully!");
+
+        const getOuttaHere = await Question.deleteMany({ _id: { $in: questions } })
+        res.status(200).json({
+            message: "Questions deleted successfully",
+            deletedQuestions : getOuttaHere
+        });
     }
-    catch(err){
-        console.log("Error occured while connecting to database");
-        console.log(err);
+    catch(e) {
+        console.log("error deleting questions", e)
+        res.status(500).json({ message: "Internal server error", error: e});
     }
 }
-
-
-//need a get all questions from quiz id

@@ -21,7 +21,7 @@ const QuestionSchema = new Schema({
 
 
     //we might get rid of this and just do a constant damage to the enemy and you
-    difficulty: {
+    /* difficulty: {
         type: String,
     },
     pointsIfRight: {
@@ -29,7 +29,7 @@ const QuestionSchema = new Schema({
     },
     pointsIfWrong: {
         type: Number,
-    }
+    } */
 });
 
 const Question = model('Question', QuestionSchema);

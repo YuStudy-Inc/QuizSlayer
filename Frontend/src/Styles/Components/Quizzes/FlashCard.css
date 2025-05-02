@@ -36,7 +36,7 @@
     height: 100%;
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     opacity: 0;
     visibility: hidden;
@@ -46,7 +46,6 @@
     width: 3.5rem;
     aspect-ratio: 1/1;
     border: none;
-    background-color: var(--red);
     border-radius: 20px;
     opacity: 85%;
     display: flex;
@@ -67,4 +66,12 @@
 .editing {
     opacity: 1;
     visibility: visible;
+}
+
+.edit-flashcard {
+    background-color: var(--yellow);
+}
+
+.delete-flashcard {
+    background-color: var(--red);
 }
