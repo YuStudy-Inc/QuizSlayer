@@ -310,18 +310,6 @@ export const getFriendData = async(req, res) =>{
     }
 }
 
-export const getToDoQuizzes = async(req, res) => {
-    try {
-        const userId = req.params.id
-        const user = await User.findOne({_id: userId })
-        const toDoQuizzes = user.quizzes.filter(quiz => quiz.completed === false)
-        res.status(200).json({toDoQuizzes})
-    } catch (e) {
-        res.status(500).json({error: 'Error retreiving quizzes under TODO status'})
-        console.log(e)
-    }
-}
-
 export const getCharacterList = async(req, res) => {
     try {
         const userId = req.params.id
@@ -412,12 +400,12 @@ export const getFriendRequests = async(req, res) => {
         const userId = req.params.id
         const user = await User.findOne({_id: userId })
         const friendRequests = user.friendRequests
-        const usernames = [];
-        for (let friendId of user.friendRequests){
-            const friend = await User.findById(friendId);
-            usernames.push(friend.username);
-        }
-        res.status(200).json({friendRequests: usernames})
+
+        const friends = await Promise.all(
+            friendRequests.map(friendId => User.findById(friendId).select("username pfp _id"))
+        )
+
+        res.status(200).json({friendRequests: friends})
     } catch (e) {
         res.status(500).json({error: 'Error retreiving friends requests'})
         console.log(e)

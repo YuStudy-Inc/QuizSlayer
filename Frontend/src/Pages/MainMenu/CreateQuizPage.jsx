@@ -65,7 +65,6 @@ const CreateQuizPage = () => {
             ...prev,
             [e.target.name]: e.target.value
         }))
-		console.log(quizData)
     }
 
 	const createCard = () => {

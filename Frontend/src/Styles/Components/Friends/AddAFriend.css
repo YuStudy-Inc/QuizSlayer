@@ -95,6 +95,12 @@
     aspect-ratio: 1/1;
 }
 
+.error-friend {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    color: var(--light-red);
+}
+
 @media only screen and (max-width: 1000px) {
     .find-a-friend-title h1 {
         font-size: 1.5rem;

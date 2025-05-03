@@ -2,7 +2,6 @@ import "../../Styles/Components/Home/FriendsActive.css"
 import { useEffect, useState } from "react"
 import axios from "axios"
 import { FriendCard } from "../Components"
-import { maomao } from "../../assets/Pictures"
 
 const URI = import.meta.env.VITE_APP_URI
 const userId = JSON.parse(localStorage.getItem('id'))
@@ -18,8 +17,8 @@ const FriendsActive = ({ className= "" }) => {
     useEffect(() => {
         const fetchActiveFriends = async () => {
             try {
-                const allActiveFriends = await axios.get(`${URI}users/getUsersFriends/${userId}`)
-                setFriends(allActiveFriends.data)
+                const allActiveFriends = await axios.get(`${URI}users/getUsersActiveFriends/${userId}`)
+                setFriends(allActiveFriends.data.friends)
             }
             catch (e) {
                 console.log(e)
@@ -55,10 +54,18 @@ const FriendsActive = ({ className= "" }) => {
             <div className={`spread-out-container ${showSpreadOut ? "shown" : ""}`} onClick={() => toggleSpreadOut()}>
                 <div className="spread-out">
                     <h1>Active</h1>
-                    {/* if no friends, add the none className */}
-                    <div className="info-on-the-spread-out none">
-                        <p>No Friends Active...</p>
-                    </div>
+                    
+                    {friends.length !== 0 ? (
+                        <div className="info-on-the-spread-out">
+                            {friends.map((friend) => (
+                                <FriendCard friendPfp={friend.pfp} friendName={friend.username} />
+                            ))}
+                        </div>
+                    ) : (
+                        <div className="info-on-the-spread-out none">
+                            <p>No Friends Active...</p>
+                        </div>
+                    )}
                 </div>
             </div>
         </>

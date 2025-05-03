@@ -95,7 +95,7 @@ export const getQuizzes = async(req, res) => {
 export const getToDoQuizzes = async(req, res) => {
     try {
         const userId = req.params.id
-        const quizzesStillLeftToDo = await find({user: userId, completed: false})
+        const quizzesStillLeftToDo = await Quiz.find({user: userId, completed: false})
         res.status(200).json({quizzesStillLeftToDo})
     } catch (e) {
         res.status(500).json({error: 'Error retreiving quizzes under TODO status'})
