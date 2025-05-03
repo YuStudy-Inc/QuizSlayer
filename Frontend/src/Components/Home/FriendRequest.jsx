@@ -6,16 +6,30 @@ const userId = JSON.parse(localStorage.getItem('id'))
 
 const FriendRequest = ({ friendId, incomingFriendPfp, incomingFriendName, FriendRequestList }) => {
     const accept = async () => {
-
+        try {
+            const response = await axios.put(`${URI}users/acceptFriendRequest/${userId}`, {
+                username: friendId
+            }, {
+                withCredentials: true
+            })
+            if (response.status === 200)
+                
+        }
+        catch (e) {
+            console.error("error accepting ts friend", e)
+        }
     }
 
-    const reject = async = () => {
+    const reject = async () => {
         try {
             const response = await axios.put(`${URI}users/rejectFriendRequest/${userId}`, {
                 username: friendId
             }, {
                 withCredentials: true
             })
+        }
+        catch (e) {
+            console.error("error rejecting ts friend", e)
         }
     }
 
