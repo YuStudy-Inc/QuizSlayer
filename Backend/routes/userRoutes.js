@@ -1,7 +1,7 @@
 import express from 'express';
-import { createUser, loginUser, editUser, editUserPassword, deleteUser, getUsername, getDescription, 
-  getActiveFriends, getFriends, getToDoQuizzes, getCharacterList, getInventory, getTop10, 
-  getFriendRequests, acceptFriendRequest, rejectFriendRequest, sendFriendRequest, updateSelections, getFriendData, getUser} from '../controllers/userController.js';
+import { createUser, loginUser, editUser, editUserPassword, deleteUser, getUser, getUsername, getDescription, 
+  getActiveFriends, getFriends, getCharacterList, getInventory, getTop10, 
+  getFriendRequests, acceptFriendRequest, rejectFriendRequest, sendFriendRequest, updateSelections } from '../controllers/userController.js';
 
 const router = express.Router();
 router.post('/createUser', createUser);
@@ -14,15 +14,14 @@ router.get('/getUsername/:id', getUsername)
 router.get('/getDescription/:id', getDescription)
 router.get('/getUsersActiveFriends/:id', getActiveFriends)
 router.get('/getFriends/:id', getFriends)
-router.get('/getToDoQuizzes/:id', getToDoQuizzes)
 router.get('/getCharacterList/:id', getCharacterList)
 router.get('/getInventory/:id', getInventory)
-router.get('/getTop10/:id', getTop10)
+router.get('/getTop10', getTop10)
 router.get('/getUsersFriendRequests/:id', getFriendRequests)
-router.get('/getFriendData/:id', getFriendData);
-router.post('/acceptFriendRequest/:id', acceptFriendRequest)
-router.post('/rejectFriendRequest/:id', rejectFriendRequest)
+router.put('/acceptFriendRequest/:id', acceptFriendRequest)
+router.put('/rejectFriendRequest/:id', rejectFriendRequest)
 router.post('/sendFriendRequest/:id', sendFriendRequest)
+router.post('/updateSelections', updateSelections)
 
 /* router.get('/getFriends/:id', getFriendsFromUserID) */
 router.get('/', (req, res) => {

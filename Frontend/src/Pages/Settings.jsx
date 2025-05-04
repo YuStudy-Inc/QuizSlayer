@@ -178,6 +178,8 @@ const Settings = () => {
 		const response = await axios.post(`${URI}users/presignedPfpURL/${userId}`, {
 			fileName,
 			fileType
+		},{
+			withCredentials: true
 		})
 
 		const { uploadURL, key } = response.data

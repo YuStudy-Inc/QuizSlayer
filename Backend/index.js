@@ -80,8 +80,8 @@ app.get("/", async(req, res) => {
 export const handler = serverless(app);
 
 // For local testing
-// const port = 3000;
+/* const port = 3000;
 
-/* app.listen(port, () => {
+app.listen(port, () => {
    console.log(`Example app listening on port ${port}`)
 }) */

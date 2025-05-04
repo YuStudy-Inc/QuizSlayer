@@ -72,7 +72,9 @@ const Gacha = () => {
     useEffect(() => {
         const fetchUsersCoins = async () => {
             try {
-                const response = await axios.get(`${URI}users/getUsersCoins/${userId}`)
+                const response = await axios.get(`${URI}users/getUsersCoins/${userId}`, {
+                    withCredentials: true
+                })
                 if (response.status === 200)
                     setUsersCoins(response.data)
             }
@@ -95,6 +97,8 @@ const Gacha = () => {
             try {
                 const response = await axios.put(`${URI}users/updateCoins/${userId}`, {
                     coins: -100
+                }, {
+                    withCredentials: true
                 })
                 if (response.status === 200)
                     console.log("purchase loot box successful")
@@ -103,8 +107,12 @@ const Gacha = () => {
 
                 //one star = 50, two stars = 75, three = 100 four == 300
                 try {
-                    const characterData = await axios.get(`${URI}users/getCharacters/${userId}`)
-                    const inventoryData = await axios.get(`${URI}users/getInventory/${userId}`)
+                    const characterData = await axios.get(`${URI}users/getCharacters/${userId}`, {
+                        withCredentials: true
+                    })
+                    const inventoryData = await axios.get(`${URI}users/getInventory/${userId}`, {
+                        withCredentials: true
+                    })
 
                     if (characterData.status !== 200 || inventoryData.status !== 200) {
                         console.error("Failed to fetch character or inventory data");
@@ -142,6 +150,8 @@ const Gacha = () => {
                     try {
                         const response = await axios.put(`${URI}users/addCharacter/${userId}`, {
                             character: itemWon
+                        }, {
+                            withCredentials: true
                         })
                         if (response.status === 200)
                             console.log("added new character to User's collection")
@@ -154,6 +164,8 @@ const Gacha = () => {
                     try {
                         const response = await axios.put(`${URI}users/addItem/${userId}`, {
                             item: itemWon
+                        }, {
+                            withCredentials: true
                         })
                         if (response.status === 200)
                             console.log("added new item to User's collection")
@@ -166,6 +178,8 @@ const Gacha = () => {
                     try {
                         const response = await axios.put(`${URI}users/updateCoins/${userId}`, {
                             coins: coinsIfTheyAlreadyWonThatItem
+                        }, {
+                            withCredentials: true
                         })
                         if (response.status === 200)
                             console.log("updated user's balance")

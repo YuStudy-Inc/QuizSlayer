@@ -1,6 +1,46 @@
 import "../../Styles/Components/Home/FriendRequest.css"
+import axios from "axios"
 
-const FriendRequest = ({ incomingFriendPfp, incomingFriendName }) => {
+const URI = import.meta.env.VITE_APP_URI
+const userId = JSON.parse(localStorage.getItem('id'))
+
+const FriendRequest = ({ index, friendId, incomingFriendPfp, incomingFriendName, friendRequestList, setFriendRequestList }) => {
+    const accept = async () => {
+        console.log(friendId)
+        try {
+            const response = await axios.put(`${URI}users/acceptFriendRequest/${userId}`, {
+                friendId: friendId
+            }, {
+                withCredentials: true
+            })
+            if (response.status === 200) {
+                const newFriendRequestList = friendRequestList.indexOf(index)
+                setFriendRequestList(newFriendRequestList)
+            }
+                
+        }
+        catch (e) {
+            console.error("error accepting ts friend", e)
+        }
+    }
+
+    const reject = async () => {
+        try {
+            const response = await axios.put(`${URI}users/rejectFriendRequest/${userId}`, {
+                friendId: friendId
+            }, {
+                withCredentials: true
+            })
+            if (response.status === 200) {
+                const newFriendRequestList = friendRequestList.indexOf(index)
+                setFriendRequestList(newFriendRequestList)
+            }
+        }
+        catch (e) {
+            console.error("error rejecting ts friend", e)
+        }
+    }
+
     return(
         <>
             <div className="friend-request-container">
@@ -13,8 +53,8 @@ const FriendRequest = ({ incomingFriendPfp, incomingFriendName }) => {
                     </div>
                 </div>
                 <div className="options">
-                    <button className="yes-button">Accept</button>
-                    <button className="no-button">Reject</button>
+                    <button className="yes-button" onClick={accept}>Accept</button>
+                    <button className="no-button" onClick={reject}>Reject</button>
                 </div>
             </div>
         </>

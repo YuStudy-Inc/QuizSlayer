@@ -16,8 +16,8 @@ const TodoList = ({ className = "" }) => {
     useEffect(() => {
         const fetchToDoQuizzes = async () => {
             try {
-                const allToDoQuizzes = await axios.get(`${URI}users/getUsersToDoQuizzes/${userId}`)
-                setQuizzesToDo(allToDoQuizzes.data)
+                const allToDoQuizzes = await axios.get(`${URI}quizzes/getToDoQuizzes/${userId}`)
+                setQuizzesToDo(allToDoQuizzes.data.quizzesStillLeftToDo)
             }
             catch (e) {
                 console.log(e)
@@ -32,8 +32,8 @@ const TodoList = ({ className = "" }) => {
                 <h1>Todo</h1>
                 {quizzesToDo.length !== 0 ? (
                     <div className="info-on-the-normal">
-                        {quizzesToDo.map((quiz) => (
-                            <h1>{quiz.title}</h1>
+                        {quizzesToDo.map((quiz, index) => (
+                            <p key={index}>{quiz.title}</p>
                         ))}
                     </div>
                 ) : (
@@ -51,10 +51,17 @@ const TodoList = ({ className = "" }) => {
             <div className={`spread-out-container ${showSpreadOut ? "shown" : ""}`} onClick={() => toggleSpreadOut()}>
                 <div className="spread-out">
                     <h1>Todo</h1>
-                    {/* if no friends, add the none className */}
-                    <div className="info-on-the-spread-out none">
-                        <p>No Quizzes to do!</p>
-                    </div>
+                        {quizzesToDo.length !== 0 ? (
+                        <div className="info-on-the-normal">
+                            {quizzesToDo.map((quiz, index) => (
+                                <p key={index}>{quiz.title}</p>
+                            ))}
+                        </div>
+                    ) : (
+                        <div className="info-on-the-spread-out none">
+                            <p>No Quizzes to do!</p>
+                        </div>
+                    )}
                 </div>
             </div>
         </>

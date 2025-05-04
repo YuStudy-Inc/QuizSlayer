@@ -6,7 +6,7 @@ const router = express.Router();
 /* router.get('/getQuizzes', getQuizzesFromUserID) */
 router.post('/createQuiz', createQuiz)
 router.put('/editQuiz/:id', editQuiz)
-router.delete('/deleteQuiz/:id', deleteQuiz)
+router.delete('/deleteQuiz', deleteQuiz)
 router.get('/getQuiz/:id', getQuiz)
 router.get('/getQuizzes/:id', getQuizzes)
 router.get('/getToDoQuizzes/:id', getToDoQuizzes)

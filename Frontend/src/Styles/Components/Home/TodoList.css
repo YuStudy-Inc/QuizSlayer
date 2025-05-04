@@ -20,6 +20,13 @@
     background-color: transparent;
 }
 
+.info-on-the-normal {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    font-size: 1rem;
+}
+
 @media only screen and (max-width: 1200px) {
     .todolist-container {
         visibility: hidden;
