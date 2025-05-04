@@ -32,7 +32,7 @@ const CreateQuizPage = () => {
 				const response = await axios.get(`${URI}users/getAICreations`, 
 					{withCredentials:true}).then(response => {
 						setAICreations(response.data.AICreations);
-						if(response.AICreations >= 2) {
+						if(response.data.AICreations >= 2) {
 							setUsedMaxCreations(true);
 						}
 					});
