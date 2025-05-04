@@ -77,7 +77,7 @@ const CreateQuizPage = () => {
             if (questionsResponse.status === 200) {
                 console.log("successfully created Quiz Questions")
             }
-            navigate(-1)
+            navigate('/quizzes')
         }
         catch (e) {
             console.error("error saving changes to quiz", e)
@@ -89,7 +89,6 @@ const CreateQuizPage = () => {
             ...prev,
             [e.target.name]: e.target.value
         }))
-		console.log(quizData)
     }
 
 	const createCard = () => {

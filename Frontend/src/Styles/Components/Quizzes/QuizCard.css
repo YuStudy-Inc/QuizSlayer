@@ -6,6 +6,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.quiz-card-container:hover {
+    background-color: #fff;
 }
 
 .quiz-stuff {
@@ -24,9 +30,9 @@
     gap: 1rem;
 }
 
-
 .play-button,
-.edit-button {
+.edit-button,
+.delete-button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -44,7 +50,8 @@
 }
 
 .play-button img,
-.edit-button img {
+.edit-button img,
+.delete-button img {
     height: 50%;
     aspect-ratio: 1/1;
 }
@@ -55,6 +62,14 @@
 
 .edit-button:hover {
     background-color: var(--light-yellow);
+}
+
+.delete-button {
+    background-color: var(--red);
+}
+
+.delete-button:hover {
+    background-color: var(--light-red);
 }
 
 @media only screen and (max-width: 768px) {

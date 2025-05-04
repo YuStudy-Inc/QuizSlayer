@@ -82,11 +82,6 @@
     margin-bottom: 10%;
 }
 
-.info-on-the-normal {
-    height: 90%;
-    display: flex;
-}
-
 .toggle-spread {
     background-color: var(--white);
     border: none;

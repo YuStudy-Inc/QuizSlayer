@@ -52,19 +52,20 @@ export const editQuiz = async (req,res) => {
 }
 
 export const deleteQuiz = async(req, res) => {
-    const{id} = req.params;
-    try{
-        const deletedQuiz = await Quiz.findByIdAndDelete(id);
-        if(!deletedQuiz){
+    try {
+        const quizId = req.body.quizId
+        console.log(quizId)
+
+        const deletedQuiz = await Quiz.findByIdAndDelete(quizId);
+        if (!deletedQuiz) {
             res.status(500).json({error: "Quiz was not found"})
             return;
         }
-        res.status(200).json({
-            message: 'Quiz deleted successfullly' }) 
+        res.status(200).json({message: 'Quiz deleted successfullly' }) 
     }
     catch(err){
-        res.status(500).json({error: "Quiz not found"})
         console.log(err)
+        res.status(500).json({error: "Quiz not found"})
     }
 }
 
@@ -94,7 +95,7 @@ export const getQuizzes = async(req, res) => {
 export const getToDoQuizzes = async(req, res) => {
     try {
         const userId = req.params.id
-        const quizzesStillLeftToDo = await find({user: userId, completed: false})
+        const quizzesStillLeftToDo = await Quiz.find({user: userId, completed: false})
         res.status(200).json({quizzesStillLeftToDo})
     } catch (e) {
         res.status(500).json({error: 'Error retreiving quizzes under TODO status'})

@@ -21,7 +21,9 @@ const Home = () => {
     useEffect(() => {
         const getUser = async () => {
             try {
-                const user = await axios.get(`${URI}users/getUser/${userId}`)
+                const user = await axios.get(`${URI}users/getUser/${userId}`, {
+                    withCredentials: true
+                })
                 setUserCharacter(user.data.selectedCharacter)
                 setUserWeapon(user.data.selectedWeapon)
                 setUserHat(user.data.selectedHat)
