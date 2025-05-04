@@ -121,9 +121,10 @@ export const createQuestionsFromPDF = async (err, req, res) => {
 
         
         user.xp += 1
-        user.save();
+        await user.save();
         return res.status(200).json(JSON.parse(response.output_text));
     } catch (e) {
+        console.log(e);
         return res.status(500).json({error: "Could not create questions"});
         
     }
