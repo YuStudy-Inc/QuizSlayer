@@ -143,10 +143,8 @@ const CreateQuizPage = () => {
 			{
 				headers: {
 					'Content-Type': 'multipart/form-data'
-				}
-			},
-			{
-				withCredentials: true
+				},
+				withCredentials: true,
 			}
 			).then(async response => {
 			console.log('Success:', response.data)
