@@ -299,19 +299,6 @@ export const getFriends = async(req, res) => {
         console.log(e)
     }
 }
-export const getFriendData = async(req, res) =>{
-    try{
-        const user = await User.findOne({_id: req.params.id}, 'username xp pfp');
-        if (!user) {
-            return res.status(404).json({ message: 'User not found' });
-        }
-        res.status(200).json(user);
-    }
-    catch (error) {
-        console.error('Error fetching friend data:', error);
-        res.status(500).json({ message: 'Server Error' });
-    }
-}
 
 export const getCharacterList = async(req, res) => {
     try {
