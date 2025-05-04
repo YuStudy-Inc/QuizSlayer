@@ -148,6 +148,9 @@ const CreateQuizPage = () => {
 			}
 			).then(async response => {
 			console.log('Success:', response.data)
+			if(aiCreations + 1 >= 2) {
+				setUsedMaxCreations(true);
+			}
 			setAICreations(aiCreations + 1);
 			for(const question of response.data.questions) {
 				await sleep(1);
