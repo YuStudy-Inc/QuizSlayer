@@ -3,6 +3,7 @@ import OpenAI from "openai";
 import mongoose from 'mongoose';
 import pdf from 'pdf-parse';
 const Question = Schemas.Question
+const User = Schemas.User
 const Quiz = Schemas.Quiz
 
 export const createQuestions = async(req, res) => {
@@ -50,10 +51,17 @@ export const createQuestionsFromPDF = async (err, req, res) => {
         if(req.file.mimetype !== 'application/pdf') {
             return res.status(415).json({error: "Invalid file type. Only PDFS are allowed"});
         }
-        
+
+
+        const userId = req.session.userID
+        const user = await User.findOne({_id: userId})
         const dataBuffer = req.file.buffer;
         const api = process.env.OPENAI_API_KEY;
         const client = new OpenAI(api);
+
+        if(user.xp > 2) {
+            return res.status(403).json({error: "User has used too many AICreations today"})
+        }
         var data; 
         try{
             data = await pdf(dataBuffer);
@@ -61,6 +69,7 @@ export const createQuestionsFromPDF = async (err, req, res) => {
         catch(e) {
             return res.status(415).json({error: "Invalid PDF structure"})
         }
+
         
         const prompt = "You are a teacher creating a quiz." +
             " Use the user inputted slide or text information to create 10 questions with a corresponding answers." +
@@ -110,6 +119,9 @@ export const createQuestionsFromPDF = async (err, req, res) => {
             }
         });
 
+        
+        user.xp += 1
+        user.save();
         return res.status(200).json(JSON.parse(response.output_text));
     } catch (e) {
         return res.status(500).json({error: "Could not create questions"});
