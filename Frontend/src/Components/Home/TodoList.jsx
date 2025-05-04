@@ -16,7 +16,9 @@ const TodoList = ({ className = "" }) => {
     useEffect(() => {
         const fetchToDoQuizzes = async () => {
             try {
-                const allToDoQuizzes = await axios.get(`${URI}quizzes/getToDoQuizzes/${userId}`)
+                const allToDoQuizzes = await axios.get(`${URI}quizzes/getToDoQuizzes/${userId}`, {
+                    withCredentials: true
+                })
                 setQuizzesToDo(allToDoQuizzes.data.quizzesStillLeftToDo)
             }
             catch (e) {
