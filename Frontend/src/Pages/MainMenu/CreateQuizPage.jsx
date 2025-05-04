@@ -2,7 +2,7 @@ import "../../Styles/Pages/MainMenu/CreateQuizPage.css"
 import { plus, download } from "../../assets/Pictures.js";
 import {Ring} from 'ldrs/react';
 import 'ldrs/react/Ring.css';
-import { FlashCard, FlashCardCreationOverlay } from "../../Components/Components.js";
+import { FlashCard, FlashCardCreationOverlay, Alert} from "../../Components/Components.js";
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -15,14 +15,35 @@ const CreateQuizPage = () => {
         title: "",
         description: "",
     })
+	const [file, setFile] = useState(null);
 	const [fileName, setFileName] = useState("");
 	const [showCardCreationOverlay, setShowCardCreationOverlay] = useState(false)
+	const [showAIAlert, setAIAlert] = useState(false)
 	const [questions, setQuestions] = useState([])
 	const [isBusy, setBusy] = useState(false);
+	const [aiCreations, setAICreations] = useState(-1);
+	const [usedMaxCreations, setUsedMaxCreations] = useState(false);
+
+	useEffect(async () => {
+		setBusy(true);
+		try{
+			const response = await axios.get(`${URI}users/getAICreations`)
+			setAICreations(response.AICreations);
+
+			if(response.AICreations >= 2) {
+				setUsedMaxCreations(true);
+			}
+		} catch (e) {
+			console.error("couldn't get AI creations", e)
+		}
+		setBusy(false);
+	}, [aiCreations])
+		
 
 	const navigate = useNavigate()
 
 	const handleQuizCreation = async () => {
+		if(isBusy) return;
 		try {
             const quizResponse = await axios.post(`${URI}quizzes/createQuiz`, {
 				userId: userId,
@@ -86,13 +107,33 @@ const CreateQuizPage = () => {
 	const sleep = (ms) => new Promise(resolve =>setTimeout(resolve,ms));
 	const handleFileChange = (event) => {
 		setBusy(true);
+
 		if (event.target.files.length > 0) {
 			console.log("File input event:", event.target.files); // Debugging
 			setFileName(event.target.files[0].name); // Display selected file name
+			setFile(event.target.files[0]);
 		}
 
+		setAIAlert(true); 
+	}
+
+	const declineCreation = () => {
+		setAIAlert(false);
+		setFileName("");
+		setFile(null);
+		setBusy(false);
+	}
+
+	const acceptCreation = () => {
+
+		setAIAlert(false);
+		if(aiCreations >= 2) {
+			setAIAlert(false);
+			setBusy(false);
+			return;
+		}
 		const formData = new FormData();
-		formData.append('file', event.target.files[0])
+		formData.append('file', file)
 		axios.post(`${URI}questions/createQuestionsFromPDF`, formData, 
 			{
 				headers: {
@@ -104,6 +145,7 @@ const CreateQuizPage = () => {
 			}
 			).then(async response => {
 			console.log('Success:', response.data)
+			setAICreations(aiCreations + 1);
 			for(const question of response.data.questions) {
 				await sleep(1);
 				const tempId = Date.now()
@@ -117,6 +159,7 @@ const CreateQuizPage = () => {
 		})
 		.catch(error => {
 			console.error('Error: ', error);
+			setBusy(false);
 		});
 	}
 
@@ -198,6 +241,25 @@ const CreateQuizPage = () => {
 						<h1>Create</h1>
 					</button>
 				</div>
+				{
+					usedMaxCreations ? 
+					<Alert 
+						text={`You have used your maximum number of AI Creations for today!`}
+						subtitle={`Remaining creations: ${aiCreations}`}
+						buttonOneText={`Okay`}
+						functionButtonOne={declineCreation}
+						show={showAIAlert}
+					/> :
+					<Alert 
+						text={`Create flashcards with the selected file: ${fileName}`}
+						subtitle={`Remaining creations: ${aiCreations}`}
+						buttonOneText={`Decline`}
+						buttonTwoText={`Create`}
+						functionButtonOne={declineCreation}
+						functionButtonTwo={acceptCreation}
+						show={showAIAlert}
+					/>
+				}
 				{showCardCreationOverlay && (
 					<FlashCardCreationOverlay makeNewCard={setQuestions} close={(handleCardCreationClose)}/>
 				)}
