@@ -20,6 +20,14 @@
     background-color: transparent;
 }
 
+.info-on-the-friends {
+    display: flex;
+    flex-direction: column;
+    gap: 0rem;
+    font-size: 1.5rem;
+    align-items: stretch;
+}
+
 @media only screen and (max-width: 1200px) {
     .friends-active-container {
         visibility: hidden;

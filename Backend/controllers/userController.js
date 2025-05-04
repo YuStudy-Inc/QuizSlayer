@@ -24,7 +24,7 @@ const changeActiveStatus = (async (user) => {
 
 export const getUser = async(req, res) => {
     try {
-        const userId = req.session.userID;
+        const userId = req.params.id;
 
         const user = await User.findById(userId);
 
@@ -305,6 +305,18 @@ export const getInventory = async(req, res) => {
     }
 }
 
+export const addCharacterToList = async (req, res) => {
+
+}
+
+export const addItemToInventory = async (req, res) => {
+
+}
+
+
+
+
+
 export const updateSelections = async (req, res) => {
     try {
         const userId = req.session.userID;
@@ -469,10 +481,46 @@ export const sendFriendRequest = async(req, res) => {
             return;
         }
         requestUser.friendRequests.push(user._id);
-       await requestUser.save();
+        await requestUser.save();
         res.status(200).json({message: 'Friend request sent!'})
     } catch (e) {
         res.status(500).json({error: 'Error sending friend request'})
         console.log(e)
+    }
+}
+
+export const getUsersCoins = async (req, res) => {
+    try {
+        const userId = req.params.id
+
+        const user = await User.findById(userId).select("coins")
+        
+        if (!user) {
+            res.status(404).json({error: "user doesn't exist"})
+            return
+        }
+        res.status(200).json({coins: user.coins})
+    }
+    catch (e) {
+        res.status(500).json({error: "error fetching user's coins"})
+    }
+}   
+
+export const updateUsersCoins = async (req, res) => {
+    try {
+        const userId = req.params.id
+
+        const user = await User.findById(userId)
+
+        if (!user) {
+            res.status(404).json({error: "user doesn't exist"})
+            return
+        }
+
+        const newBalance = await user.findOneAndUpdate()
+
+    }
+    catch (e) {
+        res.status(500).json({error: "error fetching user's coins"})
     }
 }

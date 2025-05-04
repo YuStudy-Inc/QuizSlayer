@@ -76,7 +76,7 @@ const Gacha = () => {
                     withCredentials: true
                 })
                 if (response.status === 200)
-                    setUsersCoins(response.data)
+                    setUsersCoins(response.data.coins)
             }
             catch (e) {
                 console.error("error retreiving user's coins")
