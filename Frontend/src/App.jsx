@@ -11,7 +11,7 @@ function App() {
 					<Route index element={<LandingPage />}/>
 					<Route path='/' element={<LandingPage />}/>
 					<Route path='/login' element={<LoginSignup />}/>
-					{/* <Route element={<AuthenticateUserRoute/>}> */}
+					<Route element={<AuthenticateUserRoute/>}>
 						<Route path='' element={<Navbar/>}>
 							<Route path='/home' element={<Home />}/>
 							<Route path='/collection' element={<Collection/>}/>
@@ -26,7 +26,7 @@ function App() {
 						<Route path='/results' element={<Results />}/>
 						<Route path='/settings' element={<Settings />}/>
 						<Route path="*" element={<PageNotFound />}/>
-					{/* </Route> */}
+					</Route> 
 				</Routes>
 			</BrowserRouter>
 		</>

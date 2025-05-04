@@ -3,7 +3,7 @@ import { plus, download } from "../../assets/Pictures.js";
 import {Ring} from 'ldrs/react';
 import 'ldrs/react/Ring.css';
 import { FlashCard, FlashCardCreationOverlay, Alert} from "../../Components/Components.js";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -24,19 +24,22 @@ const CreateQuizPage = () => {
 	const [aiCreations, setAICreations] = useState(-1);
 	const [usedMaxCreations, setUsedMaxCreations] = useState(false);
 
-	useEffect(async () => {
-		setBusy(true);
-		try{
-			const response = await axios.get(`${URI}users/getAICreations`, {withCredentials:true})
-			setAICreations(response.AICreations);
+	useEffect(() => {
+		async function initAICreations() {
+			setBusy(true);
+			try{
+				const response = await axios.get(`${URI}users/getAICreations`, {withCredentials:true})
+				setAICreations(response.AICreations);
 
-			if(response.AICreations >= 2) {
-				setUsedMaxCreations(true);
+				if(response.AICreations >= 2) {
+					setUsedMaxCreations(true);
+				}
+			} catch (e) {
+				console.error("couldn't get AI creations", e)
 			}
-		} catch (e) {
-			console.error("couldn't get AI creations", e)
+			setBusy(false);
 		}
-		setBusy(false);
+		initAICreations();
 	}, [aiCreations])
 		
 
