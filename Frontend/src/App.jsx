@@ -20,7 +20,7 @@ function App() {
 							<Route path='/leaderboard' element={<Leaderboard />}/>
 						</Route>
 						<Route path='/createquiz' element={<CreateQuizPage />}/>
-						<Route path='/editquiz/:id' element={<EditQuizPage />}/>
+						<Route path='/editquiz/:quizId' element={<EditQuizPage />}/>
 						<Route path='/gacha' element={<Gacha />}/>
 						<Route path='/results' element={<Results />}/>
 						<Route path='/settings' element={<Settings />}/>
