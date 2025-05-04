@@ -25,15 +25,18 @@ const CreateQuizPage = () => {
 	const [usedMaxCreations, setUsedMaxCreations] = useState(false);
 
 	useEffect(() => {
+		if(isBusy) return;
 		async function initAICreations() {
 			setBusy(true);
 			try{
-				const response = await axios.get(`${URI}users/getAICreations`, {withCredentials:true})
-				setAICreations(response.AICreations);
+				const response = await axios.get(`${URI}users/getAICreations`, 
+					{withCredentials:true}).then(response => {
+						setAICreations(response.data.AICreations);
+						if(response.AICreations >= 2) {
+							setUsedMaxCreations(true);
+						}
+					});
 
-				if(response.AICreations >= 2) {
-					setUsedMaxCreations(true);
-				}
 			} catch (e) {
 				console.error("couldn't get AI creations", e)
 			}
