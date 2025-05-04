@@ -1,4 +1,4 @@
-import { Home, Collection, Friends, Leaderboard, Quizzes, CreateQuizPage, EditQuizPage, Gacha } from './MainMenu/MainMenu.js'
+import { Home, Collection, Friends, Leaderboard, Quizzes, ViewQuizPage, CreateQuizPage, EditQuizPage, Gacha } from './MainMenu/MainMenu.js'
 import LoginSignup from './LoginSignup/LoginSignup.jsx'
 import Results from './Results/Results.jsx'
 import LandingPage from './LandingPage.jsx';
@@ -12,6 +12,7 @@ export {
     Collection,
     Gacha,
     Quizzes,
+    ViewQuizPage,
     CreateQuizPage,
     EditQuizPage,
     Home,
