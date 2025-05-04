@@ -1,5 +1,5 @@
 import express from 'express';
-import { createUser, loginUser, editUser, editUserPassword, deleteUser, getUsername, getDescription, 
+import { createUser, loginUser, editUser, editUserPassword, deleteUser, getUser, getUsername, getDescription, 
   getActiveFriends, getFriends, getCharacterList, getInventory, getTop10, 
   getFriendRequests, acceptFriendRequest, rejectFriendRequest, sendFriendRequest, updateSelections } from '../controllers/userController.js';
 
@@ -9,6 +9,7 @@ router.post('/loginUser', loginUser);
 router.put('/editUser/:id', editUser);
 router.put('/editUser/password/:id', editUserPassword);
 router.delete('/deleteUser/:id', deleteUser);
+router.get('/getUser', getUser);
 router.get('/getUsername/:id', getUsername)
 router.get('/getDescription/:id', getDescription)
 router.get('/getUsersActiveFriends/:id', getActiveFriends)
@@ -20,6 +21,7 @@ router.get('/getUsersFriendRequests/:id', getFriendRequests)
 router.put('/acceptFriendRequest/:id', acceptFriendRequest)
 router.put('/rejectFriendRequest/:id', rejectFriendRequest)
 router.post('/sendFriendRequest/:id', sendFriendRequest)
+router.post('/updateSelections', updateSelections)
 
 /* router.get('/getFriends/:id', getFriendsFromUserID) */
 router.get('/', (req, res) => {
