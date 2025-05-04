@@ -42,10 +42,9 @@
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 10%;
     flex-grow: 1;
     padding: 1rem 8px 1rem 0;
-    gap: 2.5rem;
+    gap: 1rem;
 }
 
 .scroll-for-more-friends::-webkit-scrollbar {

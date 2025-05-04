@@ -30,14 +30,14 @@ const PlayerCard = ({ rank, playerName, playerPfp, monstersSlain }) => {
                     <h1>{rank}</h1>
                 </span>
                 <span className="player-info">
-                    <img className="player-img" src={maomao} alt="" /> 
+                    <img className="player-img" src={playerPfp} alt="" /> 
                 </span>
                 <span className="player-text-mobile">
                     <span className="player-name-mobile"> 
                         <p>{playerName}</p>
                     </span>
                     <span className="player-score-mobile"> 
-                        <p> Monsters Slain {score} </p>
+                        <p> Monsters Slain {monstersSlain} </p>
                     </span>
                 </span>
             </div>

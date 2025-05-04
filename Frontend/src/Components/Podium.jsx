@@ -19,18 +19,20 @@ const Podium = ({character, hat, weapon}) => {
     }
 
     useEffect(() => {
-        // UserData.updateUserData();
-        updatePodium();
-    })
+        if (!character && !hat && !weapon) {
+            console.log("change to podium")
+            updatePodium();
+        }
+    }, [character, hat, weapon]);
 
     return(
         /* I guess Ill be drawing the Podium, it will look cooler */
         /* place holder for now */
         <>
             <div className="the-podium">
-                <img className="weapon-on-podium" src={WeaponsEnum[weapon ? weapon : selectedWeapon]} alt="" />
-                <img className="hat-on-podium" src={HatsEnum[hat ? hat : selectedHat]} alt="" />
-                <img className="character-on-podium" src={CharacterEnum[character ? character : selectedCharacter]} alt="" />
+                <img className="weapon-on-podium" src={WeaponsEnum[weapon ?? selectedWeapon]} alt="" />
+                <img className="hat-on-podium" src={HatsEnum[hat ?? selectedHat]} alt="" />
+                <img className="character-on-podium" src={CharacterEnum[character ?? selectedCharacter]} alt="" />
                 <img className="podium" src={podium} alt="" />
             </div>
         </>
