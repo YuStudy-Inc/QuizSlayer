@@ -14,7 +14,6 @@
 .player-img {
     height: 3rem;
     aspect-ratio: 1/1;
-    background-color: var(--dark-green);
     border-radius: 50%;
 }
 

@@ -72,6 +72,14 @@
     background-color: var(--yellow);
 }
 
+.edit-flashcard:hover {
+    background-color: var(--light-yellow);
+}
+
 .delete-flashcard {
     background-color: var(--red);
+}
+
+.delete-flashcard:hover {
+    background-color: var(--light-red);
 }

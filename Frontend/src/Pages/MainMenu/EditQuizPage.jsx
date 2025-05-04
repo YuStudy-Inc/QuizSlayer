@@ -28,7 +28,9 @@ const EditQuizPage = () => {
 
         const fetchQuiz = async () => {
             try {
-                const response = await axios.get(`${URI}quizzes/getQuiz/${quizId}`)
+                const response = await axios.get(`${URI}quizzes/getQuiz/${quizId}`, {
+                    withCredentials: true
+                })
                 if (response.status === 200)
                     setQuizData(response.data.quizzes)
             }
@@ -44,7 +46,9 @@ const EditQuizPage = () => {
 
         const fetchQuestionsFromQuiz = async () => {
             try {
-                const response = await axios.get(`${URI}quizzes/getQuestionsFromQuiz/${quizId}`)
+                const response = await axios.get(`${URI}quizzes/getQuestionsFromQuiz/${quizId}`, {
+                    withCredentials: true
+                })
                 if (response.status === 200)
                     setQuestions(response.data.questions)
             }
@@ -91,10 +95,6 @@ const EditQuizPage = () => {
         const cardsEdited = cardsEditedRef.current;
         const cardsDeleted = cardsDeletedRef.current;
         const cardsAdded = cardsAddedRef.current;
-
-        console.log(cardsEdited)
-        console.log(cardsDeleted)
-        console.log(cardsAdded)
 
         try {
             const quizResponse = await axios.put(`${URI}quizzes/editQuiz/${quizId}`, {
