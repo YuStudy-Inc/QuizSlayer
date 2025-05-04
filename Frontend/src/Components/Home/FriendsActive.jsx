@@ -21,7 +21,7 @@ const FriendsActive = ({ className= "" }) => {
                 setFriends(allActiveFriends.data.friends)
             }
             catch (e) {
-                console.log(e)
+                console.error("error fetching active friends", e)
             }
         }
         fetchActiveFriends()
@@ -34,8 +34,8 @@ const FriendsActive = ({ className= "" }) => {
                 <h1>Active</h1>
                 {friends.length !== 0 ? (
                     <div className="info-on-the-normal">
-                       {friends.map((friend) => (
-                            <FriendCard friendPfp={friend.pfp} friendName={friend.username} />
+                       {friends.map((friend, index) => (
+                            <FriendCard key={index} friendPfp={friend.pfp} friendName={friend.username} isOnHome={true} />
                        ))}
                     </div>
                 ): (
@@ -57,8 +57,8 @@ const FriendsActive = ({ className= "" }) => {
                     
                     {friends.length !== 0 ? (
                         <div className="info-on-the-spread-out">
-                            {friends.map((friend) => (
-                                <FriendCard friendPfp={friend.pfp} friendName={friend.username} />
+                            {friends.map((friend, index) => (
+                                <FriendCard key={index} friendPfp={friend.pfp} friendName={friend.username} />
                             ))}
                         </div>
                     ) : (

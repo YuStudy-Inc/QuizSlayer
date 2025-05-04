@@ -276,8 +276,8 @@ export const getDescription = async(req, res) => {
 export const getActiveFriends = async(req, res) => {
     try {
         const userId = req.params.id
-        const user = await User.findOne({_id: userId })
-        const friends = user.friendsList.filter(friend => friend.isOnline === true)
+        const user = await User.findOne({_id: userId }).populate("friendsList");
+        const friends = user.friendsList.filter(friend => friend.isOnline === true);
         res.status(200).json({friends})
     } catch (e) {
         res.status(500).json({error: 'Error retreiving active friends'})
@@ -288,7 +288,10 @@ export const getActiveFriends = async(req, res) => {
 export const getFriends = async(req, res) => {
     try {
         const userId = req.params.id
-        const user = await User.findOne({_id: userId })
+        const user = await User.findOne({_id: userId }).populate({
+            path: "friendsList",
+            select: "pfp username description selectedCharacter selectedHat selectedWeapon monstersSlain"
+        });
         const friends = user.friendsList
         res.status(200).json({friends})
     } catch (e) {
@@ -415,12 +418,17 @@ export const getFriendRequests = async(req, res) => {
 export const acceptFriendRequest = async(req, res) => {
     try {
         const userId = req.params.id
-        const user = await User.findOne({_id: userId })
+        const user = await User.findById(userId)
 
-        const otherUsername = req.body.username;
-        const acceptingUser = await User.findOne({username: otherUsername});
+        const otherUser = req.body.friendId;
+        const acceptingUser = await User.findById(otherUser);
         if (!user || !acceptingUser){
             res.status(404).json({ message: "User not found" })
+            return;
+        }
+
+        if (user.friendsList.includes(otherUser)) {
+            res.status(400).json({ message: "Already friends with them" })
             return;
         }
 
@@ -440,15 +448,20 @@ export const acceptFriendRequest = async(req, res) => {
 export const rejectFriendRequest = async(req, res) => {
     try {
         const userId = req.params.id
-        const user = await User.findOne({_id: userId })
+        const user = await User.findByid(userId)
 
-        const otherUsername = req.body.username;
-        const rejectingUser = await User.findOne({username: otherUsername});
+        const otherUser = req.body.friendId;
+        const rejectingUser = await User.findById(otherUser);
         if (!user || !rejectingUser){
             res.status(404).json({ message: "User not found" })
             return;
         }
-        //idk if this will work with pop
+
+        if (user.friendsList.includes(otherUser)) {
+            res.status(400).json({ message: "Already friends with them" })
+            return;
+        }
+
         user.friendRequests.pull(rejectingUser._id);
         await user.save()
         res.status(200).json({message: 'Friend request rejected!'})

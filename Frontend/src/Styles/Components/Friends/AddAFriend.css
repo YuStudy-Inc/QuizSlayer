@@ -7,8 +7,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    position: absolute;
-    z-index: 1000;
+    position: absolute;   
+    z-index: 99999; 
 }
 
 .nvm {
@@ -93,6 +93,12 @@
 .type-in-username button img {
     height: 50%;
     aspect-ratio: 1/1;
+}
+
+.yay-friend {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    color: var(--light-green);
 }
 
 .error-friend {

@@ -1,7 +1,7 @@
 .one-friend {
     height: 5rem;
     display: grid;
-    grid-template-columns: 70px minmax(150px,2.3fr) minmax(80px, 0.5fr);
+    grid-template-columns: 70px minmax(150px,2.3fr);
     align-content: center;
     background: transparent;
     border-radius: 10px;
@@ -14,12 +14,18 @@
     border-radius: 50%;
 }
 
-.name, .level {
+.name {
     display: flex;
     align-items: center;
+    height: 100%;
 }
 
-.name h1, .level h1 {
+.name h1 {
     font-size: 1.5rem;
-    color: var(--white);
+    color: #fff;
+}
+
+.black-writing h1 {
+    color: var(--black) !important;
+    height: 100% !important; /* idk why we need this but it somehow aligns it on the home page and keeps it aligned on the friends page */
 }

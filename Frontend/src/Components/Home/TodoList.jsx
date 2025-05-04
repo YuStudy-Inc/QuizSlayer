@@ -32,8 +32,8 @@ const TodoList = ({ className = "" }) => {
                 <h1>Todo</h1>
                 {quizzesToDo.length !== 0 ? (
                     <div className="info-on-the-normal">
-                        {quizzesToDo.map((quiz) => (
-                            <p>{quiz.title}</p>
+                        {quizzesToDo.map((quiz, index) => (
+                            <p key={index}>{quiz.title}</p>
                         ))}
                     </div>
                 ) : (
@@ -53,8 +53,8 @@ const TodoList = ({ className = "" }) => {
                     <h1>Todo</h1>
                         {quizzesToDo.length !== 0 ? (
                         <div className="info-on-the-normal">
-                            {quizzesToDo.map((quiz) => (
-                                <p>{quiz.title}</p>
+                            {quizzesToDo.map((quiz, index) => (
+                                <p key={index}>{quiz.title}</p>
                             ))}
                         </div>
                     ) : (

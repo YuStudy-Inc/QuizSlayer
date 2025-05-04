@@ -31,7 +31,7 @@ const UserSchema = new Schema({
         default: ""
     },
     friendsList: {
-        type: [Schema.Types.ObjectId],
+        type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
         default: []
     },
     friendRequests: {

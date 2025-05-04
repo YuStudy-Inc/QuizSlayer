@@ -31,7 +31,7 @@ const Notifications = () => {
         <>
             <div className="notifications-container">
                 {friendRequestList.map((friendRequest, index) => (
-                    <FriendRequest key={index} friendId={friendRequest._id} incomingFriendPfp={FriendRequest.pfp} incomingFriendName={friendRequest.username} friendRequestList={friendRequestList} setFriendRequestList={setFriendRequestList}/>
+                    <FriendRequest key={index} index={index} friendId={friendRequest._id} incomingFriendPfp={FriendRequest.pfp} incomingFriendName={friendRequest.username} friendRequestList={friendRequestList} setFriendRequestList={setFriendRequestList}/>
                 ))}
             </div>
         </>

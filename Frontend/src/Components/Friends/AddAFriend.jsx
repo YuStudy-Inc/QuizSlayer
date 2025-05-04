@@ -1,23 +1,16 @@
 import "../../Styles/Components/Friends/AddAFriend.css"
 import { useState } from "react"
 import { plus } from "../../assets/Pictures"
-import Alert from "../Alert"
 import axios from "axios"
 
 const URI = import.meta.env.VITE_APP_URI
 const userId = JSON.parse(localStorage.getItem('id'))
 
 const AddAFriend = ({ close }) => {
-    const [friendRequestError, setFriendRequestError] = useState(false)
+    const [friendRequestStatus, setFriendRequestStatus] = useState(false)
+    const [messageForStatus, setMessageForStatus] = useState(false)
+    const [friendFound, setFriendFound] = useState(false)
     const [friendBeingAdded, setFriendBeingAdded] = useState("")
-    const [friendRequestAlert, setFriendRequestAlert] = useState(false)
-    const [friendMessageAlert, setFriendMessageAlert] = useState("")
-
-    const closeEverything = () => {
-        setFriendMessageAlert("")
-        setFriendRequestAlert(false)
-        close()
-    }
 
     const handleChange = (e) => {
         setFriendBeingAdded(e.target.value)
@@ -26,7 +19,9 @@ const AddAFriend = ({ close }) => {
     const getThatFriend = async () => {
         console.log(friendBeingAdded)
         if (friendBeingAdded === "") {
-            setFriendRequestError(true)
+            setMessageForStatus("Please enter a username")
+            setFriendFound(false)
+            setFriendRequestStatus(true)
             return
         }
 
@@ -37,31 +32,28 @@ const AddAFriend = ({ close }) => {
                 withCredentials: true
             })
             if (response.status === 200) {
-                setFriendMessageAlert("Friend Request Sent!")
-                setFriendRequestAlert(true)
-                console.log("friend Request sent")
-            }
-            else if (response.status === 400) {
-                setFriendMessageAlert(response.error)
-                setFriendRequestAlert(true)
-                console.log(response.error)
+                setMessageForStatus("Friend Request Sent")
+                setFriendFound(true)
+                setFriendRequestStatus(true)
             }
         }
         catch (e) {
-            console.error("error sending friend Request", e)
+            const errorMessage = e?.response?.data?.error || "Something went wrong"
+            setMessageForStatus("User not Found")
+            setFriendFound(false)
+            setFriendRequestStatus(true)
+            console.error("error sending friend Request", errorMessage)
         }
     }
-
 
     return(
         <>
             <div className="find-a-friend-overlay">
                 <div className="back-button-overlay">
-                    <button className="nvm" onClick={closeEverything}>
+                    <button className="nvm" onClick={close}>
                         <h1>&lt;</h1>
                     </button>
                 </div>
-                {friendRequestAlert && (<Alert text={friendMessageAlert} buttonOneText="Ok" functionButtonOne={closeEverything}/>)}
                 <div className="find-a-friend-container">
                     <div className="find-a-friend-title">
                         <h1>Find Friend by Username</h1>
@@ -72,7 +64,7 @@ const AddAFriend = ({ close }) => {
                             <img src={plus} alt="" />
                         </button> 
                     </div>
-                    {friendRequestError && (<h1 className="error-friend">Please enter a name</h1>)}
+                    {friendRequestStatus && (<h1 className={`${friendFound ? "yay-friend" : "error-friend"}`}>{messageForStatus}</h1>)}
                 </div>
             </div>
         </>

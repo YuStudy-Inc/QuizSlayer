@@ -4,15 +4,19 @@ import axios from "axios"
 const URI = import.meta.env.VITE_APP_URI
 const userId = JSON.parse(localStorage.getItem('id'))
 
-const FriendRequest = ({ friendId, incomingFriendPfp, incomingFriendName, FriendRequestList }) => {
+const FriendRequest = ({ index, friendId, incomingFriendPfp, incomingFriendName, friendRequestList, setFriendRequestList }) => {
     const accept = async () => {
+        console.log(friendId)
         try {
             const response = await axios.put(`${URI}users/acceptFriendRequest/${userId}`, {
-                username: friendId
+                friendId: friendId
             }, {
                 withCredentials: true
             })
-            if (response.status === 200)
+            if (response.status === 200) {
+                const newFriendRequestList = friendRequestList.indexOf(index)
+                setFriendRequestList(newFriendRequestList)
+            }
                 
         }
         catch (e) {
@@ -23,10 +27,14 @@ const FriendRequest = ({ friendId, incomingFriendPfp, incomingFriendName, Friend
     const reject = async () => {
         try {
             const response = await axios.put(`${URI}users/rejectFriendRequest/${userId}`, {
-                username: friendId
+                friendId: friendId
             }, {
                 withCredentials: true
             })
+            if (response.status === 200) {
+                const newFriendRequestList = friendRequestList.indexOf(index)
+                setFriendRequestList(newFriendRequestList)
+            }
         }
         catch (e) {
             console.error("error rejecting ts friend", e)

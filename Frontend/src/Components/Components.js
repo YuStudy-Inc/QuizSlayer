@@ -7,6 +7,7 @@ import LandingPageDevs from "./LandingPage/LandingPageDevs";
 import LandingPageSpecialThanks from "./LandingPage/LandingPageSpecialThanks";
 import Navbar from "./Navbar";
 import Podium from "./Podium";
+import FriendPodium from "./FriendPodium";
 import TodoList from "./Home/TodoList";
 import Notifications from "./Home/Notifications"
 import FriendRequest from "./Home/FriendRequest"
@@ -32,6 +33,7 @@ export {
     LandingPageSpecialThanks,
     Navbar,
     Podium,
+    FriendPodium,
     TodoList,
     Notifications,
     FriendRequest,
