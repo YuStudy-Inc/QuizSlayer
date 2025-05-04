@@ -15,7 +15,9 @@ const Friends = () => {
     useEffect(() => {
         const fetchFriends = async () => {
             try {
-                const response = await axios.get(`${URI}users/getFriends/${userId}`);
+                const response = await axios.get(`${URI}users/getFriends/${userId}`, {
+                    withCredentials: true
+                });
                 if (response.status === 200)
                     setFriends(response.data.friends)
                 

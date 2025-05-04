@@ -15,7 +15,9 @@ const Quizzes = () => {
 	useEffect(() => {
         const fetchQuizzes = async () => {
             try {
-                const response = await axios.get(`${URI}quizzes/getQuizzes/${userId}`)
+                const response = await axios.get(`${URI}quizzes/getQuizzes/${userId}`, {
+                    withCredentials: true
+                })
 				if (response.status === 200) {
                 	setQuizzes(response.data.quizzes)
 				}

@@ -11,7 +11,9 @@ const Leaderboard = () => {
     useEffect(() => {
         const getLeaderBoard = async () => {
             try {
-                const response = await axios.get(`${URI}users/getTop10`)
+                const response = await axios.get(`${URI}users/getTop10`, {
+                  withCredentials: true
+              })
                 if (response.status === 200)
                     setLeaderBoard(response.data.top10Players)
             }

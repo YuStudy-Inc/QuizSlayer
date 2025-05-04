@@ -17,7 +17,9 @@ const FriendsActive = ({ className= "" }) => {
     useEffect(() => {
         const fetchActiveFriends = async () => {
             try {
-                const allActiveFriends = await axios.get(`${URI}users/getUsersActiveFriends/${userId}`)
+                const allActiveFriends = await axios.get(`${URI}users/getUsersActiveFriends/${userId}`, {
+                    withCredentials: true
+                })
                 setFriends(allActiveFriends.data.friends)
             }
             catch (e) {

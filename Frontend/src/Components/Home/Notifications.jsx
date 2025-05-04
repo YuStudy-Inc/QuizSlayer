@@ -13,7 +13,9 @@ const Notifications = () => {
         const fetchFriendRequests = async () => {
             console.log("finding requests")
             try {
-                const response = await axios.get(`${URI}users/getUsersFriendRequests/${userId}`)
+                const response = await axios.get(`${URI}users/getUsersFriendRequests/${userId}`, {
+                    withCredentials: true
+                })
                 if (response.status === 200) {
                     setFriendRequestList(response.data.friendRequests)
                     console.log(response.data)
