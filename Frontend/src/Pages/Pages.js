@@ -5,6 +5,7 @@ import LandingPage from './LandingPage.jsx';
 import LoadingScreen from "./LoadingScreen.jsx"
 import PageNotFound from "./PageNotFound.jsx";
 import Settings from "./Settings.jsx"
+import GamePage from "./GamePage.jsx"
 
 export {
     LandingPage,
@@ -20,5 +21,6 @@ export {
     Results,
     PageNotFound,
     Settings,
-    LoadingScreen
+    LoadingScreen,
+    GamePage
 }
