@@ -27,7 +27,7 @@ const CreateQuizPage = () => {
 	useEffect(async () => {
 		setBusy(true);
 		try{
-			const response = await axios.get(`${URI}users/getAICreations`)
+			const response = await axios.get(`${URI}users/getAICreations`, {withCredentials:true})
 			setAICreations(response.AICreations);
 
 			if(response.AICreations >= 2) {
