@@ -1,5 +1,7 @@
 import "../../Styles/Pages/MainMenu/CreateQuizPage.css"
 import { plus, download } from "../../assets/Pictures.js";
+import {Ring} from 'ldrs/react';
+import 'ldrs/react/Ring.css';
 import { FlashCard, FlashCardCreationOverlay } from "../../Components/Components.js";
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
@@ -16,6 +18,7 @@ const CreateQuizPage = () => {
 	const [fileName, setFileName] = useState("");
 	const [showCardCreationOverlay, setShowCardCreationOverlay] = useState(false)
 	const [questions, setQuestions] = useState([])
+	const [isBusy, setBusy] = useState(false);
 
 	const navigate = useNavigate()
 
@@ -80,11 +83,41 @@ const CreateQuizPage = () => {
 		document.getElementById("file-upload").click();
 	}
 
+	const sleep = (ms) => new Promise(resolve =>setTimeout(resolve,ms));
 	const handleFileChange = (event) => {
+		setBusy(true);
 		if (event.target.files.length > 0) {
 			console.log("File input event:", event.target.files); // Debugging
 			setFileName(event.target.files[0].name); // Display selected file name
 		}
+
+		const formData = new FormData();
+		formData.append('file', event.target.files[0])
+		axios.post(`${URI}questions/createQuestionsFromPDF`, formData, 
+			{
+				headers: {
+					'Content-Type': 'multipart/form-data'
+				}
+			},
+			{
+				withCredentials: true
+			}
+			).then(async response => {
+			console.log('Success:', response.data)
+			for(const question of response.data.questions) {
+				await sleep(1);
+				const tempId = Date.now()
+				setQuestions((questions) => [...questions, {
+					_id: tempId,
+					questionPrompt: question.question,
+					answer: question.answer, 
+				}])
+			}
+			setBusy(false);
+		})
+		.catch(error => {
+			console.error('Error: ', error);
+		});
 	}
 
 	return (
@@ -124,27 +157,39 @@ const CreateQuizPage = () => {
 								</div>
 							</div>
 							<div className="create-card">
-								<button className="create-card-button" onClick={createCard}>
-									<img src={plus} alt="" />
-								</button>
+								{isBusy ?
+									<div className = "loading-ring">
+										<Ring size ="50" stroke = "6" color = "white"/> 
+									</div>
+									:
+									<button className="create-card-button" onClick={createCard}>
+										<img src = {plus} alt = ""/>
+									</button>
+								}
 							</div>
 						</div>
 						<div className="right-side">
 							<div className="create-ai-title">
 								<h1>Create Using AI</h1>
 							</div>
-							<div className="drop-zone" onClick={handleDropZoneClick}>
-								{/* Display file name or default text */}
-								{fileName ? (<p>`Selected file:${fileName}`</p>) : (<img src={download} />)}
+							{ isBusy ?
+								<div className = "selected-file-zone">
+									{fileName ? (<p>Loading file: `{fileName}`</p>) : (<Ring size ="50" stroke = "6" color = "white"/> )}
+								</div>
+								:
+								<div className="drop-zone" onClick={handleDropZoneClick}>
+									{/* Display file name or default text */}
+									{fileName ? (<p>Selected file: `{fileName}`</p>) : (<img src={download} />)}
 
-								{/* Hidden File Input */}
-								<input
-									type="file"
-									id="file-upload"
-									className="file-input"
-									onChange={handleFileChange}
-								/>
-							</div>
+									{/* Hidden File Input */}
+									<input
+										type="file"
+										id="file-upload"
+										className="file-input"
+										onChange={handleFileChange}
+									/>
+								</div>
+							}	
 						</div>
 					</div>
 				</div>
