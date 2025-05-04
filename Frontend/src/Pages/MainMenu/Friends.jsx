@@ -1,6 +1,6 @@
 import "../../Styles/Pages/MainMenu/Friends.css"
-import { FriendCard, AddAFriend, FriendPodium } from "../../Components/Components.js"
-import { maomao, addUser } from "../../assets/Pictures.js"
+import { FriendCard, AddAFriend, Podium } from "../../Components/Components.js"
+import { addUser } from "../../assets/Pictures.js"
 import { useEffect, useState } from "react"
 import axios from 'axios'
 
@@ -51,7 +51,7 @@ const Friends = () => {
                         <div className="right-side-amigos-for-mobile">
                             <div className="podium-plus-info-for-mobile">
                                 <div className="podium-centerer-friends">
-                                    <FriendPodium character={selectedFriend ? selectedFriend.selectedCharacter : 0} hat={selectedFriend ? selectedFriend.selectedHat : 0} weapon={selectedFriend ? selectedFriend.selectedWeapon : 0} />
+                                    <Podium character={selectedFriend?.selectedCharacter ?? 0} hat={selectedFriend?.selectedHat ?? 0} weapon={selectedFriend?.selectedWeapon ?? 0} />
                                 </div>
                                 <div className="info">
                                     {selectedFriend ? (
@@ -59,7 +59,6 @@ const Friends = () => {
                                             <h1>{selectedFriend.username || "No Name Available"}</h1>
                                             <p>Description: {selectedFriend.description || "No description available."}</p>
                                             <p>Monsters slain: {selectedFriend.monstersSlain || "0"}</p>
-                                            {/* You can add more fields here with fallback texts */}
                                         </>
                                     ) : (
                                         <p>Please select a friend to see their details.</p>
@@ -83,7 +82,7 @@ const Friends = () => {
                     <div className="right-side-amigos">
                         <div className="podium-plus-info">
                             <div className="podium-centerer-friends">
-                            <FriendPodium character={selectedFriend ? selectedFriend.selectedCharacter : 0} hat={selectedFriend ? selectedFriend.selectedHat : 0} weapon={selectedFriend ? selectedFriend.selectedWeapon : 0} />
+                            <Podium character={selectedFriend ? selectedFriend.selectedCharacter : 0} hat={selectedFriend ? selectedFriend.selectedHat : 0} weapon={selectedFriend ? selectedFriend.selectedWeapon : 0} />
                             </div>
                             <div className={`info ${selectedFriend ? "" : "not-selected-info"}`}>
                                 {selectedFriend ? (
@@ -91,7 +90,6 @@ const Friends = () => {
                                         <h1>{selectedFriend.username || "No Name Available"}</h1>
                                         <p>Description: {selectedFriend.description || "No Description"}</p>
                                         <p>Monsters Slain: {selectedFriend.monstersSlain || 0}</p>
-                                        {/* You can add more fields here with fallback texts */}
                                     </>
                                 ) : (
                                     <p>Please select a friend to see their details...</p>
