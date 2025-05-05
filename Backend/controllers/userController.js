@@ -510,15 +510,18 @@ export const updateUsersCoins = async (req, res) => {
     try {
         const userId = req.params.id
 
-        const user = await User.findById(userId)
+        const user = await User.findById(userId).select("coins")
 
         if (!user) {
             res.status(404).json({error: "user doesn't exist"})
             return
         }
+        const balance = req.body.coins
 
-        const newBalance = await user.findOneAndUpdate()
+        const adjust = user.coins + balance
 
+        const newBalance = await user.findOneAndUpdate({ _id: userId }, { coins : adjust })
+        res.status(200).json({coins: newBalance})
     }
     catch (e) {
         res.status(500).json({error: "error fetching user's coins"})
