@@ -306,11 +306,57 @@ export const getInventory = async(req, res) => {
 }
 
 export const addCharacterToList = async (req, res) => {
+    try {
+        const userId = req.params.id
+        const itemWon = req.body.item
+    
+        const user = User.findById(userId).select("characterList")
+        if (!user) {
+            res.status(404).json({ message: "User not found" })
+            return;
+        }
 
+        if (user.characterList.includes(itemWon)) {
+            res.status(403).json({ message: "user already has this item" })
+            return;
+        }
+        user.characterList.push(itemWon)
+        await user.save()
+
+        res.status(200).json({ characterList: user.characterList })
+    }
+    catch (e) {
+        res.status(500).json({ error: "Error updating character list" });
+        console.log(e);
+    }
 }
 
 export const addItemToInventory = async (req, res) => {
+    try {
+        const userId = req.params.id
+        const itemWon = req.body.item
+    
+        const user = User.findById(userId).select("inventory")
+        if (!user) {
+            res.status(404).json({ message: "User not found" })
+            return;
+        }
 
+        if (user.inventory.includes(itemWon)) {
+            res.status(403).json({ message: "user already has this item" })
+            return;
+        }
+
+        user.inventory.push(itemWon)
+        await user.save()
+
+        res.status(200).json({ inventory: user.inventory })
+            
+    }
+    catch (e) {
+        res.status(500).json({ error: "Error updating character list" });
+        console.log(e);
+    }
 }
 
 

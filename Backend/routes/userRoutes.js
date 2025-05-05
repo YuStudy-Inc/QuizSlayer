@@ -2,7 +2,7 @@ import express from 'express';
 import { createUser, loginUser, editUser, editUserPassword, deleteUser, getUser, getUsername, getDescription, 
   getActiveFriends, getFriends, getCharacterList, getInventory, getTop10, 
   getFriendRequests, acceptFriendRequest, rejectFriendRequest, sendFriendRequest, updateSelections,
-  getAICreations, increaseAICreations, getUsersCoins, updateUsersCoins } from '../controllers/userController.js';
+  getAICreations, increaseAICreations, getUsersCoins, updateUsersCoins, addCharacterToList, addItemToInventory } from '../controllers/userController.js';
 
 const router = express.Router();
 router.post('/createUser', createUser);
@@ -27,6 +27,8 @@ router.post('/sendFriendRequest/:id', sendFriendRequest)
 router.post('/updateSelections', updateSelections)
 router.get('/getUsersCoins/:id', getUsersCoins)
 router.put('/updateCoins/:id', updateUsersCoins)
+router.put('/addCharacter/:id', addCharacterToList)
+router.put('/addItem/:id', addItemToInventory)
 
 /* router.get('/getFriends/:id', getFriendsFromUserID) */
 router.get('/', (req, res) => {

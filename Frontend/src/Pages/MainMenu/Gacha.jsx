@@ -10,6 +10,9 @@ import {
     bucketHat, crowCharacter, frogCharacter, capyBaraCharacter, raccoonCharacter, 
     coins, oneStar, twoStar, threeStar, fourStar 
 } from "../../assets/Pictures"
+import HatsEnum from "../../assets/Hats/HatsEnum.js"
+import WeaponsEnum from "../../assets/Weapons/WeaponsEnum.js"
+import CharacterEnum from "../../assets/Characters/CharacterEnum.js"
 
 const URI = import.meta.env.VITE_APP_URI
 const userId = JSON.parse(localStorage.getItem('id'));
@@ -107,7 +110,7 @@ const Gacha = () => {
 
                 //one star = 50, two stars = 75, three = 100 four == 300
                 try {
-                    const characterData = await axios.get(`${URI}users/getCharacters/${userId}`, {
+                    const characterData = await axios.get(`${URI}users/getCharacterList/${userId}`, {
                         withCredentials: true
                     })
                     const inventoryData = await axios.get(`${URI}users/getInventory/${userId}`, {
@@ -142,31 +145,37 @@ const Gacha = () => {
                 }
 
                 if (coinsTextIfTheyAlreadyWonThatItem === null && stars === fourStar) {
-                    try {
-                        const response = await axios.put(`${URI}users/addCharacter/${userId}`, {
-                            character: itemWon
-                        }, {
-                            withCredentials: true
-                        })
-                        if (response.status === 200)
-                            console.log("added new character to User's collection")
-                    }
-                    catch (e) {
-                        console.error("error adding new character to User's collection", e)
+                    const characterEnumKey = lookUpItemFromTheEnums(CharacterEnum, itemWon)
+                    if (characterEnumKey !== undefined) {
+                        try {
+                            const response = await axios.put(`${URI}users/addCharacter/${userId}`, {
+                                character: itemWon
+                            }, {
+                                withCredentials: true
+                            })
+                            if (response.status === 200)
+                                console.log("added new character to User's collection")
+                        }
+                        catch (e) {
+                            console.error("error adding new character to User's collection", e)
+                        }
                     }
                 }
                 else if (coinsTextIfTheyAlreadyWonThatItem === null) {
-                    try {
-                        const response = await axios.put(`${URI}users/addItem/${userId}`, {
-                            item: itemWon
-                        }, {
-                            withCredentials: true
-                        })
-                        if (response.status === 200)
-                            console.log("added new item to User's collection")
-                    }
-                    catch (e) {
-                        console.error("error adding new item to User's collection", e)
+                    let itemEnumKey = lookUpItemFromTheEnums(HatsEnum, itemWon) ?? lookUpItemFromTheEnums(WeaponsEnum, itemWon);
+                    if (itemEnumKey !== undefined) {
+                        try {
+                            const response = await axios.put(`${URI}users/addItem/${userId}`, {
+                                item: itemWon
+                            }, {
+                                withCredentials: true
+                            })
+                            if (response.status === 200)
+                                console.log("added new item to User's collection")
+                        }
+                        catch (e) {
+                            console.error("error adding new item to User's collection", e)
+                        }
                     }
                 }
                 else {
@@ -238,6 +247,10 @@ const Gacha = () => {
         }
         setItemWon(randomItem)
         setItemName(nameOfTheRandomItem)
+    }
+
+    const lookUpItemFromTheEnums = (enumObject, value) => {
+        return Object.keys(enumObject).find(key => enumObject[key] === value)
     }
 
     return(
