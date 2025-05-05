@@ -363,6 +363,31 @@ export const getFriendRequests = async(req, res) => {
     }
 }
 
+export const getAICreations = async(req,res) => {
+    try{
+        const userId = req.session.userID
+        const user = await User.findOne({_id: userId})
+        const aiCreations = user.xp
+        return res.status(200).json({AICreations: aiCreations})
+    } catch(e) {
+        console.log(e);
+        return res.status(500).json({error: 'Error retreiving friends requests'})
+    }
+}
+
+export const increaseAICreations = async(req, res) => {
+    try {
+        const userId = req.session.userID
+        const user = await User.findOne({_id: userId})
+        user.xp = user.xp++
+        user.save();
+        return res.status(200).json({message: 'AICreations increased'})
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({error: 'Error increase AICreations'})
+    }
+}
+
 export const acceptFriendRequest = async(req, res) => {
     try {
         const userId = req.params.id
