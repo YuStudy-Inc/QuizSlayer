@@ -114,11 +114,6 @@ const Gacha = () => {
                         withCredentials: true
                     })
 
-                    if (characterData.status !== 200 || inventoryData.status !== 200) {
-                        console.error("Failed to fetch character or inventory data");
-                        return;
-                    }
-
                     if (characterData.data.includes(itemWon) || inventoryData.data.includes(itemWon)) {
                         switch (stars) {
                             case (oneStar):
