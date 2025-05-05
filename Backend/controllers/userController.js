@@ -509,6 +509,7 @@ export const getUsersCoins = async (req, res) => {
 export const updateUsersCoins = async (req, res) => {
     try {
         const userId = req.params.id
+        const balance = req.body.coins
 
         const user = await User.findById(userId).select("coins")
 
@@ -516,12 +517,10 @@ export const updateUsersCoins = async (req, res) => {
             res.status(404).json({error: "user doesn't exist"})
             return
         }
-        const balance = req.body.coins
 
         const adjust = user.coins + balance
-
-        const newBalance = await user.findOneAndUpdate({ _id: userId }, { coins : adjust })
-        res.status(200).json({coins: newBalance})
+        const updatedUsersCoins = await User.findByIdAndUpdate(userId, { coins : adjust }, { new: true }).select("coins")
+        res.status(200).json({ coins: updatedUsersCoins.coins })
     }
     catch (e) {
         res.status(500).json({error: "error fetching user's coins"})
