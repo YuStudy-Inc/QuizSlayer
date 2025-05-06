@@ -70,8 +70,7 @@ export const createUser = async(req, res) => {
             username,
             email,
             password: hashedPassword,
-            isOneline: true,
-            pfp: "", //pfp string url, save a temp one for now after creation
+            isOneline: true, //got rid of pfp so it uses the default values
             description: "", //description, empty for now (could default to "" in the schema)
             friendsList: [],
             friendRequest: [],
@@ -484,7 +483,7 @@ export const acceptFriendRequest = async(req, res) => {
 export const rejectFriendRequest = async(req, res) => {
     try {
         const userId = req.params.id
-        const user = await User.findByid(userId)
+        const user = await User.findById(userId)
 
         const otherUser = req.body.friendId;
         const rejectingUser = await User.findById(otherUser);
@@ -496,6 +495,10 @@ export const rejectFriendRequest = async(req, res) => {
         if (user.friendsList.includes(otherUser)) {
             res.status(400).json({ message: "Already friends with them" })
             return;
+        }
+
+        if (!user.friendRequests.includes(otherUser)) {
+            return res.status(400).json({ message: "No such friend request exists" });
         }
 
         user.friendRequests.pull(rejectingUser._id);
