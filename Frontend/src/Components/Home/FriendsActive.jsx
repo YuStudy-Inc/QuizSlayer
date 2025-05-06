@@ -27,7 +27,7 @@ const FriendsActive = ({ className= "" }) => {
             }
         }
         fetchActiveFriends()
-    }, [URI, userId])
+    }, [])
 
 
     return (
