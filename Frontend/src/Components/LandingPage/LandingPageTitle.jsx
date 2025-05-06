@@ -43,7 +43,7 @@ const LandingPageTitle = () => {
                     <img className="logo-big" src={logo} alt="logo-for-title" />
                     <div className="button-container-title">
                         <button className="login-button" onClick={() => routeLogin(true)}>Login</button>
-                        <button className="signup-button" onClick={() => setSorryAlert(true)}>Sign Up</button>
+                        <button className="signup-button" onClick={() => routeLogin(false)}>Sign Up</button>
                     </div>
                 </div>
             </div>
