@@ -5,11 +5,11 @@ import UserData from "../UserData";
 const GAME_URI = import.meta.env.VITE_GAME_URI || ''; // Get the game URI from environment variables
 const userId = JSON.parse(localStorage.getItem('id')); // Retrieve user ID from localStorage
 const user = JSON.parse(localStorage.getItem('user'));
-console.log(user);
 const GamePage = () => {
   const character = user.selectedCharacter;
   const weapon = user.selectedWeapon;
   const hat = user.selectedHat;
+  console.log(`${GAME_URI}?sessionId=${userId}&character=${character}&weapon=${weapon}&hat=${hat}`);
   const [showAlert, setShowAlert] = useState(true)
 	const [alertText, setAlertText] = useState('')
   const [gameFinished, setGameFinished] = useState(false);
@@ -50,7 +50,7 @@ const GamePage = () => {
       <div className="game-page-container">
           {!gameFinished && (
         <iframe
-           src={`${GAME_URI}?sessionId=${userId}&character=${character}&weapon=${weapon}&hat=${hat}`}
+           src={`${GAME_URI}?sessionId=68132a4dd2f24155b229d728&character=${character}&weapon=${weapon}&hat=${hat}`}
           style={{ width: "100%", height: "100vh", border: "none" }}
           title="My Game"
         />
