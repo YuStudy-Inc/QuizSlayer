@@ -7,7 +7,6 @@ import { podium } from "../assets/Pictures"
 import { useState, useEffect } from "react"
 
 const Podium = ({character, hat, weapon}) => {
-
     // Set podium to User's selected character/items first
     const [selectedCharacter, setSelectedCharacter] = useState(UserData.getSelectedCharacter());
     const [selectedHat, setSelectedHat] = useState(UserData.getSelectedHat());
@@ -21,14 +20,11 @@ const Podium = ({character, hat, weapon}) => {
 
     useEffect(() => {
         if (!character && !hat && !weapon) {
-            console.log("change to podium")
             updatePodium();
         }
     }, [character, hat, weapon]);
 
     return(
-        /* I guess Ill be drawing the Podium, it will look cooler */
-        /* place holder for now */
         <>
             <div className="the-podium">
                 <img className="weapon-on-podium" src={WeaponsEnum[weapon ?? selectedWeapon]} alt="" />

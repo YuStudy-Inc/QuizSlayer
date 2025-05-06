@@ -34,11 +34,9 @@ const Quizzes = () => {
 		navigate(`/editquiz/${id}`)
 	}
 	const playThatQuiz = async (quizId) =>{
-		console.log(quizId);
 		localStorage.setItem('quizId', quizId);
 	}
 	const deleteThatQuiz = async (quizId) => {
-		console.log(quizId)
 		try {
 			const response = await axios.delete(`${URI}quizzes/deleteQuiz`, {
 				data: { quizId },

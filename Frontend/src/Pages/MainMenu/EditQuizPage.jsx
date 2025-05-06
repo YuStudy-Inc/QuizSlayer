@@ -10,7 +10,6 @@ const URI = import.meta.env.VITE_APP_URI
 const EditQuizPage = () => {
     //I need to find a way to make sure the owner of the quiz can edit it, we don't want people to write to other's quizzes
     const { quizId } = useParams();
-    console.log(quizId)
     const [quizData, setQuizData] = useState({
         title: "",
         description: "",
@@ -119,8 +118,6 @@ const EditQuizPage = () => {
 				...question,
 				quizId: updatedQuizId
 			}))
-
-            console.log(updatedQuestionsWithNewId)
 
             const editedQuestionsResponse = await axios.put(`${URI}questions/editQuestions`, {
                 questions: cardsEdited

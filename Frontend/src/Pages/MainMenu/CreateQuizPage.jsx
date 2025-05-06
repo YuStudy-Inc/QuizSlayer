@@ -71,8 +71,6 @@ const CreateQuizPage = () => {
 				quizId: quizId
 			}))
 
-			console.log(updatedQuestionsWithNewId)
-
             const questionsResponse = await axios.post(`${URI}questions/createQuestions`, {
 				questions: updatedQuestionsWithNewId,
 			},
