@@ -119,30 +119,36 @@ const EditQuizPage = () => {
 				quizId: updatedQuizId
 			}))
 
-            const editedQuestionsResponse = await axios.put(`${URI}questions/editQuestions`, {
-                questions: cardsEdited
-            },
-            {
-                withCredentials: true
-            })
-            if (editedQuestionsResponse.status === 200) {
-                console.log("successfully added edited questions to Quiz")
+            if (Array.isArray(cardsEdited) && cardsEdited.length > 0) {
+                const editedQuestionsResponse = await axios.put(`${URI}questions/editQuestions`, {
+                    questions: cardsEdited
+                },
+                {
+                    withCredentials: true
+                })
+                if (editedQuestionsResponse.status === 200) {
+                    console.log("successfully added edited questions to Quiz")
+                }
             }
-            const deletedQuestionsResponse = await axios.delete(`${URI}questions/deleteQuestions`, {
-                data: { questions: cardsDeleted },
-                withCredentials: true
-            })
-            if (deletedQuestionsResponse.status === 200) {
-                console.log("successfully added edited questions to Quiz")
+            if (Array.isArray(cardsDeleted) && cardsDeleted.length > 0) {
+                const deletedQuestionsResponse = await axios.delete(`${URI}questions/deleteQuestions`, {
+                    data: { questions: cardsDeleted },
+                    withCredentials: true
+                })
+                if (deletedQuestionsResponse.status === 200) {
+                    console.log("successfully added edited questions to Quiz")
+                }
             }
-            const createdQuestionsResponse = await axios.post(`${URI}questions/createQuestions`, {
-                questions: updatedQuestionsWithNewId
-            },
-            {
-                withCredentials: true
-            })
-            if (createdQuestionsResponse.status === 200) {
-                console.log("successfully added edited questions to Quiz")
+            if (Array.isArray(cardsAdded) && cardsAdded.length > 0) {
+                const createdQuestionsResponse = await axios.post(`${URI}questions/createQuestions`, {
+                    questions: updatedQuestionsWithNewId
+                },
+                {
+                    withCredentials: true
+                })
+                if (createdQuestionsResponse.status === 200) {
+                    console.log("successfully added edited questions to Quiz")
+                }
             }
             navigate(-1)
         }
