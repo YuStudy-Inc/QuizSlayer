@@ -20,7 +20,6 @@ const Home = () => {
 
     const navigate = useNavigate()
 
-<<<<<<< HEAD
     useEffect(() => {
         const getUser = async () => {
             try {
@@ -40,7 +39,6 @@ const Home = () => {
         }
         getUser()
     }, [URI, userId])
-=======
     // useEffect(() => {
     //     const getUser = async () => {
     //         try {
@@ -58,7 +56,6 @@ const Home = () => {
     //     }
     //     getUser()
     // }, [URI, userId])
->>>>>>> master
 
     return(
         <>
