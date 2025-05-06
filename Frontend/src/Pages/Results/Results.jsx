@@ -1,11 +1,15 @@
 import "../../Styles/Pages/Results/Results.css"
 import { Podium, ResultCard } from "../../Components/Components"
-
+import { useNavigate } from "react-router-dom"
 
 const Results = ({didWin, }) => {
     const win = "You beat the Quiz!"
     const lose = "Better luck next time..."
     const monstersSlain = localStorage.getItem('results') || 0;
+    const navigate = useNavigate()
+    const goHome =() =>{
+        navigate('/home')
+    }
     console.log("Monsters slain", monstersSlain)
     return(
         <>
@@ -23,7 +27,7 @@ const Results = ({didWin, }) => {
                         </div>
                     </div>
                 </div>
-                <button className="from-results-to-home">Continue</button>
+                <button className="from-results-to-home" onClick={goHome}>Continue</button>
             </div>
         </>
     ) 
