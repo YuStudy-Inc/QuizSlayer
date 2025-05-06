@@ -3,14 +3,8 @@ import { useState, useEffect } from "react"
 import { logo, backgroundFight } from "../../assets/Pictures.js"
 import { LoadingScreen } from "../../Pages/Pages.js"
 import { useNavigate } from "react-router-dom"
-import Alert from "../Alert.jsx"
 
 const LandingPageTitle = () => {
-    //predeployment remove when done
-    const [sorryAlert, setSorryAlert] = useState(false)
-
-
-
     const [isLoaded, setIsLoaded] = useState(false)
     const [isTransitioning, setIsTransitioning] = useState(false)
 
@@ -43,12 +37,9 @@ const LandingPageTitle = () => {
         <>
             {(!isLoaded || isTransitioning) && <LoadingScreen isLoaded={isLoaded} />}
             <LoadingScreen isLoaded={false}/>
-            {/* remove */}
-            {sorryAlert && <Alert text={"Sorry, the game is not ready to play yet ... 5/6/25"} buttonOneText={"Ok"} functionButtonOne={() => {setSorryAlert(false)}} show={true}/>}
             <div className="background-for-title-page">
                 <img id="bg-image" className="moving-background" src={backgroundFight} alt="" />
                 <div className="container-for-the-things-on-the-page">
-                    {/* the logo looks ass rn, imma fix it but that's the rough sketch */}
                     <img className="logo-big" src={logo} alt="logo-for-title" />
                     <div className="button-container-title">
                         <button className="login-button" onClick={() => routeLogin(true)}>Login</button>
