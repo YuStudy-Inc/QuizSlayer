@@ -18,7 +18,7 @@ const Notifications = () => {
                 })
                 if (response.status === 200) {
                     setFriendRequestList(response.data.friendRequests)
-                    console.log(response.data)
+                    console.log(response.data.friendRequests)
                 }
             }
             catch (e) {
@@ -32,7 +32,7 @@ const Notifications = () => {
     return(
         <>
             <div className="notifications-container">
-                {friendRequestList.map((friendRequest, index) => (
+                {Array.isArray(friendRequestList) && friendRequestList.map((friendRequest, index) => (
                     <FriendRequest key={index} index={index} friendId={friendRequest._id} incomingFriendPfp={FriendRequest.pfp} incomingFriendName={friendRequest.username} friendRequestList={friendRequestList} setFriendRequestList={setFriendRequestList}/>
                 ))}
             </div>

@@ -92,13 +92,9 @@
     align-items: center;
     justify-content: center;
     transition: all 0.2s ease-in-out;
-    -webkit-box-shadow: 0px 10px 5px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 10px 5px 0px rgba(0,0,0,0.75);
-    box-shadow: 0px 10px 5px 0px rgba(0,0,0,0.75);
     cursor: pointer;
     writing-mode: vertical-rl;
     text-orientation: upright;
-
 }
 
 .toggle-spread:hover {

@@ -6,8 +6,8 @@ import axios from "axios"
 import { Alert } from "../Components/Components"
 
 const URI = import.meta.env.VITE_APP_URI || '';
-const AWS_BUCKET_NAME = import.meta.env.VITE_APP_AWS_S3_BUCKET_NAME
-const AWS_REGION = import.meta.env.VITE_APP_AWS_REGION
+/* const AWS_BUCKET_NAME = import.meta.env.VITE_APP_AWS_S3_BUCKET_NAME
+const AWS_REGION = import.meta.env.VITE_APP_AWS_REGION */
 
 const Settings = () => {
 	const userId = JSON.parse(localStorage.getItem('id'));
@@ -64,7 +64,7 @@ const Settings = () => {
 
 	//Settings saving
 	const onSaveProfile = async () => {
-		const ImageURL = await uploadPfp();
+		/* const ImageURL = await uploadPfp(); */
 
 		axios({
 			method: "put",
@@ -72,7 +72,6 @@ const Settings = () => {
 			data: {
 				username: username,
 				description: description,
-				pfp: ImageURL
 			},
 			headers: {
 				"Content-Type": "application/json"
@@ -84,7 +83,7 @@ const Settings = () => {
 			setAlertText(response.data.message || "Request successful!");
 			setShowAlert(true);
 			// Update local storage or UI with new user data if needed
-			localStorage.setItem('user', JSON.stringify(response.data));
+			localStorage.setItem('user', JSON.stringify(response.data.user));
 		})
 		.catch((error) => {
 			const response = error.response;
@@ -170,7 +169,7 @@ const Settings = () => {
 		});
 	}
 
-	const uploadPfp = async () => {
+	/* const uploadPfp = async () => {
 		const fileName = profilePic.name
 		const fileType = profilePic.type
 
@@ -194,7 +193,7 @@ const Settings = () => {
 		const imageURL = `https://${AWS_BUCKET_NAME}.s3.${AWS_REGION}.amazonaws.com/${key}`
 		// probably works
 		return imageURL
-	}
+	} */
 
 	return (
 		<>
