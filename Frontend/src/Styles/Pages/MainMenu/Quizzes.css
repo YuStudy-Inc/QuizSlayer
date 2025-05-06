@@ -33,14 +33,14 @@
 }
 
 .quizlist {
-    /* border: 1px solid var(--light-green); */
+   /*  border: 1px solid var(--light-green); */
     position: relative;
     width: 99%;
-    max-height: 73vh;
     display: flex;
     flex-direction: column;
     gap: 1rem;
     overflow-y: auto;
+    max-height: 73vh;
     padding-right: 5px;
 }
 
@@ -57,9 +57,11 @@
     /* border: 1px solid var(--light-green); */
     height: 100%;
     display: flex;
+    flex: 1;
     flex-direction: column;
     gap: 1rem;
     margin-bottom: 1rem;
+    position: relative;
 }
 
 .quiz-progress-titles {
