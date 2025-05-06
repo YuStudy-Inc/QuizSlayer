@@ -21,7 +21,9 @@ const GamePage = () => {
         const data = JSON.parse(event.data);
         const monstersSlainValue = Number(data?.payload?.monstersSlain);
         //Update Quiz
-        axios.put(`${URI}quizes/quizFinished/${quizId}`, {
+        axios.put(`${URI}quizzes/quizFinished/${userId}`, 
+          {
+            quizId: quizId
         }, {
           withCredentials: true,
           headers: {
