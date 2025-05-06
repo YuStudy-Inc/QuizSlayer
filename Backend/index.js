@@ -6,6 +6,7 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import serverless from 'serverless-http';
+import User from './schemas/User.js'
 //import mongoose from 'mongoose';
 //import path from 'path';
 //import { fileURLToPath } from 'url';
@@ -42,8 +43,6 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 const tempClient = await DatabaseConnection(); // Ensure DatabaseConnection is an async function that connects to MongoDB
 
-// dotenv.config();
-
 const sessionStore = MongoStore.create({
   mongoUrl: process.env.MONGODB_URI,
   collectionName: "sessions"
@@ -60,6 +59,25 @@ app.use(session({
     maxAge: 1000 * 60 * 60 * 24 // 1 day
   }
 }));
+
+app.use(async (req, res, next) => {
+  let userId = "";
+  if(req.session && req.session.userID) {
+    userId = req.session.userID;
+  }
+  else if (req.params.id) {
+    userId = req.params.id;
+  }
+
+  if(userId != "") {
+    await User.findOneAndUpdate(
+      { _id: userId },
+      { $set: { lastSeen: Date.now() } },
+      { new: true } // returns updated user object
+    );
+  }
+  next();
+})
 
 app.use("/users", userRoutes)
 app.use("/quizzes", quizRoutes)

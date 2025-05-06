@@ -18,9 +18,9 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
-    isOnline: {
-        type: Boolean,
-        default: false
+    lastSeen: {
+        type: Number,
+        default: 0
     },
     pfp: {
         type: String,
