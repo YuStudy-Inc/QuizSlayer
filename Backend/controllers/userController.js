@@ -24,7 +24,7 @@ const changeActiveStatus = (async (user) => {
 
 export const getUser = async(req, res) => {
     try {
-        const userId = req.params.id;
+        const userId = req.session.userID;
 
         const user = await User.findById(userId);
 
