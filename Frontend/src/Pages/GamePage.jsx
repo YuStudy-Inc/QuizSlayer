@@ -20,11 +20,25 @@ const GamePage = () => {
       try {
         const data = JSON.parse(event.data);
         const monstersSlainValue = Number(data?.payload?.monstersSlain);
+        //Update Quiz
+        axios.put(`${URI}quizes/quizFinished/${quizId}`, {
+        }, {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+        .then((response) => {
+          console.log("Update Success:", response.data);
+        })
+        .catch((error) => {
+          const response = error.response;
+          console.error("Update failed:", response?.data || error.message);
+        });
 
         if (!isNaN(monstersSlainValue)) {
           localStorage.setItem("results", monstersSlainValue);
           setGameFinished(true);
-
           axios.put(`${URI}users/updateMonstersSlain/${userId}`, {
             monstersSlain: monstersSlainValue
           }, {

@@ -128,7 +128,7 @@ export const getFinishedQuizzes = async(req, res) => {
 }
 export const updateFinished = async (req, res) => {
     try {
-        const quizId = req.body.quizId;
+        const quizId = req.params.quizId;
 
         const updatedQuiz = await Quiz.findOneAndUpdate(
             { _id: quizId }, // filter by quiz ID and user ID
