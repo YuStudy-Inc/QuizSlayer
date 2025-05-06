@@ -11,15 +11,16 @@ const userId = JSON.parse(localStorage.getItem('id'))
 
 const Home = () => {
     const [openNotifications, setOpenNotifications] = useState(false)
-    const [userCharacter, setUserCharacter] = useState(1)
-    const [userWeapon, setUserWeapon] = useState(0)
-    const [userHat, setUserHat] = useState(0)
+    // const [userCharacter, setUserCharacter] = UserData ? useState(UserData.getSelectedCharacter()) : useState (1);
+    // const [userWeapon, setUserWeapon] = UserData ? userState(UserData.getSelectedWeapon()) :  useState(0);
+    // const [userHat, setUserHat] = UserData ? userState(UserData.getSelectedWeapon()) :  useState(0);
     const [userPfp, setUserPfp] = useState("")
 
     console.log(userPfp)
 
     const navigate = useNavigate()
 
+<<<<<<< HEAD
     useEffect(() => {
         const getUser = async () => {
             try {
@@ -39,6 +40,25 @@ const Home = () => {
         }
         getUser()
     }, [URI, userId])
+=======
+    // useEffect(() => {
+    //     const getUser = async () => {
+    //         try {
+    //             const user = await axios.get(`${URI}users/getUser/${userId}`, {
+    //                 withCredentials: true
+    //             })
+    //             setUserCharacter(user.data.selectedCharacter)
+    //             setUserWeapon(user.data.selectedWeapon)
+    //             setUserHat(user.data.selectedHat)
+    //             setUserPfp(user.data.pfp)
+    //         }
+    //         catch (e) {
+    //             console.log(e)
+    //         }
+    //     }
+    //     getUser()
+    // }, [URI, userId])
+>>>>>>> master
 
     return(
         <>
@@ -55,7 +75,7 @@ const Home = () => {
                 <div className="home-cards-container">
                     <TodoList className="home-todo-list" />
                     <div className="podium-centerer-home">
-                        <Podium character={userCharacter} hat={userHat} weapon={userWeapon}/>
+                        <Podium character={UserData.getSelectedCharacter()} hat={UserData.getSelectedHat()} weapon={UserData.getSelectedWeapon()}/>
                     </div>
                     <FriendsActive className="home-friends-active" />
                 </div>

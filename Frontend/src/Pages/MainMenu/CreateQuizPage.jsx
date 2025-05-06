@@ -24,19 +24,25 @@ const CreateQuizPage = () => {
 	const [aiCreations, setAICreations] = useState(-1);
 	const [usedMaxCreations, setUsedMaxCreations] = useState(false);
 
-	useEffect(async () => {
-		setBusy(true);
-		try{
-			const response = await axios.get(`${URI}users/getAICreations`)
-			setAICreations(response.AICreations);
+	useEffect(() => {
+		if(isBusy) return;
+		async function initAICreations() {
+			setBusy(true);
+			try{
+				const response = await axios.get(`${URI}users/getAICreations`, 
+					{withCredentials:true}).then(response => {
+						setAICreations(response.data.AICreations);
+						if(response.data.AICreations >= 2) {
+							setUsedMaxCreations(true);
+						}
+					});
 
-			if(response.AICreations >= 2) {
-				setUsedMaxCreations(true);
+			} catch (e) {
+				console.error("couldn't get AI creations", e)
 			}
-		} catch (e) {
-			console.error("couldn't get AI creations", e)
+			setBusy(false);
 		}
-		setBusy(false);
+		initAICreations();
 	}, [aiCreations])
 		
 
@@ -137,13 +143,14 @@ const CreateQuizPage = () => {
 			{
 				headers: {
 					'Content-Type': 'multipart/form-data'
-				}
-			},
-			{
-				withCredentials: true
+				},
+				withCredentials: true,
 			}
 			).then(async response => {
 			console.log('Success:', response.data)
+			if(aiCreations + 1 >= 2) {
+				setUsedMaxCreations(true);
+			}
 			setAICreations(aiCreations + 1);
 			for(const question of response.data.questions) {
 				await sleep(1);
@@ -244,7 +251,7 @@ const CreateQuizPage = () => {
 					usedMaxCreations ? 
 					<Alert 
 						text={`You have used your maximum number of AI Creations for today!`}
-						subtitle={`Remaining creations: ${aiCreations}`}
+						subtitle={`Remaining creations: ${2 - aiCreations}`}
 						buttonOneText={`Okay`}
 						functionButtonOne={declineCreation}
 						show={showAIAlert}
