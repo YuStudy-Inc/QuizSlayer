@@ -10,7 +10,7 @@ router.post('/loginUser', loginUser);
 router.put('/editUser/:id', editUser);
 router.put('/editUser/password/:id', editUserPassword);
 router.delete('/deleteUser/:id', deleteUser);
-router.get('/getUser/:id', getUser);
+router.get('/getUser', getUser);
 router.get('/getUsername/:id', getUsername)
 router.get('/getDescription/:id', getDescription)
 router.get('/getUsersActiveFriends/:id', getActiveFriends)
