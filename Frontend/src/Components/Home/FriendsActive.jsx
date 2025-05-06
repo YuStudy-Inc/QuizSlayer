@@ -58,13 +58,13 @@ const FriendsActive = ({ className= "" }) => {
                     <h1>Active</h1>
                     
                     {friends.length !== 0 ? (
-                        <div className="info-on-the-spread-out info-on-the-friends">
+                        <div className="info-on-the-friends">
                             {friends.map((friend, index) => (
-                                <FriendCard key={index} friendPfp={friend.pfp} friendName={friend.username} />
+                                <FriendCard key={index} friendPfp={friend.pfp} friendName={friend.username} isOnHome={true} />
                             ))}
                         </div>
                     ) : (
-                        <div className="info-on-the-spread-out none">
+                        <div className="none">
                             <p>No Friends Active...</p>
                         </div>
                     )}
