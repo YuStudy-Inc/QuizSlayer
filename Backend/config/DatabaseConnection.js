@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 // Uses path of first file to import (should be server.js)
-// import dotenv from 'dotenv';
-// dotenv.config();
+import dotenv from 'dotenv';
+dotenv.config();
 //dotenv.config({path: 'Backend/.env'});
 
 // const DatabaseConnection = async () => {
