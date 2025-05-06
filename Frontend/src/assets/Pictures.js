@@ -33,6 +33,7 @@ import redBalloon from "../assets/Weapons/redBalloon.png";
 
 import sign404 from "../assets/sign404.png";
 import nothing from "../assets/nothing.png"
+import arrow from "../assets/arrow.png"
 
 import lootBox from "../assets/Collection/lootbox.png";
 import chestClosed from "../assets/Collection/chestClosed.png"
@@ -103,7 +104,8 @@ export {
     battle,
     friends,
     home,
-    quiz
+    quiz,
+    arrow
 }
 
 //bruh im so lazy i had to make chatGPT write this 😭😭😭😭😭
