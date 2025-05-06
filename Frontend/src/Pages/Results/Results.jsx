@@ -2,6 +2,7 @@ import "../../Styles/Pages/Results/Results.css"
 import { Podium, ResultCard } from "../../Components/Components"
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
+import axios from "axios"
 
 const URI = import.meta.env.VITE_APP_URI
 const userId = JSON.parse(localStorage.getItem('id'));
