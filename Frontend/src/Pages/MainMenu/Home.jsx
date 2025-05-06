@@ -16,8 +16,29 @@ const Home = () => {
     // const [userHat, setUserHat] = UserData ? userState(UserData.getSelectedWeapon()) :  useState(0);
     const [userPfp, setUserPfp] = useState("")
 
+    console.log(userPfp)
+
     const navigate = useNavigate()
 
+    useEffect(() => {
+        const getUser = async () => {
+            try {
+                const response = await axios.get(`${URI}users/getUser/${userId}`, {
+                    withCredentials: true
+                })
+                if (response.status === 200) {
+                    setUserCharacter(response.data.user.selectedCharacter)
+                    setUserWeapon(response.data.user.selectedWeapon)
+                    setUserHat(response.data.user.selectedHat)
+                    setUserPfp(response.data.user.pfp)
+                }
+            }
+            catch (e) {
+                console.log(e)
+            }
+        }
+        getUser()
+    }, [URI, userId])
     // useEffect(() => {
     //     const getUser = async () => {
     //         try {

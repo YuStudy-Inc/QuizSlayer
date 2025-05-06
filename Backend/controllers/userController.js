@@ -24,7 +24,7 @@ const changeActiveStatus = (async (user) => {
 
 export const getUser = async(req, res) => {
     try {
-        const userId = req.session.userID;
+        const userId = req.params.id;
 
         const user = await User.findById(userId);
 
@@ -305,6 +305,65 @@ export const getInventory = async(req, res) => {
     }
 }
 
+export const addCharacterToList = async (req, res) => {
+    try {
+        const userId = req.params.id
+        const itemWon = req.body.character
+    
+        const user = await User.findById(userId).select("characterList")
+        if (!user) {
+            res.status(404).json({ message: "User not found" })
+            return;
+        }
+
+        if (user.characterList.includes(itemWon)) {
+            res.status(403).json({ message: "user already has this item" })
+            return;
+        }
+        user.characterList.push(itemWon)
+        await user.save()
+
+        res.status(200).json({ characterList: user.characterList })
+    }
+    catch (e) {
+        res.status(500).json({ error: "Error updating character list" });
+        console.log(e);
+    }
+}
+
+export const addItemToInventory = async (req, res) => {
+    try {
+        const userId = req.params.id
+        const itemWon = req.body.item
+    
+        const user = await User.findById(userId).select("inventory")
+        if (!user) {
+            res.status(404).json({ message: "User not found" })
+            return;
+        }
+        console.log(user.inventory)
+
+        if (user.inventory.includes(itemWon)) {
+            res.status(403).json({ message: "user already has this item" })
+            return;
+        }
+
+        user.inventory.push(itemWon)
+        await user.save()
+
+        res.status(200).json({ inventory: user.inventory })
+            
+    }
+    catch (e) {
+        res.status(500).json({ error: "Error updating character list" });
+        console.log(e);
+    }
+}
+
+
+
+
+
 export const updateSelections = async (req, res) => {
     try {
         const userId = req.session.userID;
@@ -469,10 +528,48 @@ export const sendFriendRequest = async(req, res) => {
             return;
         }
         requestUser.friendRequests.push(user._id);
-       await requestUser.save();
+        await requestUser.save();
         res.status(200).json({message: 'Friend request sent!'})
     } catch (e) {
         res.status(500).json({error: 'Error sending friend request'})
         console.log(e)
+    }
+}
+
+export const getUsersCoins = async (req, res) => {
+    try {
+        const userId = req.params.id
+
+        const user = await User.findById(userId).select("coins")
+        
+        if (!user) {
+            res.status(404).json({error: "user doesn't exist"})
+            return
+        }
+        res.status(200).json({coins: user.coins})
+    }
+    catch (e) {
+        res.status(500).json({error: "error fetching user's coins"})
+    }
+}   
+
+export const updateUsersCoins = async (req, res) => {
+    try {
+        const userId = req.params.id
+        const balance = req.body.coins
+
+        const user = await User.findById(userId).select("coins")
+
+        if (!user) {
+            res.status(404).json({error: "user doesn't exist"})
+            return
+        }
+
+        const adjust = user.coins + balance
+        const updatedUsersCoins = await User.findByIdAndUpdate(userId, { coins : adjust }, { new: true }).select("coins")
+        res.status(200).json({ coins: updatedUsersCoins.coins })
+    }
+    catch (e) {
+        res.status(500).json({error: "error fetching user's coins"})
     }
 }

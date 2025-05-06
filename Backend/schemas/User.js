@@ -24,7 +24,7 @@ const UserSchema = new Schema({
     },
     pfp: {
         type: String,
-        default: "https://profile-pictures-for-quizslayer.s3.us-east-1.amazonaws.com/duckDefault.png"
+        default: "https://profile-pictures-for-quizslayer.s3.us-east-1.amazonaws.com/newUser/duckDefault.png"
     },
     description: {
         type: String,
