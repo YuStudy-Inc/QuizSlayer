@@ -308,9 +308,9 @@ export const getInventory = async(req, res) => {
 export const addCharacterToList = async (req, res) => {
     try {
         const userId = req.params.id
-        const itemWon = req.body.item
+        const itemWon = req.body.character
     
-        const user = User.findById(userId).select("characterList")
+        const user = await User.findById(userId).select("characterList")
         if (!user) {
             res.status(404).json({ message: "User not found" })
             return;
@@ -336,11 +336,12 @@ export const addItemToInventory = async (req, res) => {
         const userId = req.params.id
         const itemWon = req.body.item
     
-        const user = User.findById(userId).select("inventory")
+        const user = await User.findById(userId).select("inventory")
         if (!user) {
             res.status(404).json({ message: "User not found" })
             return;
         }
+        console.log(user.inventory)
 
         if (user.inventory.includes(itemWon)) {
             res.status(403).json({ message: "user already has this item" })

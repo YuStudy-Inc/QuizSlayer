@@ -59,6 +59,8 @@ const Gacha = () => {
     
 
     const [usersCoins, setUsersCoins] = useState(0)
+    const [usersCharacterList, setUsersCharacterList] = useState([])
+    const [usersInventory, setUsersInventory] = useState([])
     const [gachaAnimation, setGachaAnimation] = useState(false)
     const [alertForInsufficientFunds, setAlertForInsufficientFunds] = useState(false)
     const [isChestOpen, setIsChestOpen] = useState(false)
@@ -106,7 +108,11 @@ const Gacha = () => {
                 if (response.status === 200)
                     console.log("purchase loot box successful")
                 
-                theGamblingAlgorithm()
+                const { randomItem, nameOfTheRandomItem, whichStar } = theGamblingAlgorithm()
+                setItemWon(randomItem)
+                setItemName(nameOfTheRandomItem)
+                setStars(whichStar)
+                console.log("item won", randomItem)
 
                 //one star = 50, two stars = 75, three = 100 four == 300
                 try {
@@ -116,40 +122,50 @@ const Gacha = () => {
                     const inventoryData = await axios.get(`${URI}users/getInventory/${userId}`, {
                         withCredentials: true
                     })
-
-                    if (characterData.data.includes(itemWon) || inventoryData.data.includes(itemWon)) {
-                        switch (stars) {
-                            case (oneStar):
-                                coinsIfTheyAlreadyWonThatItem = 50
-                                setCoinsTextIfTheyAlreadyWonThatItem("50 Coins")
-                                break
-                            case (twoStar):
-                                coinsIfTheyAlreadyWonThatItem = 75
-                                setCoinsTextIfTheyAlreadyWonThatItem("75 Coins")
-                                break
-                            case (threeStar):
-                                coinsIfTheyAlreadyWonThatItem = 100
-                                setCoinsTextIfTheyAlreadyWonThatItem("100 Coins")
-                                break
-                            case (fourStar):
-                                coinsIfTheyAlreadyWonThatItem = 300
-                                setCoinsTextIfTheyAlreadyWonThatItem("300 Coins")
-                                break
-                            default:
-                                setCoinsTextIfTheyAlreadyWonThatItem(null)
-                        }
-                    }
+                    setUsersCharacterList(characterData.data.characterList)
+                    setUsersInventory(inventoryData.data.inventory)
+                    console.log(characterData.data.characterList)
+                    console.log(inventoryData.data.inventory)
                 }
                 catch (e) {
                     console.error("failed to fetch the player's inventory")
                 }
 
-                if (coinsTextIfTheyAlreadyWonThatItem === null && stars === fourStar) {
-                    const characterEnumKey = lookUpItemFromTheEnums(CharacterEnum, itemWon)
+                console.log("item won", randomItem)
+                
+                if (usersCharacterList.includes(randomItem) || usersInventory.includes(randomItem)) {
+                    switch (whichStar) {
+                        case (oneStar):
+                            coinsIfTheyAlreadyWonThatItem = 50
+                            setCoinsTextIfTheyAlreadyWonThatItem("50 Coins")
+                            break
+                        case (twoStar):
+                            coinsIfTheyAlreadyWonThatItem = 75
+                            setCoinsTextIfTheyAlreadyWonThatItem("75 Coins")
+                            break
+                        case (threeStar):
+                            coinsIfTheyAlreadyWonThatItem = 100
+                            setCoinsTextIfTheyAlreadyWonThatItem("100 Coins")
+                            break
+                        case (fourStar):
+                            coinsIfTheyAlreadyWonThatItem = 300
+                            setCoinsTextIfTheyAlreadyWonThatItem("300 Coins")
+                            break
+                        default:
+                            setCoinsTextIfTheyAlreadyWonThatItem(null)
+                    }
+                    console.log("users coins because they already had the item", coinsIfTheyAlreadyWonThatItem)
+                }
+                console.log("item won", randomItem)
+
+                if (coinsTextIfTheyAlreadyWonThatItem === null && whichStar === fourStar) {
+                    console.log("it was a character", randomItem)
+                    const characterEnumKey = lookUpItemFromTheEnums(CharacterEnum, randomItem)
+                    console.log(characterEnumKey)
                     if (characterEnumKey !== undefined) {
                         try {
                             const response = await axios.put(`${URI}users/addCharacter/${userId}`, {
-                                character: itemWon
+                                character: characterEnumKey
                             }, {
                                 withCredentials: true
                             })
@@ -161,12 +177,14 @@ const Gacha = () => {
                         }
                     }
                 }
-                else if (coinsTextIfTheyAlreadyWonThatItem === null) {
-                    let itemEnumKey = lookUpItemFromTheEnums(HatsEnum, itemWon) ?? lookUpItemFromTheEnums(WeaponsEnum, itemWon);
+                else if (coinsTextIfTheyAlreadyWonThatItem === null && (whichStar === threeStar || whichStar === twoStar)) {
+                    console.log("it was a item", randomItem)
+                    let itemEnumKey = lookUpItemFromTheEnums(HatsEnum, randomItem) ?? lookUpItemFromTheEnums(WeaponsEnum, randomItem);
+                    console.log(itemEnumKey)
                     if (itemEnumKey !== undefined) {
                         try {
                             const response = await axios.put(`${URI}users/addItem/${userId}`, {
-                                item: itemWon
+                                item: itemEnumKey
                             }, {
                                 withCredentials: true
                             })
@@ -178,10 +196,26 @@ const Gacha = () => {
                         }
                     }
                 }
-                else {
+                else if (whichStar === oneStar) {
+                    console.log("it was just coins", randomItem)
                     try {
                         const response = await axios.put(`${URI}users/updateCoins/${userId}`, {
-                            coins: coinsIfTheyAlreadyWonThatItem
+                            coins: 50
+                        }, {
+                            withCredentials: true
+                        })
+                        if (response.status === 200)
+                            console.log("updated user's balance")
+                    }
+                    catch (e) {
+                        console.error("error updating user's balance", e)
+                    }
+                }
+                else {
+                    console.log("it was just coins", randomItem)
+                    try {
+                        const response = await axios.put(`${URI}users/updateCoins/${userId}`, {
+                            coins: 50
                         }, {
                             withCredentials: true
                         })
@@ -214,39 +248,39 @@ const Gacha = () => {
         let place
         let randomItem
         let nameOfTheRandomItem
+        let whichStar
         switch (random) {
             case (1):
-                setStars(oneStar)
+                whichStar = oneStar
                 place = Math.floor(Math.random() * oneStarItems.length)
                 randomItem = oneStarItems[place]
                 nameOfTheRandomItem = oneStarItemNames[place]
                 break
             case (2):
-                setStars(twoStar)
+                whichStar = twoStar
                 place = Math.floor(Math.random() * twoStarItems.length)
                 randomItem = twoStarItems[place]
                 nameOfTheRandomItem = twoStarItemNames[place]
                 break
             case (3):
-                setStars(threeStar)
+                whichStar = threeStar
                 place = Math.floor(Math.random() * threeStarItems.length)
                 randomItem = threeStarItems[place]
                 nameOfTheRandomItem = threeStarItemNames[place]
                 break
             case (4):
-                setStars(fourStar)
+                whichStar = fourStar
                 place = Math.floor(Math.random() * fourStarItems.length)
                 randomItem = fourStarItems[place]
                 nameOfTheRandomItem = fourStarItemNames[place]
                 break
             default:
-                setStars(oneStar)
+                whichStar = oneStar
                 place = Math.floor(Math.random() * oneStarItems.length)
                 randomItem = oneStarItems[place]
                 nameOfTheRandomItem = oneStarItemNames[place]
         }
-        setItemWon(randomItem)
-        setItemName(nameOfTheRandomItem)
+        return { randomItem, nameOfTheRandomItem, whichStar }
     }
 
     const lookUpItemFromTheEnums = (enumObject, value) => {
