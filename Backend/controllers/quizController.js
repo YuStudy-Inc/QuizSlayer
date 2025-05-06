@@ -128,13 +128,15 @@ export const getFinishedQuizzes = async(req, res) => {
 }
 export const updateFinished = async (req, res) => {
     try {
-        const quizId = req.params.quizId;
+        const userId = req.params.id;
+        const quizId = req.body.quizId;
 
         const updatedQuiz = await Quiz.findOneAndUpdate(
-            { _id: quizId }, // filter by quiz ID and user ID
-            { $set: { completed: true } },    // update `completed` to true
-            { new: true }                     // return the updated document
-        );
+            { _id: quizId, user: userId },
+            { $set: { completed: true } },
+            { new: true }
+          );
+          console.log(updatedQuiz);
         if (!updatedQuiz) {
             return res.status(404).json({ error: 'Quiz not found or does not belong to the user' });
         }
