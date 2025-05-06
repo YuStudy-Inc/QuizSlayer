@@ -5,7 +5,8 @@ import { Podium, ResultCard } from "../../Components/Components"
 const Results = ({didWin, }) => {
     const win = "You beat the Quiz!"
     const lose = "Better luck next time..."
-    const monstersSlain = localStorage.getItem('score') || 0;
+    const monstersSlain = localStorage.getItem('results') || 0;
+    console.log("Monsters slain", monstersSlain)
     return(
         <>
             <div className="results-container">

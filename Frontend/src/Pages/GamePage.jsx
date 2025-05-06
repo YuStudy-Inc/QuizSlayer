@@ -14,56 +14,39 @@ const GamePage = () => {
   const weapon = user.selectedWeapon;
   const hat = user.selectedHat;
   const userId = JSON.parse(localStorage.getItem('id'));
-  console.log(`${GAME_URI}?sessionId=${quizId}&character=${character}&weapon=${weapon}&hat=${hat}`);
-  const [showAlert, setShowAlert] = useState(true)
-	const [alertText, setAlertText] = useState('')
   const [gameFinished, setGameFinished] = useState(false);
-  const closeAlert = () => {
-		setShowAlert(false);
-	};
-
-  const [score, setScore] = useState(null);
   useEffect(() => {
     function handleMessage(event) {
       try {
         const data = JSON.parse(event.data);
-        setScore(data.payload.monstersSlain);
-        // setAlertText("Monsters Slain: ", score);
-        localStorage.setItem('results',score )
-        setShowAlert(true);
-        setGameFinished(true);
-        axios({
-          method: "put",
-          url: `${URI}users/updateMonstersSlain/${userId}`,
-          data: {
-            "monsterSlain": score
-          },
-          headers: {
-            "Content-Type": "application/json"
-          }
-        })
-        .then((response) => {
-          console.log("Update Success:", response.data);
- 
-          // Update local storage or UI with new user data if needed
-          localStorage.setItem('user', JSON.stringify(response.data));
-        })
-        .catch((error) => {
-          const response = error.response;
-          // alert("It did not work")
-          if (response) {
-            console.log(response.data);
-            console.log(response.status);
-            console.log(response.headers);
-          } else if (error.request) {
-            console.log(error.request);
-          } else {
-            console.log("Error", error.message);
-          }
-        });
-        navigate('/results'); 
+        const monstersSlainValue = Number(data?.payload?.monstersSlain);
 
-        // console.log("Data: ", data.payload.monstersSlain);
+        if (!isNaN(monstersSlainValue)) {
+          localStorage.setItem("results", monstersSlainValue);
+          setGameFinished(true);
+
+          axios.put(`${URI}users/updateMonstersSlain/${userId}`, {
+            monstersSlain: monstersSlainValue
+          }, {
+            withCredentials: true,
+            headers: {
+              "Content-Type": "application/json"
+            }
+          })
+          .then((response) => {
+            console.log("Update Success:", response.data);
+            localStorage.setItem("user", JSON.stringify(response.data));
+          })
+          .catch((error) => {
+            const response = error.response;
+            console.error("Update failed:", response?.data || error.message);
+          });
+
+          navigate("/results");
+        } else {
+          console.error("Invalid monstersSlain value received:", data?.payload?.monstersSlain);
+        }
+
       } catch (err) {
         console.warn("Invalid message received:", event.data);
       }
@@ -73,17 +56,10 @@ const GamePage = () => {
     return () => {
       window.removeEventListener("message", handleMessage);
     };
-  }, []);
+  }, [URI, userId, navigate]);
 
   return (
     <>
-    	{showAlert && (
-				<Alert
-					text={alertText}
-					buttonOneText="OK"
-					functionButtonOne={closeAlert}
-				/>
-			)}
       <div className="game-page-container">
           {!gameFinished && (
         <iframe
