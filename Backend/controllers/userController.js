@@ -21,7 +21,6 @@ const passwordMatch = (async(passwordFromUser, savedPasswordFromDB) => {
 //     const active = user.isOnline;
 //     return await User.findOneAndUpdate({ username: user.username }, { isOnline: !active })
 // })
-
 export const getUser = async(req, res) => {
     try {
         const userId = req.session.userID;
@@ -576,5 +575,23 @@ export const updateUsersCoins = async (req, res) => {
     }
     catch (e) {
         res.status(500).json({error: "error fetching user's coins"})
+    }
+}
+export const updateUserMonstersSlain = async(req, res) =>{
+    try{
+        const userId = req.params.id;
+        const monstersSlain = req.body.monstersSlain;
+        const user = await User.findById(userId).select("monstersSlain");
+        if (!user) {
+            res.status(404).json({error: "user doesn't exist"})
+            return
+        }
+        const adjust = user.monstersSlain + monstersSlain;
+        const updatedUsers = await User.findByIdAndUpdate(userId, { monstersSlain : adjust }, { new: true }).select("monstersSlain")
+        await updatedUsers.save();
+        res.status(200).json({ monstersSlain: updatedUsers.monstersSlain })
+    }
+    catch(e){
+        res.status(500).json({error: "error updating user's monsters slain"});
     }
 }
