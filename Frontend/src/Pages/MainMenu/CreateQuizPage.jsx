@@ -251,7 +251,7 @@ const CreateQuizPage = () => {
 					usedMaxCreations ? 
 					<Alert 
 						text={`You have used your maximum number of AI Creations for today!`}
-						subtitle={`Remaining creations: ${aiCreations}`}
+						subtitle={`Remaining creations: ${2 - aiCreations}`}
 						buttonOneText={`Okay`}
 						functionButtonOne={declineCreation}
 						show={showAIAlert}
