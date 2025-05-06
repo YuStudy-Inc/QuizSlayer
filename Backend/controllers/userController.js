@@ -17,21 +17,20 @@ const passwordMatch = (async(passwordFromUser, savedPasswordFromDB) => {
     return await bcrypt.compare(passwordFromUser, savedPasswordFromDB)
 })
 
-const changeActiveStatus = (async (user) => {
-    const active = user.isOnline;
-    return await User.findOneAndUpdate({ username: user.username }, { isOnline: !active })
-})
+// const changeActiveStatus = (async (user) => {
+//     const active = user.isOnline;
+//     return await User.findOneAndUpdate({ username: user.username }, { isOnline: !active })
+// })
 
 export const getUser = async(req, res) => {
     try {
         const userId = req.session.userID;
 
         const user = await User.findById(userId);
-
         if(!user) {
             return res.status(404).json({ error: "User not found" });
         }
-
+        // console.log(user);
         return res.status(200).json({ 
             message: "User found",
             user: user
@@ -114,7 +113,7 @@ export const loginUser = async(req, res) => {
         if (!passwordValidated)
             return res.status(400).json({ message: "Invalid Password" })
         
-        await changeActiveStatus(user)
+        // await changeActiveStatus(user)
 
         req.session.userID = user._id;
 
@@ -258,7 +257,13 @@ export const getActiveFriends = async(req, res) => {
     try {
         const userId = req.params.id
         const user = await User.findOne({_id: userId }).populate("friendsList");
-        const friends = user.friendsList.filter(friend => friend.isOnline === true);
+        // const friends = user.friendsList.filter(friend => friend.isOnline === true);
+        console.log(user.friendsList.length)
+        console.log("Current date: " + Date.now());
+        // user.friendsList.filter(friend => console.log(friend.lastSeen + " < " + (Date.now() - 1000 * 60 * 2)));
+
+        const friends = user.friendsList.filter(friend => friend.lastSeen > Date.now() - 1000 * 60 * 2); // Check if friend was online less than 2 min ago
+
         res.status(200).json({friends})
     } catch (e) {
         res.status(500).json({error: 'Error retreiving active friends'})
