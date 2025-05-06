@@ -36,7 +36,7 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: end;
+    align-items: center;
 }
 
 .container-for-podium-results-page {
@@ -48,8 +48,8 @@
 }
 
 .container-for-result-card {
-    height: 80%;
-    width: 55%;
+    height: 40%;
+    width: 50%;
     display: flex;
     align-items: center;
     margin-bottom: 5%;

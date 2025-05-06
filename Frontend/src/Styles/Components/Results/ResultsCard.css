@@ -40,31 +40,5 @@
     font-size: 1.4rem;
 }
 
-.progress-bar {
-    height: auto;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.full-bar {
-    width: 100%;
-    height: 20px;
-    background-color: var(--black);
-    border-radius: 20px;
-    margin-top: 10%;
-}
-
-.actual-bar {
-    z-index: 10;
-    position: absolute;
-    /* pass it from the game */
-    /* this is scuffed rn, 100% width goes outside the full bar for some reason */
-    height: 20px;
-    border-radius: 20px;
-    width: 10%;
-    background-color: var(--light-green) !important;
-}
 
 

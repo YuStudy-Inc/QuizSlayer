@@ -1,6 +1,6 @@
 import "../../Styles/Components/Results/ResultsCard.css"
 
-const ResultCard = ({ didWin, coins, monsters, xp, lvl }) => {
+const ResultCard = ({ didWin, coins, monsters }) => {
     return (
         <>
             <div className="results-card-container">
@@ -11,16 +11,6 @@ const ResultCard = ({ didWin, coins, monsters, xp, lvl }) => {
                         <p className="right-results">{coins}</p>
                         <p className="left-results">Monsters Slain</p>
                         <p className="right-results">{monsters}</p>
-                        <p className="left-results">XP Received</p>
-                        <p className="right-results">{xp}</p>
-                    </div>
-                    <div className="progress-bar">
-                        <div className="full-bar">
-                            <div className="actual-bar"></div>
-                        </div>
-                        <div className="level">
-                            <h1>lv. {lvl}</h1>
-                        </div>
                     </div>
                 </div>
             </div>
