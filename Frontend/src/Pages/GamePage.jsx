@@ -93,11 +93,6 @@ const GamePage = () => {
         />
   )}
       </div>
-      {/* {score !== null && (
-        <div className="score-display">
-          🎉 Final Score: {score}
-        </div>
-      )} */}
     </>
   );
 };
