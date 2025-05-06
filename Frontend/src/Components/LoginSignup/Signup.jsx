@@ -182,7 +182,6 @@ const Signup = ({ onToggle }) => {
                             <p className="error-text" hidden={matching}>* Passwords do not match</p>
                         </div>
                         <input type="submit" className="submit-button" id="signup" value="Sign Up" disabled={validating}></input>
-                        <button className="submit-button" id="signup" onClick={() => {setSorryAlert(true)}}>Sign Up</button>
                     </form>
                     <span className="to-login-arrow login-signup-arrow" onClick={handleClick}>
                         <h1>&lt;</h1>
