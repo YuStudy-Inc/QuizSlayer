@@ -56,11 +56,14 @@ export const deleteQuiz = async(req, res) => {
         const quizId = req.body.quizId
         console.log(quizId)
 
+        await Question.deleteMany({ quizId: quizId })
+
         const deletedQuiz = await Quiz.findByIdAndDelete(quizId);
         if (!deletedQuiz) {
             res.status(500).json({error: "Quiz was not found"})
             return;
         }
+
         res.status(200).json({message: 'Quiz deleted successfullly' }) 
     }
     catch(err){
