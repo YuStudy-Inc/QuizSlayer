@@ -27,7 +27,7 @@ const FriendsActive = ({ className= "" }) => {
             }
         }
         fetchActiveFriends()
-    }, [URI, userId])
+    }, [])
 
 
     return (
@@ -35,7 +35,7 @@ const FriendsActive = ({ className= "" }) => {
             <div className={`friends-active-container ${className}`}>
                 <h1>Active</h1>
                 {friends.length !== 0 ? (
-                    <div className="info-on-the-normal">
+                    <div className="info-on-the-friends">
                        {friends.map((friend, index) => (
                             <FriendCard key={index} friendPfp={friend.pfp} friendName={friend.username} isOnHome={true} />
                        ))}
@@ -58,7 +58,7 @@ const FriendsActive = ({ className= "" }) => {
                     <h1>Active</h1>
                     
                     {friends.length !== 0 ? (
-                        <div className="info-on-the-spread-out">
+                        <div className="info-on-the-spread-out info-on-the-friends">
                             {friends.map((friend, index) => (
                                 <FriendCard key={index} friendPfp={friend.pfp} friendName={friend.username} />
                             ))}

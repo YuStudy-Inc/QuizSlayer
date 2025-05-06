@@ -5,9 +5,6 @@ import Password from "./Password";
 import Email from "./Email"
 import "../../Styles/Pages/LoginSignup/LoginSignup.css"
 import UserData from "../../UserData";
-
-import Alert from "../Alert";
-
 import axios from "axios";
 
 const endpointUri = import.meta.env.VITE_APP_URI;
@@ -29,9 +26,6 @@ const Signup = ({ onToggle }) => {
     const [validated, setValidated] = useState(true);
     const [validating, setValidating] = useState(false);
     const validatingRef = useRef(false);
-
-    //predeployment remove when done
-    const [sorryAlert, setSorryAlert] = useState(false)
 
     const navigate = useNavigate();
     const routeHome = () => {
@@ -173,8 +167,6 @@ const Signup = ({ onToggle }) => {
     return (
         <>
             <div className="login-signup-container if-sign-up">
-                {/* remove */}
-            {sorryAlert && <Alert text={"Sorry, the game is not ready to play yet ... 5/6/25"} buttonOneText={"Ok"} functionButtonOne={() => {setSorryAlert(false)}} show={true}/>}
                 <div className="login-signup-box">
                     <h1 className="welcome-text">HELP WANTED</h1>
                     <form onSubmit={handleSubmit}>
@@ -189,8 +181,7 @@ const Signup = ({ onToggle }) => {
                             <p className="error-text" hidden={validPassword}>Password must be: <br/> * At least 9 characters <br/> * Includes at least one uppercase letter <br/> * Includes a number <br/> * Includes a special character (@$!%*?&_.)</p>
                             <p className="error-text" hidden={matching}>* Passwords do not match</p>
                         </div>
-                        {/* <input type="submit" className="submit-button" id="signup" value="Sign Up" disabled={validating}></input> */}
-                        <button className="submit-button" id="signup" onClick={() => {setSorryAlert(true)}}>Sign Up</button>
+                        <input type="submit" className="submit-button" id="signup" value="Sign Up" disabled={validating}></input>
                     </form>
                     <span className="to-login-arrow login-signup-arrow" onClick={handleClick}>
                         <h1>&lt;</h1>

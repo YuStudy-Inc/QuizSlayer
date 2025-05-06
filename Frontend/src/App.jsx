@@ -1,5 +1,5 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-import { LandingPage, Home, Collection, Gacha, LoginSignup, Quizzes, Results, CreateQuizPage, EditQuizPage, Friends, Leaderboard, Settings, PageNotFound, GamePage} from "./Pages/Pages";
+import { LandingPage, Home, Collection, Gacha, LoginSignup, Quizzes, Results, ViewQuizPage, CreateQuizPage, EditQuizPage, Friends, Leaderboard, Settings, PageNotFound, GamePage} from "./Pages/Pages";
 import { Navbar } from './Components/Components'
 import AuthenticateUserRoute from "./Components/AuthenticateUserRoute";
 
@@ -19,13 +19,14 @@ function App() {
 							<Route path='/quizzes' element={<Quizzes />}/>
 							<Route path='/leaderboard' element={<Leaderboard />}/>
 						</Route>
+						<Route path='/gamePage' element={<GamePage />}/>
 						<Route path='/createquiz' element={<CreateQuizPage />}/>
-						<Route path='/editquiz/:id' element={<EditQuizPage />}/>
+						<Route path='/quizzes/:quizId' element={<ViewQuizPage />}/>
+						<Route path='/editquiz/:quizId' element={<EditQuizPage />}/>
 						<Route path='/gacha' element={<Gacha />}/>
 						<Route path='/results' element={<Results />}/>
 						<Route path='/settings' element={<Settings />}/>
 						<Route path="*" element={<PageNotFound />}/>
-						<Route path='/gamePage' element={<GamePage />}/>
 					</Route>
 				</Routes>
 			</BrowserRouter>

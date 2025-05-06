@@ -120,7 +120,7 @@ const Login = ({onToggle}) => {
 
     const setEmail = (email) => {
         setFormData(previousState => {
-            return { ...previousState, email: email}
+            return { ...previousState, email: email.toLowerCase()}
         })
     }
 

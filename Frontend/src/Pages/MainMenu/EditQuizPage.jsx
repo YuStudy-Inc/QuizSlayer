@@ -10,6 +10,7 @@ const URI = import.meta.env.VITE_APP_URI
 const EditQuizPage = () => {
     //I need to find a way to make sure the owner of the quiz can edit it, we don't want people to write to other's quizzes
     const { quizId } = useParams();
+    console.log(quizId)
     const [quizData, setQuizData] = useState({
         title: "",
         description: "",
@@ -23,14 +24,16 @@ const EditQuizPage = () => {
     const cardsDeletedRef = useRef([])
     const cardsAddedRef = useRef([])
 
+
     useEffect(() => {
-        if (!quizId) return 
+        if (!quizId) {
+            console.log("no id")
+            return
+        } 
 
         const fetchQuiz = async () => {
             try {
-                const response = await axios.get(`${URI}quizzes/getQuiz/${quizId}`, {
-                    withCredentials: true
-                })
+                const response = await axios.get(`${URI}quizzes/getQuiz/${quizId}`)
                 if (response.status === 200)
                     setQuizData(response.data.quizzes)
             }
@@ -42,13 +45,14 @@ const EditQuizPage = () => {
     }, [quizId, URI])
 
     useEffect(() => {
-        if (!quizId) return 
+        if (!quizId) {
+            console.log("no id")
+            return
+        } 
 
         const fetchQuestionsFromQuiz = async () => {
             try {
-                const response = await axios.get(`${URI}quizzes/getQuestionsFromQuiz/${quizId}`, {
-                    withCredentials: true
-                })
+                const response = await axios.get(`${URI}quizzes/getQuestionsFromQuiz/${quizId}`)
                 if (response.status === 200)
                     setQuestions(response.data.questions)
             }

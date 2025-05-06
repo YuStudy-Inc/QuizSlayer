@@ -1,7 +1,9 @@
 import "../../Styles/Pages/MainMenu/CreateQuizPage.css"
 import { plus, download } from "../../assets/Pictures.js";
-import { FlashCard, FlashCardCreationOverlay } from "../../Components/Components.js";
-import { useState } from 'react';
+import {Ring} from 'ldrs/react';
+import 'ldrs/react/Ring.css';
+import { FlashCard, FlashCardCreationOverlay, Alert} from "../../Components/Components.js";
+import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -13,13 +15,41 @@ const CreateQuizPage = () => {
         title: "",
         description: "",
     })
+	const [file, setFile] = useState(null);
 	const [fileName, setFileName] = useState("");
 	const [showCardCreationOverlay, setShowCardCreationOverlay] = useState(false)
+	const [showAIAlert, setAIAlert] = useState(false)
 	const [questions, setQuestions] = useState([])
+	const [isBusy, setBusy] = useState(false);
+	const [aiCreations, setAICreations] = useState(-1);
+	const [usedMaxCreations, setUsedMaxCreations] = useState(false);
+
+	useEffect(() => {
+		if(isBusy) return;
+		async function initAICreations() {
+			setBusy(true);
+			try{
+				const response = await axios.get(`${URI}users/getAICreations`, 
+					{withCredentials:true}).then(response => {
+						setAICreations(response.data.AICreations);
+						if(response.data.AICreations >= 2) {
+							setUsedMaxCreations(true);
+						}
+					});
+
+			} catch (e) {
+				console.error("couldn't get AI creations", e)
+			}
+			setBusy(false);
+		}
+		initAICreations();
+	}, [aiCreations])
+		
 
 	const navigate = useNavigate()
 
 	const handleQuizCreation = async () => {
+		if(isBusy) return;
 		try {
             const quizResponse = await axios.post(`${URI}quizzes/createQuiz`, {
 				userId: userId,
@@ -79,11 +109,64 @@ const CreateQuizPage = () => {
 		document.getElementById("file-upload").click();
 	}
 
+	const sleep = (ms) => new Promise(resolve =>setTimeout(resolve,ms));
 	const handleFileChange = (event) => {
+		setBusy(true);
+
 		if (event.target.files.length > 0) {
 			console.log("File input event:", event.target.files); // Debugging
 			setFileName(event.target.files[0].name); // Display selected file name
+			setFile(event.target.files[0]);
 		}
+
+		setAIAlert(true); 
+	}
+
+	const declineCreation = () => {
+		setAIAlert(false);
+		setFileName("");
+		setFile(null);
+		setBusy(false);
+	}
+
+	const acceptCreation = () => {
+
+		setAIAlert(false);
+		if(aiCreations >= 2) {
+			setAIAlert(false);
+			setBusy(false);
+			return;
+		}
+		const formData = new FormData();
+		formData.append('file', file)
+		axios.post(`${URI}questions/createQuestionsFromPDF`, formData, 
+			{
+				headers: {
+					'Content-Type': 'multipart/form-data'
+				},
+				withCredentials: true,
+			}
+			).then(async response => {
+			console.log('Success:', response.data)
+			if(aiCreations + 1 >= 2) {
+				setUsedMaxCreations(true);
+			}
+			setAICreations(aiCreations + 1);
+			for(const question of response.data.questions) {
+				await sleep(1);
+				const tempId = Date.now()
+				setQuestions((questions) => [...questions, {
+					_id: tempId,
+					questionPrompt: question.question,
+					answer: question.answer, 
+				}])
+			}
+			setBusy(false);
+		})
+		.catch(error => {
+			console.error('Error: ', error);
+			setBusy(false);
+		});
 	}
 
 	return (
@@ -123,27 +206,39 @@ const CreateQuizPage = () => {
 								</div>
 							</div>
 							<div className="create-card">
-								<button className="create-card-button" onClick={createCard}>
-									<img src={plus} alt="" />
-								</button>
+								{isBusy ?
+									<div className = "loading-ring">
+										<Ring size ="50" stroke = "6" color = "white"/> 
+									</div>
+									:
+									<button className="create-card-button" onClick={createCard}>
+										<img src = {plus} alt = ""/>
+									</button>
+								}
 							</div>
 						</div>
 						<div className="right-side">
 							<div className="create-ai-title">
 								<h1>Create Using AI</h1>
 							</div>
-							<div className="drop-zone" onClick={handleDropZoneClick}>
-								{/* Display file name or default text */}
-								{fileName ? (<p>`Selected file:${fileName}`</p>) : (<img src={download} />)}
+							{ isBusy ?
+								<div className = "selected-file-zone">
+									{fileName ? (<p>Loading file: `{fileName}`</p>) : (<Ring size ="50" stroke = "6" color = "white"/> )}
+								</div>
+								:
+								<div className="drop-zone" onClick={handleDropZoneClick}>
+									{/* Display file name or default text */}
+									{fileName ? (<p>Selected file: `{fileName}`</p>) : (<img src={download} />)}
 
-								{/* Hidden File Input */}
-								<input
-									type="file"
-									id="file-upload"
-									className="file-input"
-									onChange={handleFileChange}
-								/>
-							</div>
+									{/* Hidden File Input */}
+									<input
+										type="file"
+										id="file-upload"
+										className="file-input"
+										onChange={handleFileChange}
+									/>
+								</div>
+							}	
 						</div>
 					</div>
 				</div>
@@ -152,6 +247,25 @@ const CreateQuizPage = () => {
 						<h1>Create</h1>
 					</button>
 				</div>
+				{
+					usedMaxCreations ? 
+					<Alert 
+						text={`You have used your maximum number of AI Creations for today!`}
+						subtitle={`Remaining creations: ${2 - aiCreations}`}
+						buttonOneText={`Okay`}
+						functionButtonOne={declineCreation}
+						show={showAIAlert}
+					/> :
+					<Alert 
+						text={`Create flashcards with the selected file: ${fileName}`}
+						subtitle={`Remaining creations: ${aiCreations}`}
+						buttonOneText={`Decline`}
+						buttonTwoText={`Create`}
+						functionButtonOne={declineCreation}
+						functionButtonTwo={acceptCreation}
+						show={showAIAlert}
+					/>
+				}
 				{showCardCreationOverlay && (
 					<FlashCardCreationOverlay makeNewCard={setQuestions} close={(handleCardCreationClose)}/>
 				)}

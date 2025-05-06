@@ -8,11 +8,12 @@ import { useState, useEffect } from "react"
 
 const Podium = ({character, hat, weapon}) => {
 
+    // Set podium to User's selected character/items first
     const [selectedCharacter, setSelectedCharacter] = useState(UserData.getSelectedCharacter());
     const [selectedHat, setSelectedHat] = useState(UserData.getSelectedHat());
     const [selectedWeapon, setSelectedWeapon] = useState(UserData.getSelectedWeapon());
 
-    const updatePodium = (character, hat, weapon) => {
+    const updatePodium = () => {
         setSelectedCharacter(character ? character : UserData.getSelectedCharacter());
         setSelectedHat(hat ? hat : UserData.getSelectedHat());
         setSelectedWeapon(weapon ? weapon : UserData.getSelectedWeapon());

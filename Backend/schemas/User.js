@@ -18,13 +18,13 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
-    isOnline: {
-        type: Boolean,
-        default: false
+    lastSeen: {
+        type: Number,
+        default: 0
     },
     pfp: {
         type: String,
-        default: "https://profile-pictures-for-quizslayer.s3.us-east-1.amazonaws.com/duckDefault.png"
+        default: "https://profile-pictures-for-quizslayer.s3.us-east-1.amazonaws.com/newUser/duckDefault.png"
     },
     description: {
         type: String,
