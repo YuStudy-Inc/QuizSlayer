@@ -25,6 +25,7 @@ const FriendRequest = ({ index, friendId, incomingFriendPfp, incomingFriendName,
     }
 
     const reject = async () => {
+        console.log(friendId)
         try {
             const response = await axios.put(`${URI}users/rejectFriendRequest/${userId}`, {
                 friendId: friendId
