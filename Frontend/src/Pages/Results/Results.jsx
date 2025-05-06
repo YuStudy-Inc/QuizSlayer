@@ -1,6 +1,7 @@
 import "../../Styles/Pages/Results/Results.css"
 import { Podium, ResultCard } from "../../Components/Components"
 import { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 
 const URI = import.meta.env.VITE_APP_URI
 const userId = JSON.parse(localStorage.getItem('id'));
@@ -9,6 +10,10 @@ const Results = () => {
     const win = "You beat the Quiz!"
     const lose = "Better luck next time..."
     const monstersSlain = localStorage.getItem('results') || 0;
+    const navigate = useNavigate()
+    const goHome =() =>{
+        navigate('/home')
+    }
     console.log("Monsters slain", monstersSlain)
     const [totalCoins, setTotalCoins] = useState(0)
 
@@ -51,7 +56,7 @@ const Results = () => {
                         </div>
                     </div>
                 </div>
-                <button className="from-results-to-home">Continue</button>
+                <button className="from-results-to-home" onClick={goHome}>Continue</button>
             </div>
         </>
     ) 
