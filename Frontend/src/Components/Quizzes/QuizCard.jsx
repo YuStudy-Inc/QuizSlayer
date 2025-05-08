@@ -6,7 +6,8 @@ const QuizCard = ({ id, title, url, editThatQuiz, deleteThatQuiz }) => {
     const navigate = useNavigate();
 
     const handlePlayClick = () => {
-        window.location.href = url; // Redirects to external links
+        localStorage.setItem('quizId', id);
+          window.location.href = url; // Redirects to external links
     };
 
     const handleViewQuiz = () => {

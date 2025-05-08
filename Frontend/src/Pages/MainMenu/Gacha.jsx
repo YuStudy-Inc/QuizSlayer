@@ -69,6 +69,7 @@ const Gacha = () => {
     const [itemName, setItemName] = useState(null)
     const [theResultsPageOfTheGacha, setTheResultsPageOfTheGacha] = useState(false)
     const [coinsTextIfTheyAlreadyWonThatItem, setCoinsTextIfTheyAlreadyWonThatItem] = useState(null)
+    const [isRolling, setIsRolling] = useState(false)
 
     const navigate = useNavigate()
 
@@ -91,6 +92,10 @@ const Gacha = () => {
     }, [URI, userId])
 
     const handleRoll = async () => {
+        if (isRolling) return
+
+        setIsRolling(true)
+
         setTheResultsPageOfTheGacha(false)
         setCoinsTextIfTheyAlreadyWonThatItem(null)
 
@@ -112,7 +117,6 @@ const Gacha = () => {
                 setItemWon(randomItem)
                 setItemName(nameOfTheRandomItem)
                 setStars(whichStar)
-                console.log("item won", randomItem)
 
                 //one star = 50, two stars = 75, three = 100 four == 300
                 try {
@@ -124,14 +128,10 @@ const Gacha = () => {
                     })
                     setUsersCharacterList(characterData.data.characterList)
                     setUsersInventory(inventoryData.data.inventory)
-                    console.log(characterData.data.characterList)
-                    console.log(inventoryData.data.inventory)
                 }
                 catch (e) {
                     console.error("failed to fetch the player's inventory")
                 }
-
-                console.log("item won", randomItem)
                 
                 if (usersCharacterList.includes(randomItem) || usersInventory.includes(randomItem)) {
                     switch (whichStar) {
@@ -154,14 +154,10 @@ const Gacha = () => {
                         default:
                             setCoinsTextIfTheyAlreadyWonThatItem(null)
                     }
-                    console.log("users coins because they already had the item", coinsIfTheyAlreadyWonThatItem)
                 }
-                console.log("item won", randomItem)
 
                 if (coinsTextIfTheyAlreadyWonThatItem === null && whichStar === fourStar) {
-                    console.log("it was a character", randomItem)
                     const characterEnumKey = lookUpItemFromTheEnums(CharacterEnum, randomItem)
-                    console.log(characterEnumKey)
                     if (characterEnumKey !== undefined) {
                         try {
                             const response = await axios.put(`${URI}users/addCharacter/${userId}`, {
@@ -178,9 +174,7 @@ const Gacha = () => {
                     }
                 }
                 else if (coinsTextIfTheyAlreadyWonThatItem === null && (whichStar === threeStar || whichStar === twoStar)) {
-                    console.log("it was a item", randomItem)
                     let itemEnumKey = lookUpItemFromTheEnums(HatsEnum, randomItem) ?? lookUpItemFromTheEnums(WeaponsEnum, randomItem);
-                    console.log(itemEnumKey)
                     if (itemEnumKey !== undefined) {
                         try {
                             const response = await axios.put(`${URI}users/addItem/${userId}`, {
@@ -197,7 +191,6 @@ const Gacha = () => {
                     }
                 }
                 else if (whichStar === oneStar) {
-                    console.log("it was just coins", randomItem)
                     try {
                         const response = await axios.put(`${URI}users/updateCoins/${userId}`, {
                             coins: 50
@@ -212,7 +205,6 @@ const Gacha = () => {
                     }
                 }
                 else {
-                    console.log("it was just coins", randomItem)
                     try {
                         const response = await axios.put(`${URI}users/updateCoins/${userId}`, {
                             coins: 50
@@ -239,6 +231,9 @@ const Gacha = () => {
             }
             catch (e) {
                 console.error("error buying lootbox", e)
+            }
+            finally {
+                setTimeout(() => setIsRolling(false), 2000)
             }
         }
     }
@@ -295,7 +290,7 @@ const Gacha = () => {
                         <h1>&lt;</h1>
                     </button>
                 </div>) : null }
-                {alertForInsufficientFunds && (<Alert text={"Insufficient Funds!"} buttonOneText={"Ok"} functionButtonOne={() => {setAlertForInsufficientFunds(false)}}/>)}
+                {alertForInsufficientFunds && (<Alert text={"Insufficient Funds!"} buttonOneText={"Ok"} functionButtonOne={() => {setAlertForInsufficientFunds(false)}} show={true}/>)}
                 <div className="stuff-in-gacha">
                     {theResultsPageOfTheGacha ? (
                         <>
@@ -309,7 +304,7 @@ const Gacha = () => {
                                 <h1>{itemName} {coinsTextIfTheyAlreadyWonThatItem !== null ? `:${coinsTextIfTheyAlreadyWonThatItem}` : ""}</h1>
                             </div>
                             <div className="button-for-gacha">
-                                <button onClick={handleRoll}>Buy Again? : 100 coins</button>
+                                <button onClick={handleRoll} disabled={isRolling}>Buy Again? : 100 coins</button>
                             </div>
                         </>
                     ) : (
@@ -331,7 +326,7 @@ const Gacha = () => {
                                         <h1>Your coins: {usersCoins}</h1>
                                     </div>
                                     <div className="button-for-gacha">
-                                        <button onClick={handleRoll}>Buy: 100 coins</button>
+                                        <button onClick={handleRoll} disabled={isRolling}>Buy: 100 coins</button>
                                     </div>
                                 </>
                             )}

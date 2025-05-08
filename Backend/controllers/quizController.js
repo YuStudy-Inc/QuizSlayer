@@ -56,11 +56,14 @@ export const deleteQuiz = async(req, res) => {
         const quizId = req.body.quizId
         console.log(quizId)
 
+        await Question.deleteMany({ quizId: quizId })
+
         const deletedQuiz = await Quiz.findByIdAndDelete(quizId);
         if (!deletedQuiz) {
             res.status(500).json({error: "Quiz was not found"})
             return;
         }
+
         res.status(200).json({message: 'Quiz deleted successfullly' }) 
     }
     catch(err){
@@ -116,3 +119,34 @@ export const getQuestionsFromQuiz = async(req, res) => {
         res.status(500).json({error: "Error finding questions for that quiz"})
     }
 }
+export const getFinishedQuizzes = async(req, res) => {
+    try {
+        const userId = req.params.id
+        const quizzesFinished = await Quiz.find({user: userId, completed: true})
+        res.status(200).json({quizzesFinished})
+    } catch (e) {
+        res.status(500).json({error: 'Error retreiving quizzes under TODO status'})
+        console.log(e)
+    }
+}
+export const updateFinished = async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const quizId = req.body.quizId;
+
+        const updatedQuiz = await Quiz.findOneAndUpdate(
+            { _id: quizId, user: userId },
+            { $set: { completed: true } },
+            { new: true }
+          );
+          console.log(updatedQuiz);
+        if (!updatedQuiz) {
+            return res.status(404).json({ error: 'Quiz not found or does not belong to the user' });
+        }
+
+        res.status(200).json({ message: 'Quiz marked as completed', quiz: updatedQuiz });
+    } catch (e) {
+        console.error(e);
+        res.status(500).json({ error: 'Error updating quiz completion status' });
+    }
+};

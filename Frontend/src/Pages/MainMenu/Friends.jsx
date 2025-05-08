@@ -37,7 +37,6 @@ const Friends = () => {
     }
 
     const handleFriendClick = (friend) => {
-        console.log(friend)
         setSelectedFriend(friend)
     };
 

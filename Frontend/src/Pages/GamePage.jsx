@@ -2,31 +2,67 @@ import "../Styles/Pages/GamePage.css";
 import { useEffect, useState } from "react";
 import Alert from "../Components/Alert";
 import UserData from "../UserData";
+import axios from "axios"
 const GAME_URI = import.meta.env.VITE_GAME_URI || ''; // Get the game URI from environment variables
-const userId = JSON.parse(localStorage.getItem('id')); // Retrieve user ID from localStorage
+const quizId = localStorage.getItem('quizId'); // Retrieve user ID from localStorage
 const user = JSON.parse(localStorage.getItem('user'));
-console.log(user);
+import { useNavigate } from "react-router-dom"; 
 const GamePage = () => {
+  const URI = import.meta.env.VITE_APP_URI || '';
+  const navigate = useNavigate();
   const character = user.selectedCharacter;
   const weapon = user.selectedWeapon;
   const hat = user.selectedHat;
-  const [showAlert, setShowAlert] = useState(true)
-	const [alertText, setAlertText] = useState('')
+  const userId = JSON.parse(localStorage.getItem('id'));
   const [gameFinished, setGameFinished] = useState(false);
-  const closeAlert = () => {
-		setShowAlert(false);
-	};
-
-  const [score, setScore] = useState(null);
   useEffect(() => {
     function handleMessage(event) {
       try {
         const data = JSON.parse(event.data);
-        setScore(data.payload.monstersSlain);
-        setAlertText("Monsters Slain: ", score);
-        setShowAlert(true);
-        setGameFinished(true);
-        // console.log("Data: ", data.payload.monstersSlain);
+        const monstersSlainValue = Number(data?.payload?.monstersSlain);
+        //Update Quiz
+        axios.put(`${URI}quizzes/quizFinished/${userId}`, 
+          {
+            quizId: quizId
+        }, {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+        .then((response) => {
+          console.log("Update Success:", response.data);
+        })
+        .catch((error) => {
+          const response = error.response;
+          console.error("Update failed:", response?.data || error.message);
+        });
+
+        if (!isNaN(monstersSlainValue)) {
+          localStorage.setItem("results", monstersSlainValue);
+          setGameFinished(true);
+          axios.put(`${URI}users/updateMonstersSlain/${userId}`, {
+            monstersSlain: monstersSlainValue
+          }, {
+            withCredentials: true,
+            headers: {
+              "Content-Type": "application/json"
+            }
+          })
+          .then((response) => {
+            console.log("Update Success:", response.data);
+            localStorage.setItem("user", JSON.stringify(response.data));
+          })
+          .catch((error) => {
+            const response = error.response;
+            console.error("Update failed:", response?.data || error.message);
+          });
+
+          navigate("/results");
+        } else {
+          console.error("Invalid monstersSlain value received:", data?.payload?.monstersSlain);
+        }
+
       } catch (err) {
         console.warn("Invalid message received:", event.data);
       }
@@ -36,31 +72,19 @@ const GamePage = () => {
     return () => {
       window.removeEventListener("message", handleMessage);
     };
-  }, []);
+  }, [URI, userId, navigate]);
 
   return (
     <>
-    	{showAlert && (
-				<Alert
-					text={alertText}
-					buttonOneText="OK"
-					functionButtonOne={closeAlert}
-				/>
-			)}
       <div className="game-page-container">
           {!gameFinished && (
         <iframe
-           src={`${GAME_URI}?sessionId=${userId}&character=${character}&weapon=${weapon}&hat=${hat}`}
+           src={`${GAME_URI}?sessionId=${quizId}&character=${character}&weapon=${weapon}&hat=${hat}`}
           style={{ width: "100%", height: "100vh", border: "none" }}
           title="My Game"
         />
   )}
       </div>
-      {score !== null && (
-        <div className="score-display">
-          🎉 Final Score: {score}
-        </div>
-      )}
     </>
   );
 };

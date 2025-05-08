@@ -37,3 +37,48 @@
     width: 100%;
     overflow-x: hidden;
 }
+
+.arrow {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    height: 64px;
+    width: 64px;
+    background-color: var(--white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    z-index: 1000;
+}
+
+.arrow:hover {
+    transform: scale(1.15);
+    background-color: var(--light-green);
+}
+
+.arrow img {
+    height: 50%;
+    aspect-ratio: 1/1;
+    transition: transform 0.3s ease;
+}
+
+.arrow img.rotated {
+    transform: rotate(180deg);
+}
+
+@media only screen and (max-width: 1000px) {
+    .arrow {
+        height: 48px;
+        width: 48px;
+        transition: none;
+        background-color: var(--white);
+    }
+    .arrow:focus {
+        background-color: var(--white);
+    }
+
+}

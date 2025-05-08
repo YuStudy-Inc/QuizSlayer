@@ -5,12 +5,19 @@
     opacity: 1;
     visibility: visible;
     padding: 1rem;
+    border-radius: 10px;
+    overflow-y: auto;  
+    word-break: break-word;
+    white-space: pre-wrap;
+    padding-right: 0.5rem;
+    max-height: 100%;   
 }
 
 .small-todolist-container {
     opacity: 0;
     visibility: hidden;
     position: absolute;
+    border-radius: 10px;
 }
 
 .todolist-container h1 {
@@ -19,6 +26,10 @@
     color: var(--black);
     background-color: transparent;
     margin-bottom: 0.5rem;
+}
+
+.spread-out {
+    border-radius: 10px;
 }
 
 .info-on-the-normal {

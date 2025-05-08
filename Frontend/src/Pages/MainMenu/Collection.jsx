@@ -4,7 +4,7 @@ import CharacterEnum from "../../assets/Characters/CharacterEnum.js"
 import "../../Styles/Pages/MainMenu/Collection.css"
 import { useNavigate } from "react-router-dom"
 import UserData from "../../UserData.js"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import HatsEnum from "../../assets/Hats/HatsEnum.js"
 import WeaponsEnum from "../../assets/Weapons/WeaponsEnum.js"
 
@@ -18,6 +18,20 @@ const Collection = () => {
     const [selectedCharacter, setSelectedCharacter] = useState(UserData.getSelectedCharacter());
     const [selectedHat, setSelectedHat] = useState(UserData.getSelectedHat());
     const [selectedWeapon, setSelectedWeapon] = useState(UserData.getSelectedWeapon());
+
+    useEffect(() => {
+        axios.get(URI + "users/getUser", { withCredentials: true })
+            .then((res) => {
+                UserData.updateUserData(res.data.user);
+                setSelectedCharacter(res.data.user.selectedCharacter);
+                setSelectedHat(res.data.user.selectedHat);
+                setSelectedWeapon(res.data.user.selectedWeapon);
+            })
+            .catch((err) => {
+                console.error("Failed to fetch user data:", err);
+            });
+    }, []); //vibe coded
+
 
     const updateCharacter = (direction) => {
         const characters = Object.keys(CharacterEnum);

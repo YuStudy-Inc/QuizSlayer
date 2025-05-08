@@ -71,8 +71,6 @@ const CreateQuizPage = () => {
 				quizId: quizId
 			}))
 
-			console.log(updatedQuestionsWithNewId)
-
             const questionsResponse = await axios.post(`${URI}questions/createQuestions`, {
 				questions: updatedQuestionsWithNewId,
 			},
@@ -200,8 +198,8 @@ const CreateQuizPage = () => {
 
 							<div className="flash-cards-create-container">
 								<div className="flash-cards">
-									{questions.map((question) => (
-                                        <FlashCard key={question._id} id={question._id} questionInput={question.questionPrompt} answerInput={question.answer} editing={false} onEdit={() => {}} />
+									{questions.map((question, index) => (
+                                        <FlashCard key={index} id={question._id} questionInput={question.questionPrompt} answerInput={question.answer} editing={false} onEdit={() => {}} />
                                     ))}
 								</div>
 							</div>

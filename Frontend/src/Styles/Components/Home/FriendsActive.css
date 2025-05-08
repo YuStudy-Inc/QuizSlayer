@@ -5,6 +5,12 @@
     opacity: 1;
     visibility: visible;
     padding: 1rem;
+    border-radius: 10px;
+    overflow-y: auto;  
+    word-break: break-word;
+    white-space: pre-wrap;
+    padding-right: 0.5rem;
+    max-height: 100%;   
 }
 
 .small-friends-active-container {

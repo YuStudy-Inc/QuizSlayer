@@ -10,7 +10,6 @@ const URI = import.meta.env.VITE_APP_URI
 const EditQuizPage = () => {
     //I need to find a way to make sure the owner of the quiz can edit it, we don't want people to write to other's quizzes
     const { quizId } = useParams();
-    console.log(quizId)
     const [quizData, setQuizData] = useState({
         title: "",
         description: "",
@@ -120,32 +119,36 @@ const EditQuizPage = () => {
 				quizId: updatedQuizId
 			}))
 
-            console.log(updatedQuestionsWithNewId)
-
-            const editedQuestionsResponse = await axios.put(`${URI}questions/editQuestions`, {
-                questions: cardsEdited
-            },
-            {
-                withCredentials: true
-            })
-            if (editedQuestionsResponse.status === 200) {
-                console.log("successfully added edited questions to Quiz")
+            if (Array.isArray(cardsEdited) && cardsEdited.length > 0) {
+                const editedQuestionsResponse = await axios.put(`${URI}questions/editQuestions`, {
+                    questions: cardsEdited
+                },
+                {
+                    withCredentials: true
+                })
+                if (editedQuestionsResponse.status === 200) {
+                    console.log("successfully added edited questions to Quiz")
+                }
             }
-            const deletedQuestionsResponse = await axios.delete(`${URI}questions/deleteQuestions`, {
-                data: { questions: cardsDeleted },
-                withCredentials: true
-            })
-            if (deletedQuestionsResponse.status === 200) {
-                console.log("successfully added edited questions to Quiz")
+            if (Array.isArray(cardsDeleted) && cardsDeleted.length > 0) {
+                const deletedQuestionsResponse = await axios.delete(`${URI}questions/deleteQuestions`, {
+                    data: { questions: cardsDeleted },
+                    withCredentials: true
+                })
+                if (deletedQuestionsResponse.status === 200) {
+                    console.log("successfully added edited questions to Quiz")
+                }
             }
-            const createdQuestionsResponse = await axios.post(`${URI}questions/createQuestions`, {
-                questions: updatedQuestionsWithNewId
-            },
-            {
-                withCredentials: true
-            })
-            if (createdQuestionsResponse.status === 200) {
-                console.log("successfully added edited questions to Quiz")
+            if (Array.isArray(cardsAdded) && cardsAdded.length > 0) {
+                const createdQuestionsResponse = await axios.post(`${URI}questions/createQuestions`, {
+                    questions: updatedQuestionsWithNewId
+                },
+                {
+                    withCredentials: true
+                })
+                if (createdQuestionsResponse.status === 200) {
+                    console.log("successfully added edited questions to Quiz")
+                }
             }
             navigate(-1)
         }

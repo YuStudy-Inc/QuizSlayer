@@ -33,9 +33,10 @@ const Quizzes = () => {
 	const editThatQuiz = (id) => {
 		navigate(`/editquiz/${id}`)
 	}
-
+	const playThatQuiz = async (quizId) =>{
+		localStorage.setItem('quizId', quizId);
+	}
 	const deleteThatQuiz = async (quizId) => {
-		console.log(quizId)
 		try {
 			const response = await axios.delete(`${URI}quizzes/deleteQuiz`, {
 				data: { quizId },
@@ -64,7 +65,13 @@ const Quizzes = () => {
 							<h1 className="todo-quizzes quiz-progress-titles">Todo</h1>
 							<div className="quizCards">
 								{quizzes.map((quiz) => !quiz.completed ? (
-									<QuizCard key={quiz._id} id={quiz._id} userId={userId} title={quiz.title} url="/" editThatQuiz={() => editThatQuiz(quiz._id)} deleteThatQuiz={() => {deleteThatQuiz(quiz._id)}}/>
+									<QuizCard key={quiz._id} 
+									id={quiz._id} userId={userId} 
+									title={quiz.title} 
+									url="/gamePage" 
+									editThatQuiz={() => editThatQuiz(quiz._id)} 
+									deleteThatQuiz={() => {deleteThatQuiz(quiz._id)}}
+									/>
 								) : null )}
 							</div>
 						</div>
@@ -72,7 +79,13 @@ const Quizzes = () => {
 							<h1 className="finished-quizzes quiz-progress-titles">Finished</h1>
 							<div className="quizCards">
 								{quizzes.map((quiz) => quiz.completed ? (
-									<QuizCard key={quiz._id} id={quiz._id} userId={userId} title={quiz.title} url="/" editThatQuiz={() => editThatQuiz(quiz._id)} deleteThatQuiz={() => {deleteThatQuiz(quiz._id)}}/>
+									<QuizCard key={quiz._id} 
+									id={quiz._id} userId={userId} 
+									title={quiz.title} 
+									url="/gamePage" 
+									editThatQuiz={() => editThatQuiz(quiz._id)} 
+									deleteThatQuiz={() => {deleteThatQuiz(quiz._id)}}
+									/>
 								) : null )} 
 							</div>
 						</div>

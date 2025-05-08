@@ -13,9 +13,9 @@ const LandingPageAboutUs = () => {
                     </div>
                     <div className="about-us-words">
                         <h1 className="about-us-title">About Us</h1>
-                        <p>QuizSlayer is an interactive study app that turns your studying into an adventure. 
-                            Create flashcards on your own or through AI features and test your knowledge in an idle fighting game. Win battles, earn prizes. 
-                            Compete against friends or against others to the be the best adventurer there is!!!</p>
+                        <p>QuizSlayer is an interactive study app that turns your studying into an adventure.
+                            Create flashcards on your own or through AI features and test your knowledge in an idle fighting game. 
+                            Win battles, earn prizes. Compete against friends or against others to the be the best adventurer there is!!!</p>
                     </div>
                 </div>
             </div>
