@@ -10,6 +10,7 @@ env:
     DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
     DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
     VITE_APP_URI: ${{secrets.LAMBDA_ENDPOINT}}
+    VITE_GAME_URI: ${{secrets.VITE_GAME_URI}}
 
 jobs:
   
